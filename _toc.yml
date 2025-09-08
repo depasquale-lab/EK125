@@ -1,5 +1,5 @@
 format: jb-book
 root: intro
 chapters:
-  - file: chapter1
+  - file: Week2A
   - file: chapter2
