@@ -1,0 +1,4 @@
+title: "My Jupyter Book"
+author: "Your Name"
+execute:
+  execute_notebooks: "off"
