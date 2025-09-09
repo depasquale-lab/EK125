@@ -1,4 +1,4 @@
-# Chapter 4 (Week 3A) – Selection Statements in Python
+# Class 3A: Selection Statements in Python
 
 In programming, we often need to **make choices**:
 - Should a piece of code run, or be skipped?

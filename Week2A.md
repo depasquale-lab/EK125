@@ -1,4 +1,4 @@
-# Week 2 Pre-read: Sequences, Strings, and Lists in Python
+# Class 2A: Sequences, Strings, and Lists in Python
 
 ## Why Do We Need Sequences?
 

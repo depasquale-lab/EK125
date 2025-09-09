@@ -1,4 +1,4 @@
-# Class 1B
+# Class 1B: Intro to colab and why program?
 
 # 1. Introduction to Interactive Programming Using Google Colab
 
