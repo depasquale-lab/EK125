@@ -4,7 +4,7 @@
 
 In the past few weeks, you have built a strong foundation with **loops**, **lists**, **indexing**, and even some **list comprehensions**. You’ve learned how to repeat actions with for loops, how to store values in lists, and how to print or process data row by row.
 
-Now, we are ready for the next step: working with **nested structures**. A nested structure is simply a list (or tuple) that contains other lists (or tuples). This creates data that looks like a grid or table. Instead of just having a single line of values, you now have rows and columns—just like seats in a theater, squares in a chessboard, or entries in a multiplication table. It's important to note that these structures are **strictly** organized into a grid (that's an **array** which we will study later!) but rather, the nesting structing can be **interpreted** as coordinates along a grid.
+Now, we are ready for the next step: working with **nested structures**. A nested structure is simply a list (or tuple) that contains other lists (or tuples). This creates data that looks like a grid or table. Instead of just having a single line of values, you now have rows and columns—just like seats in a theater, squares in a chessboard, or entries in a multiplication table. It's important to note that these structures are **not strictly** organized into a grid (that's an **array** which we will study later!) but rather, the nesting structing can be **interpreted** as coordinates along a grid.
 
 This preread introduces you to three major skills that go hand-in-hand:
 
