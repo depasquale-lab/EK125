@@ -322,6 +322,111 @@ Notice that for a two dimensional array, with logical indexing the resulting  ar
 array([ 1,  3,  8,  5, 33])
 ``` 
 
+### Multidimensional Slicing
+
+Just like lists, NumPy arrays can be sliced using the `:` operator. But because arrays can have multiple axes (dimensions), NumPy allows **slicing along each axis** simultaneously using a comma-separated list of slice specifications.  
+
+For a 2 × 4 array:
+
+```python
+arr2d = np.array([
+    [-2, 18,  9, 32],
+    [44, -7,  4, 99]
+])
+print(arr2d)
+```
+```
+# [[-2 18  9 32]
+#  [44 -7  4 99]]
+```
+
+The **first index** corresponds to the **row**, and the **second index** to the **column**.
+
+#### Slicing Rows and Columns
+
+```python
+# First row (row 0), all columns
+print(arr2d[0, :])
+# → [-2 18  9 32]
+```
+
+```python
+# All rows, second column (column 1)
+print(arr2d[:, 1])
+# → [18 -7]
+```
+
+#### Slicing Subarrays
+
+You can extract rectangular blocks by slicing along both axes:
+
+```python
+# Rows 0 through 1, columns 1 through 2
+sub = arr2d[0:2, 1:3]
+print(sub)
+```
+```
+# Output:
+# [[18  9]
+#  [-7  4]]
+```
+
+This is a **2 × 2 subarray**, taken from the middle of `arr2d`.
+
+#### Including a Step Size
+
+NumPy slicing follows the pattern:
+
+```python
+# start : stop : step
+```
+
+You can include a **step size** along any axis. For example:
+
+```python
+# Every other column from all rows
+print(arr2d[:, ::2])
+```
+```
+# Output:
+# [[-2  9]
+#  [44  4]]
+```
+```python
+# Take every row, but every other column starting at index 1
+print(arr2d[:, 1::2])
+```
+```
+# Output:
+# [[ 18  32]
+#  [ -7  99]]
+```
+
+#### 3D Arrays
+
+The same slicing logic extends naturally to higher dimensions. For example, with a 3D array shaped `(2, 3, 4)`:
+```python
+arr3d = np.arange(24).reshape(2, 3, 4)
+print(arr3d.shape)  # (2, 3, 4)
+```
+
+```python
+# Take the first "layer" (axis 0)
+print(arr3d[0, :, :])
+```
+```python
+# Take all layers, first row, columns 1–3
+print(arr3d[:, 0, 1:4])
+```
+
+```python
+# Take every other column in every row of the first layer
+print(arr3d[0, :, ::2])
+```
+
+Think of each comma as moving to the next axis. This makes multidimensional slicing a powerful way to extract structured portions of data—like rows, columns, planes, or sub-blocks—without looping.
+
+
 ### Changing Dimensions
 
 There are NumPy methods that change the shape of an array.
