@@ -1,6 +1,10 @@
 # Week 7A Preread: Dictionaries and Intro to Pandas
 
-Pandas is a data manipulation library that is built on NumPy. The basic Pandas data structures are `Series` and `DataFrames`. `Series` are essentially one-dimensional arrays and `DataFrames` are two-dimensional arrays, but the row and/or columns can be labeled.  Frequently `DataFrames` are created by reading in data from a .csv (comma separated value) file or spreadsheet file, but they can also be created programmatically which is what we will focus on here. Python dictionaries are commonly used to create Series and DataFrames. In this section, we will first introduce dictionaries, and then in an introduction to Pandas, will use dictionaries to create `Series` and `DataFrames`.
+A Python dictionary is a built-in data structure that stores data as key–value pairs, allowing fast lookup, insertion, and deletion by key. It is enclosed in curly braces `{}` and uses a colon : to separate each key from its value.
+
+Pandas is a data manipulation library that is built on NumPy. The basic Pandas data structures are `Series` and `DataFrames`. `Series` are essentially one-dimensional arrays and `DataFrames` are two-dimensional arrays, but the row and/or columns can be labeled. Python dictionaries are commonly used to create Series and DataFrames. In this section, we will first introduce dictionaries, and then in an introduction to Pandas, will use dictionaries to create `Series` and `DataFrames`.
+
+Dictionaries will be the topic of the morning, and Pandas the afternoon. Thus, only the Dictionaries sections is strictly necessary for the GPP, but reading on both will likely be helpful. 
 
 ## Dictionaries
 
@@ -239,6 +243,8 @@ For a dictionary comprehension, key-value pairs must be created.
 ```
 
 ## Introduction to Pandas
+
+The morning GPP will strictly be on dictionaries, but the homework will cover Pandas, which will also be the topic of the lecture. So this reading is strictly optional (i.e., you don't need it for the preclass assessment) but it will likely be useful.
 
 Since Pandas is built on NumPy, they are frequently imported together using the following:
 
@@ -515,3 +521,5 @@ dtype: float64
 ```
 
 If a DataFrame object is large, which it frequently will be if read from a file, the first 5 rows can be viewed using the `head()` method, and the last 5 rows can be viewed using the `tail()` method.
+
+Frequently `DataFrames` are created by reading in data from a .csv (comma separated value) file or spreadsheet file, which we will focus on later in the class.
