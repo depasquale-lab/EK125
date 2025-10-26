@@ -1,4 +1,4 @@
-# Week 9b Appendix How to Get an API Key
+# Week 9a Appendix How to Get an API Key
 
 You don't automatically have an API key—you need to obtain one from the API provider. The typical process looks like this:
 
@@ -117,3 +117,4 @@ print(files)
 client.download_file('data.csv', local_path='./data.csv')
 
 ```
+
