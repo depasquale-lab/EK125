@@ -22,7 +22,7 @@ Boston University has a site-wide license giving all BU students, faculty, and s
 3. **Install the Software**
    - Run the installer you downloaded
    - Follow the on-screen installation prompts
-   - Choose which toolboxes you want to install (for this class, the base MATLAB is sufficient)
+   - Choose which toolboxes you want to install (it's not a bad idea to just install them all)
 
 4. **Activate Your License**
    - After installation, MATLAB will prompt you to activate
