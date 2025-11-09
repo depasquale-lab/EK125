@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -19,10 +18,10 @@ jobs:
           python-version: '3.10'
 
       - name: Install Jupyter Book and tools
-        run: pip install -U jupyter-book ghp-import
+        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 ghp-import
 
       - name: Build the Jupyter Book
-        run: jupyter-book build .
+        run: jb build .
 
       - name: Deploy to GitHub Pages
         run: ghp-import -n -p -f _build/html
