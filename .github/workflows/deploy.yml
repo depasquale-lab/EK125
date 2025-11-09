@@ -4,12 +4,16 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,15 +25,18 @@ jobs:
           pip install -U pip
           pip install jupyter-book ghp-import
 
-      - name: Build book with the *correct* Python module
+      - name: Show repo root contents (debug)
         run: |
-          python -m jupyter_book build .
+          echo "Repo files:"
+          ls -la .
 
-      - name: Verify output exists
+      - name: Build book using Python module (avoids Node binary issue)
+        run: python -m jupyter_book build . --verbose
+
+      - name: Show built output (debug)
         run: |
           echo "Contents of _build:"
           ls -R _build || true
 
       - name: Deploy to GitHub Pages
-        run: |
-          ghp-import -n -p -f _build/html
+        run: ghp-import -n -p -f _build/html
