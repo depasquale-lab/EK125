@@ -2,41 +2,26 @@ name: deploy-book
 
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write
+    branches:
+      - main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
 
-      - name: Install Jupyter Book + tools
-        run: |
-          pip install -U pip
-          pip install jupyter-book ghp-import
+      - name: Install Jupyter Book
+        run: pip install -U jupyter-book ghp-import
 
-      - name: Show repo root contents (debug)
-        run: |
-          echo "Repo files:"
-          ls -la .
-
-      - name: Build book using Python module (avoids Node binary issue)
-        run: python -m jupyter_book build . --verbose
-
-      - name: Show built output (debug)
-        run: |
-          echo "Contents of _build:"
-          ls -R _build || true
+      - name: Build the book
+        run: jupyter-book build .
 
       - name: Deploy to GitHub Pages
-        run: ghp-import -n -p -f _build/html
+        run: |
+          ghp-import -n -p -f _build/html
