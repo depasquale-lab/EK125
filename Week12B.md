@@ -1,4 +1,4 @@
-# Class 23 Pre-Read: Vector and Matrix Operations in MATLAB
+# Week 12B: Vector and Matrix Operations in MATLAB
 
 ## Scalar Operations
 
