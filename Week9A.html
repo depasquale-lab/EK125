@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 9a Working with Online Data Stores and APIs in Python &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week9A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 9a Appendix How to Get an API Key" href="Week9aappendix.html" />
+    <link rel="prev" title="Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation" href="Week8B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week9A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 9a Working with Online Data Stores and APIs in Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-apis-and-why-do-we-need-them">What Are APIs and Why Do We Need Them?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-examples-of-apis">Real-World Examples of APIs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-rest-apis-and-http">Understanding REST APIs and HTTP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-methods-the-verbs-of-the-web">HTTP Methods: The Verbs of the Web</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-an-api-request">Anatomy of an API Request</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-learn-about-a-specific-api-reading-documentation">How to Learn About a Specific API: Reading Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-api-documentation-tells-you">What API Documentation Tells You</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reading-openweathermap-documentation">Example: Reading OpenWeatherMap Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-find-api-documentation">Where to Find API Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-reading-api-documentation">Tips for Reading API Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-documentation-is-poor-or-missing">What If Documentation Is Poor or Missing?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-api-requests-with-python-s-requests-library">Making API Requests with Python’s <code class="docutils literal notranslate"><span class="pre">requests</span></code> Library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-get-request">Basic GET Request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-json-data">Working with JSON Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-json-to-python">Converting JSON to Python</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-nested-data">Accessing Nested Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data-safely">Handling Missing Data Safely</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-json-arrays">Working with JSON Arrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-printing-json">Pretty Printing JSON</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-python-to-json">Converting Python to JSON</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-authentication-keeping-data-secure">API Authentication: Keeping Data Secure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-keys">API Keys</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#database-as-a-service-dbaas-structured-data-in-the-cloud">Database as a Service (DBaaS): Structured Data in the Cloud</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-cloud-databases">Types of Cloud Databases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-database-as-a-service">Why Use Database as a Service?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-cloud-databases">Accessing Cloud Databases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-working-with-apis-and-cloud-services">Best Practices for Working with APIs and Cloud Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-apis-you-can-use-right-now">Example APIs You Can Use Right Now</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonplaceholder-practice-api-no-authentication">1. JSONPlaceholder - Practice API (No Authentication)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-meteo-weather-data-no-authentication">2. Open-Meteo - Weather Data (No Authentication)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-countries-country-information-no-authentication">3. REST Countries - Country Information (No Authentication)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-to-remember">Key Terms to Remember</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-9a-working-with-online-data-stores-and-apis-in-python">
+<h1>Week 9a Working with Online Data Stores and APIs in Python<a class="headerlink" href="#week-9a-working-with-online-data-stores-and-apis-in-python" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In today’s world, data doesn’t live in isolation on a single computer. Weather forecasts, social media posts, financial transactions, and countless other types of information are stored on servers around the world. As a programmer, you need to know how to access and work with this data. This reading will introduce you to two fundamental concepts: <strong>Application Programming Interfaces</strong> (aka APIs) and online data stores.</p>
+</section>
+<section id="what-are-apis-and-why-do-we-need-them">
+<h2>What Are APIs and Why Do We Need Them?<a class="headerlink" href="#what-are-apis-and-why-do-we-need-them" title="Link to this heading">#</a></h2>
+<p>Imagine you’re at a restaurant. You don’t walk into the kitchen and make your own food—instead, you tell a waiter what you want, and they bring it to you. An <strong>API</strong> works the same way: it’s an intermediary that lets your program request data or services from another system without needing to know how that system works internally.</p>
+<section id="real-world-examples-of-apis">
+<h3>Real-World Examples of APIs<a class="headerlink" href="#real-world-examples-of-apis" title="Link to this heading">#</a></h3>
+<p>APIs are everywhere in modern applications:</p>
+<ul class="simple">
+<li><p><strong>ABSOLUTELY EVERYWHERE</strong> Below is a list of some ones you might personally use early on in your careers, but the first question anyone asks about your new software project is “Where is your API?” and “How can I get API access?”</p></li>
+<li><p><strong>Weather apps</strong> use APIs from meteorological services to get current conditions and forecasts</p></li>
+<li><p><strong>Social media integrations</strong> (like “Sign in with Google”) use APIs to authenticate users</p></li>
+<li><p><strong>E-commerce sites</strong> use payment APIs (like Stripe or PayPal) to process transactions</p></li>
+<li><p><strong>Map applications</strong> use APIs to get directions, traffic data, and location information</p></li>
+<li><p><strong>News aggregators</strong> use APIs to pull articles from multiple sources</p></li>
+</ul>
+<p>Without APIs, every developer would need to recreate these services from scratch, which would be inefficient and often impossible.</p>
+</section>
+</section>
+<section id="understanding-rest-apis-and-http">
+<h2>Understanding REST APIs and HTTP<a class="headerlink" href="#understanding-rest-apis-and-http" title="Link to this heading">#</a></h2>
+<p>Most modern web APIs follow a pattern called <strong>REST</strong> (Representational State Transfer). REST APIs use the same protocol that web browsers use to load websites: <strong>HTTP</strong> (Hypertext Transfer Protocol).</p>
+<section id="http-methods-the-verbs-of-the-web">
+<h3>HTTP Methods: The Verbs of the Web<a class="headerlink" href="#http-methods-the-verbs-of-the-web" title="Link to this heading">#</a></h3>
+<p>When you interact with a REST API, you use different HTTP methods to specify what action you want to perform:</p>
+<ul class="simple">
+<li><p><strong>GET</strong>: Retrieve data (like viewing a webpage)</p></li>
+<li><p><strong>POST</strong>: Create new data (like submitting a form)</p></li>
+<li><p><strong>PUT</strong>: Update existing data completely</p></li>
+<li><p><strong>PATCH</strong>: Update part of existing data</p></li>
+<li><p><strong>DELETE</strong>: Remove data</p></li>
+</ul>
+<p>For most data retrieval tasks—which is what we’ll focus on—you’ll use <strong>GET</strong> requests.</p>
+</section>
+<section id="anatomy-of-an-api-request">
+<h3>Anatomy of an API Request<a class="headerlink" href="#anatomy-of-an-api-request" title="Link to this heading">#</a></h3>
+<p>An API request typically includes several components:</p>
+<ol class="arabic simple">
+<li><p><strong>Base URL</strong>: The address of the API server (e.g., <code class="docutils literal notranslate"><span class="pre">https://api.weather.com</span></code>)</p></li>
+<li><p><strong>Endpoint</strong>: The specific resource you want (e.g., <code class="docutils literal notranslate"><span class="pre">/current</span></code>)</p></li>
+<li><p><strong>Parameters</strong>: Additional information about your request (e.g., <code class="docutils literal notranslate"><span class="pre">?city=Boston</span></code>)</p></li>
+<li><p><strong>Headers</strong>: Metadata about your request (e.g., authentication tokens)</p></li>
+</ol>
+<p>Put together, a complete API request might look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://api.weather.com/current?city=Boston&amp;units=metric
+</pre></div>
+</div>
+</section>
+</section>
+<section id="how-to-learn-about-a-specific-api-reading-documentation">
+<h2>How to Learn About a Specific API: Reading Documentation<a class="headerlink" href="#how-to-learn-about-a-specific-api-reading-documentation" title="Link to this heading">#</a></h2>
+<p>Before you can use any API, you need to understand what it offers and how to use it. Every API has <strong>documentation</strong>—a guide that explains its endpoints, parameters, authentication requirements, and response formats. Learning to read API documentation is one of the most important skills for working with APIs.</p>
+<section id="what-api-documentation-tells-you">
+<h3>What API Documentation Tells You<a class="headerlink" href="#what-api-documentation-tells-you" title="Link to this heading">#</a></h3>
+<p>Good API documentation typically includes:</p>
+<ol class="arabic simple">
+<li><p>A FULLY WORKING EXAMPLE. For reasons that are difficult to understand, many API providers do not give you a fully working reference example, which just adds time and ambiguity. If/when you write your own API, don’t be that person</p></li>
+<li><p><strong>Base URL</strong>: Where the API is hosted (e.g., <code class="docutils literal notranslate"><span class="pre">https://api.openweathermap.org/data/2.5</span></code>)</p></li>
+<li><p><strong>Available Endpoints</strong>: The specific paths you can access (e.g., <code class="docutils literal notranslate"><span class="pre">/weather</span></code>, <code class="docutils literal notranslate"><span class="pre">/forecast</span></code>, <code class="docutils literal notranslate"><span class="pre">/users</span></code>)</p></li>
+<li><p><strong>HTTP Methods</strong>: Which methods each endpoint accepts (GET, POST, etc.)</p></li>
+<li><p><strong>Parameters</strong>: What information you can or must include in your request:</p>
+<ul class="simple">
+<li><p><strong>Required parameters</strong>: Must be included or the request fails</p></li>
+<li><p><strong>Optional parameters</strong>: Customize the response but aren’t necessary</p></li>
+<li><p><strong>Parameter types</strong>: String, number, boolean, etc.</p></li>
+<li><p><strong>Parameter location</strong>: Query string, URL path, headers, or request body</p></li>
+</ul>
+</li>
+<li><p><strong>Authentication</strong>: How to prove you’re authorized to use the API (API keys, OAuth, etc.)</p></li>
+<li><p><strong>Response Format</strong>: What data structure you’ll receive back, usually with examples</p></li>
+<li><p><strong>Error Codes</strong>: What different status codes mean for that specific API</p></li>
+<li><p><strong>Rate Limits</strong>: How many requests you can make per minute/hour/day</p></li>
+</ol>
+</section>
+<section id="example-reading-openweathermap-documentation">
+<h3>Example: Reading OpenWeatherMap Documentation<a class="headerlink" href="#example-reading-openweathermap-documentation" title="Link to this heading">#</a></h3>
+<p>Let’s walk through a real example. If you visit OpenWeatherMap’s API documentation, you’ll find information like this:</p>
+<p><strong>Endpoint</strong>: Current Weather Data<br />
+<strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">https://api.openweathermap.org/data/2.5/weather</span></code><br />
+<strong>Method</strong>: GET</p>
+<p><strong>Required Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">appid</span></code> (string): Your API key</p></li>
+<li><p>One of:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> (string): City name (e.g., “Boston” or “Boston,US”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code> (numbers): Geographic coordinates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip</span></code> (string): ZIP code</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Optional Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">units</span></code> (string): “standard”, “metric”, or “imperial” (default: “standard”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lang</span></code> (string): Language for weather descriptions (default: “en”)</p></li>
+</ul>
+<p><strong>Example Response</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;weather&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Clear&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;clear sky&quot;</span><span class="p">}],</span>
+<span class="w">  </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;temp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">72.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;feels_like&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">70.2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boston&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>From this documentation, you know exactly how to construct your request!</p>
+</section>
+<section id="where-to-find-api-documentation">
+<h3>Where to Find API Documentation<a class="headerlink" href="#where-to-find-api-documentation" title="Link to this heading">#</a></h3>
+<p>Most APIs host their documentation on their website. Common places to look:</p>
+<ul class="simple">
+<li><p><strong>Company website</strong>: Often at <code class="docutils literal notranslate"><span class="pre">https://company.com/api</span></code> or <code class="docutils literal notranslate"><span class="pre">https://developers.company.com</span></code></p></li>
+<li><p><strong>Documentation subdomains</strong>: <code class="docutils literal notranslate"><span class="pre">https://docs.company.com</span></code> or <code class="docutils literal notranslate"><span class="pre">https://api.company.com/docs</span></code></p></li>
+<li><p><strong>README files</strong>: For APIs hosted on GitHub or similar platforms</p></li>
+<li><p><strong>API reference pages</strong>: Searchable lists of all endpoints</p></li>
+</ul>
+</section>
+<section id="tips-for-reading-api-documentation">
+<h3>Tips for Reading API Documentation<a class="headerlink" href="#tips-for-reading-api-documentation" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Start with the “Getting Started” or “Quickstart” guide</strong>: Don’t dive into the full reference immediately</p></li>
+<li><p><strong>Look for code examples</strong>: Good documentation includes sample code in multiple languages</p></li>
+<li><p><strong>Check the version</strong>: APIs evolve, so make sure you’re reading docs for the current version</p></li>
+<li><p><strong>Note the date format</strong>: Different APIs use different date/time formats (ISO 8601, Unix timestamps, etc.)</p></li>
+<li><p><strong>Understand the authentication flow</strong>: This is often the most confusing part, so read it carefully</p></li>
+<li><p><strong>Look for SDKs or libraries</strong>: Many APIs provide official Python libraries that simplify usage</p></li>
+</ol>
+</section>
+<section id="what-if-documentation-is-poor-or-missing">
+<h3>What If Documentation Is Poor or Missing?<a class="headerlink" href="#what-if-documentation-is-poor-or-missing" title="Link to this heading">#</a></h3>
+<p>Not all APIs have great documentation. If you encounter this:</p>
+<ul class="simple">
+<li><p><strong>Look for community tutorials</strong>: Other developers may have written guides</p></li>
+<li><p><strong>Check Stack Overflow</strong>: Search for questions about the specific API</p></li>
+<li><p><strong>Ask Chat</strong>: GenAI can be very useful, but be careful because GenAI’s understanding of the API can be behind by several versions</p></li>
+<li><p><strong>Experiment carefully</strong>: Make simple test requests and examine the responses</p></li>
+<li><p><strong>Use browser developer tools</strong>: If there’s a web interface, watch the network requests it makes</p></li>
+<li><p><strong>Contact support</strong>: Many API providers have developer support channels</p></li>
+</ul>
+</section>
+</section>
+<section id="making-api-requests-with-python-s-requests-library">
+<h2>Making API Requests with Python’s <code class="docutils literal notranslate"><span class="pre">requests</span></code> Library<a class="headerlink" href="#making-api-requests-with-python-s-requests-library" title="Link to this heading">#</a></h2>
+<p>Python makes working with APIs straightforward using the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library. This library handles all the complexity of HTTP communication for you.</p>
+<section id="basic-get-request">
+<h3>Basic GET Request<a class="headerlink" href="#basic-get-request" title="Link to this heading">#</a></h3>
+<p>Here’s a simple example using a public API that provides random cat facts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Make a GET request</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://catfact.ninja/fact&#39;</span><span class="p">)</span>
+
+<span class="c1"># Check if the request was successful</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="c1"># Parse the JSON data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;fact&#39;</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">status_code</span></code> tells you whether the request succeeded. A code of 200 means success; codes in the 400s indicate client errors (like bad requests), and codes in the 500s indicate server errors.</p>
+</section>
+<section id="working-with-json-data">
+<h3>Working with JSON Data<a class="headerlink" href="#working-with-json-data" title="Link to this heading">#</a></h3>
+<p>Most APIs return data in <strong>JSON</strong> (JavaScript Object Notation) format. JSON is text-based and uses a structure similar to Python dictionaries and lists. Understanding how to work with JSON is crucial because it’s the lingua franca of web APIs—almost every modern API uses it.</p>
+<p>Here’s an expanded introduction with more detail:</p>
+<hr class="docutils" />
+<p><strong>JSON Structure</strong></p>
+<p>JSON (JavaScript Object Notation) is a lightweight, text-based format for storing and exchanging data. Originally derived from JavaScript, it has become the dominant format for web APIs because of its simplicity, human readability, and language independence. Nearly every modern programming language includes native or library support for parsing and generating JSON.</p>
+<p><strong>Basic Structure</strong></p>
+<p>JSON data is built from two fundamental structures:</p>
+<p><em>Objects</em> are unordered collections of key-value pairs enclosed in curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>. Each key must be a string enclosed in double quotes, followed by a colon, then the value. Multiple pairs are separated by commas:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alice@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Arrays</em> are ordered lists of values enclosed in square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Values are separated by commas and can be of any type:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;date&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Data Types</strong></p>
+<p>JSON supports exactly six data types:</p>
+<ul class="simple">
+<li><p><strong>String</strong>: Text enclosed in double quotes. Special characters are escaped with backslashes (<code class="docutils literal notranslate"><span class="pre">&quot;Hello\nWorld&quot;</span></code> for a newline).</p></li>
+<li><p><strong>Number</strong>: Integers or floating-point values without quotes (<code class="docutils literal notranslate"><span class="pre">42</span></code>, <code class="docutils literal notranslate"><span class="pre">3.14</span></code>, <code class="docutils literal notranslate"><span class="pre">-17</span></code>, <code class="docutils literal notranslate"><span class="pre">2.5e10</span></code>). JSON doesn’t distinguish between integers and floats.</p></li>
+<li><p><strong>Boolean</strong>: Either <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> (lowercase, no quotes).</p></li>
+<li><p><strong>Null</strong>: Represents the absence of a value, written as <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><strong>Object</strong>: A collection of key-value pairs as described above.</p></li>
+<li><p><strong>Array</strong>: An ordered list of values as described above.</p></li>
+</ul>
+<p><strong>Nested Structures</strong></p>
+<p>The power of JSON comes from nesting objects and arrays to represent complex, hierarchical data:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alice@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferences&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;theme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dark&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;notifications&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;orders&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;laptop&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mouse&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1299.99</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-02-03&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;keyboard&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">89.50</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;orderCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This example shows objects nested within objects, arrays containing objects, and arrays containing strings—all valid JSON structures.</p>
+<p><strong>Syntax Rules</strong></p>
+<p>JSON is strict about formatting:</p>
+<ul class="simple">
+<li><p>Keys must always be strings in double quotes (not single quotes)</p></li>
+<li><p>No trailing commas after the last item in an object or array</p></li>
+<li><p>No comments are allowed in standard JSON</p></li>
+<li><p>All strings must use double quotes, not single quotes</p></li>
+<li><p>Values must be one of the six data types (no functions, dates, or undefined values)</p></li>
+</ul>
+<p><strong>Why JSON for APIs and Data Stores</strong></p>
+<p>JSON’s structure maps naturally to data structures in most programming languages. Objects become dictionaries, hash maps, or objects; arrays become lists or arrays. This makes JSON trivial to parse and generate programmatically.</p>
+<p>When a REST API returns data, it typically sends JSON that applications can immediately deserialize into native data structures. A Python application converts JSON to dictionaries and lists; a JavaScript application converts it to objects and arrays. This seamless transformation eliminates the need for custom parsing logic.</p>
+<p>For data stores, JSON and JSON-like formats (like BSON in MongoDB) offer flexibility. Unlike rigid table schemas in relational databases, JSON documents can have varying structures, making them ideal for evolving data models. Yet the format remains human-readable, simplifying debugging, logging, and configuration files.</p>
+<p><strong>Common Use Cases</strong></p>
+<ul class="simple">
+<li><p>API responses and requests (RESTful services almost universally use JSON)</p></li>
+<li><p>Configuration files (package.json, settings files)</p></li>
+<li><p>NoSQL databases (MongoDB stores data as BSON, a binary form of JSON)</p></li>
+<li><p>Data interchange between microservices</p></li>
+<li><p>Log files and structured logging</p></li>
+<li><p>Web storage (localStorage and sessionStorage in browsers)</p></li>
+</ul>
+<hr class="docutils" />
+<section id="converting-json-to-python">
+<h4>Converting JSON to Python<a class="headerlink" href="#converting-json-to-python" title="Link to this heading">#</a></h4>
+<p>Python’s <code class="docutils literal notranslate"><span class="pre">requests</span></code> library automatically converts JSON into Python data structures when you call <code class="docutils literal notranslate"><span class="pre">.json()</span></code> on a response:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.example.com/weather&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>  <span class="c1"># Converts JSON to Python dict</span>
+
+<span class="c1"># Now you can access data like any Python dictionary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">])</span>              <span class="c1"># Output: Boston</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">])</span>       <span class="c1"># Output: 72</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;forecast&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># Output: sunny</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;details&#39;</span><span class="p">][</span><span class="s1">&#39;wind_speed&#39;</span><span class="p">])</span>  <span class="c1"># Output: 12</span>
+</pre></div>
+</div>
+</section>
+<section id="accessing-nested-data">
+<h4>Accessing Nested Data<a class="headerlink" href="#accessing-nested-data" title="Link to this heading">#</a></h4>
+<p>Real-world API responses often have deeply nested structures. Here’s how to navigate them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample API response converted to Python</span>
+<span class="n">weather_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Boston&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">42.36</span><span class="p">,</span>
+            <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">71.06</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mi">72</span><span class="p">,</span>
+        <span class="s2">&quot;conditions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sunny&quot;</span><span class="p">,</span> <span class="s2">&quot;windy&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Accessing nested values</span>
+<span class="n">city_name</span> <span class="o">=</span> <span class="n">weather_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">latitude</span> <span class="o">=</span> <span class="n">weather_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">][</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span>
+<span class="n">first_condition</span> <span class="o">=</span> <span class="n">weather_data</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">][</span><span class="s1">&#39;conditions&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">city_name</span><span class="si">}</span><span class="s2"> is at latitude </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current condition: </span><span class="si">{</span><span class="n">first_condition</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-missing-data-safely">
+<h4>Handling Missing Data Safely<a class="headerlink" href="#handling-missing-data-safely" title="Link to this heading">#</a></h4>
+<p>Sometimes API responses don’t include all fields, or they might be <code class="docutils literal notranslate"><span class="pre">None</span></code>. Use the <code class="docutils literal notranslate"><span class="pre">.get()</span></code> method to avoid errors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unsafe way - will crash if &#39;humidity&#39; doesn&#39;t exist</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;humidity&#39;</span><span class="p">]</span>
+
+<span class="c1"># Safe way - returns None if key doesn&#39;t exist</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;humidity&#39;</span><span class="p">)</span>
+
+<span class="c1"># Safe way with a default value</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;humidity&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># For nested data</span>
+<span class="n">wind_speed</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;details&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wind_speed&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="working-with-json-arrays">
+<h4>Working with JSON Arrays<a class="headerlink" href="#working-with-json-arrays" title="Link to this heading">#</a></h4>
+<p>When an API returns a list of items, you’ll need to iterate through them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Get a list of users from an API</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://jsonplaceholder.typicode.com/users&#39;</span><span class="p">)</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>  <span class="c1"># This is a list of dictionaries</span>
+
+<span class="c1"># Process each user</span>
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+    <span class="n">city</span> <span class="o">=</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;city&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Or use list comprehension to extract specific data</span>
+<span class="n">all_emails</span> <span class="o">=</span> <span class="p">[</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_emails</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pretty-printing-json">
+<h4>Pretty Printing JSON<a class="headerlink" href="#pretty-printing-json" title="Link to this heading">#</a></h4>
+<p>When you’re exploring a new API, it helps to see the structure clearly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.example.com/data&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># Pretty print with indentation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This will display the JSON in a readable format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Boston&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mi">72</span><span class="p">,</span>
+  <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;wind_speed&quot;</span><span class="p">:</span> <span class="mi">12</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="converting-python-to-json">
+<h4>Converting Python to JSON<a class="headerlink" href="#converting-python-to-json" title="Link to this heading">#</a></h4>
+<p>Sometimes you need to send data to an API. The <code class="docutils literal notranslate"><span class="pre">requests</span></code> library handles this automatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Python dictionary you want to send</span>
+<span class="n">new_post</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My First Post&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the content&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;userId&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="c1"># requests automatically converts dict to JSON</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s1">&#39;https://jsonplaceholder.typicode.com/posts&#39;</span><span class="p">,</span>
+    <span class="n">json</span><span class="o">=</span><span class="n">new_post</span>  <span class="c1"># Note: use &#39;json=&#39; parameter</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>  <span class="c1"># See the API&#39;s response</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="api-authentication-keeping-data-secure">
+<h2>API Authentication: Keeping Data Secure<a class="headerlink" href="#api-authentication-keeping-data-secure" title="Link to this heading">#</a></h2>
+<p>Many APIs require authentication to prevent abuse and track usage. Think of authentication as showing your ID before accessing a service.</p>
+<section id="api-keys">
+<h3>API Keys<a class="headerlink" href="#api-keys" title="Link to this heading">#</a></h3>
+<p>The most common authentication method is an <strong>API key</strong>—a unique string that identifies you to the API. To read more about obtaining and using API keys, check out the appendix to this reading.</p>
+</section>
+</section>
+<section id="database-as-a-service-dbaas-structured-data-in-the-cloud">
+<h2>Database as a Service (DBaaS): Structured Data in the Cloud<a class="headerlink" href="#database-as-a-service-dbaas-structured-data-in-the-cloud" title="Link to this heading">#</a></h2>
+<p>While cloud storage is great for files, <strong>Database as a Service</strong> platforms specialize in storing structured data—information organized in tables, documents, or other formats optimized for querying and analysis.</p>
+<section id="types-of-cloud-databases">
+<h3>Types of Cloud Databases<a class="headerlink" href="#types-of-cloud-databases" title="Link to this heading">#</a></h3>
+<p>Cloud databases come in different flavors:</p>
+<ul class="simple">
+<li><p><strong>Relational databases</strong> (like PostgreSQL, MySQL): Data organized in tables with relationships</p></li>
+<li><p><strong>Document databases</strong> (like MongoDB): Data stored as JSON-like documents</p></li>
+<li><p><strong>Key-value stores</strong> (like Redis): Simple pairs of keys and values for fast access</p></li>
+</ul>
+</section>
+<section id="why-use-database-as-a-service">
+<h3>Why Use Database as a Service?<a class="headerlink" href="#why-use-database-as-a-service" title="Link to this heading">#</a></h3>
+<p>Setting up and maintaining your own database server requires significant expertise and resources. DBaaS providers handle:</p>
+<ul class="simple">
+<li><p><strong>Server management</strong>: No need to configure or maintain hardware</p></li>
+<li><p><strong>Automatic backups</strong>: Your data is regularly saved</p></li>
+<li><p><strong>Scaling</strong>: The database grows with your needs</p></li>
+<li><p><strong>Security</strong>: Professionals manage security patches and updates</p></li>
+</ul>
+</section>
+<section id="accessing-cloud-databases">
+<h3>Accessing Cloud Databases<a class="headerlink" href="#accessing-cloud-databases" title="Link to this heading">#</a></h3>
+<p>Most cloud databases can be accessed using Python libraries specific to the database type. Here’s a simplified example using a hypothetical API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Query a cloud database via its API</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s1">&#39;https://api.database-service.com/query&#39;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">api_key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">users</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices-for-working-with-apis-and-cloud-services">
+<h2>Best Practices for Working with APIs and Cloud Services<a class="headerlink" href="#best-practices-for-working-with-apis-and-cloud-services" title="Link to this heading">#</a></h2>
+<p>As you start working with online data stores and APIs, keep these principles in mind:</p>
+<ol class="arabic simple">
+<li><p><strong>Read the documentation</strong>: Every API is different. Always check the official docs for endpoints, parameters, and authentication methods.</p></li>
+<li><p><strong>Handle errors gracefully</strong>: Networks fail, servers go down, and rate limits get exceeded. Always check status codes and handle potential errors.</p></li>
+<li><p><strong>Respect rate limits</strong>: Many APIs limit how many requests you can make per hour or day. Exceeding these limits can get you temporarily blocked.</p></li>
+<li><p><strong>Cache when possible</strong>: If data doesn’t change frequently, store it locally instead of requesting it repeatedly.</p></li>
+<li><p><strong>Keep credentials secure</strong>: Never hardcode API keys in your source code or commit them to version control.</p></li>
+<li><p><strong>Test with small datasets first</strong>: When working with new APIs, start with small requests to understand the response format before processing large amounts of data.</p></li>
+</ol>
+</section>
+<section id="example-apis-you-can-use-right-now">
+<h2>Example APIs You Can Use Right Now<a class="headerlink" href="#example-apis-you-can-use-right-now" title="Link to this heading">#</a></h2>
+<p>To help you get started, here are some beginner-friendly APIs you can experiment with. These examples range from completely free with no authentication to those requiring simple (free) API keys.</p>
+<section id="jsonplaceholder-practice-api-no-authentication">
+<h3>1. JSONPlaceholder - Practice API (No Authentication)<a class="headerlink" href="#jsonplaceholder-practice-api-no-authentication" title="Link to this heading">#</a></h3>
+<p><strong>What it does</strong>: Provides fake data for testing and prototyping (posts, comments, users, photos, etc.)</p>
+<p><strong>Base URL</strong>: <code class="docutils literal notranslate"><span class="pre">https://jsonplaceholder.typicode.com</span></code></p>
+<p><strong>Example usage</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Get a list of users</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://jsonplaceholder.typicode.com/users&#39;</span><span class="p">)</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>  <span class="c1"># Show first 3 users</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get a specific post</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://jsonplaceholder.typicode.com/posts/1&#39;</span><span class="p">)</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Post title: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="open-meteo-weather-data-no-authentication">
+<h3>2. Open-Meteo - Weather Data (No Authentication)<a class="headerlink" href="#open-meteo-weather-data-no-authentication" title="Link to this heading">#</a></h3>
+<p><strong>What it does</strong>: Provides weather forecasts and historical weather data</p>
+<p><strong>Base URL</strong>: <code class="docutils literal notranslate"><span class="pre">https://api.open-meteo.com/v1</span></code></p>
+<p><strong>Example usage</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Get weather for a location (latitude, longitude)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="mf">42.36</span><span class="p">,</span>
+    <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">71.06</span><span class="p">,</span>  <span class="c1"># Boston coordinates</span>
+    <span class="s1">&#39;current_weather&#39;</span><span class="p">:</span> <span class="s1">&#39;true&#39;</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s1">&#39;https://api.open-meteo.com/v1/forecast&#39;</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">params</span>
+<span class="p">)</span>
+
+<span class="n">weather</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">current</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;current_weather&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">current</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wind speed: </span><span class="si">{</span><span class="n">current</span><span class="p">[</span><span class="s1">&#39;windspeed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> km/h&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="rest-countries-country-information-no-authentication">
+<h3>3. REST Countries - Country Information (No Authentication)<a class="headerlink" href="#rest-countries-country-information-no-authentication" title="Link to this heading">#</a></h3>
+<p><strong>What it does</strong>: Provides data about countries (population, languages, currencies, flags, etc.)</p>
+<p><strong>Base URL</strong>: <code class="docutils literal notranslate"><span class="pre">https://restcountries.com/v3.1</span></code></p>
+<p><strong>Example usage</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Get information about a specific country</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://restcountries.com/v3.1/name/japan&#39;</span><span class="p">)</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="n">japan</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Capital: </span><span class="si">{</span><span class="n">japan</span><span class="p">[</span><span class="s1">&#39;capital&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Population: </span><span class="si">{</span><span class="n">japan</span><span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Region: </span><span class="si">{</span><span class="n">japan</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>APIs and online data stores are fundamental to modern software development. They allow your programs to access vast amounts of data and powerful services without building everything from scratch. As you practice working with these technologies, you’ll discover that most of the programming challenges you’ll face in the real world involve integrating different systems and services—and now you have the foundational knowledge to do exactly that.</p>
+</section>
+<section id="key-terms-to-remember">
+<h2>Key Terms to Remember<a class="headerlink" href="#key-terms-to-remember" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>API</strong>: Application Programming Interface—a way for programs to communicate</p></li>
+<li><p><strong>REST</strong>: A common pattern for web APIs using HTTP</p></li>
+<li><p><strong>HTTP methods</strong>: GET, POST, PUT, PATCH, DELETE</p></li>
+<li><p><strong>JSON</strong>: JavaScript Object Notation—a text format for data exchange</p></li>
+<li><p><strong>API key</strong>: A unique identifier for authentication</p></li>
+<li><p><strong>Cloud storage</strong>: File storage on remote servers accessible via the internet</p></li>
+<li><p><strong>DBaaS</strong>: Database as a Service—managed database hosting</p></li>
+<li><p><strong>Status code</strong>: A number indicating the result of an HTTP request (200 = success)</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week8B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week9aappendix.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 9a Appendix How to Get an API Key</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-apis-and-why-do-we-need-them">What Are APIs and Why Do We Need Them?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-examples-of-apis">Real-World Examples of APIs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-rest-apis-and-http">Understanding REST APIs and HTTP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-methods-the-verbs-of-the-web">HTTP Methods: The Verbs of the Web</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-an-api-request">Anatomy of an API Request</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-learn-about-a-specific-api-reading-documentation">How to Learn About a Specific API: Reading Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-api-documentation-tells-you">What API Documentation Tells You</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reading-openweathermap-documentation">Example: Reading OpenWeatherMap Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-find-api-documentation">Where to Find API Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-reading-api-documentation">Tips for Reading API Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-documentation-is-poor-or-missing">What If Documentation Is Poor or Missing?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-api-requests-with-python-s-requests-library">Making API Requests with Python’s <code class="docutils literal notranslate"><span class="pre">requests</span></code> Library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-get-request">Basic GET Request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-json-data">Working with JSON Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-json-to-python">Converting JSON to Python</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-nested-data">Accessing Nested Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data-safely">Handling Missing Data Safely</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-json-arrays">Working with JSON Arrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-printing-json">Pretty Printing JSON</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-python-to-json">Converting Python to JSON</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-authentication-keeping-data-secure">API Authentication: Keeping Data Secure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-keys">API Keys</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#database-as-a-service-dbaas-structured-data-in-the-cloud">Database as a Service (DBaaS): Structured Data in the Cloud</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-cloud-databases">Types of Cloud Databases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-database-as-a-service">Why Use Database as a Service?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-cloud-databases">Accessing Cloud Databases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-working-with-apis-and-cloud-services">Best Practices for Working with APIs and Cloud Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-apis-you-can-use-right-now">Example APIs You Can Use Right Now</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonplaceholder-practice-api-no-authentication">1. JSONPlaceholder - Practice API (No Authentication)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-meteo-weather-data-no-authentication">2. Open-Meteo - Weather Data (No Authentication)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-countries-country-information-no-authentication">3. REST Countries - Country Information (No Authentication)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-to-remember">Key Terms to Remember</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

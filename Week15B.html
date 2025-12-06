@@ -1,0 +1,1566 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 15B Pre-read: AI-Assisted Programming &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week15B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Week 15A: Useful MATLAB Toolboxes" href="Week15A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week15B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 15B Pre-read: AI-Assisted Programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ai-coding-landscape-in-late-2025">1. The AI Coding Landscape in Late 2025</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-ai-tools-can-do-well">What AI Tools Can Do Well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-ai-tools-cannot-do-or-do-poorly">What AI Tools Cannot Do (or Do Poorly)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#available-tools-and-their-strengths">Available Tools and Their Strengths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-these-tools-actually-do">What These Tools Actually Do</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-engine-problem-solving">2. Multi-Engine Problem Solving</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-triangle-approach">The Triangle Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-engines-agree-and-disagree">When Engines Agree and Disagree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-insights">Combining Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-prompting-techniques">3. Effective Prompting Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context-is-everything">Context is Everything</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-refinement">Iterative Refinement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asking-for-alternatives">Asking for Alternatives</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-limitations-in-late-2025">4. Real Limitations in Late 2025</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-ai-still-gets-wrong">What AI Still Gets Wrong</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context-window-limitations">Context Window Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-specific-knowledge">Domain-Specific Knowledge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-confidence-problem">The Confidence Problem</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verification-strategies">5. Verification Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-step-check">The Three-Step Check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systematic-testing">Systematic Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-ai-generated-code">6. Debugging AI-Generated Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-ai-code-fails">When AI Code Fails</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-workflow">Debugging Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-ai-into-your-workflow">7. Integrating AI Into Your Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-development-cycle-with-ai">The Development Cycle with AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflows">Practical Workflows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#academic-integrity-in-the-ai-era">8. Academic Integrity in the AI Era</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reality-of-ai-in-education">The Reality of AI in Education</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-expectations">Course Expectations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-understanding-test">The Understanding Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-proofing-your-skills">Future-Proofing Your Skills</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-scenarios">9. Real-World Scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-1-rastic-upgrade-dec-5th-2pm">Scenario 1: RASTIC upgrade (Dec 5th, 2PM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-debt">Technical debt:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-2-api-integration">Scenario 2: API Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-3-data-processing">Scenario 3: Data Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-4-algorithm-optimization">Scenario 4: Algorithm Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-4-debugging-complex-logic">Scenario 4: Debugging Complex Logic</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-skills-in-2026">10. Programming Skills in 2026</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-changing">What’s Changing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skills-that-matter-more">Skills That Matter More</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hybrid-workflow">The Hybrid Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-practice-now">What to Practice Now</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#career-implications">Career Implications</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-15b-pre-read-ai-assisted-programming">
+<h1>Week 15B Pre-read: AI-Assisted Programming<a class="headerlink" href="#week-15b-pre-read-ai-assisted-programming" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this reading, you should understand:</p>
+<ul class="simple">
+<li><p>How different AI engines complement each other for complex problems</p></li>
+<li><p>Current capabilities and limitations of AI coding tools in late 2025</p></li>
+<li><p>Practical workflows for integrating AI into your development process</p></li>
+<li><p>How to verify and validate AI-generated solutions</p></li>
+<li><p>What programming skills will matter in 2026 and beyond</p></li>
+</ul>
+</section>
+<section id="the-ai-coding-landscape-in-late-2025">
+<h2>1. The AI Coding Landscape in Late 2025<a class="headerlink" href="#the-ai-coding-landscape-in-late-2025" title="Link to this heading">#</a></h2>
+<section id="what-ai-tools-can-do-well">
+<h3>What AI Tools Can Do Well<a class="headerlink" href="#what-ai-tools-can-do-well" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Delete all of your files (<a class="reference external" href="https://old.reddit.com/r/google_antigravity/comments/1p82or6/google_antigravity_just_deleted_the_contents_of/">https://old.reddit.com/r/google_antigravity/comments/1p82or6/google_antigravity_just_deleted_the_contents_of/</a>)</p></li>
+<li><p>Generate boilerplate code quickly</p></li>
+<li><p>Explain error messages in plain language</p></li>
+<li><p>Suggest multiple approaches to solve a problem</p></li>
+<li><p>Convert code between languages (Python to MATLAB, for example)</p></li>
+<li><p>Write documentation and comments for existing code</p></li>
+<li><p>Identify common bugs in your code</p></li>
+<li><p>Help with user interface iterations</p></li>
+</ul>
+</section>
+<section id="what-ai-tools-cannot-do-or-do-poorly">
+<h3>What AI Tools Cannot Do (or Do Poorly)<a class="headerlink" href="#what-ai-tools-cannot-do-or-do-poorly" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Understand your specific project requirements without clear context</p></li>
+<li><p>Know about your code-specific constraints (like using camelCase instead of snake_case)</p></li>
+<li><p>Guarantee correct code every time</p></li>
+<li><p>Debug complex logic errors without guidance</p></li>
+<li><p>Understand nuanced performance requirements</p></li>
+<li><p>Replace your need to understand the code</p></li>
+</ul>
+</section>
+<section id="available-tools-and-their-strengths">
+<h3>Available Tools and Their Strengths<a class="headerlink" href="#available-tools-and-their-strengths" title="Link to this heading">#</a></h3>
+<p>As of late 2025, you have access to several major AI coding assistants, each with different characteristics:</p>
+<p><strong>ChatGPT (GPT-5 and variants)</strong></p>
+<ul class="simple">
+<li><p>Strong at generating boilerplate code and common patterns</p></li>
+<li><p>Excellent human language output with little context</p></li>
+<li><p>Excellent for explaining concepts and debugging errors</p></li>
+<li><p>Large context window for working with substantial codebases</p></li>
+<li><p>Can struggle with very recent library updates</p></li>
+</ul>
+<p><strong>Claude (Anthropic)</strong></p>
+<ul class="simple">
+<li><p>Particularly good at understanding context and nuance</p></li>
+<li><p>Strong at refactoring and code review</p></li>
+<li><p>Excellent at explaining trade-offs between approaches</p></li>
+<li><p>Handles complex multi-file projects well</p></li>
+</ul>
+<p><strong>GitHub Copilot</strong></p>
+<ul class="simple">
+<li><p>Integrated directly into your IDE (VS Code, JetBrains, etc.)</p></li>
+<li><p>Fast inline suggestions as you type</p></li>
+<li><p>Good at completing patterns it recognizes</p></li>
+<li><p>Best for accelerating coding you already understand</p></li>
+</ul>
+<p><strong>TerrierGPT (BU’s instance)</strong></p>
+<ul class="simple">
+<li><p><strong>BLUF:</strong> Approved for  data classified as <a class="reference external" href="https://www.bu.edu/policies/data-classification-policy/">confidential, but not restricted use.</a></p></li>
+<li><p>Configured for educational use</p></li>
+<li><p>Understands course-specific constraints</p></li>
+<li><p>May have access to course materials and examples</p></li>
+</ul>
+<p><strong>Specialized Tools</strong></p>
+<ul class="simple">
+<li><p>Cursor: AI-first code editor with deep integration</p></li>
+<li><p>Replit AI: Good for quick prototypes and learning</p></li>
+<li><p>Codeium: Free alternative to Copilot</p></li>
+</ul>
+</section>
+<section id="what-these-tools-actually-do">
+<h3>What These Tools Actually Do<a class="headerlink" href="#what-these-tools-actually-do" title="Link to this heading">#</a></h3>
+<p>AI coding assistants are large language models trained on massive amounts of code from GitHub, documentation, Stack Overflow, and other sources. They predict what code should come next based on patterns they’ve seen millions of times. They don’t “understand” code the way you do - they’re doing sophisticated pattern matching.</p>
+<p>This means:</p>
+<ul class="simple">
+<li><p>They’re excellent at common patterns and well-established libraries</p></li>
+<li><p>They struggle with novel problems or unusual constraints</p></li>
+<li><p>They may confidently suggest code that looks right but has subtle bugs</p></li>
+<li><p>They perform better with clear, specific prompts</p></li>
+<li><p>They often need iteration to get exactly what you want</p></li>
+</ul>
+</section>
+</section>
+<section id="multi-engine-problem-solving">
+<h2>2. Multi-Engine Problem Solving<a class="headerlink" href="#multi-engine-problem-solving" title="Link to this heading">#</a></h2>
+<p>One of the most powerful techniques is using multiple AI engines to triangulate on a solution. Different models have different training data and architectures, so they make different mistakes and have different strengths.</p>
+<section id="the-triangle-approach">
+<h3>The Triangle Approach<a class="headerlink" href="#the-triangle-approach" title="Link to this heading">#</a></h3>
+<p>For complex or critical problems, ask 2-3 different AI engines and compare their responses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem: You need to parse complex log files with irregular formatting</span>
+
+<span class="c1"># ChatGPT suggests: Using regex with error handling</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parseLogLine</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d</span><span class="si">{4}</span><span class="s1">-\d</span><span class="si">{2}</span><span class="s1">-\d</span><span class="si">{2}</span><span class="s1">)\s+(\w+):\s+(.*)&#39;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> 
+                <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Claude suggests: More defensive parsing with explicit structure</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parseLogLine</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">maxsplit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">level</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">message</span><span class="p">}</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Copilot suggests: Using existing libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging.handlers</span>
+<span class="c1"># Then points you to Python&#39;s logging module documentation</span>
+</pre></div>
+</div>
+<p>When you see different approaches:</p>
+<ol class="arabic simple">
+<li><p>Test each one with your actual data</p></li>
+<li><p>Understand the trade-offs (regex is powerful but fragile, string splitting is simple but limited, libraries are robust but might be overkill)</p></li>
+<li><p>Pick the approach that best fits your constraints</p></li>
+<li><p>Consider hybrid solutions that combine the best ideas</p></li>
+</ol>
+</section>
+<section id="when-engines-agree-and-disagree">
+<h3>When Engines Agree and Disagree<a class="headerlink" href="#when-engines-agree-and-disagree" title="Link to this heading">#</a></h3>
+<p><strong>Agreement usually means</strong>: The problem is common and the solution is well-established. You can be more confident in the result, but still test it.</p>
+<p><strong>Disagreement often means</strong>:</p>
+<ul class="simple">
+<li><p>The problem has multiple valid solutions with different trade-offs</p></li>
+<li><p>The problem is less common or more specialized</p></li>
+<li><p>Your prompt might be ambiguous</p></li>
+</ul>
+<p>When engines disagree, ask follow-up questions:</p>
+<ul class="simple">
+<li><p>“Why might someone choose approach A over approach B?”</p></li>
+<li><p>“What are the edge cases where each approach fails?”</p></li>
+<li><p>“Which approach is more maintainable?”</p></li>
+</ul>
+</section>
+<section id="combining-insights">
+<h3>Combining Insights<a class="headerlink" href="#combining-insights" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You ask ChatGPT: &quot;How do I download data from an API with rate limiting?&quot;</span>
+<span class="c1"># Response focuses on the requests library and basic retry logic</span>
+
+<span class="c1"># You ask Claude: &quot;Same question&quot;</span>
+<span class="c1"># Response discusses exponential backoff and handling 429 status codes</span>
+
+<span class="c1"># You ask Copilot: &quot;Same question&quot; </span>
+<span class="c1"># Suggests using the tenacity library for automatic retries</span>
+
+<span class="c1"># Your synthesis:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tenacity</span><span class="w"> </span><span class="kn">import</span> <span class="n">retry</span><span class="p">,</span> <span class="n">stop_after_attempt</span><span class="p">,</span> <span class="n">wait_exponential</span>
+
+<span class="nd">@retry</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">stop_after_attempt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> 
+       <span class="n">wait</span><span class="o">=</span><span class="n">wait_exponential</span><span class="p">(</span><span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetchWithRateLimit</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">429</span><span class="p">:</span>  <span class="c1"># Rate limited</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Rate limit hit&quot;</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># You&#39;ve combined: requests (ChatGPT), explicit 429 handling (Claude), </span>
+<span class="c1"># and tenacity library (Copilot)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="effective-prompting-techniques">
+<h2>3. Effective Prompting Techniques<a class="headerlink" href="#effective-prompting-techniques" title="Link to this heading">#</a></h2>
+<section id="context-is-everything">
+<h3>Context is Everything<a class="headerlink" href="#context-is-everything" title="Link to this heading">#</a></h3>
+<p>AI engines have no memory between sessions and can’t see your screen. You need to provide strong assistance. For instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Weak prompt:</span>
+<span class="c1"># &quot;Fix this bug&quot;</span>
+
+<span class="c1"># Strong prompt:</span>
+<span class="c1"># &quot;I have a function that should calculate compound interest, but it&#39;s giving </span>
+<span class="c1"># wrong results. Here&#39;s my code:</span>
+<span class="c1">#</span>
+<span class="c1"># def calculateInterest(principal, rate, years):</span>
+<span class="c1">#     return principal * rate ** years</span>
+<span class="c1">#</span>
+<span class="c1"># When I call calculateInterest(1000, 0.05, 10), I expect around 1628.89 </span>
+<span class="c1"># but I&#39;m getting 0.0000000001. Using Python 3.11 in Google Colab.&quot;</span>
+</pre></div>
+</div>
+<p>The strong prompt tells the AI:</p>
+<ul class="simple">
+<li><p>What you’re trying to accomplish</p></li>
+<li><p>What’s actually happening</p></li>
+<li><p>What you expected</p></li>
+<li><p>Your environment</p></li>
+</ul>
+</section>
+<section id="iterative-refinement">
+<h3>Iterative Refinement<a class="headerlink" href="#iterative-refinement" title="Link to this heading">#</a></h3>
+<p>You rarely get perfect code on the first try. Think of it as a conversation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># First prompt:</span>
+<span class="c1"># &quot;Write a function to validate email addresses&quot;</span>
+
+<span class="c1"># AI gives you something basic with .count(&quot;@&quot;) == 1</span>
+
+<span class="c1"># Second prompt:</span>
+<span class="c1"># &quot;This doesn&#39;t handle cases like &#39;user@domain&#39; with no TLD. Can you make </span>
+<span class="c1"># it more robust?&quot;</span>
+
+<span class="c1"># AI adds checks for dots after the @</span>
+
+<span class="c1"># Third prompt:</span>
+<span class="c1"># &quot;Good, but can you explain what each condition checks for? I need to </span>
+<span class="c1"># understand this for my exam.&quot;</span>
+
+<span class="c1"># AI adds explanatory comments</span>
+
+<span class="c1"># Fourth prompt:</span>
+<span class="c1"># &quot;Perfect. Now rewrite using camelCase variables to match my course style.&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="asking-for-alternatives">
+<h3>Asking for Alternatives<a class="headerlink" href="#asking-for-alternatives" title="Link to this heading">#</a></h3>
+<p>AI is great at giving you several options to choose from. In most contexts, you want to make a justified choice, don’t settle for the first solution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prompt:</span>
+<span class="c1"># &quot;I need to remove duplicates from a list while preserving order. </span>
+<span class="c1"># Show me three different approaches with pros/cons of each.&quot;</span>
+
+<span class="c1"># You might get:</span>
+<span class="c1"># 1. Using dict.fromkeys() - fast, clean, Python 3.7+</span>
+<span class="c1"># 2. Using a loop with seen set - explicit, educational</span>
+<span class="c1"># 3. Using collections.OrderedDict - works in older Python</span>
+
+<span class="c1"># Now you can choose based on your constraints</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="real-limitations-in-late-2025">
+<h2>4. Real Limitations in Late 2025<a class="headerlink" href="#real-limitations-in-late-2025" title="Link to this heading">#</a></h2>
+<section id="what-ai-still-gets-wrong">
+<h3>What AI Still Gets Wrong<a class="headerlink" href="#what-ai-still-gets-wrong" title="Link to this heading">#</a></h3>
+<p><strong>Version Confusion</strong>
+AI models are trained on code from multiple time periods. They might suggest:</p>
+<ul class="simple">
+<li><p>Deprecated functions that no longer exist</p></li>
+<li><p>Old syntax that’s been replaced</p></li>
+<li><p>Features that don’t exist yet in the version you’re using</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI might suggest for Python 3.8:</span>
+<span class="k">match</span> <span class="n">status</span><span class="p">:</span>  <span class="c1"># This doesn&#39;t exist until Python 3.10!</span>
+    <span class="k">case</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+
+<span class="c1"># Or for older numpy:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># ddof parameter naming changed across versions</span>
+</pre></div>
+</div>
+<p>Always be prepared rto check the documentation for your specific library versions.</p>
+<p><strong>Library Hallucinations</strong>
+AI frequently invents functions that sound plausible but don’t exist:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI might suggest:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>  <span class="c1"># No such method!</span>
+
+<span class="c1"># The real method:</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong><a class="reference external" href="https://en.wikipedia.org/wiki/Cargo_cult">Cargo Cult Imports</a></strong>
+AI often includes unnecessary imports because they commonly appear together in training data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI might give you:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">addNumbers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c1"># Doesn&#39;t use any of these imports!</span>
+</pre></div>
+</div>
+</section>
+<section id="context-window-limitations">
+<h3>Context Window Limitations<a class="headerlink" href="#context-window-limitations" title="Link to this heading">#</a></h3>
+<p>Even with large context windows, AI struggles with:</p>
+<ul class="simple">
+<li><p>Very large codebases (thousands of lines)</p></li>
+<li><p>Complex state that evolves across many functions</p></li>
+<li><p>Subtle interactions between distant parts of code</p></li>
+</ul>
+<p>For big projects, you need to break problems into smaller pieces.</p>
+</section>
+<section id="domain-specific-knowledge">
+<h3>Domain-Specific Knowledge<a class="headerlink" href="#domain-specific-knowledge" title="Link to this heading">#</a></h3>
+<p>AI is trained on public code, which means:</p>
+<ul class="simple">
+<li><p>Strong: Web development, data science, common algorithms</p></li>
+<li><p>Weak: Specialized scientific computing, proprietary APIs, cutting-edge libraries</p></li>
+<li><p>Variable: Course-specific requirements, local conventions, custom tools</p></li>
+</ul>
+</section>
+<section id="the-confidence-problem">
+<h3>The Confidence Problem<a class="headerlink" href="#the-confidence-problem" title="Link to this heading">#</a></h3>
+<p>AI always sounds confident, even when wrong. It doesn’t say “I’m not sure” or “This might not work.” You need to be the skeptic.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI might confidently tell you:</span>
+<span class="c1"># &quot;To connect to a quantum computer, use the quantum.connect() function&quot;</span>
+<span class="c1"># (There is no standard quantum.connect() function - this is made up)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verification-strategies">
+<h2>5. Verification Strategies<a class="headerlink" href="#verification-strategies" title="Link to this heading">#</a></h2>
+<section id="the-three-step-check">
+<h3>The Three-Step Check<a class="headerlink" href="#the-three-step-check" title="Link to this heading">#</a></h3>
+<p><strong>Step 1: Read and Understand</strong>
+Before deploying <strong>any</strong> code– AI-generater or otherwise–, trace through it mentally (or on paper):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI gives you:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">isPrime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1"># Trace with n=9:</span>
+<span class="c1"># - n=9, not less than 2, continue</span>
+<span class="c1"># - range(2, 4) gives [2, 3]</span>
+<span class="c1"># - i=2: 9 % 2 = 1, not 0, continue</span>
+<span class="c1"># - i=3: 9 % 3 = 0, return False</span>
+<span class="c1"># Correct! 9 is not prime</span>
+</pre></div>
+</div>
+<p><strong>Step 2: Test Edge Cases</strong>
+AI typically tests the happy path. You need to ask it to test the edges:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For any function, test:</span>
+<span class="n">testCases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kc">None</span><span class="p">,</span>           <span class="c1"># If applicable</span>
+    <span class="p">[],</span>             <span class="c1"># Empty container</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">],</span>            <span class="c1"># Single element</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>      <span class="c1"># All same</span>
+    <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>     <span class="c1"># Mix of negative, zero, positive</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Step 3: Cross-Reference</strong>
+Check AI suggestions against:</p>
+<ul class="simple">
+<li><p>Official documentation</p></li>
+<li><p>Stack Overflow (sorted by votes)</p></li>
+<li><p>Your course materials</p></li>
+<li><p>Other AI engines</p></li>
+</ul>
+</section>
+<section id="systematic-testing">
+<h3>Systematic Testing<a class="headerlink" href="#systematic-testing" title="Link to this heading">#</a></h3>
+<p>AI is incredible for testing, as it takes all the drudgery out of setting up the testing harnesses and creating the boilerplate code for the numerous tests required.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a test harness for any AI-generated function:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">testFunction</span><span class="p">(</span><span class="n">functionToTest</span><span class="p">,</span> <span class="n">testCases</span><span class="p">,</span> <span class="n">expectedResults</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test a function with multiple cases.</span>
+<span class="sd">    </span>
+<span class="sd">    functionToTest: The function to test</span>
+<span class="sd">    testCases: List of input tuples (args, kwargs)</span>
+<span class="sd">    expectedResults: List of expected outputs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">failed</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">testCases</span><span class="p">):</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">expectedResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">functionToTest</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: PASS&quot;</span><span class="p">)</span>
+                <span class="n">passed</span> <span class="o">=</span> <span class="n">passed</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: FAIL - Expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">failed</span> <span class="o">=</span> <span class="n">failed</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: ERROR - </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="n">failed</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">passed</span><span class="si">}</span><span class="s2"> passed, </span><span class="si">{</span><span class="n">failed</span><span class="si">}</span><span class="s2"> failed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">testCases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(([],),</span> <span class="p">{}),</span>           <span class="c1"># Empty list</span>
+    <span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],),</span> <span class="p">{}),</span>    <span class="c1"># Normal case</span>
+    <span class="p">(([</span><span class="mi">1</span><span class="p">],),</span> <span class="p">{}),</span>          <span class="c1"># Single element</span>
+<span class="p">]</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">testFunction</span><span class="p">(</span><span class="n">getAverage</span><span class="p">,</span> <span class="n">testCases</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="debugging-ai-generated-code">
+<h2>6. Debugging AI-Generated Code<a class="headerlink" href="#debugging-ai-generated-code" title="Link to this heading">#</a></h2>
+<section id="when-ai-code-fails">
+<h3>When AI Code Fails<a class="headerlink" href="#when-ai-code-fails" title="Link to this heading">#</a></h3>
+<p>AI code fails in predictable ways. Here’s how to fix it:</p>
+<p><strong>Pattern 1: Missing Error Handling</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI gives you:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">readConfig</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># This fails if file doesn&#39;t exist. Add handling:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">readConfig</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Config file </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p><strong>Pattern 2: Off-by-One Errors</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI might give you:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">getLastNItems</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]</span>
+
+<span class="c1"># Test it:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">getLastNItems</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># [3, 4, 5] - correct</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">getLastNItems</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">))</span>        <span class="c1"># [1, 2, 3] - unexpected!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">getLastNItems</span><span class="p">([],</span> <span class="mi">3</span><span class="p">))</span>               <span class="c1"># [] - might want error instead</span>
+</pre></div>
+</div>
+<p><strong>Pattern 3: Type Assumptions</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI assumes strings but gets numbers:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processInput</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>  <span class="c1"># Fails if data is not a string!</span>
+
+<span class="c1"># Make it robust:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processInput</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>  <span class="c1"># Convert to string first</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-workflow">
+<h3>Debugging Workflow<a class="headerlink" href="#debugging-workflow" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Isolate the Problem</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI gives you a complex function that&#39;s failing</span>
+<span class="c1"># Break it into pieces:</span>
+
+<span class="c1"># Original AI code:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyzeData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">squared</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cleaned</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">squared</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">squared</span><span class="p">)</span>
+
+<span class="c1"># Debug by testing each step:</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned: </span><span class="si">{</span><span class="n">cleaned</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Check this works</span>
+
+<span class="n">squared</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cleaned</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Squared: </span><span class="si">{</span><span class="n">squared</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Check this works</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">squared</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">squared</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>    <span class="c1"># Check this works</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Add Instrumentation</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add print statements at key points:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mysteriousFunction</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, value </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug</span>
+        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Appended </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Simplify and Rebuild</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If AI code is too complex to debug, rebuild simpler:</span>
+<span class="c1"># Start with the simplest version that works:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">data</span>  <span class="c1"># Does nothing but compiles</span>
+
+<span class="c1"># Add one feature at a time:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">filtered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filtered</span>  <span class="c1"># Works for positive filtering</span>
+
+<span class="c1"># Continue building...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="integrating-ai-into-your-workflow">
+<h2>7. Integrating AI Into Your Workflow<a class="headerlink" href="#integrating-ai-into-your-workflow" title="Link to this heading">#</a></h2>
+<section id="the-development-cycle-with-ai">
+<h3>The Development Cycle with AI<a class="headerlink" href="#the-development-cycle-with-ai" title="Link to this heading">#</a></h3>
+<p><strong>Phase 1: Understanding</strong></p>
+<ul class="simple">
+<li><p>Read the problem specification</p></li>
+<li><p>Identify inputs, outputs, constraints</p></li>
+<li><p>Decide on general approach</p></li>
+<li><p>AI role: Generate initial structure, suggest algorithms, create function skeletons</p></li>
+</ul>
+<p><strong>Phase 2: Implementation</strong></p>
+<ul class="simple">
+<li><p>Have AI generate the basic structure and boilerplate</p></li>
+<li><p>Review and understand what it created</p></li>
+<li><p>Identify gaps or issues in the generated code</p></li>
+<li><p>AI role: Write the code, you make the decisions</p></li>
+</ul>
+<p><strong>Phase 3: Testing</strong></p>
+<ul class="simple">
+<li><p>Have AI generate comprehensive test cases</p></li>
+<li><p>Add edge cases specific to your problem that AI might miss</p></li>
+<li><p>Run tests and use AI to help debug failures</p></li>
+<li><p>AI role: Create test harness and common test cases</p></li>
+</ul>
+<p><strong>Phase 4: Optimization</strong></p>
+<ul class="simple">
+<li><p>Profile your code to find bottlenecks. Ask AI to provide the profiler setup.</p></li>
+<li><p>Ask multiple AIs for more efficient algorithms</p></li>
+<li><p>Compare approaches and understand trade-offs</p></li>
+<li><p>AI role: Suggest optimizations, explain complexity, benchmark alternatives</p></li>
+</ul>
+</section>
+<section id="practical-workflows">
+<h3>Practical Workflows<a class="headerlink" href="#practical-workflows" title="Link to this heading">#</a></h3>
+<p><strong>Workflow 1: Syntax Helper</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You know what you want but forget the syntax:</span>
+<span class="c1"># &quot;How do I sort a list of dictionaries by a specific key in Python?&quot;</span>
+
+<span class="c1"># AI reminds you:</span>
+<span class="n">students</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">:</span> <span class="mi">92</span><span class="p">}]</span>
+<span class="n">sorted_students</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;grade&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Workflow 2: Error Interpreter</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You get an error you don&#39;t understand:</span>
+<span class="c1"># &quot;I&#39;m getting &#39;TypeError: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;&#39; </span>
+<span class="c1"># on line 15. Here&#39;s my code: ...&quot;</span>
+
+<span class="c1"># AI explains: You&#39;re trying to add a number and a string</span>
+<span class="c1"># Then suggests: Convert the string to int first: int(myVariable)</span>
+</pre></div>
+</div>
+<p><strong>Workflow 3: Alternative Approaches</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You have working code but want to explore alternatives:</span>
+<span class="c1"># &quot;I wrote this function using nested loops. Are there other approaches </span>
+<span class="c1"># that might be faster or cleaner?&quot;</span>
+
+<span class="c1"># AI shows you:</span>
+<span class="c1"># - List comprehension version</span>
+<span class="c1"># - NumPy vectorized version  </span>
+<span class="c1"># - itertools version</span>
+<span class="c1"># You pick based on your constraints</span>
+</pre></div>
+</div>
+<p><strong>Workflow 4: Code Review</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You&#39;ve written code and want a second opinion:</span>
+<span class="c1"># &quot;Can you review this function for potential bugs or improvements?&quot;</span>
+
+<span class="c1"># AI might catch:</span>
+<span class="c1"># - Missing edge case handling</span>
+<span class="c1"># - Variable naming inconsistencies</span>
+<span class="c1"># - Opportunities to reduce complexity</span>
+<span class="c1"># - Missing docstrings</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="academic-integrity-in-the-ai-era">
+<h2>8. Academic Integrity in the AI Era<a class="headerlink" href="#academic-integrity-in-the-ai-era" title="Link to this heading">#</a></h2>
+<section id="the-reality-of-ai-in-education">
+<h3>The Reality of AI in Education<a class="headerlink" href="#the-reality-of-ai-in-education" title="Link to this heading">#</a></h3>
+<p>By late 2025, trying to ban AI in programming courses is like banning calculators in math classes. It’s not realistic and doesn’t prepare you for actual work. However, there’s a difference between using AI as a tool and using it to bypass learning.</p>
+</section>
+<section id="course-expectations">
+<h3>Course Expectations<a class="headerlink" href="#course-expectations" title="Link to this heading">#</a></h3>
+<p><strong>Encouraged Uses:</strong></p>
+<ul class="simple">
+<li><p>Explaining error messages and stack traces</p></li>
+<li><p>Suggesting multiple approaches to a problem you’re working on</p></li>
+<li><p>Helping debug code you’ve written</p></li>
+<li><p>Converting between languages (Python to MATLAB)</p></li>
+<li><p>Generating test cases</p></li>
+<li><p>Explaining concepts from pre-reads or lectures</p></li>
+</ul>
+<p><strong>Discouraged Uses:</strong></p>
+<ul class="simple">
+<li><p>Pasting entire homework problems and submitting the output</p></li>
+<li><p>Using AI during assessments without explicit permission</p></li>
+<li><p>Not understanding code before you submit it</p></li>
+<li><p>Relying on AI when you should be building fundamental skills</p></li>
+</ul>
+</section>
+<section id="the-understanding-test">
+<h3>The Understanding Test<a class="headerlink" href="#the-understanding-test" title="Link to this heading">#</a></h3>
+<p>If you’re using AI for homework, ask yourself:</p>
+<ul class="simple">
+<li><p>Can I explain every line of this code to someone else?</p></li>
+<li><p>Could I recreate this solution without AI?</p></li>
+<li><p>Do I understand why this approach works?</p></li>
+<li><p>Could I debug this if it broke?</p></li>
+</ul>
+<p>If you answer “no” to these questions, you’re using AI wrong.</p>
+</section>
+<section id="future-proofing-your-skills">
+<h3>Future-Proofing Your Skills<a class="headerlink" href="#future-proofing-your-skills" title="Link to this heading">#</a></h3>
+<p>The job market in 2026 will expect you to:</p>
+<ul class="simple">
+<li><p>Use AI tools effectively</p></li>
+<li><p>Verify AI output</p></li>
+<li><p>Understand underlying concepts</p></li>
+<li><p>Debug and maintain AI-generated code</p></li>
+<li><p>Know when AI is leading you astray</p></li>
+</ul>
+<p>You can’t develop these skills by blindly accepting AI output.</p>
+</section>
+</section>
+<section id="real-world-scenarios">
+<h2>9. Real-World Scenarios<a class="headerlink" href="#real-world-scenarios" title="Link to this heading">#</a></h2>
+<section id="scenario-1-rastic-upgrade-dec-5th-2pm">
+<h3>Scenario 1: RASTIC upgrade (Dec 5th, 2PM)<a class="headerlink" href="#scenario-1-rastic-upgrade-dec-5th-2pm" title="Link to this heading">#</a></h3>
+<p><strong>Problem</strong>: Students needed a way to remotely access RASTIC’s robotic hardware. This had to be secure, and needed to be accessibly over the web. It would use <a class="reference external" href="https://nanomq.io/">NanoMq</a>, an MQTT broker.</p>
+<p><strong>Single AI Approach</strong>: Let’s burn through some Claude tokens!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Make</span> <span class="n">a</span> <span class="n">python</span> <span class="n">server</span> <span class="n">which</span> <span class="n">offers</span> <span class="n">an</span> <span class="n">HTTP</span> <span class="n">API</span> <span class="n">to</span> <span class="n">publish</span> <span class="n">a</span> <span class="n">message</span> <span class="n">to</span> <span class="n">NanoMq</span><span class="o">.</span> <span class="n">Python</span> <span class="n">pushes</span> <span class="kn">from</span><span class="w"> </span><span class="nn">HTTP</span> <span class="n">to</span> <span class="n">MQTT</span> <span class="n">over</span> <span class="n">a</span> <span class="n">websocket</span><span class="o">.</span> <span class="n">It</span> <span class="n">uses</span> <span class="n">an</span> <span class="n">API</span> <span class="n">key</span> <span class="n">to</span> <span class="n">validate</span> <span class="k">if</span> <span class="n">a</span> <span class="n">client</span> <span class="ow">is</span> <span class="n">authorized</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Then upon examining the code and realizing it was not resilient to network hiccups, we needed a follow-up prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>\<span class="p">)</span> <span class="n">The</span> <span class="n">server</span> <span class="n">should</span> <span class="n">infinitely</span> <span class="k">try</span> <span class="n">to</span> <span class="n">establish</span> <span class="n">a</span> <span class="n">first</span> <span class="n">connection</span>
+<span class="mi">2</span>\<span class="p">)</span> <span class="n">The</span> <span class="n">server</span> <span class="n">should</span> <span class="n">reconnect</span> <span class="k">if</span> <span class="n">it</span> <span class="n">loses</span> <span class="n">its</span> <span class="n">connection</span><span class="o">.</span>
+<span class="mi">3</span>\<span class="p">)</span> <span class="n">It</span> <span class="n">should</span> <span class="n">also</span> <span class="n">restart</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scratch</span> <span class="k">if</span> <span class="n">its</span> <span class="n">connection</span> <span class="ow">is</span> <span class="n">ever</span> <span class="n">down</span> <span class="k">for</span> <span class="n">more</span> <span class="n">than</span> <span class="mi">1</span> <span class="n">minute</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The result was a full implementation which worked on the first try. We had no experience creating our own API or authentication methods.</p>
+<section id="technical-debt">
+<h4>Technical debt:<a class="headerlink" href="#technical-debt" title="Link to this heading">#</a></h4>
+<p>We don’t know much about security, and we performed a cardinal sin in COMSEC (computer security) which is rolling our own solution. We could not move to production with this code, but it allowed us to create a blazingly rapid PoC (Proof of Concept) with trivial effort.</p>
+</section>
+</section>
+<section id="scenario-2-api-integration">
+<h3>Scenario 2: API Integration<a class="headerlink" href="#scenario-2-api-integration" title="Link to this heading">#</a></h3>
+<p><strong>Problem</strong>: You need to fetch weather data from an API and cache it to avoid rate limits.</p>
+<p><strong>Single AI Approach</strong>: Ask ChatGPT, get basic code with requests library.</p>
+<p><strong>Multi-AI Approach</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ChatGPT suggests: Basic requests with timeout</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">getWeather</span><span class="p">(</span><span class="n">city</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.weather.com/v1/weather?city=</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># Claude suggests: Adding caching</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">cacheTimeout</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># 5 minutes</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">getWeather</span><span class="p">(</span><span class="n">city</span><span class="p">):</span>
+    <span class="n">currentTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+        <span class="n">cachedTime</span><span class="p">,</span> <span class="n">cachedData</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="n">city</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">currentTime</span> <span class="o">-</span> <span class="n">cachedTime</span> <span class="o">&lt;</span> <span class="n">cacheTimeout</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cachedData</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.weather.com/v1/weather?city=</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">cache</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">currentTime</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># Copilot suggests: Using requests_cache library</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests_cache</span>
+
+<span class="n">requests_cache</span><span class="o">.</span><span class="n">install_cache</span><span class="p">(</span><span class="s1">&#39;weather_cache&#39;</span><span class="p">,</span> <span class="n">expire_after</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">getWeather</span><span class="p">(</span><span class="n">city</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.weather.com/v1/weather?city=</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># You choose Claude&#39;s approach because you understand it and don&#39;t need</span>
+<span class="c1"># an external library, but you note the library for future reference</span>
+</pre></div>
+</div>
+</section>
+<section id="scenario-3-data-processing">
+<h3>Scenario 3: Data Processing<a class="headerlink" href="#scenario-3-data-processing" title="Link to this heading">#</a></h3>
+<p><strong>Problem</strong>: Process a CSV file with inconsistent formatting.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You start with a rough structure:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processCSV</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="c1"># Read file</span>
+    <span class="c1"># Clean data</span>
+    <span class="c1"># Calculate statistics</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Ask AI: &quot;I need to read a CSV where some lines have extra commas and </span>
+<span class="c1"># some values are missing. How should I handle this robustly?&quot;</span>
+
+<span class="c1"># AI suggests error handling and pandas:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">processCSV</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Read with error handling</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Remove rows with any missing values</span>
+        <span class="n">cleanData</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        
+        <span class="c1"># Calculate statistics</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">cleanData</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">cleanData</span><span class="p">),</span>
+            <span class="s1">&#39;missing&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">cleanData</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">stats</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># You test with your actual data and discover you need more specific</span>
+<span class="c1"># handling, so you iterate with AI</span>
+</pre></div>
+</div>
+</section>
+<section id="scenario-4-algorithm-optimization">
+<h3>Scenario 4: Algorithm Optimization<a class="headerlink" href="#scenario-4-algorithm-optimization" title="Link to this heading">#</a></h3>
+<p><strong>Problem</strong>: Your nested loop is too slow for large datasets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your original code:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">findCommonElements</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
+    <span class="n">common</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item2</span> <span class="ow">in</span> <span class="n">list2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item1</span> <span class="o">==</span> <span class="n">item2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">item1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">common</span><span class="p">:</span>  <span class="c1"># Avoid duplicates</span>
+                    <span class="n">common</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">common</span>
+
+<span class="c1"># This is O(n*m*k) - very slow!</span>
+
+<span class="c1"># Ask AI: &quot;This function works but is slow for large lists. Can you </span>
+<span class="c1"># explain why and suggest a faster approach?&quot;</span>
+
+<span class="c1"># AI explains the time complexity and suggests:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">findCommonElements</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
+    <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+
+<span class="c1"># O(n+m) - much faster!</span>
+
+<span class="c1"># You understand: converting to sets eliminates the nested loop</span>
+<span class="c1"># and set operations are fast</span>
+</pre></div>
+</div>
+</section>
+<section id="scenario-4-debugging-complex-logic">
+<h3>Scenario 4: Debugging Complex Logic<a class="headerlink" href="#scenario-4-debugging-complex-logic" title="Link to this heading">#</a></h3>
+<p><strong>Problem</strong>: Function sometimes returns wrong results, but you can’t figure out why.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateDiscount</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">customerType</span><span class="p">):</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">if</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="k">if</span> <span class="n">customerType</span> <span class="o">==</span> <span class="s2">&quot;premium&quot;</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="n">discount</span> <span class="o">+</span> <span class="mf">0.15</span>
+    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">discount</span><span class="p">)</span>
+
+<span class="c1"># It works most of the time but gives weird results sometimes</span>
+
+<span class="c1"># Ask AI: &quot;Walk through this function with inputs: price=100, quantity=60, </span>
+<span class="c1"># customerType=&#39;premium&#39;. What discount should be applied?&quot;</span>
+
+<span class="c1"># AI traces through:</span>
+<span class="c1"># quantity &gt; 10: discount = 0.1</span>
+<span class="c1"># quantity &gt; 50: discount = 0.2 (overwrites 0.1)</span>
+<span class="c1"># customerType == &quot;premium&quot;: discount = 0.2 + 0.15 = 0.35</span>
+<span class="c1"># </span>
+<span class="c1"># But AI points out: &quot;The premium discount should be based on the </span>
+<span class="c1"># quantity discount, not added to it. Also, the if statements overwrite</span>
+<span class="c1"># each other instead of using elif.&quot;</span>
+
+<span class="c1"># Fixed version:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateDiscount</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">customerType</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="k">elif</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">if</span> <span class="n">customerType</span> <span class="o">==</span> <span class="s2">&quot;premium&quot;</span><span class="p">:</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="n">discount</span> <span class="o">*</span> <span class="mf">1.5</span>  <span class="c1"># Multiply, don&#39;t add</span>
+    
+    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">discount</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="programming-skills-in-2026">
+<h2>10. Programming Skills in 2026<a class="headerlink" href="#programming-skills-in-2026" title="Link to this heading">#</a></h2>
+<section id="what-s-changing">
+<h3>What’s Changing<a class="headerlink" href="#what-s-changing" title="Link to this heading">#</a></h3>
+<p>By 2026, the programming landscape will look different:</p>
+<p><strong>What AI Will Handle Better:</strong></p>
+<ul class="simple">
+<li><p>Boilerplate code generation</p></li>
+<li><p>Common algorithms and patterns</p></li>
+<li><p>Syntax conversion between languages</p></li>
+<li><p>Initial test case generation</p></li>
+<li><p>Documentation writing</p></li>
+<li><p>Basic refactoring</p></li>
+</ul>
+<p><strong>What Humans Still Need:</strong></p>
+<ul class="simple">
+<li><p>Problem decomposition and architecture</p></li>
+<li><p>Requirement analysis and clarification</p></li>
+<li><p>Performance optimization decisions</p></li>
+<li><p>Security considerations</p></li>
+<li><p>Code review and quality assessment</p></li>
+<li><p>Domain expertise integration</p></li>
+<li><p>Debugging complex interactions</p></li>
+</ul>
+</section>
+<section id="skills-that-matter-more">
+<h3>Skills That Matter More<a class="headerlink" href="#skills-that-matter-more" title="Link to this heading">#</a></h3>
+<p><strong>1. System Thinking</strong>
+Understanding how components interact is more valuable than memorizing syntax. AI can generate individual functions, but you need to design the system.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># AI can write this function:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validateUser</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+    <span class="c1"># validation logic</span>
+    <span class="k">pass</span>
+
+<span class="c1"># But you need to decide:</span>
+<span class="c1"># - Where does this function live in your architecture?</span>
+<span class="c1"># - How does it interact with the database?</span>
+<span class="c1"># - What happens on validation failure?</span>
+<span class="c1"># - How do we handle rate limiting?</span>
+<span class="c1"># - What security measures are needed?</span>
+</pre></div>
+</div>
+<p><strong>2. Prompt Engineering</strong>
+Getting good results from AI is a skill. The difference between a vague prompt and a precise one is the difference between working code and garbage.</p>
+<p><strong>3. Critical Evaluation</strong>
+You need to quickly assess:</p>
+<ul class="simple">
+<li><p>Is this code correct?</p></li>
+<li><p>Is it efficient enough?</p></li>
+<li><p>Is it maintainable?</p></li>
+<li><p>Does it handle edge cases?</p></li>
+<li><p>Are there security issues?</p></li>
+</ul>
+<p><strong>4. Integration Skills</strong>
+Combining AI-generated components, handling the connections, managing state, dealing with failures - these require human judgment.</p>
+</section>
+<section id="the-hybrid-workflow">
+<h3>The Hybrid Workflow<a class="headerlink" href="#the-hybrid-workflow" title="Link to this heading">#</a></h3>
+<p>Future programming looks like:</p>
+<ol class="arabic simple">
+<li><p>Human: Understand problem and design approach</p></li>
+<li><p>AI: Generate initial implementation</p></li>
+<li><p>Human: Review, test, and refine</p></li>
+<li><p>AI: Suggest optimizations</p></li>
+<li><p>Human: Make final decisions and integrate</p></li>
+<li><p>Both: Iterate until complete</p></li>
+</ol>
+</section>
+<section id="what-to-practice-now">
+<h3>What to Practice Now<a class="headerlink" href="#what-to-practice-now" title="Link to this heading">#</a></h3>
+<p><strong>Build Mental Models</strong>
+Don’t just copy AI code. Understand:</p>
+<ul class="simple">
+<li><p>How do dictionaries actually work?</p></li>
+<li><p>What happens in memory when you append to a list?</p></li>
+<li><p>Why are some operations slow and others fast?</p></li>
+</ul>
+<p><strong>Practice Without AI</strong>
+Regularly solve problems without AI assistance:</p>
+<ul class="simple">
+<li><p>It builds problem-solving skills</p></li>
+<li><p>You learn to recognize patterns</p></li>
+<li><p>You develop debugging intuition</p></li>
+<li><p>You understand what’s hard and what’s easy</p></li>
+</ul>
+<p><strong>Learn to Learn</strong>
+AI tools and languages will keep changing. The skill of quickly learning new tools and concepts matters more than memorizing current ones.</p>
+</section>
+<section id="career-implications">
+<h3>Career Implications<a class="headerlink" href="#career-implications" title="Link to this heading">#</a></h3>
+<p>Jobs in 2026 will expect you to:</p>
+<ul class="simple">
+<li><p>Use AI tools fluently</p></li>
+<li><p>Produce code faster than previous generations</p></li>
+<li><p>Handle more complex systems</p></li>
+<li><p>Take responsibility for AI-generated code quality</p></li>
+<li><p>Explain and defend technical decisions</p></li>
+</ul>
+<p>The programmers who succeed will be those who use AI to amplify their capabilities, not replace their thinking.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week15A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 15A: Useful MATLAB Toolboxes</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ai-coding-landscape-in-late-2025">1. The AI Coding Landscape in Late 2025</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-ai-tools-can-do-well">What AI Tools Can Do Well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-ai-tools-cannot-do-or-do-poorly">What AI Tools Cannot Do (or Do Poorly)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#available-tools-and-their-strengths">Available Tools and Their Strengths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-these-tools-actually-do">What These Tools Actually Do</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-engine-problem-solving">2. Multi-Engine Problem Solving</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-triangle-approach">The Triangle Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-engines-agree-and-disagree">When Engines Agree and Disagree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-insights">Combining Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-prompting-techniques">3. Effective Prompting Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context-is-everything">Context is Everything</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-refinement">Iterative Refinement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asking-for-alternatives">Asking for Alternatives</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-limitations-in-late-2025">4. Real Limitations in Late 2025</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-ai-still-gets-wrong">What AI Still Gets Wrong</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context-window-limitations">Context Window Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-specific-knowledge">Domain-Specific Knowledge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-confidence-problem">The Confidence Problem</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verification-strategies">5. Verification Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-step-check">The Three-Step Check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systematic-testing">Systematic Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-ai-generated-code">6. Debugging AI-Generated Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-ai-code-fails">When AI Code Fails</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-workflow">Debugging Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-ai-into-your-workflow">7. Integrating AI Into Your Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-development-cycle-with-ai">The Development Cycle with AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflows">Practical Workflows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#academic-integrity-in-the-ai-era">8. Academic Integrity in the AI Era</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reality-of-ai-in-education">The Reality of AI in Education</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-expectations">Course Expectations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-understanding-test">The Understanding Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-proofing-your-skills">Future-Proofing Your Skills</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-scenarios">9. Real-World Scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-1-rastic-upgrade-dec-5th-2pm">Scenario 1: RASTIC upgrade (Dec 5th, 2PM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-debt">Technical debt:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-2-api-integration">Scenario 2: API Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-3-data-processing">Scenario 3: Data Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-4-algorithm-optimization">Scenario 4: Algorithm Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-4-debugging-complex-logic">Scenario 4: Debugging Complex Logic</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-skills-in-2026">10. Programming Skills in 2026</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-changing">What’s Changing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skills-that-matter-more">Skills That Matter More</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hybrid-workflow">The Hybrid Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-practice-now">What to Practice Now</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#career-implications">Career Implications</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,820 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 7B Preread: User-Defined Functions and Modular Program introduction &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week7B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying" href="Week8A.html" />
+    <link rel="prev" title="Week 7A Preread: Dictionaries and Intro to Pandas" href="Week7A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week7B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 7B Preread: User-Defined Functions and Modular Program introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions-morning">User-defined functions (Morning)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-return">Functions with Return</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-no-return">Functions with no Return</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope">Scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lambda-functions">Lambda Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-programs-afternoon">Modular Programs (Afternoon)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-programs">Modular Programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-stubs">Function Stubs</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-7b-preread-user-defined-functions-and-modular-program-introduction">
+<h1>Week 7B Preread: User-Defined Functions and Modular Program introduction<a class="headerlink" href="#week-7b-preread-user-defined-functions-and-modular-program-introduction" title="Link to this heading">#</a></h1>
+<section id="user-defined-functions-morning">
+<h2>User-defined functions (Morning)<a class="headerlink" href="#user-defined-functions-morning" title="Link to this heading">#</a></h2>
+<p>We have seen many built-in functions in Python. You can also write your own functions, which are called user-defined functions.  Related user-defined functions can be stored in user-defined modules, which can then be imported into programs for use.</p>
+<p>When we write a function, we write the function definition. The function can then be called, much like built-in functions.</p>
+<p>The general form of a function definition is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">functionname</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Documentation string. &quot;&quot;&quot;</span>
+    <span class="c1"># Function body</span>
+</pre></div>
+</div>
+<p>The first line is called the function header. It consists of the reserved word <code class="docutils literal notranslate"><span class="pre">def</span></code>, the name of the function, parameters (if any) in parentheses, followed by a colon. The rest of the function, which is indented, is the function body. This typically begins with a documentation string (docstring), in triple quotes. The docstring should be sentence(s) describing what the function does, beginning with a capitalized word and ending with a period.  After the docstring there are the statements in the body of the function.  It is common to indent the body of the function 4 spaces.</p>
+<p>The function is called by giving the name of the function, and passing arguments in parentheses that will correspond to the parameters in the function header:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">functionname</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sometimes the arguments in the function call are referred to as actual parameters and the parameters in the function header are referred to as formal parameters.</p>
+<p>Although this is somewhat arbitrary, we will begin with two types of functions:</p>
+<ul class="simple">
+<li><p>Functions that calculate and return a value</p></li>
+<li><p>Functions that accomplish a task</p></li>
+</ul>
+<p>Two main reasons for writing our own functions are:</p>
+<ul class="simple">
+<li><p>To be able to reuse code by calling the function whenever it is needed</p></li>
+<li><p>To write modular programs</p></li>
+</ul>
+<p>If there is code that will be repeated at different times, perhaps using different values, it can be made into a function and then called whenever needed.</p>
+<p>Modular programs are programs that consist of a series of functions that do the actual work. The functions are called by a main program, which can be implemented as either a script or function.</p>
+<section id="functions-with-return">
+<h3>Functions with Return<a class="headerlink" href="#functions-with-return" title="Link to this heading">#</a></h3>
+<p>We have seen examples of built-in functions that calculate and return a value, such as the <code class="docutils literal notranslate"><span class="pre">round</span></code> function. User-defined functions can also accomplish this using the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement.</p>
+<p>As an example, we will write a function that returns the area of a square. In order to calculate the area of a square, the function needs the length of each side of the square, so the side length must be passed as an argument to the function. Here is a function definition for a function named sqrarea that accomplishes this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sqrarea</span><span class="p">(</span><span class="n">sidelen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the area of a square.&quot;&quot;&quot;</span>
+    <span class="n">sqar</span> <span class="o">=</span> <span class="n">sidelen</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">sqar</span>
+</pre></div>
+</div>
+<p>The function can then be called by using the name of the function and passing a number for the length of a side of the square:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrarea</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<p>In the function call, the side length, 3, was passed to the parameter <code class="docutils literal notranslate"><span class="pre">sidelen</span></code> in the function. The function then squared this, and returned the result.  We say that when the function is called, control is sent to the function, and the function begins executing. The return statement not only returns the value (in this case, 9), but also sends control out of the function.</p>
+<p>In general a docstring describes what a function does and can be displayed using the help function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">sqrarea</span><span class="p">)</span>
+<span class="go">Help on function sqrarea in module __main__:</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sqrarea</span><span class="p">(</span><span class="n">sidelen</span><span class="p">)</span>
+    <span class="n">This</span> <span class="n">function</span> <span class="n">calculates</span> <span class="n">the</span> <span class="n">area</span> <span class="n">of</span> <span class="n">a</span> <span class="n">square</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">sqar</span></code>, which was used in the function body, was not necessary. The return statement could just return an expression:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sqrarea</span><span class="p">(</span><span class="n">sidelen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the area of a square.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sidelen</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>The value returned from the function would normally be stored in a variable, e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mysquare</span> <span class="o">=</span> <span class="n">sqrarea</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mysquare</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<p>In this example, one argument was passed to the function.  For a function to calculate the area of a rectangle, both the length and width of the rectangle must be passed to the function, so there will be two parameters in the function header and two arguments passed in the function call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rectarea</span><span class="p">(</span><span class="n">rlen</span><span class="p">,</span> <span class="n">rwid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the area of a rectangle.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">rlen</span> <span class="o">*</span> <span class="n">rwid</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rectarea</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<p>The values of the arguments are passed to the corresponding parameters in the function, so the first argument, 2, is passed to the first parameter <code class="docutils literal notranslate"><span class="pre">rlen</span></code>, and the second argument 4 is passed to the second parameter <code class="docutils literal notranslate"><span class="pre">rwid</span></code>.</p>
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement returned the result of an expression; an intermediate variable could be used but is not necessary.</p>
+<p>In Python, the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement can only return one object. If it is desired to have a function return more than one thing, they can be stored in one data structure (such as a tuple or list), and that can be returned.  In the following example, a function calculates and returns both the area and the perimeter of a square, by storing both in a list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sqrarea_perim</span><span class="p">(</span><span class="n">sidelen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the area and perimeter of a square.&quot;&quot;&quot;</span>
+    <span class="n">sqar</span> <span class="o">=</span> <span class="n">sidelen</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">sqperim</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">sidelen</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">sqar</span><span class="p">,</span> <span class="n">sqperim</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrarea_perim</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="go">[121, 44]</span>
+</pre></div>
+</div>
+<p>Using a tuple instead of a list is perhaps easier to understand, and it is easier to use the results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sqrarea_perim</span><span class="p">(</span><span class="n">sidelen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the area and perimeter of a square.&quot;&quot;&quot;</span>
+    <span class="n">sqar</span> <span class="o">=</span> <span class="n">sidelen</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">sqperim</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">sidelen</span>
+    <span class="k">return</span> <span class="n">sqar</span><span class="p">,</span> <span class="n">sqperim</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">area</span><span class="p">,</span> <span class="n">perim</span> <span class="o">=</span> <span class="n">sqrarea_perim</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">perim</span><span class="p">)</span>
+<span class="go">121 44</span>
+</pre></div>
+</div>
+</section>
+<section id="functions-with-no-return">
+<h3>Functions with no Return<a class="headerlink" href="#functions-with-no-return" title="Link to this heading">#</a></h3>
+<p>In many cases functions calculate and return values, but in some cases functions just accomplish a task, such as printing.</p>
+<p>For example, the following function receives as parameters a string and an integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, and prints the string n times in a row on one line. After that, it moves the cursor down.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">printstrs</span><span class="p">(</span><span class="n">instr</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function prints instr n times.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">instr</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here are two examples of calling the function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">printstrs</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">xxx</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">printstrs</span><span class="p">(</span><span class="s2">&quot;Hi&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">HiHiHiHiHi</span>
+</pre></div>
+</div>
+<p>Notice that the function does not have a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, since it is not calculating anything.  However, all functions return something regardless of whether there is a return statement or not. The default value that is returned is a special value <code class="docutils literal notranslate"><span class="pre">None</span></code>, as we can see by passing a call to the function <code class="docutils literal notranslate"><span class="pre">printstrs</span></code> to the print function.  In the following example, <code class="docutils literal notranslate"><span class="pre">aa</span></code> and then the newline gets printed by the function, and then the result returned by the function call, <code class="docutils literal notranslate"><span class="pre">None</span></code>, is printed once the function stops executing and returns control.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">printstrs</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">aa</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">printstrs</span></code> function prints the line <code class="docutils literal notranslate"><span class="pre">aa</span></code> and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. The print function then prints the returned value, <code class="docutils literal notranslate"><span class="pre">None</span></code>.  This is equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">printstrs</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is not always necessary to pass arguments to functions (whether they explicitly return something or not).  For example, we may wish to have a function that just prints a set of instructions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">printinstruct</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function just prints stuff.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please sit up&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Do not slouch!&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Chew with your mouth closed&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">printinstruct</span><span class="p">()</span>
+<span class="go">Please sit up</span>
+<span class="go">Do not slouch!</span>
+<span class="go">Chew with your mouth closed</span>
+</pre></div>
+</div>
+<p>A function like this that just prints helps to facilitate modular programs. Of course, the instructions printed by a function would normally refer to actions that the user must take when running a program!</p>
+</section>
+<section id="scope">
+<h3>Scope<a class="headerlink" href="#scope" title="Link to this heading">#</a></h3>
+<p>The scope of a variable or object is where that object is valid. We will discuss scope more fully in a following lecture, but introduce it here so as to not sow confusion.</p>
+<p>For functions, everything that is defined in the function is valid only in that function. We say that variables defined in a function are <code class="docutils literal notranslate"><span class="pre">local</span></code> to that function, meaning that their scope is the function. Formally, what happens is that every function has its own symbol table, which contains the names of the variables and their values. Once a function is called and control is sent to the function, its symbol table is created. The function’s symbol table only exists while the function is executing.</p>
+<p>For example, for the <code class="docutils literal notranslate"><span class="pre">sqarea</span></code> function, the symbol table contains the local variable <code class="docutils literal notranslate"><span class="pre">sqar</span></code>, as well as the parameter <code class="docutils literal notranslate"><span class="pre">sidelen</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sqrarea</span><span class="p">(</span><span class="n">sidelen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function calculates the area of a square.&quot;&quot;&quot;</span>
+    <span class="n">sqar</span> <span class="o">=</span> <span class="n">sidelen</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">sqar</span>
+</pre></div>
+</div>
+<p>After the function is called, attempting to reference either <code class="docutils literal notranslate"><span class="pre">sqar</span></code> or <code class="docutils literal notranslate"><span class="pre">sidelen</span></code> will result in an error. This is because after the function stops executing, the symbol table, the variable <code class="docutils literal notranslate"><span class="pre">sqar</span></code>, and the parameter <code class="docutils literal notranslate"><span class="pre">sidelen</span></code> no longer exist.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="n">sqrarea</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sqar</span><span class="p">)</span>
+
+<span class="go">NameError: name &#39;sqar&#39; is not defined</span>
+</pre></div>
+</div>
+</section>
+<section id="lambda-functions">
+<h3>Lambda Functions<a class="headerlink" href="#lambda-functions" title="Link to this heading">#</a></h3>
+<p>Anonymous functions, called lambda functions in Python, are very short one line functions that do not require a formal function definition using <code class="docutils literal notranslate"><span class="pre">def</span></code>.  Lambda functions are created using the keyword <code class="docutils literal notranslate"><span class="pre">lambda</span></code>. The general form is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">argument</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">expression</span>
+</pre></div>
+</div>
+<p>The function begins with the reserved word <code class="docutils literal notranslate"><span class="pre">lambda</span></code>, then argument(s) followed by a colon and then an expression that uses the arguments; the result of the expression is returned.</p>
+<p>If the lambda function is stored in a variable, the variable can be used to call the function. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">times3</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">num</span><span class="p">:</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">times3</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="go">33</span>
+</pre></div>
+</div>
+<p>One advantage of a lambda function is that it is shorter than a function definition and does not require the header with <code class="docutils literal notranslate"><span class="pre">def</span></code> or the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement. A disadvantage is that the “body” of the function is confined to one simple expression.</p>
+</section>
+</section>
+<section id="modular-programs-afternoon">
+<h2>Modular Programs (Afternoon)<a class="headerlink" href="#modular-programs-afternoon" title="Link to this heading">#</a></h2>
+<p>The following is an introduction to what we will discuss in the afternoon. This content is not strictly necessary to complete the pre-class assessment or the GPP, but it might be useful!</p>
+<section id="modular-programs">
+<h3>Modular Programs<a class="headerlink" href="#modular-programs" title="Link to this heading">#</a></h3>
+<p>In general in programming, a modular program is one in which the program is broken down into separate tasks, and each task is implemented as a function. This facilitates the top-down design approach of taking a problem, breaking it down into pieces, and implementing each as a function.  The program then consists basically of calling the functions to complete each of the tasks.</p>
+<p>A basic algorithm for many programs is:</p>
+<ul class="simple">
+<li><p>Get input(s)</p></li>
+<li><p>Calculate result(s), using the input(s)</p></li>
+<li><p>Print and/or display the result(s)</p></li>
+</ul>
+<p>So, a simple outline of many programs would be to have:</p>
+<ul class="simple">
+<li><p>Function(s) to get the input(s)</p></li>
+<li><p>Function(s) to calculate result(s) using the input(s)</p></li>
+<li><p>Function(s) to display the result(s)</p></li>
+</ul>
+<p>As an example, we will write a program that will prompt the user for the cost of an item in a store, and then calculate and print the total cost with a tax of 3%. The program will call 3 functions:</p>
+<ul class="simple">
+<li><p>A function to prompt for and return the cost</p></li>
+<li><p>A function to calculate the total cost including the tax</p></li>
+<li><p>A function to print the total cost</p></li>
+</ul>
+<p>Here are the function definitions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">getcost</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Prompts for item cost. &quot;&quot;&quot;</span>
+    <span class="n">cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter the item cost: &#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cost</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calctax</span><span class="p">(</span><span class="n">cost</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates and returns cost plus tax. &quot;&quot;&quot;</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="n">cost</span> <span class="o">*</span> <span class="mf">.03</span>
+    <span class="k">return</span> <span class="n">cost</span> <span class="o">+</span> <span class="n">tax</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">printtotcost</span><span class="p">(</span><span class="n">totcost</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Prints cost plus tax. &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The total cost is $</span><span class="si">{</span><span class="n">totcost</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The functions could be called from a script, which is frequently called a main program. The program consists of calls to the functions. We will discuss scripts in future lectures. Other times the main program is implemented as a function rather than a script.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># main program</span>
+<span class="n">cost</span> <span class="o">=</span> <span class="n">getcost</span><span class="p">()</span>
+<span class="n">totalcost</span> <span class="o">=</span> <span class="n">calctax</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+<span class="n">printtotcost</span><span class="p">(</span><span class="n">totalcost</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Enter the item cost: 11.11
+The total cost is $11.44
+</pre></div>
+</div>
+<p>Of course, to be more complete, the <code class="docutils literal notranslate"><span class="pre">getcost</span></code> function would error-check to make sure that the user enters a valid cost.</p>
+</section>
+<section id="function-stubs">
+<h3>Function Stubs<a class="headerlink" href="#function-stubs" title="Link to this heading">#</a></h3>
+<p>When writing a program that consists of a script calling multiple functions, the best practice is not to write the entire program and then execute it to see the results. Frequently, there are errors. When an error is encountered in a particular function, the problem may be in that function, or it might be the result of an incorrect argument passed to the function, that was obtained from another function. A more effective method for constructing the program is to use function stubs, which are place-holders for the actual functions.</p>
+<p>The approach is:</p>
+<ul class="simple">
+<li><p>Sketch out the algorithm</p></li>
+<li><p>Decide what the functions are going to do</p></li>
+<li><p>Write the script, consisting of the calls to the functions (including the arguments that will get passed back and forth)</p></li>
+<li><p>Write function stubs for the individual functions</p></li>
+<li><p>Change each function stub to the actual function, one at a time</p></li>
+</ul>
+<p>This methodical method of writing a program helps cut down on mistakes, and makes it easier to find bugs when they occur.</p>
+<p>Function stubs should mimic what the function is eventually going to do, including using the arguments and returning the correct type(s).</p>
+<p>For example, let’s say we are going to write a program that will prompt the user for a temperature in degrees Celsius, convert that to Fahrenheit, and print the results.</p>
+<p>We might have functions to:</p>
+<ul class="simple">
+<li><p>Prompt the user for degrees C, error-checking to make sure it’s valid, and return the result</p></li>
+<li><p>Receive the degrees C and from that calculate and return degrees F</p></li>
+<li><p>Print both degrees C and degrees F in a nice sentence format</p></li>
+</ul>
+<p>The script for the main program might look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert C to F</span>
+<span class="n">degC</span> <span class="o">=</span> <span class="n">getdegc</span><span class="p">()</span>
+<span class="n">degF</span> <span class="o">=</span> <span class="n">c2f</span><span class="p">(</span><span class="n">degC</span><span class="p">)</span>
+<span class="n">printCF</span><span class="p">(</span><span class="n">degC</span><span class="p">,</span> <span class="n">degF</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Example function stubs might look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">getdegc</span><span class="p">():</span>
+    <span class="err">“””</span><span class="n">Prompts</span> <span class="n">user</span> <span class="k">for</span> <span class="n">degrees</span> <span class="n">Celsius</span><span class="o">.</span><span class="err">”””</span>
+    <span class="k">return</span> <span class="mi">33</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">c2f</span><span class="p">(</span><span class="n">degreesc</span><span class="p">):</span>
+    <span class="err">“””</span><span class="n">Converts</span> <span class="n">degrees</span> <span class="n">C</span> <span class="n">to</span> <span class="n">degrees</span> <span class="n">F</span><span class="err">”””</span>
+    <span class="k">return</span> <span class="n">degreesc</span> <span class="o">+</span> <span class="mi">5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">printCF</span><span class="p">(</span><span class="n">degreesc</span><span class="p">,</span> <span class="n">degreesf</span><span class="p">):</span>
+    <span class="err">“””</span><span class="n">Prints</span> <span class="n">degrees</span> <span class="n">C</span> <span class="ow">and</span> <span class="n">degrees</span> <span class="n">F</span><span class="err">”””</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">degreesc</span><span class="p">,</span> <span class="n">degreesf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The idea is to execute the program with the function stubs and make sure that values are being passed back and forth correctly. Eventually, after prompting the user and error-checking, the <code class="docutils literal notranslate"><span class="pre">getdegc</span></code> function will return a positive number. So, for now, we just return a positive number. Eventually, once we figure out the conversion, the <code class="docutils literal notranslate"><span class="pre">c2f</span></code> function will convert C to F. For now, we’ll just add 5 so we know that this function is correctly receiving the degrees C and using this number to calculate and return degrees F. Then, the <code class="docutils literal notranslate"><span class="pre">printCF</span></code> function will eventually print in a nice sentence format, but for now it will just print the values.</p>
+<p>The headers for the functions should not change. Putting the actual doc strings in the function stubs is a good idea.</p>
+<p>Then, once that is working, modify the stubs one at a time. For example, you might start by modifying the <code class="docutils literal notranslate"><span class="pre">getdegc</span></code> function to prompt the user. Then, modify that function to include the error-checking.  Going about this systematically really does cut down on errors and makes it easier to find them.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week7A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 7A Preread: Dictionaries and Intro to Pandas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week8A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions-morning">User-defined functions (Morning)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-return">Functions with Return</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-no-return">Functions with no Return</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope">Scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lambda-functions">Lambda Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-programs-afternoon">Modular Programs (Afternoon)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-programs">Modular Programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-stubs">Function Stubs</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

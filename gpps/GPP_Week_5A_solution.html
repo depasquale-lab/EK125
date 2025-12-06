@@ -1,0 +1,899 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 5A Morning Assignment: Nested lists and Multilevel Indexing &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gpps/GPP_Week_5A_solution';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/gpps/GPP_Week_5A_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 5A Morning Assignment: Nested lists and Multilevel Indexing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warmup-nested-list-comprehensions">Warmup: Nested list comprehensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-ice-cream-combinations-with-nested-list-comprehensions">Problem 1: Ice cream combinations with nested list comprehensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-classroom-attendance-tracker-with-nested-lists">Problem 2: Classroom Attendance Tracker with nested lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-nested-tuples">Problem 3: Nested tuples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-multi-indexing">Problem 4: Multi-indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-basic-slicing">Problem 5: Basic slicing</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-5a-morning-assignment-nested-lists-and-multilevel-indexing">
+<h1>Week 5A Morning Assignment: Nested lists and Multilevel Indexing<a class="headerlink" href="#week-5a-morning-assignment-nested-lists-and-multilevel-indexing" title="Link to this heading">#</a></h1>
+<p><strong>Group Exercise (Teams of 3)</strong>
+Work together to complete the following tasks!</p>
+<section id="warmup-nested-list-comprehensions">
+<h2>Warmup: Nested list comprehensions<a class="headerlink" href="#warmup-nested-list-comprehensions" title="Link to this heading">#</a></h2>
+<p>Create a nested list of the integers from 1 to n and their squares. Generate n as a random integer from 5 to 8. Do this using a list comprehension.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">newlist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 1], [2, 4], [3, 9], [4, 16], [5, 25]]
+[[1, 1], [2, 4], [3, 9], [4, 16], [5, 25]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-1-ice-cream-combinations-with-nested-list-comprehensions">
+<h2>Problem 1: Ice cream combinations with nested list comprehensions<a class="headerlink" href="#problem-1-ice-cream-combinations-with-nested-list-comprehensions" title="Link to this heading">#</a></h2>
+<p>An ice cream shop wants to test every possible combination of ice cream flavors and toppings for a new menu.<br />
+Some combos are disallowed because they would be gross (for example: <code class="docutils literal notranslate"><span class="pre">&quot;oreo&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;peach&quot;</span></code>).</p>
+<p>Your task is to generate the combinations using a <strong>nested list comprehension</strong>.<br />
+That means the result should be a <strong>list of lists</strong>, where each sublist contains all the valid <code class="docutils literal notranslate"><span class="pre">(flavor,</span> <span class="pre">topping)</span></code> pairs for one particular flavor.</p>
+<p><strong>Tasks</strong></p>
+<ol class="arabic">
+<li><p><strong>Small test case</strong></p>
+<ul>
+<li><p>Manually create two short lists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vanilla&quot;</span><span class="p">,</span> <span class="s2">&quot;chocolate&quot;</span><span class="p">,</span> <span class="s2">&quot;strawberry&quot;</span><span class="p">]</span>
+<span class="n">toppings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sprinkles&quot;</span><span class="p">,</span> <span class="s2">&quot;fudge&quot;</span><span class="p">,</span> <span class="s2">&quot;nuts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use a nested list comprehension to generate all <code class="docutils literal notranslate"><span class="pre">(flavor,</span> <span class="pre">topping)</span></code> pairs, but <strong>structure the result by flavor</strong> (i.e., each flavor has its own sublist of topping pairs). Call this nested list <code class="docutils literal notranslate"><span class="pre">combos_small</span></code>.</p></li>
+<li><p>Exclude one specific bad combo (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;strawberry&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;fudge&quot;</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>Large test case</strong></p>
+<ul>
+<li><p>Pretend the shop has 200 flavors and 200 toppings.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>   <span class="c1"># 0, 1, 2, ..., 199</span>
+<span class="n">toppings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use a nested list comprehension to generate a list of 200 sublists.</p></li>
+<li><p>Each sublist should contain all the valid <code class="docutils literal notranslate"><span class="pre">(flavor,</span> <span class="pre">topping)</span></code> pairs for that flavor.</p></li>
+<li><p>Exclude pairs where <code class="docutils literal notranslate"><span class="pre">(flavor</span> <span class="pre">+</span> <span class="pre">topping)</span> <span class="pre">%</span> <span class="pre">17</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vanilla&quot;</span><span class="p">,</span> <span class="s2">&quot;chocolate&quot;</span><span class="p">,</span> <span class="s2">&quot;strawberry&quot;</span><span class="p">]</span>
+<span class="n">toppings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sprinkles&quot;</span><span class="p">,</span> <span class="s2">&quot;fudge&quot;</span><span class="p">,</span> <span class="s2">&quot;nuts&quot;</span><span class="p">]</span>
+
+<span class="c1"># Nested list comprehension: each flavor has a sublist of valid toppings</span>
+<span class="n">combos_small</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">toppings</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;strawberry&quot;</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;fudge&quot;</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">flavors</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">combos_small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[(&#39;vanilla&#39;, &#39;sprinkles&#39;), (&#39;vanilla&#39;, &#39;fudge&#39;), (&#39;vanilla&#39;, &#39;nuts&#39;)], [(&#39;chocolate&#39;, &#39;sprinkles&#39;), (&#39;chocolate&#39;, &#39;fudge&#39;), (&#39;chocolate&#39;, &#39;nuts&#39;)], [(&#39;strawberry&#39;, &#39;sprinkles&#39;), (&#39;strawberry&#39;, &#39;nuts&#39;)]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+<span class="n">toppings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+
+<span class="n">combos_large</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">toppings</span> <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="n">t</span><span class="p">)</span> <span class="o">%</span> <span class="mi">17</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">flavors</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">combos_large</span><span class="p">))</span>          <span class="c1"># 200 sublists (one for each flavor)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2-classroom-attendance-tracker-with-nested-lists">
+<h2>Problem 2: Classroom Attendance Tracker with nested lists<a class="headerlink" href="#problem-2-classroom-attendance-tracker-with-nested-lists" title="Link to this heading">#</a></h2>
+<p>A teacher wants to record the number of students present in each row of her classroom.<br />
+The classroom has <code class="docutils literal notranslate"><span class="pre">n</span></code> rows and <code class="docutils literal notranslate"><span class="pre">m</span></code> desks per row.</p>
+<p>Each desk can either be <strong>occupied (1)</strong> or <strong>empty (0)</strong>.</p>
+<p><strong>Task</strong></p>
+<ol class="arabic simple">
+<li><p>Build the nested list using this description</p></li>
+</ol>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">3</span></code> (3 rows) and <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">4</span></code> (4 desks per row).</p></li>
+<li><p>Create a nested list called <code class="docutils literal notranslate"><span class="pre">attendance</span></code>, where <strong>each inner list represents one row of desks</strong>.</p></li>
+<li><p>Fill each inner list with 1s and 0s to indicate which desks are occupied and which are empty:</p>
+<ul>
+<li><p><strong>Row 0:</strong> first desk occupied, second desk empty, third desk occupied, fourth desk occupied</p></li>
+<li><p><strong>Row 1:</strong> first desk occupied, second desk occupied, third desk occupied, fourth desk empty</p></li>
+<li><p><strong>Row 2:</strong> first desk empty, second desk occupied, third desk occupied, fourth desk occupied</p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Nested For Loops (Build the Nested List)</strong></p>
+<ul class="simple">
+<li><p>Use <strong>nested for loops</strong> to create a nested list <code class="docutils literal notranslate"><span class="pre">attendance2</span></code> that represents the classroom using the nested listed you build above <code class="docutils literal notranslate"><span class="pre">attendance</span></code>.</p></li>
+<li><p>Each inner list represents one row, and each element is the attendance at that desk.</p></li>
+</ul>
+</li>
+<li><p><strong>Nested List Comprehension</strong></p>
+<ul class="simple">
+<li><p>Create another nested list <code class="docutils literal notranslate"><span class="pre">attendance3</span></code> using a <strong>nested list comprehension</strong> instead of loops.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Example Expected Output for each approach</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Step 0: Start with the given nested list ---</span>
+<span class="n">attendance</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial attendance list:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># --- Nested Loops: Copy attendance to a new nested list ---</span>
+<span class="n">attendance_loops</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance</span><span class="p">:</span>
+    <span class="n">new_row</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">desk</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="n">new_row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desk</span><span class="p">)</span>
+    <span class="n">attendance_loops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_row</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Attendance (nested loops):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance_loops</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># --- Nested List Comprehension: Copy attendance to another nested list ---</span>
+<span class="n">attendance_comp</span> <span class="o">=</span> <span class="p">[[</span><span class="n">desk</span> <span class="k">for</span> <span class="n">desk</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Attendance (nested comprehension):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance_comp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial attendance list:
+[1, 0, 1, 1]
+[1, 1, 1, 0]
+[0, 1, 1, 1]
+
+Attendance (nested loops):
+[1, 0, 1, 1]
+[1, 1, 1, 0]
+[0, 1, 1, 1]
+
+Attendance (nested comprehension):
+[1, 0, 1, 1]
+[1, 1, 1, 0]
+[0, 1, 1, 1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-nested-tuples">
+<h2>Problem 3: Nested tuples<a class="headerlink" href="#problem-3-nested-tuples" title="Link to this heading">#</a></h2>
+<p>Do the same thing as Problem 2, but this time using nested tuples.</p>
+<section id="instructions">
+<h3>Instructions<a class="headerlink" href="#instructions" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Start by constructing a nested tuple for <code class="docutils literal notranslate"><span class="pre">attendance</span></code>.</p></li>
+<li><p><strong>Nested Loops Copy</strong></p>
+<ul>
+<li><p>Use nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops to create a <strong>new nested tuple</strong> that copies the original.</p></li>
+<li><p><strong>Important:</strong> Tuples are immutable, so you cannot use <code class="docutils literal notranslate"><span class="pre">append()</span></code>.</p>
+<ul>
+<li><p>Instead, build each inner tuple by <strong>concatenating a single-element tuple</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_row</span> <span class="o">=</span> <span class="n">new_row</span> <span class="o">+</span> <span class="p">(</span><span class="n">desk</span><span class="p">,)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Then concatenate the inner tuple to the outer tuple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_attendance</span> <span class="o">=</span> <span class="n">new_attendance</span> <span class="o">+</span> <span class="p">(</span><span class="n">new_row</span><span class="p">,)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Nested Comprehension Copy</strong></p>
+<ul class="simple">
+<li><p>Use a <strong>nested comprehension</strong> to create another copy of the nested tuple.</p></li>
+</ul>
+</li>
+</ol>
+<p>Your code output should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initial</span> <span class="n">attendance</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">Attendance</span> <span class="p">(</span><span class="n">nested</span> <span class="n">loops</span> <span class="n">copy</span> <span class="k">with</span> <span class="n">tuples</span><span class="p">):</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">Attendance</span> <span class="p">(</span><span class="n">nested</span> <span class="n">comprehension</span> <span class="n">copy</span> <span class="k">with</span> <span class="n">tuples</span><span class="p">):</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Point:</strong> Tuples are immutable. You <strong>cannot append</strong>; you must <strong>concatenate</strong> tuples to add entries inside loops.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Part 0: Construct the nested tuple manually ---</span>
+<span class="n">attendance</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># Row 0: first desk occupied, second empty, third occupied, fourth occupied</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Row 1: first three desks occupied, fourth empty</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># Row 2: first desk empty, others occupied</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial attendance tuple:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># --- Part 1: Nested Loops Copy ---</span>
+<span class="n">attendance_loops</span> <span class="o">=</span> <span class="p">()</span>  <span class="c1"># outer tuple</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance</span><span class="p">:</span>
+    <span class="n">new_row</span> <span class="o">=</span> <span class="p">()</span>  <span class="c1"># inner tuple</span>
+    <span class="k">for</span> <span class="n">desk</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="c1"># Tuples are immutable: concatenate single-element tuple</span>
+        <span class="n">new_row</span> <span class="o">+=</span> <span class="p">(</span><span class="n">desk</span><span class="p">,)</span>
+    <span class="c1"># Add inner tuple to outer tuple</span>
+    <span class="n">attendance_loops</span> <span class="o">+=</span> <span class="p">(</span><span class="n">new_row</span><span class="p">,)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Attendance (nested loops copy with tuples):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance_loops</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># --- Part 2: Nested Comprehension Copy ---</span>
+<span class="n">attendance_comp</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">desk</span> <span class="k">for</span> <span class="n">desk</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Attendance (nested comprehension copy with tuples):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">attendance_comp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial attendance tuple:
+(1, 0, 1, 1)
+(1, 1, 1, 0)
+(0, 1, 1, 1)
+
+Attendance (nested loops copy with tuples):
+(1, 0, 1, 1)
+(1, 1, 1, 0)
+(0, 1, 1, 1)
+
+Attendance (nested comprehension copy with tuples):
+(1, 0, 1, 1)
+(1, 1, 1, 0)
+(0, 1, 1, 1)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="problem-4-multi-indexing">
+<h2>Problem 4: Multi-indexing<a class="headerlink" href="#problem-4-multi-indexing" title="Link to this heading">#</a></h2>
+<p>From problem 1, you should have a nested list called <code class="docutils literal notranslate"><span class="pre">combos_small</span></code>. With this nested list, do the following indexing:</p>
+<ul class="simple">
+<li><p>Print the tuple of the first topping for “vanilla” (hint: access the first sublist, first element).</p></li>
+<li><p>Print the tuple of the last topping for “chocolate”.</p></li>
+<li><p>Print all the tuples for all the topping pairs for “strawberry”.</p></li>
+<li><p>Print the tuple of the second topping of “vanilla”.</p></li>
+<li><p>Print the tuple containing “strawberry” and “nuts”.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. First topping for &quot;vanilla&quot;</span>
+<span class="n">first_vanilla</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First topping for vanilla:&quot;</span><span class="p">,</span> <span class="n">first_vanilla</span><span class="p">)</span>
+
+<span class="c1"># 2. Last topping for &quot;chocolate&quot;</span>
+<span class="n">last_chocolate</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last topping for chocolate:&quot;</span><span class="p">,</span> <span class="n">last_chocolate</span><span class="p">)</span>
+
+<span class="c1"># 3. All topping pairs for &quot;strawberry&quot;</span>
+<span class="n">strawberry_toppings</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All topping pairs for strawberry:&quot;</span><span class="p">,</span> <span class="n">strawberry_toppings</span><span class="p">)</span>
+
+<span class="c1"># 4. Second topping of &quot;vanilla&quot;</span>
+<span class="n">second_vanilla</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second topping for vanilla:&quot;</span><span class="p">,</span> <span class="n">second_vanilla</span><span class="p">)</span>
+
+<span class="c1"># 5. Tuple containing (&quot;strawberry&quot;, &quot;nuts&quot;)</span>
+<span class="n">strawberry_nuts</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuple (&#39;strawberry&#39;, &#39;nuts&#39;):&quot;</span><span class="p">,</span> <span class="n">strawberry_nuts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First topping for vanilla: (&#39;vanilla&#39;, &#39;sprinkles&#39;)
+Last topping for chocolate: (&#39;chocolate&#39;, &#39;nuts&#39;)
+All topping pairs for strawberry: [(&#39;strawberry&#39;, &#39;sprinkles&#39;), (&#39;strawberry&#39;, &#39;nuts&#39;)]
+Second topping for vanilla: (&#39;vanilla&#39;, &#39;fudge&#39;)
+Tuple (&#39;strawberry&#39;, &#39;nuts&#39;): (&#39;strawberry&#39;, &#39;nuts&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-5-basic-slicing">
+<h2>Problem 5: Basic slicing<a class="headerlink" href="#problem-5-basic-slicing" title="Link to this heading">#</a></h2>
+<p>From problem 1, you should have a nested list called <code class="docutils literal notranslate"><span class="pre">combos_small</span></code>. With this nested list, do the following using slicing:</p>
+<ul class="simple">
+<li><p>Get the first two tuples of the first two toppings for “vanilla”.</p></li>
+<li><p>Get all tuples for all toppings except the last one for “chocolate”.</p></li>
+<li><p>Get the last tuple of the last topping for each flavor using slicing.</p></li>
+<li><p>Get the tuples for the first two flavors with all their toppings.</p></li>
+<li><p>Get a sublist of tuples containing the second and third toppings of “vanilla”.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. First two toppings for &quot;vanilla&quot;</span>
+<span class="n">vanilla_first_two</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First two toppings for vanilla:&quot;</span><span class="p">,</span> <span class="n">vanilla_first_two</span><span class="p">)</span>
+
+<span class="c1"># 2. All toppings except the last one for &quot;chocolate&quot;</span>
+<span class="n">chocolate_except_last</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chocolate toppings except last:&quot;</span><span class="p">,</span> <span class="n">chocolate_except_last</span><span class="p">)</span>
+
+<span class="c1"># 3. Last topping for each flavor using slicing</span>
+<span class="n">last_toppings</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">combos_small</span><span class="p">]</span>  <span class="c1"># slice keeps it as a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last topping for each flavor:&quot;</span><span class="p">,</span> <span class="n">last_toppings</span><span class="p">)</span>
+
+<span class="c1"># 4. First two flavors with all their toppings</span>
+<span class="n">first_two_flavors</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First two flavors with all toppings:&quot;</span><span class="p">,</span> <span class="n">first_two_flavors</span><span class="p">)</span>
+
+<span class="c1"># 5. Second and third toppings of &quot;vanilla&quot;</span>
+<span class="n">vanilla_second_third</span> <span class="o">=</span> <span class="n">combos_small</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second and third toppings for vanilla:&quot;</span><span class="p">,</span> <span class="n">vanilla_second_third</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First two toppings for vanilla: [(&#39;vanilla&#39;, &#39;sprinkles&#39;), (&#39;vanilla&#39;, &#39;fudge&#39;)]
+Chocolate toppings except last: [(&#39;chocolate&#39;, &#39;sprinkles&#39;), (&#39;chocolate&#39;, &#39;fudge&#39;)]
+Last topping for each flavor: [[(&#39;vanilla&#39;, &#39;nuts&#39;)], [(&#39;chocolate&#39;, &#39;nuts&#39;)], [(&#39;strawberry&#39;, &#39;nuts&#39;)]]
+First two flavors with all toppings: [[(&#39;vanilla&#39;, &#39;sprinkles&#39;), (&#39;vanilla&#39;, &#39;fudge&#39;), (&#39;vanilla&#39;, &#39;nuts&#39;)], [(&#39;chocolate&#39;, &#39;sprinkles&#39;), (&#39;chocolate&#39;, &#39;fudge&#39;), (&#39;chocolate&#39;, &#39;nuts&#39;)]]
+Second and third toppings for vanilla: [(&#39;vanilla&#39;, &#39;fudge&#39;), (&#39;vanilla&#39;, &#39;nuts&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./gpps"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warmup-nested-list-comprehensions">Warmup: Nested list comprehensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-ice-cream-combinations-with-nested-list-comprehensions">Problem 1: Ice cream combinations with nested list comprehensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-classroom-attendance-tracker-with-nested-lists">Problem 2: Classroom Attendance Tracker with nested lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-nested-tuples">Problem 3: Nested tuples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-multi-indexing">Problem 4: Multi-indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-basic-slicing">Problem 5: Basic slicing</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

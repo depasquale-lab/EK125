@@ -1,0 +1,1152 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 12B: Vector and Matrix Operations in MATLAB &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week12B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 13a: MATLAB Scripts, Documentation, and File I/O" href="Week13A.html" />
+    <link rel="prev" title="Week 12a: Creating Vectors and Matrices in MATLAB" href="Week12A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week12B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 12B: Vector and Matrix Operations in MATLAB</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-operations">Scalar Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-multiplication-operators">Array Multiplication Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-array-vs-matrix-operations">Understanding Array vs. Matrix Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-matrix-multiplication">Introduction to Matrix Multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-sums">Weighted Sums</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-vector-multiplication">Matrix-Vector Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-matrix-multiplication">Matrix-Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-dimensions">Matrix Dimensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-indexing">Logical Indexing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-as-function-arguments">Arrays as Function Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-that-change-array-dimensions">Functions that Change Array Dimensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape-function"><code class="docutils literal notranslate"><span class="pre">reshape</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rot90-function"><code class="docutils literal notranslate"><span class="pre">rot90</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-functions">Flip Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replication-functions">Replication Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-functions-and-statistical-functions">Array Functions and Statistical Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-functions-on-matrices">Statistical Functions on Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-dimensions">Specifying Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-similar-functions">Other Similar Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diff-function"><code class="docutils literal notranslate"><span class="pre">diff</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-function"><code class="docutils literal notranslate"><span class="pre">sort</span></code> Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrices">Square Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diag-function"><code class="docutils literal notranslate"><span class="pre">diag</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-function"><code class="docutils literal notranslate"><span class="pre">trace</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eye-function"><code class="docutils literal notranslate"><span class="pre">eye</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-functions-for-square-matrices">“Is” Functions for Square Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-matlab-documentation-resources">Additional MATLAB Documentation Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-12b-vector-and-matrix-operations-in-matlab">
+<h1>Week 12B: Vector and Matrix Operations in MATLAB<a class="headerlink" href="#week-12b-vector-and-matrix-operations-in-matlab" title="Link to this heading">#</a></h1>
+<section id="scalar-operations">
+<h2>Scalar Operations<a class="headerlink" href="#scalar-operations" title="Link to this heading">#</a></h2>
+<p>Scalar operations can be performed on arrays (vectors or matrices). For example, one can perform scalar operations on the following vector vec:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">vec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mf">1.0000</span><span class="w">    </span><span class="mf">1.5000</span><span class="w">    </span><span class="mf">2.0000</span><span class="w">    </span><span class="mf">2.5000</span><span class="w">    </span><span class="mf">3.0000</span>
+</pre></div>
+</div>
+<p>Multiplying the vector by 2 performs the multiplication on every element in the vector, resulting in a vector with the same length as the original. Since this is not stored in a variable, the result is stored in the default variable <code class="docutils literal notranslate"><span class="pre">ans</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">2</span><span class="w">    </span><span class="mi">3</span><span class="w">    </span><span class="mi">4</span><span class="w">    </span><span class="mi">5</span><span class="w">    </span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>All numerical operators can be used in this way. For example, we can add 5 to every element:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">newv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">newv</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mf">6.0000</span><span class="w">    </span><span class="mf">6.5000</span><span class="w">    </span><span class="mf">7.0000</span><span class="w">    </span><span class="mf">7.5000</span><span class="w">    </span><span class="mf">8.0000</span>
+</pre></div>
+</div>
+<p>Scalar operations can also be performed on matrices:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">17</span><span class="w">    </span><span class="mi">15</span><span class="w">    </span><span class="mi">18</span>
+<span class="w">    </span><span class="mi">20</span><span class="w">     </span><span class="mi">5</span><span class="w">    </span><span class="mi">19</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mat</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mf">8.5000</span><span class="w">    </span><span class="mf">7.5000</span><span class="w">    </span><span class="mf">9.0000</span>
+<span class="w">   </span><span class="mf">10.0000</span><span class="w">    </span><span class="mf">2.5000</span><span class="w">    </span><span class="mf">9.5000</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="array-operations">
+<h2>Array Operations<a class="headerlink" href="#array-operations" title="Link to this heading">#</a></h2>
+<p>MATLAB’s array operations are highlighted for their simplicity and efficiency, particularly through <strong>scalar and vector expansion</strong>, features in MATLAB that automatically expand arrays to match each other’s dimensions for certain operations.</p>
+<p>You can also perform array operations on operands of different compatible sizes. Two arrays have compatible sizes if the size of each dimension is either the same or 1.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">linspace</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="n">vec2</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">3</span><span class="w">    </span><span class="mi">5</span><span class="w">    </span><span class="mi">7</span><span class="w">    </span><span class="mi">9</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vec2</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">5</span><span class="w">   </span><span class="mi">16</span><span class="w">   </span><span class="mi">40</span><span class="w">   </span><span class="mi">14</span>
+</pre></div>
+</div>
+<p>The vector implicitly “expanded” to the same size as the matrix for element-wise arithmetic. If both elements are vectors, they will both be “expanded”.</p>
+<section id="array-multiplication-operators">
+<h3>Array Multiplication Operators<a class="headerlink" href="#array-multiplication-operators" title="Link to this heading">#</a></h3>
+<p>For operations that are based on multiplication, the operator must have a <strong>dot</strong> in front of it. So, the multiplication array operators are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.^</span></code> - Element-wise power</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.*</span></code> - Element-wise multiplication</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./</span></code> - Element-wise right division</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.\</span></code> - Element-wise left division</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec2</span>
+<span class="n">vec2</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">3</span><span class="w">    </span><span class="mi">5</span><span class="w">    </span><span class="mi">7</span><span class="w">    </span><span class="mi">9</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec2</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">9</span><span class="w">   </span><span class="mi">25</span><span class="w">   </span><span class="mi">49</span><span class="w">   </span><span class="mi">81</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">2</span><span class="w"> </span><span class="s">1]</span>
+<span class="n">mata</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">1</span><span class="w">    </span><span class="mi">3</span>
+<span class="w">    </span><span class="mi">2</span><span class="w">    </span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">matb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">1</span><span class="w"> </span><span class="s">5]</span>
+<span class="n">matb</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">4</span><span class="w">    </span><span class="mi">2</span>
+<span class="w">    </span><span class="mi">1</span><span class="w">    </span><span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mata</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">matb</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">4</span><span class="w">    </span><span class="mi">6</span>
+<span class="w">    </span><span class="mi">2</span><span class="w">    </span><span class="mi">5</span>
+</pre></div>
+</div>
+</section>
+<section id="understanding-array-vs-matrix-operations">
+<h3>Understanding Array vs. Matrix Operations<a class="headerlink" href="#understanding-array-vs-matrix-operations" title="Link to this heading">#</a></h3>
+<p>MATLAB has two different types of arithmetic operations: array operations and matrix operations. Matrix operations follow the rules of linear algebra, while array operations execute element-by-element operations and support multidimensional arrays. The period character (.) distinguishes the array operations from the matrix operations. However, since the matrix and array operations are the same for addition and subtraction, the character pairs .+ and .- are unnecessary.</p>
+<p>If operands have compatible sizes, then each input is implicitly expanded as needed to match the size of the other. For instance, if you add a 1-by-3 row vector to a 2-by-1 column vector, both vectors implicitly expand into a 2-by-3 matrix before MATLAB executes the element-wise addition.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="introduction-to-matrix-multiplication">
+<h2>Introduction to Matrix Multiplication<a class="headerlink" href="#introduction-to-matrix-multiplication" title="Link to this heading">#</a></h2>
+<p>You have done element-wise arithmetic with matrices, including multiplication (<code class="docutils literal notranslate"><span class="pre">.*</span></code>). Another way to multiply matrices is called <strong>matrix multiplication</strong> (<code class="docutils literal notranslate"><span class="pre">*</span></code>). You can think of it as a way to add elements in a row where you weight, or scale, the elements differently.</p>
+<section id="weighted-sums">
+<h3>Weighted Sums<a class="headerlink" href="#weighted-sums" title="Link to this heading">#</a></h3>
+<p>A weighted sum is where you scale numbers and then add them together.</p>
+<p>One example of a weighted sum is how some teachers calculate final grades. If tests are worth 50% of the final grade, homework is 40%, and quizzes are 10%, then a student’s final grade is calculated by multiplying these proportions by the test, homework, and quiz grades and adding them together.</p>
+</section>
+<section id="matrix-vector-multiplication">
+<h3>Matrix-Vector Multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Link to this heading">#</a></h3>
+<p>Matrix multiplication of a matrix times a vector is the weighted sum of each row of the matrix. So, imagine a teacher records the test, homework, and quiz grades of different students in the rows of a matrix. Multiplying the matrix of grades by the vector of weights gives you the grades for each student.</p>
+<p>The resulting matrix has the same number of rows as the matrix on the left — one final grade per student.</p>
+</section>
+<section id="matrix-matrix-multiplication">
+<h3>Matrix-Matrix Multiplication<a class="headerlink" href="#matrix-matrix-multiplication" title="Link to this heading">#</a></h3>
+<p>When you multiply two matrices, the elements of the resulting matrix are the weighted sums of the rows and columns of the first and second matrix, respectively. The matrix order is important because matrix multiplication is <strong>not commutative</strong>. That is, AB ≠ BA.</p>
+<p>Another way of looking at matrix multiplication is that a matrix times a matrix is the left matrix multiplied by each column of the right matrix.</p>
+</section>
+<section id="matrix-dimensions">
+<h3>Matrix Dimensions<a class="headerlink" href="#matrix-dimensions" title="Link to this heading">#</a></h3>
+<p>Matrix multiplication requires that the dimensions agree. You need the same number of columns in the first matrix as there are rows in the second, or else there won’t be enough elements to multiply together.</p>
+<p>Matrix multiplication requires that the <strong>inner dimensions</strong> of the two matrices agree. The resulting matrix has the <strong>outer dimensions</strong> of the two matrices.</p>
+<p>The number of columns in the first matrix, n, must equal the number of rows in the second matrix, n.</p>
+<p>When these conditions are satisfied, you can do matrix multiplication. If <code class="docutils literal notranslate"><span class="pre">.*</span></code> is array multiplication, the matrix multiplication operator is just <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">matc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">mata</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">matb</span>
+<span class="n">matc</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">7</span><span class="w">   </span><span class="mi">17</span>
+<span class="w">    </span><span class="mi">9</span><span class="w">    </span><span class="mi">9</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="logical-operators">
+<h2>Logical Operators<a class="headerlink" href="#logical-operators" title="Link to this heading">#</a></h2>
+<p>Logical operators can be used with arrays, also.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">vec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">16</span><span class="w">    </span><span class="mi">15</span><span class="w">     </span><span class="mi">8</span><span class="w">    </span><span class="mi">14</span><span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">isless10</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span>
+<span class="n">isless10</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="mi">1</span>×<span class="mi">5</span><span class="w"> </span><span class="nb">logical</span><span class="w"> </span><span class="n">array</span>
+<span class="w">   </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span>
+</pre></div>
+</div>
+<section id="logical-indexing">
+<h3>Logical Indexing<a class="headerlink" href="#logical-indexing" title="Link to this heading">#</a></h3>
+<p>Logical indexing also works in MATLAB:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="n">isless10</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">8</span><span class="w">    </span><span class="mi">4</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">vec</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="mi">1</span>×<span class="mi">5</span><span class="w"> </span><span class="nb">logical</span><span class="w"> </span><span class="n">array</span>
+<span class="w">   </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>To find out just true/false whether two vectors are equal to each other, use <code class="docutils literal notranslate"><span class="pre">isequal</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">isequal</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="w"> </span><span class="n">vec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">logical</span>
+<span class="w">   </span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="arrays-as-function-arguments">
+<h2>Arrays as Function Arguments<a class="headerlink" href="#arrays-as-function-arguments" title="Link to this heading">#</a></h2>
+<p>Entire arrays can be passed to functions. The function will evaluate each of the elements in the array and return an array with the same dimensions as the original.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">myvec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="n">myvec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="o">-</span><span class="mi">3</span><span class="w">    </span><span class="o">-</span><span class="mi">2</span><span class="w">    </span><span class="o">-</span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mymat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mymat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="n">mymat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">         </span><span class="mi">0</span><span class="w">    </span><span class="mf">2.2361</span><span class="w">    </span><span class="mf">1.7321</span><span class="w">    </span><span class="mf">2.0000</span>
+<span class="w">    </span><span class="mf">1.4142</span><span class="w">    </span><span class="mf">1.4142</span><span class="w">    </span><span class="mf">1.0000</span><span class="w">    </span><span class="mf">1.0000</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mf">0.0000</span><span class="w">    </span><span class="mf">0.5878</span><span class="w">   </span><span class="o">-</span><span class="mf">0.9511</span><span class="w">    </span><span class="mf">0.9511</span><span class="w">   </span><span class="o">-</span><span class="mf">0.5878</span><span class="w">   </span><span class="o">-</span><span class="mf">0.0000</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="functions-that-change-array-dimensions">
+<h2>Functions that Change Array Dimensions<a class="headerlink" href="#functions-that-change-array-dimensions" title="Link to this heading">#</a></h2>
+<section id="reshape-function">
+<h3><code class="docutils literal notranslate"><span class="pre">reshape</span></code> Function<a class="headerlink" href="#reshape-function" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">reshape</span></code> function can change the dimensions of any array to any other array that has the same number of elements.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ranmat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ranmat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">9</span><span class="w">    </span><span class="mi">16</span><span class="w">    </span><span class="mi">14</span><span class="w">    </span><span class="mi">17</span>
+<span class="w">    </span><span class="mi">19</span><span class="w">    </span><span class="mi">20</span><span class="w">     </span><span class="mi">1</span><span class="w">    </span><span class="mi">19</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">ranmat</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">9</span><span class="w">    </span><span class="mi">14</span>
+<span class="w">    </span><span class="mi">19</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">    </span><span class="mi">16</span><span class="w">    </span><span class="mi">17</span>
+<span class="w">    </span><span class="mi">20</span><span class="w">    </span><span class="mi">19</span>
+</pre></div>
+</div>
+</section>
+<section id="rot90-function">
+<h3><code class="docutils literal notranslate"><span class="pre">rot90</span></code> Function<a class="headerlink" href="#rot90-function" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">rot90</span></code> function rotates a matrix 90 degrees counterclockwise.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ranmat</span>
+<span class="n">ranmat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">9</span><span class="w">    </span><span class="mi">16</span><span class="w">    </span><span class="mi">14</span><span class="w">    </span><span class="mi">17</span>
+<span class="w">    </span><span class="mi">19</span><span class="w">    </span><span class="mi">20</span><span class="w">     </span><span class="mi">1</span><span class="w">    </span><span class="mi">19</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">rot90</span><span class="p">(</span><span class="n">ranmat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">17</span><span class="w">    </span><span class="mi">19</span>
+<span class="w">    </span><span class="mi">14</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">    </span><span class="mi">16</span><span class="w">    </span><span class="mi">20</span>
+<span class="w">     </span><span class="mi">9</span><span class="w">    </span><span class="mi">19</span>
+</pre></div>
+</div>
+</section>
+<section id="flip-functions">
+<h3>Flip Functions<a class="headerlink" href="#flip-functions" title="Link to this heading">#</a></h3>
+<p>There are several functions that flip matrices.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">fliplr</span></code></strong> flips a row vector or the columns of a matrix from left to right:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">14</span>
+<span class="n">vec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">8</span><span class="w">    </span><span class="mi">11</span><span class="w">    </span><span class="mi">14</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">fliplr</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">14</span><span class="w">    </span><span class="mi">11</span><span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">2</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">flipud</span></code></strong> flips a column vector or the rows of a matrix up to down:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">14</span>
+<span class="n">vec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">8</span><span class="w">    </span><span class="mi">11</span><span class="w">    </span><span class="mi">14</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">flipud</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">14</span><span class="w">    </span><span class="mi">11</span><span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">2</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">flip</span></code></strong> flips a row vector left to right or a column vector or matrix up to down.</p>
+</section>
+<section id="replication-functions">
+<h3>Replication Functions<a class="headerlink" href="#replication-functions" title="Link to this heading">#</a></h3>
+<p>There are functions that replicate a matrix or element from a matrix.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">repmat</span></code></strong> replicates an entire matrix. The following replicates a matrix variable <code class="docutils literal notranslate"><span class="pre">mymat</span></code> 6 times, as a 2 × 3 matrix of <code class="docutils literal notranslate"><span class="pre">mymat</span></code>s:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mymat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">3</span><span class="w"> </span><span class="s">4]</span>
+<span class="n">mymat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="n">mymat</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">repelem</span></code></strong> replicates each element, in this case as a 2 × 3 matrix of each element:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mymat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">3</span><span class="w"> </span><span class="s">4]</span>
+<span class="n">mymat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">repelem</span><span class="p">(</span><span class="n">mymat</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="array-functions-and-statistical-functions">
+<h2>Array Functions and Statistical Functions<a class="headerlink" href="#array-functions-and-statistical-functions" title="Link to this heading">#</a></h2>
+<p>There are functions that perform statistical analyses on vectors, including:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">min</span></code></strong>: minimum value</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">max</span></code></strong>: maximum value</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">mean</span></code></strong>: average</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">mode</span></code></strong>: number that appears most frequently</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">median</span></code></strong>: number in the middle of a sorted vector</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">std</span></code></strong>: standard deviation</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">var</span></code></strong>: variance</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sum</span></code></strong>: sum</p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="n">vec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">5</span><span class="w">    </span><span class="mi">33</span><span class="w">    </span><span class="mi">11</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">9</span><span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">   </span><span class="mf">10.1429</span>
+</pre></div>
+</div>
+<section id="statistical-functions-on-matrices">
+<h3>Statistical Functions on Matrices<a class="headerlink" href="#statistical-functions-on-matrices" title="Link to this heading">#</a></h3>
+<p>For matrices, all of these functions work <strong>column-wise</strong>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">5</span><span class="w">    </span><span class="mi">10</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">8</span><span class="w">    </span><span class="mi">10</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">14</span><span class="w">    </span><span class="mi">12</span><span class="w">    </span><span class="mi">17</span><span class="w">    </span><span class="mi">20</span><span class="w">    </span><span class="mi">14</span>
+</pre></div>
+</div>
+<p>Notice that the result is a row vector that contains the result of the function for each column.</p>
+</section>
+<section id="specifying-dimensions">
+<h3>Specifying Dimensions<a class="headerlink" href="#specifying-dimensions" title="Link to this heading">#</a></h3>
+<p>Many statistical functions accept an optional dimensional argument that specifies whether the operation should be applied to the columns independently (the default) or to the rows.</p>
+<p>To get the mean of each row, specify <code class="docutils literal notranslate"><span class="pre">2</span></code> as the second input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">7</span>
+<span class="w">     </span><span class="mi">8</span>
+<span class="w">    </span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>To get an overall value, for example overall maximum, get the max of this row vector:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">mat</span><span class="p">))</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">10</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">mat</span><span class="p">))</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">77</span>
+</pre></div>
+</div>
+<p>You could also specify the operating dimension of the function as <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="s">&quot;all&quot;</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">10</span>
+</pre></div>
+</div>
+</section>
+<section id="other-similar-functions">
+<h3>Other Similar Functions<a class="headerlink" href="#other-similar-functions" title="Link to this heading">#</a></h3>
+<p>Other similar functions include:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">prod</span></code></strong>: product</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cumsum</span></code></strong>: cumulative sum</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cumprod</span></code></strong>: cumulative product</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cummin</span></code></strong>: cumulative minimum</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cummax</span></code></strong>: cumulative maximum</p></li>
+</ul>
+<p>These can similarly work on a vector or the columns of a matrix.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rvec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span>
+<span class="n">rvec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">prod</span><span class="p">(</span><span class="n">rvec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">   </span><span class="mi">120</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rvec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">rvec</span><span class="w"> </span><span class="mi">11</span><span class="p">]</span>
+<span class="n">rvec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">5</span><span class="w">    </span><span class="mi">11</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">cumsum</span><span class="p">(</span><span class="n">rvec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">9</span><span class="w">    </span><span class="mi">14</span><span class="w">    </span><span class="mi">25</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">prod</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">    </span><span class="mi">24</span><span class="w">    </span><span class="mi">12</span><span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">cummin</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="diff-function">
+<h3><code class="docutils literal notranslate"><span class="pre">diff</span></code> Function<a class="headerlink" href="#diff-function" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">diff</span></code> function returns differences between consecutive elements in a vector:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">7</span><span class="p">]</span>
+<span class="n">vec</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">5</span><span class="w">    </span><span class="mi">33</span><span class="w">    </span><span class="mi">11</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">7</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">diff</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="mi">28</span><span class="w">   </span><span class="o">-</span><span class="mi">22</span><span class="w">    </span><span class="o">-</span><span class="mi">9</span><span class="w">     </span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>Note that the result has one fewer element than the original vector.</p>
+</section>
+<section id="sort-function">
+<h3><code class="docutils literal notranslate"><span class="pre">sort</span></code> Function<a class="headerlink" href="#sort-function" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">sort</span></code> function sorts a vector, or columns of a matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mat</span>
+<span class="n">mat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">sort</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="square-matrices">
+<h2>Square Matrices<a class="headerlink" href="#square-matrices" title="Link to this heading">#</a></h2>
+<p>There are functions that operate on square matrices.</p>
+<section id="diag-function">
+<h3><code class="docutils literal notranslate"><span class="pre">diag</span></code> Function<a class="headerlink" href="#diag-function" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">diag</span></code> function returns the diagonal of a matrix, or creates a diagonal matrix by putting a vector on the diagonal:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mydm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">diag</span><span class="p">([</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">mydm</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">diag</span><span class="p">(</span><span class="n">mydm</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+<section id="trace-function">
+<h3><code class="docutils literal notranslate"><span class="pre">trace</span></code> Function<a class="headerlink" href="#trace-function" title="Link to this heading">#</a></h3>
+<p>The trace of a square matrix is the sum of the diagonal; the <code class="docutils literal notranslate"><span class="pre">trace</span></code> function will return this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">trace</span><span class="p">(</span><span class="n">mydm</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">9</span>
+</pre></div>
+</div>
+</section>
+<section id="eye-function">
+<h3><code class="docutils literal notranslate"><span class="pre">eye</span></code> Function<a class="headerlink" href="#eye-function" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">eye</span></code> function creates an Identity matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">     </span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="is-functions-for-square-matrices">
+<h3>“Is” Functions for Square Matrices<a class="headerlink" href="#is-functions-for-square-matrices" title="Link to this heading">#</a></h3>
+<p>There are “is” functions that ask True/False questions about square matrices.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">isdiag</span></code></strong> returns 1 for true if a matrix is a diagonal matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">isdiag</span><span class="p">(</span><span class="n">mydm</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">logical</span>
+<span class="w">   </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">issymmetric</span></code></strong> returns logical 1 if the matrix is a symmetric matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">smat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">2</span><span class="w"> </span><span class="s">7</span><span class="w"> </span><span class="s">4</span><span class="p">;</span><span class="w"> </span><span class="n">3</span><span class="w"> </span><span class="s">4</span><span class="w"> </span><span class="s">5]</span>
+<span class="n">smat</span><span class="w"> </span><span class="p">=</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">issymmetric</span><span class="p">(</span><span class="n">smat</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">logical</span>
+<span class="w">   </span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Scalar operations apply to every element of an array</p></li>
+<li><p>Array operations use element-wise arithmetic with the dot operator (<code class="docutils literal notranslate"><span class="pre">.*,</span> <span class="pre">./,</span> <span class="pre">.^</span></code>)</p></li>
+<li><p>Matrix operations follow linear algebra rules and use operators without dots (<code class="docutils literal notranslate"><span class="pre">*,</span> <span class="pre">/,</span> <span class="pre">^</span></code>)</p></li>
+<li><p>MATLAB automatically expands arrays with compatible dimensions</p></li>
+<li><p>Matrix multiplication requires inner dimensions to match (columns of first = rows of second)</p></li>
+<li><p>Logical operators create logical arrays that can be used for indexing</p></li>
+<li><p>Most statistical functions operate column-wise by default on matrices</p></li>
+<li><p>Use dimension arguments (e.g., <code class="docutils literal notranslate"><span class="pre">2</span></code> for rows, <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code> for entire array) to control function behavior</p></li>
+<li><p>Functions like <code class="docutils literal notranslate"><span class="pre">reshape</span></code>, <code class="docutils literal notranslate"><span class="pre">flip</span></code>, and <code class="docutils literal notranslate"><span class="pre">repmat</span></code> modify array structure</p></li>
+<li><p>Square matrix functions like <code class="docutils literal notranslate"><span class="pre">diag</span></code>, <code class="docutils literal notranslate"><span class="pre">trace</span></code>, and <code class="docutils literal notranslate"><span class="pre">eye</span></code> are useful for linear algebra</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="additional-matlab-documentation-resources">
+<h2>Additional MATLAB Documentation Resources<a class="headerlink" href="#additional-matlab-documentation-resources" title="Link to this heading">#</a></h2>
+<p>For more detailed information about these functions and concepts, refer to the official MATLAB documentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/matlab_prog/array-vs-matrix-operations.html">Array vs. Matrix Operations - MATLAB &amp; Simulink</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/reshape.html">Reshape array by rearranging existing elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/rot90.html">rot90 - Rotate CW 90 deg - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/fliplr.html">fliplr - Flip array left to right - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/flipud.html">flipud - Flip array up to down - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/flip.html">flip - Flip order of elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/repmat.html">repmat - Repeat copies of array - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/repelem.html">repelem - Repeat copies of array elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/min.html">min - Minimum elements of array - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/max.html">max - Maximum elements of array - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/mean.html">mean - Average or mean value of array - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/mode.html">mode - Most frequent values in array - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/median.html">median - Median value of array - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/std.html">std - Standard deviation - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/var.html">var - Variance - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/sum.html">sum - Sum of array elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/prod.html">prod - Product of array elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/cumsum.html">cumsum - Cumulative sum - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/cumprod.html">cumprod - Cumulative product - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/cummin.html">cummin - Cumulative minimum - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/cummax.html">cummax - Cumulative maximum - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/sort.html">sort - Sort array elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/diag.html">diag - Create diagonal matrix or get diagonal elements of matrix - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/isdiag.html">isdiag - Determine if matrix is diagonal - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/trace.html">trace - Sum of diagonal elements - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/eye.html">eye - Identity matrix - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/issymmetric.html">issymmetric - Determine if matrix is symmetric or skew-symmetric - MATLAB</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/matlab/ref/movmean.html">movmean - Moving mean - MATLAB</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week12A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 12a: Creating Vectors and Matrices in MATLAB</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week13A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 13a: MATLAB Scripts, Documentation, and File I/O</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-operations">Scalar Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-multiplication-operators">Array Multiplication Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-array-vs-matrix-operations">Understanding Array vs. Matrix Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-matrix-multiplication">Introduction to Matrix Multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-sums">Weighted Sums</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-vector-multiplication">Matrix-Vector Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-matrix-multiplication">Matrix-Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-dimensions">Matrix Dimensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-indexing">Logical Indexing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-as-function-arguments">Arrays as Function Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-that-change-array-dimensions">Functions that Change Array Dimensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape-function"><code class="docutils literal notranslate"><span class="pre">reshape</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rot90-function"><code class="docutils literal notranslate"><span class="pre">rot90</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-functions">Flip Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replication-functions">Replication Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-functions-and-statistical-functions">Array Functions and Statistical Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-functions-on-matrices">Statistical Functions on Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-dimensions">Specifying Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-similar-functions">Other Similar Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diff-function"><code class="docutils literal notranslate"><span class="pre">diff</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-function"><code class="docutils literal notranslate"><span class="pre">sort</span></code> Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrices">Square Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diag-function"><code class="docutils literal notranslate"><span class="pre">diag</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-function"><code class="docutils literal notranslate"><span class="pre">trace</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eye-function"><code class="docutils literal notranslate"><span class="pre">eye</span></code> Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-functions-for-square-matrices">“Is” Functions for Square Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-matlab-documentation-resources">Additional MATLAB Documentation Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

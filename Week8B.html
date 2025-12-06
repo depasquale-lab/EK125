@@ -1,0 +1,2136 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week8B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 9a Working with Online Data Stores and APIs in Python" href="Week9A.html" />
+    <link rel="prev" title="Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying" href="Week8A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week8B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-and-comments-both-are-necessary">1. Code and Comments: Both Are Necessary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-myth-of-self-documenting-code">The Myth of “Self-Documenting” Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-code-can-tell-you">What Code Can Tell You</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-code-cannot-tell-you">What Code Cannot Tell You</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clear-names-help-but-aren-t-enough">Clear Names Help, But Aren’t Enough</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-where-clear-names-cannot-tell-the-full-story">Example where clear names CANNOT tell the full story:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-why-both-are-needed">Example: Why Both Are Needed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-effective-comments">2. Writing Effective Comments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-magic-numbers-to-named-constants">Extract Magic Numbers to Named Constants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#break-complex-logic-into-well-named-functions">Break Complex Logic into Well-Named Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-comment">3. What to Comment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-comment-mathematical-formulas-and-calculations">Always Comment: Mathematical Formulas and Calculations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-comment-business-logic-and-context">Always Comment: Business Logic and Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-comment-assumptions-and-constraints">Always Comment: Assumptions and Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goes-without-saying-comments-must-match-the-code">Goes Without Saying: Comments must match the code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-patterns-for-real-code">Comment Patterns for Real Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-1-section-headers">Pattern 1: Section Headers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-2-complex-logic-explanation">Pattern 2: Complex Logic Explanation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-3-todo-fixme-and-note">Pattern 3: TODO, FIXME, and NOTE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings-formal-documentation">4. Docstrings: Formal Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-docstrings-google-style">Function Docstrings (Google Style)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpler-function-docstrings">Simpler Function Docstrings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-level-docstrings">Module-Level Docstrings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-interactive-to-scripts">5. From Interactive to Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-scripts-matter">Why Scripts Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#script-vs-interactive-code">Script vs Interactive Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-python-script">Anatomy of a Python Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-if-name-main-guard">The <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code> Guard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shebang-line">The Shebang Line</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-practices-summary">Key Practices Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">Common Mistakes to Avoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-understanding">Check Your Understanding</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-running-scripts-professionally">Appendix A: Running Scripts Professionally</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-command-line-arguments">Handling Command-Line Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-argument-handling-with-argparse">Better Argument Handling with argparse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-error-messages">Proper Error Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-logging-instead-of-print">Using Logging Instead of Print</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-modern-python-documentation">Appendix B: Modern Python Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-type-hint-syntax">Basic Type Hint Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-hints-with-default-values">Type Hints with Default Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-type-hints">Common Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-complex-type-hints">Reading Complex Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-with-full-type-hints">Practical Example with Full Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-type-hints">Why Use Type Hints?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes-about-type-hints">Important Notes About Type Hints</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-c-professional-script-structure-template">Appendix C: Professional Script Structure Template</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-scripts-become-modules">9. When Scripts Become Modules</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-8-class-15-pre-read-scripts-comments-and-code-documentation">
+<h1>Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation<a class="headerlink" href="#week-8-class-15-pre-read-scripts-comments-and-code-documentation" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this reading, you should understand:</p>
+<ul class="simple">
+<li><p>How code and comments work together to create readable programs</p></li>
+<li><p>When and how to write effective comments</p></li>
+<li><p>How to organize code into reusable scripts</p></li>
+<li><p>Documentation standards for professional Python code</p></li>
+<li><p>The difference between interactive coding and production scripts</p></li>
+</ul>
+</section>
+<section id="code-and-comments-both-are-necessary">
+<h2>1. Code and Comments: Both Are Necessary<a class="headerlink" href="#code-and-comments-both-are-necessary" title="Link to this heading">#</a></h2>
+<section id="the-myth-of-self-documenting-code">
+<h3>The Myth of “Self-Documenting” Code<a class="headerlink" href="#the-myth-of-self-documenting-code" title="Link to this heading">#</a></h3>
+<p>You may hear people talk about “self-documenting code” - the idea that if you write your code clearly enough, you don’t need comments. <strong>This is wrong and harmful.</strong></p>
+<p>Here’s why:</p>
+<ol class="arabic simple">
+<li><p><strong>Most readers aren’t Python experts</strong> - Your code might be read by researchers, collaborators, managers, or future maintainers who don’t know Python well</p></li>
+<li><p><strong>Code explains HOW, not WHY</strong> - Even perfect code can’t explain business logic, design decisions, or context</p></li>
+<li><p><strong>Assumptions and intent become invisible</strong> - What’s obvious to you today won’t be obvious to others (or to you in 6 months)</p></li>
+</ol>
+<p><strong>The truth:</strong> Good code and good comments are complementary. You need both.</p>
+</section>
+<section id="what-code-can-tell-you">
+<h3>What Code Can Tell You<a class="headerlink" href="#what-code-can-tell-you" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">price</span> <span class="o">=</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="mf">1.0825</span>
+</pre></div>
+</div>
+<p>From the code alone, a reader can see:</p>
+<ul class="simple">
+<li><p>We’re multiplying two variables and one constant</p></li>
+<li><p>The result is stored in <code class="docutils literal notranslate"><span class="pre">price</span></code></p></li>
+<li><p>The constant is 1.0825</p></li>
+</ul>
+</section>
+<section id="what-code-cannot-tell-you">
+<h3>What Code Cannot Tell You<a class="headerlink" href="#what-code-cannot-tell-you" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NYC sales tax is 8.25% (as of 2025)</span>
+<span class="c1"># Client requires tax included in displayed price</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="mf">1.0825</span>
+</pre></div>
+</div>
+<p>Now the reader knows:</p>
+<ul class="simple">
+<li><p>Why 1.0825 (not a magic number anymore)</p></li>
+<li><p>Where this applies (NYC)</p></li>
+<li><p>When this might change (tax rates change)</p></li>
+<li><p>Why we’re including it (client requirement)</p></li>
+</ul>
+<p><strong>Without the comment, even an experienced Python programmer wouldn’t know these critical facts.</strong></p>
+</section>
+<section id="clear-names-help-but-aren-t-enough">
+<h3>Clear Names Help, But Aren’t Enough<a class="headerlink" href="#clear-names-help-but-aren-t-enough" title="Link to this heading">#</a></h3>
+<p><strong>Poor naming:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Problems: Cryptic names, no explanation of purpose or units</p>
+<p><strong>Better naming:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateTotalPrice</span><span class="p">(</span><span class="n">basePrice</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">taxRate</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">taxRate</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Better: Clear what it does</p>
+<p><strong>Best: Clear naming WITH comments:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateTotalPrice</span><span class="p">(</span><span class="n">basePrice</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">taxRate</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate final price including tax.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        basePrice: Price per item in USD</span>
+<span class="sd">        quantity: Number of items (must be positive)</span>
+<span class="sd">        taxRate: Tax as decimal (e.g., 0.0825 for 8.25%)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Total price in USD including tax</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">taxRate</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now readers know: units, constraints, format expectations, and what the return value represents.</p>
+<section id="example-where-clear-names-cannot-tell-the-full-story">
+<h4>Example where clear names CANNOT tell the full story:<a class="headerlink" href="#example-where-clear-names-cannot-tell-the-full-story" title="Link to this heading">#</a></h4>
+<p>Even with perfect variable names, critical information can be ambiguous:</p>
+<p>python</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># BAD - Ambiguous even with clear names</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateSineWave</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">frequency</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Questions a reader has:</p>
+<ul class="simple">
+<li><p>Is <code class="docutils literal notranslate"><span class="pre">frequency</span></code> in Hz or radians per second?</p></li>
+<li><p>Is <code class="docutils literal notranslate"><span class="pre">time</span></code> in seconds or milliseconds?</p></li>
+<li><p>What units is the result in?</p></li>
+</ul>
+<p>python</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># GOOD - Names AND comments provide complete picture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateSineWave</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate displacement of sine wave at given time.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        amplitude: Maximum displacement in meters</span>
+<span class="sd">        frequency: Wave frequency in Hz (cycles per second)</span>
+<span class="sd">        time: Time point in seconds</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Displacement in meters at the specified time</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert frequency (Hz) to angular frequency (rad/s)</span>
+    <span class="c1"># Angular frequency ω = 2πf</span>
+    <span class="n">angularFreq</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span>
+    
+    <span class="c1"># Sine wave equation: y(t) = A × sin(ωt)</span>
+    <span class="c1"># where A = amplitude, ω = angular frequency, t = time</span>
+    <span class="k">return</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angularFreq</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Another critical example - angle units:</strong></p>
+<p>python</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># DANGEROUS - No indication of expected units</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateHorizontalSpeed</span><span class="p">(</span><span class="n">airplaneVelocity</span><span class="p">,</span> <span class="n">glideAngle</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">airplaneVelocity</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">glideAngle</span><span class="p">)</span>
+
+<span class="c1"># Using it:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">calculateHorizontalSpeed</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>  <span class="c1"># Is this 45 degrees or 45 radians?!</span>
+</pre></div>
+</div>
+<p>The problem: <code class="docutils literal notranslate"><span class="pre">math.cos()</span></code> expects radians, but people naturally think in degrees. Without comments, users will make mistakes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># SAFE - Documentation makes units explicit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateHorizontalDistance</span><span class="p">(</span><span class="n">airplaneVelocity_mps</span><span class="p">,</span> <span class="n">glideAngle_deg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate horizontal component of velocity vector.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        velocity: Speed in m/s</span>
+<span class="sd">        angleDegrees: Angle from horizontal in degrees (NOT radians)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Horizontal velocity component in m/s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert degrees to radians for trig functions</span>
+    <span class="c1"># Python&#39;s math library requires radians</span>
+    <span class="n">glideAngle_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">glideAngle_deg</span><span class="p">)</span>
+    
+    <span class="c1"># Horizontal component: v_x = v × cos(θ)</span>
+    <span class="k">return</span> <span class="n">airplaneVelocity_mps</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">glideAngle_rad</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now it’s impossible to use incorrectly - the parameter name AND documentation make it clear.</p>
+</section>
+</section>
+<section id="example-why-both-are-needed">
+<h3>Example: Why Both Are Needed<a class="headerlink" href="#example-why-both-are-needed" title="Link to this heading">#</a></h3>
+<p>Consider this code from a data analysis project:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Without comments (what some call &quot;self-documenting&quot;)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processStudentData</span><span class="p">(</span><span class="n">students</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">students</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;credits&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">filtered</span>
+</pre></div>
+</div>
+<p>Questions a reader might have:</p>
+<ul class="simple">
+<li><p>Why 12 credits?</p></li>
+<li><p>What happens to students with fewer credits?</p></li>
+<li><p>Is this temporary or permanent filtering?</p></li>
+<li><p>Should this threshold change for different terms?</p></li>
+</ul>
+<p>And most importantly, for a non-python programmer who isn’t familiar with python’s peculiar comprehension syntax:</p>
+<ul class="simple">
+<li><p>What is that code line even doing???</p>
+<ul>
+<li><p>Be honest, did you, an EK125 student, feel good when you tried reading that line? How do you think other people would feel coming across it? Doesn’t it look like magic, and on its own give you no idea whatsoever about what it’s doing? Thus the myth of “self-documenting code”.</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># With comments (actually readable by non-experts)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processStudentData</span><span class="p">(</span><span class="n">students</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter student list to only full-time students.</span>
+<span class="sd">    </span>
+<span class="sd">    University policy defines full-time as 12+ credits per semester.</span>
+<span class="sd">    Part-time students are excluded from this analysis per IRB protocol #2024-158.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        students: List of dicts with &#39;credits&#39; key</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List containing only full-time students (12+ credits)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Full-time threshold per university registrar definition</span>
+    <span class="n">FULL_TIME_CREDITS</span> <span class="o">=</span> <span class="mi">12</span>
+    
+    <span class="c1"># Filter to full-time only for IRB compliance</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">students</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;credits&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">FULL_TIME_CREDITS</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">filtered</span>
+</pre></div>
+</div>
+<p>Now anyone - including non-programmers on your research team - can understand what’s happening and why.</p>
+</section>
+</section>
+<section id="writing-effective-comments">
+<h2>2. Writing Effective Comments<a class="headerlink" href="#writing-effective-comments" title="Link to this heading">#</a></h2>
+<section id="extract-magic-numbers-to-named-constants">
+<h3>Extract Magic Numbers to Named Constants<a class="headerlink" href="#extract-magic-numbers-to-named-constants" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># POOR: Magic numbers with no explanation</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">:</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="mf">0.15</span>
+<span class="k">elif</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># BETTER: Named constants</span>
+<span class="n">SENIOR_AGE</span> <span class="o">=</span> <span class="mi">65</span>
+<span class="n">ADULT_AGE</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">SENIOR_DISCOUNT_RATE</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="n">SENIOR_AGE</span><span class="p">:</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">SENIOR_DISCOUNT_RATE</span>
+<span class="k">elif</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="n">ADULT_AGE</span><span class="p">:</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># BEST: Named constants WITH comments explaining business rules</span>
+<span class="c1"># Senior discount policy (approved by management 2025-01-15)</span>
+<span class="c1"># Applies to customers 65+ years old</span>
+<span class="n">SENIOR_AGE</span> <span class="o">=</span> <span class="mi">65</span>
+<span class="n">ADULT_AGE</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">SENIOR_DISCOUNT_RATE</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 15% discount for seniors</span>
+
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="n">SENIOR_AGE</span><span class="p">:</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">SENIOR_DISCOUNT_RATE</span>
+<span class="k">elif</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="n">ADULT_AGE</span><span class="p">:</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><strong>Note on naming:</strong> Constants are an exception to camelCase - use UPPER_SNAKE_CASE for module-level constants to follow industry convention.</p>
+</section>
+<section id="break-complex-logic-into-well-named-functions">
+<h3>Break Complex Logic into Well-Named Functions<a class="headerlink" href="#break-complex-logic-into-well-named-functions" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># POOR: Everything in one monolithic function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processApplication</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+    <span class="c1"># 50 lines of validation logic...</span>
+    <span class="c1"># 30 lines of scoring logic...</span>
+    <span class="c1"># 40 lines of decision logic...</span>
+    <span class="c1"># Even with good names, this is overwhelming</span>
+    
+<span class="c1"># BETTER: Logical separation with descriptive names</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processApplication</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Process college application through full pipeline.</span>
+<span class="sd">    </span>
+<span class="sd">    Pipeline steps:</span>
+<span class="sd">    1. Validate completeness (all required fields present)</span>
+<span class="sd">    2. Calculate admission score (GPA + test scores + essays)</span>
+<span class="sd">    3. Make admission decision (compare to threshold)</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        application: Dict with student application data</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Decision string: &quot;accepted&quot;, &quot;rejected&quot;, or &quot;waitlist&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">isValidApplication</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;rejected: incomplete&quot;</span>
+    
+    <span class="c1"># Score calculation uses rubric from admissions committee</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">calculateApplicationScore</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
+    
+    <span class="c1"># Thresholds set by admissions committee for 2025 cycle</span>
+    <span class="n">decision</span> <span class="o">=</span> <span class="n">makeAdmissionDecision</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">decision</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">isValidApplication</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that all required fields are present and valid.&quot;&quot;&quot;</span>
+    <span class="c1"># Validation logic here</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateApplicationScore</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate admission score using 2025 rubric.</span>
+<span class="sd">    </span>
+<span class="sd">    Scoring: 40% GPA, 30% test scores, 30% essays</span>
+<span class="sd">    Maximum score: 100 points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Scoring logic here</span>
+</pre></div>
+</div>
+<p>Notice: Even with good function names, we still need comments to explain the scoring weights, thresholds, and business context.</p>
+</section>
+</section>
+<section id="what-to-comment">
+<h2>3. What to Comment<a class="headerlink" href="#what-to-comment" title="Link to this heading">#</a></h2>
+<section id="always-comment-mathematical-formulas-and-calculations">
+<h3>Always Comment: Mathematical Formulas and Calculations<a class="headerlink" href="#always-comment-mathematical-formulas-and-calculations" title="Link to this heading">#</a></h3>
+<p><strong>Critical rule:</strong> Every mathematical operation needs a comment explaining the formula and its source. The level of detail should match how esoteric the formula is.</p>
+<p>Why? Because:</p>
+<ol class="arabic simple">
+<li><p>Readers need to verify the implementation is correct</p></li>
+<li><p>Formula sources let others check your work</p></li>
+<li><p>Units and conventions must be explicit</p></li>
+<li><p>Small errors in math cause huge problems</p></li>
+</ol>
+<p><strong>Common formulas need brief documentation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD - No explanation of formula</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">celsiusToFahrenheit</span><span class="p">(</span><span class="n">celsius</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>
+
+<span class="c1"># GOOD - Brief comment for well-known formula</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">celsiusToFahrenheit</span><span class="p">(</span><span class="n">celsius</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Celsius to Fahrenheit.&quot;&quot;&quot;</span>
+    <span class="c1"># Formula: F = C × (9/5) + 32</span>
+    <span class="k">return</span> <span class="n">celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>
+
+<span class="c1"># ALSO GOOD - Inline comment if function is obvious</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">celsiusToFahrenheit</span><span class="p">(</span><span class="n">celsius</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Celsius to Fahrenheit.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>  <span class="c1"># F = C × (9/5) + 32</span>
+</pre></div>
+</div>
+<p><strong>Uncommon formulas need detailed documentation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD - No explanation of complex formula</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateBMI</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">weight</span> <span class="o">/</span> <span class="p">(</span><span class="n">height</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># GOOD - More detail for formula that readers may need to verify</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateBMI</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate Body Mass Index.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        weight: Weight in kilograms</span>
+<span class="sd">        height: Height in meters</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        BMI value (kg/m²)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># BMI = weight(kg) / height(m)²</span>
+    <span class="c1"># Source: WHO Technical Report Series 894, 2000</span>
+    <span class="k">return</span> <span class="n">weight</span> <span class="o">/</span> <span class="p">(</span><span class="n">height</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Specialized or derived formulas need full documentation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateCompoundInterest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate compound interest (compounded annually).</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        principal: Initial amount in dollars</span>
+<span class="sd">        rate: Annual interest rate as decimal (e.g., 0.05 for 5%)</span>
+<span class="sd">        years: Number of years</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Final amount after compound interest</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compound interest formula: A = P(1 + r)^t</span>
+    <span class="c1"># Where: A = final amount, P = principal, r = rate, t = time</span>
+    <span class="c1"># IMPORTANT: Assumes annual compounding (not monthly or continuous)</span>
+    <span class="k">return</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">years</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateStandardDeviation</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate population standard deviation.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        values: List of numeric values</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Population standard deviation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    
+    <span class="c1"># Population variance: σ² = Σ(x - μ)² / N</span>
+    <span class="c1"># Standard deviation: σ = √(variance)</span>
+    <span class="c1"># NOTE: This is POPULATION std dev (divide by N)</span>
+    <span class="c1"># For SAMPLE std dev, would use N-1 (Bessel&#39;s correction)</span>
+    <span class="c1"># Source: Introduction to Statistics, OpenStax, Section 2.7</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">variance</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateTrajectory</span><span class="p">(</span><span class="n">velocity</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate projectile position (ignoring air resistance).</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        velocity: Initial velocity in m/s</span>
+<span class="sd">        angle: Launch angle in degrees</span>
+<span class="sd">        time: Time elapsed in seconds</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (horizontal_position, vertical_position) in meters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+    
+    <span class="c1"># Convert angle to radians for trig functions</span>
+    <span class="n">angleRad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    
+    <span class="c1"># Horizontal position: x = v₀ × cos(θ) × t</span>
+    <span class="c1"># No horizontal acceleration (ignoring air resistance)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angleRad</span><span class="p">)</span> <span class="o">*</span> <span class="n">time</span>
+    
+    <span class="c1"># Vertical position: y = v₀ × sin(θ) × t - (1/2) × g × t²</span>
+    <span class="c1"># g = 9.81 m/s² (standard gravity at Earth&#39;s surface)</span>
+    <span class="c1"># Negative term because gravity opposes upward motion</span>
+    <span class="c1"># Source: Physics for Scientists and Engineers, Serway &amp; Jewett, Ch. 4</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># m/s²</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angleRad</span><span class="p">)</span> <span class="o">*</span> <span class="n">time</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">time</span> <span class="o">**</span> <span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Guidelines for math documentation level:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Formula Type</p></th>
+<th class="head"><p>Documentation Level</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Well-known (taught in high school)</p></td>
+<td><p>Formula only</p></td>
+<td><p>Area of circle, Pythagorean theorem, C↔F conversion</p></td>
+</tr>
+<tr class="row-odd"><td><p>Standard (common in field)</p></td>
+<td><p>Formula + units</p></td>
+<td><p>BMI, simple interest, speed = distance/time</p></td>
+</tr>
+<tr class="row-even"><td><p>Specialized (field-specific)</p></td>
+<td><p>Formula + source + assumptions</p></td>
+<td><p>Compound interest, projectile motion, statistical tests</p></td>
+</tr>
+<tr class="row-odd"><td><p>Custom/derived (not in textbooks)</p></td>
+<td><p>Full derivation + source data</p></td>
+<td><p>Your own models, modified formulas, empirical fits</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Even simple arithmetic needs context:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD - Magic numbers and operations</span>
+<span class="n">totalCost</span> <span class="o">=</span> <span class="n">baseCost</span> <span class="o">*</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="mf">0.85</span>
+
+<span class="c1"># GOOD - Each operation explained</span>
+<span class="c1"># Apply 20% markup for overhead (company policy)</span>
+<span class="n">markedUpCost</span> <span class="o">=</span> <span class="n">baseCost</span> <span class="o">*</span> <span class="mf">1.2</span>
+
+<span class="c1"># Apply 15% educational discount (contract #EDU-2025-047)</span>
+<span class="n">totalCost</span> <span class="o">=</span> <span class="n">markedUpCost</span> <span class="o">*</span> <span class="mf">0.85</span>
+</pre></div>
+</div>
+</section>
+<section id="always-comment-business-logic-and-context">
+<h3>Always Comment: Business Logic and Context<a class="headerlink" href="#always-comment-business-logic-and-context" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># GOOD - Explains business rules that aren&#39;t in the code</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="mf">1.0825</span>  <span class="c1"># NYC sales tax is 8.25%</span>
+
+<span class="c1"># GOOD - Explains non-obvious behavior  </span>
+<span class="n">scores</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="c1"># Remove last score (it&#39;s a practice run, not real data)</span>
+
+<span class="c1"># GOOD - Explains why this algorithm</span>
+<span class="c1"># Using binary search because student list is pre-sorted by ID</span>
+<span class="c1"># O(log n) vs O(n) for linear search - matters with 50,000+ students</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">binarySearch</span><span class="p">(</span><span class="n">sortedStudents</span><span class="p">,</span> <span class="n">targetId</span><span class="p">)</span>
+
+<span class="c1"># GOOD - Documents workarounds and gotchas</span>
+<span class="c1"># datetime.strptime fails with dates before 1900</span>
+<span class="c1"># Bug report: https://bugs.python.org/issue13305</span>
+<span class="c1"># Using manual parsing as workaround</span>
+<span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dateString</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">month</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dateString</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="always-comment-assumptions-and-constraints">
+<h3>Always Comment: Assumptions and Constraints<a class="headerlink" href="#always-comment-assumptions-and-constraints" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">processTemperature</span><span class="p">(</span><span class="n">celsius</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Celsius to Fahrenheit.</span>
+<span class="sd">    </span>
+<span class="sd">    ASSUMES: Input is a valid temperature (not None or string)</span>
+<span class="sd">    ASSUMES: Temperature is physically reasonable (-273.15°C to 1000°C)</span>
+<span class="sd">    NOTE: Does not validate input - caller must ensure valid data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Formula: F = C × (9/5) + 32</span>
+    <span class="k">return</span> <span class="n">celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyzeGrades</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate grade statistics.</span>
+<span class="sd">    </span>
+<span class="sd">    REQUIRES: grades list is non-empty</span>
+<span class="sd">    REQUIRES: all grades are numeric (int or float)</span>
+<span class="sd">    REQUIRES: all grades are in range 0-100</span>
+<span class="sd">    </span>
+<span class="sd">    Will crash with division by zero if empty list passed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="goes-without-saying-comments-must-match-the-code">
+<h3>Goes Without Saying: Comments must match the code<a class="headerlink" href="#goes-without-saying-comments-must-match-the-code" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD - Comment doesn&#39;t match code (dangerous!)</span>
+<span class="c1"># Calculate the average</span>
+<span class="n">median</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="p">)[</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># GOOD - Keep comments synchronized with code</span>
+<span class="c1"># Calculate the median (middle value of sorted list)</span>
+<span class="n">median</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="p">)[</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Critical rule:</strong> If you change code, update the comments. Incorrect comments are worse than no comments because they mislead readers.</p>
+</section>
+<section id="comment-patterns-for-real-code">
+<h3>Comment Patterns for Real Code<a class="headerlink" href="#comment-patterns-for-real-code" title="Link to this heading">#</a></h3>
+<section id="pattern-1-section-headers">
+<h4>Pattern 1: Section Headers<a class="headerlink" href="#pattern-1-section-headers" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================</span>
+<span class="c1"># DATA LOADING AND VALIDATION</span>
+<span class="c1"># ============================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">loadCSV</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load CSV file and validate required columns.</span>
+<span class="sd">    </span>
+<span class="sd">    Required columns: studentId, name, grade</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ... implementation ...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validateData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check data integrity.</span>
+<span class="sd">    </span>
+<span class="sd">    Verifies: no missing values, grades in 0-100 range, unique IDs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ... implementation ...</span>
+
+<span class="c1"># ============================================</span>
+<span class="c1"># STATISTICAL ANALYSIS</span>
+<span class="c1"># ============================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyzePattern</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find grade distribution patterns and outliers.&quot;&quot;&quot;</span>
+    <span class="c1"># ... implementation ...</span>
+</pre></div>
+</div>
+</section>
+<section id="pattern-2-complex-logic-explanation">
+<h4>Pattern 2: Complex Logic Explanation<a class="headerlink" href="#pattern-2-complex-logic-explanation" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateGrade</span><span class="p">(</span><span class="n">rawScore</span><span class="p">,</span> <span class="n">curveMethod</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply grading curve to raw score.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        rawScore: Raw points (0-100)</span>
+<span class="sd">        curveMethod: &quot;standard&quot; or &quot;linear&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Curved grade (0-100)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Standard curve: sqrt(rawScore) * 10</span>
+    <span class="c1"># Rationale: Provides more benefit to lower scores</span>
+    <span class="c1"># Example: 64 -&gt; 80, 81 -&gt; 90, 100 -&gt; 100</span>
+    <span class="c1"># Approved by department chair 2024-09-01</span>
+    <span class="k">if</span> <span class="n">curveMethod</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">rawScore</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="mi">10</span><span class="p">))</span>
+    
+    <span class="c1"># Linear curve: flat 10 point bonus</span>
+    <span class="c1"># Used for courses where raw scores are already reasonable</span>
+    <span class="k">elif</span> <span class="n">curveMethod</span> <span class="o">==</span> <span class="s2">&quot;linear&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">rawScore</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pattern-3-todo-fixme-and-note">
+<h4>Pattern 3: TODO, FIXME, and NOTE<a class="headerlink" href="#pattern-3-todo-fixme-and-note" title="Link to this heading">#</a></h4>
+<p>These special comment types help track issues:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">processPayment</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">cardNumber</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process credit card payment.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># TODO: Add support for international currencies (EUR, GBP)</span>
+    <span class="c1"># TODO: Implement retry logic for network failures</span>
+    <span class="c1"># Ticket: PROJ-458</span>
+    
+    <span class="c1"># FIXME: Current regex doesn&#39;t handle Diners Club cards</span>
+    <span class="c1"># Failing test: test_diners_club_validation()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">validateCard</span><span class="p">(</span><span class="n">cardNumber</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+    <span class="c1"># NOTE: Rate limiting enforced at 10 transactions/second</span>
+    <span class="c1"># Exceeding limit returns HTTP 429 error</span>
+    <span class="c1"># See: api_documentation.md section 3.2</span>
+    <span class="k">return</span> <span class="n">chargeCard</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">cardNumber</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="docstrings-formal-documentation">
+<h2>4. Docstrings: Formal Documentation<a class="headerlink" href="#docstrings-formal-documentation" title="Link to this heading">#</a></h2>
+<p>Docstrings are special comments that document functions, classes, and modules. They use triple quotes and appear right after the definition.</p>
+<section id="function-docstrings-google-style">
+<h3>Function Docstrings (Google Style)<a class="headerlink" href="#function-docstrings-google-style" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mergeDatasets</span><span class="p">(</span><span class="n">primary</span><span class="p">,</span> <span class="n">secondary</span><span class="p">,</span> <span class="n">keyField</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">keepDuplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merge two datasets based on a common key field.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        primary: Primary dataset (dict or list of dicts)</span>
+<span class="sd">        secondary: Secondary dataset to merge</span>
+<span class="sd">        keyField: Field name to match records on (default: &quot;id&quot;)</span>
+<span class="sd">        keepDuplicates: If True, keep duplicate entries (default: False)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Merged dataset with combined fields from both inputs</span>
+<span class="sd">        </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        KeyError: If keyField doesn&#39;t exist in datasets</span>
+<span class="sd">        ValueError: If datasets are incompatible types</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; users = [{&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;}]</span>
+<span class="sd">        &gt;&gt;&gt; scores = [{&quot;id&quot;: 1, &quot;score&quot;: 95}]</span>
+<span class="sd">        &gt;&gt;&gt; mergeDatasets(users, scores)</span>
+<span class="sd">        [{&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;, &quot;score&quot;: 95}]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Implementation here</span>
+</pre></div>
+</div>
+</section>
+<section id="simpler-function-docstrings">
+<h3>Simpler Function Docstrings<a class="headerlink" href="#simpler-function-docstrings" title="Link to this heading">#</a></h3>
+<p>For straightforward functions, a one-line docstring is sufficient:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateAverage</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the arithmetic mean of the numbers list.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">isValidEmail</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if email contains @ and has text before and after it.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">email</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">email</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="module-level-docstrings">
+<h3>Module-Level Docstrings<a class="headerlink" href="#module-level-docstrings" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">studentPerformance.py</span>
+
+<span class="sd">Analyzes student performance across multiple assessments.</span>
+<span class="sd">Generates statistical reports and identifies at-risk students.</span>
+
+<span class="sd">Classes:</span>
+<span class="sd">    Student: Represents individual student with grades</span>
+<span class="sd">    Course: Manages collection of students and assessments</span>
+
+<span class="sd">Functions:</span>
+<span class="sd">    loadRoster: Import student list from CSV</span>
+<span class="sd">    generateReport: Create performance summary</span>
+<span class="sd">    findAtRisk: Identify students below threshold</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    python studentPerformance.py roster.csv grades.csv</span>
+<span class="sd">    </span>
+<span class="sd">Requirements:</span>
+<span class="sd">    - Python 3.8+</span>
+<span class="sd">    - numpy, pandas</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="from-interactive-to-scripts">
+<h2>5. From Interactive to Scripts<a class="headerlink" href="#from-interactive-to-scripts" title="Link to this heading">#</a></h2>
+<p>In this advanced section of the class, we will leave you with some high-level understandings of how python would be used in a professional domain. Don’t worry if this doesn’t sink in the first time, it’s important to us that you have some familiarity with it, even if mastery will take more time than we have in EK125.</p>
+<section id="why-scripts-matter">
+<h3>Why Scripts Matter<a class="headerlink" href="#why-scripts-matter" title="Link to this heading">#</a></h3>
+<p>You might not have realized it, but so far when you’ve been using Google Colab, you’ve been using a Jupyter front end. Jupyter is great for exploration and learning, but real software is built with <strong>scripts</strong> - Python files (<code class="docutils literal notranslate"><span class="pre">.py</span></code> files) that:</p>
+<ul class="simple">
+<li><p>Can be run repeatedly with consistent results</p></li>
+<li><p>Can be shared with others</p></li>
+<li><p>Can be version controlled (Git)</p></li>
+<li><p>Can be imported as modules</p></li>
+<li><p>Run without needing a browser or notebook interface</p></li>
+</ul>
+</section>
+<section id="script-vs-interactive-code">
+<h3>Script vs Interactive Code<a class="headerlink" href="#script-vs-interactive-code" title="Link to this heading">#</a></h3>
+<p><strong>Interactive (Jupyter/Colab/REPL):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run once, immediate feedback</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="c1"># 3.0</span>
+</pre></div>
+</div>
+<p>This is great for:</p>
+<ul class="simple">
+<li><p>Learning and exploring</p></li>
+<li><p>Quick calculations</p></li>
+<li><p>Data analysis and visualization</p></li>
+<li><p>Prototyping ideas</p></li>
+</ul>
+<p><strong>Script (reusable, shareable <code class="docutils literal notranslate"><span class="pre">.py</span></code> file):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># analyze.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateAverage</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the arithmetic mean of a list.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main program entry point.&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="n">calculateAverage</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average: </span><span class="si">{</span><span class="n">average</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This is better for:</p>
+<ul class="simple">
+<li><p>Production code</p></li>
+<li><p>Sharing with collaborators</p></li>
+<li><p>Running on servers or clusters</p></li>
+<li><p>Building reusable tools</p></li>
+</ul>
+</section>
+<section id="anatomy-of-a-python-script">
+<h3>Anatomy of a Python Script<a class="headerlink" href="#anatomy-of-a-python-script" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">gradeAnalyzer.py - Analyze student performance data</span>
+
+<span class="sd">Usage: python gradeAnalyzer.py datafile.csv</span>
+<span class="sd">Author: Your Name</span>
+<span class="sd">Date: October 2025</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Standard library imports first</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Third-party imports second</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Local imports last</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">loadData</span>
+
+<span class="c1"># Constants at module level</span>
+<span class="n">PASSING_GRADE</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;results.txt&quot;</span>
+
+<span class="c1"># Global configuration (use sparingly)</span>
+<span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateStats</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate basic statistics for grades.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
+        <span class="s1">&#39;median&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
+        <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main program entry point.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Usage: python gradeAnalyzer.py datafile.csv&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">loadData</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">calculateStats</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Class average: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="the-if-name-main-guard">
+<h3>The <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> Guard<a class="headerlink" href="#the-if-name-main-guard" title="Link to this heading">#</a></h3>
+<p>This critical pattern enables dual use of your code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># mathTools.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate n factorial.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Only runs when executed directly, not when imported</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Test code</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5! = </span><span class="si">{</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10! = </span><span class="si">{</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tests passed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you can use it two ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Way 1: Run as a script</span>
+<span class="c1"># $ python mathTools.py</span>
+<span class="c1"># 5! = 120</span>
+<span class="c1"># 10! = 3628800</span>
+<span class="c1"># Tests passed!</span>
+
+<span class="c1"># Way 2: Import as a module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">factorial</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># No test output!</span>
+</pre></div>
+</div>
+</section>
+<section id="the-shebang-line">
+<h3>The Shebang Line<a class="headerlink" href="#the-shebang-line" title="Link to this heading">#</a></h3>
+<p>The first line <code class="docutils literal notranslate"><span class="pre">#!/usr/bin/env</span> <span class="pre">python3</span></code> is called a “shebang.” It tells Unix-like systems (Linux, Mac) how to run the file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;My script&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To use it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make executable (one time only)</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>myScript.py
+
+<span class="c1"># Run directly (no need to type &quot;python&quot;)</span>
+./myScript.py
+</pre></div>
+</div>
+<p>On Windows, the shebang is ignored but doesn’t hurt anything.</p>
+</section>
+</section>
+<section id="key-practices-summary">
+<h2>Key Practices Summary<a class="headerlink" href="#key-practices-summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Do</p></th>
+<th class="head"><p>Don’t</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Philosophy</strong></p></td>
+<td><p>Write clear code AND comprehensive comments</p></td>
+<td><p>Believe in “self-documenting” code</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Comments</strong></p></td>
+<td><p>Explain why, context, business rules</p></td>
+<td><p>State the obvious</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Docstrings</strong></p></td>
+<td><p>Document purpose, params, returns, assumptions</p></td>
+<td><p>Repeat function signature only</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Scripts</strong></p></td>
+<td><p>Include error handling and validation</p></td>
+<td><p>Assume perfect inputs</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Structure</strong></p></td>
+<td><p>Separate concerns into well-named functions</p></td>
+<td><p>Write monolithic code</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Arguments</strong></p></td>
+<td><p>Use argparse for complex CLIs</p></td>
+<td><p>Parse sys.argv manually</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Output</strong></p></td>
+<td><p>Use logging for production code</p></td>
+<td><p>Use print everywhere</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Audience</strong></p></td>
+<td><p>Write for someone unfamiliar with Python</p></td>
+<td><p>Write only for Python experts</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="common-mistakes-to-avoid">
+<h2>Common Mistakes to Avoid<a class="headerlink" href="#common-mistakes-to-avoid" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Believing code alone is enough</strong></p>
+<ul class="simple">
+<li><p>Wrong: “Good variable names mean I don’t need comments”</p></li>
+<li><p>Right: “Clear names help, but I still need to explain context, assumptions, and business logic”</p></li>
+</ul>
+</li>
+<li><p><strong>Over-commenting trivial operations</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD: Too many obvious comments</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialize x to zero</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Increment x by one</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Print the value of x</span>
+
+<span class="c1"># GOOD: Comment explains non-obvious purpose</span>
+<span class="n">skipCount</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">skipCount</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Skip header row in CSV</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">skipCount</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Forgetting your audience</strong></p>
+<ul class="simple">
+<li><p>Your code will be read by: collaborators, advisors, future you, maintainers</p></li>
+<li><p>Most of these people are not Python experts</p></li>
+<li><p>Comments bridge the gap between code and human understanding</p></li>
+</ul>
+</li>
+<li><p><strong>Forgetting the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> guard</strong></p>
+<ul class="simple">
+<li><p>Always include it so your script can be imported safely</p></li>
+</ul>
+</li>
+<li><p><strong>Using print instead of logging in long-running scripts</strong></p>
+<ul class="simple">
+<li><p>Use logging for anything that runs more than a few seconds</p></li>
+</ul>
+</li>
+<li><p><strong>Not handling command-line arguments properly</strong></p>
+<ul class="simple">
+<li><p>Check argument count and validate inputs before using them</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="check-your-understanding">
+<h2>Check Your Understanding<a class="headerlink" href="#check-your-understanding" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Why is “self-documenting code” a myth? What can code tell you and what can’t it tell you?</p></li>
+<li><p>Why should you write comments even if your variable names are clear?</p></li>
+<li><p>What’s the difference between module, class, and function docstrings?</p></li>
+<li><p>How do scripts differ from interactive notebook code?</p></li>
+<li><p>When should you use <code class="docutils literal notranslate"><span class="pre">argparse</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code>?</p></li>
+<li><p>What are type hints and why are they useful?</p></li>
+<li><p>Why use logging instead of print statements in production code?</p></li>
+<li><p>Who is your audience when writing comments? Why does this matter?</p></li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="appendix-a-running-scripts-professionally">
+<h1>Appendix A: Running Scripts Professionally<a class="headerlink" href="#appendix-a-running-scripts-professionally" title="Link to this heading">#</a></h1>
+<section id="handling-command-line-arguments">
+<h2>Handling Command-Line Arguments<a class="headerlink" href="#handling-command-line-arguments" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Check for required arguments</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: No input file specified&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Usage: python </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> &lt;inputFile&gt; [outputFile]&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">inputFile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Optional argument with default</span>
+    <span class="n">outputFile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;output.txt&quot;</span>
+    
+    <span class="c1"># Verify file exists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">inputFile</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: File &#39;</span><span class="si">{</span><span class="n">inputFile</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">processFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">,</span> <span class="n">outputFile</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results written to </span><span class="si">{</span><span class="n">outputFile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="better-argument-handling-with-argparse">
+<h2>Better Argument Handling with argparse<a class="headerlink" href="#better-argument-handling-with-argparse" title="Link to this heading">#</a></h2>
+<p>For more complex scripts, use the <code class="docutils literal notranslate"><span class="pre">argparse</span></code> module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Analyze student grade data&quot;</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Required argument</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;inputFile&#39;</span><span class="p">,</span> 
+                       <span class="n">help</span><span class="o">=</span><span class="s1">&#39;CSV file containing grades&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Optional arguments</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="s1">&#39;results.txt&#39;</span><span class="p">,</span>
+                       <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output file (default: results.txt)&#39;</span><span class="p">)</span>
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbose&#39;</span><span class="p">,</span>
+                       <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                       <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Print detailed output&#39;</span><span class="p">)</span>
+    
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    
+    <span class="c1"># Use the arguments</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">inputFile</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    
+    <span class="n">processFile</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">inputFile</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This gives you automatic help messages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>analyze.py<span class="w"> </span>--help
+usage:<span class="w"> </span>analyze.py<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="o">]</span><span class="w"> </span>inputFile
+
+Analyze<span class="w"> </span>student<span class="w"> </span>grade<span class="w"> </span>data
+
+positional<span class="w"> </span>arguments:
+<span class="w">  </span>inputFile<span class="w">             </span>CSV<span class="w"> </span>file<span class="w"> </span>containing<span class="w"> </span>grades
+
+optional<span class="w"> </span>arguments:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>-o<span class="w"> </span>OUTPUT,<span class="w"> </span>--output<span class="w"> </span>OUTPUT
+<span class="w">                        </span>Output<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>results.txt<span class="o">)</span>
+<span class="w">  </span>-v,<span class="w"> </span>--verbose<span class="w">         </span>Print<span class="w"> </span>detailed<span class="w"> </span>output
+</pre></div>
+</div>
+</section>
+<section id="proper-error-messages">
+<h2>Proper Error Messages<a class="headerlink" href="#proper-error-messages" title="Link to this heading">#</a></h2>
+<p>Absolutely nothing is worse when debugging an input error than the system not telling you what it expected vs. what it got. It’s due to laziness on the part of the programmer, who did not take the time to give a useful error message. Don’t be that person!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">divideNumbers</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely divide two numbers.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Cannot divide </span><span class="si">{</span><span class="n">numerator</span><span class="si">}</span><span class="s2"> by zero&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Both arguments must be numbers&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Got: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">numerator</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">denominator</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="using-logging-instead-of-print">
+<h2>Using Logging Instead of Print<a class="headerlink" href="#using-logging-instead-of-print" title="Link to this heading">#</a></h2>
+<p>[Pro-level] For production code, use logging instead of print statements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Configure logging at the start of your script</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">processData</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Do work</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Reading file contents&quot;</span><span class="p">)</span>  <span class="c1"># Only shows in debug mode</span>
+        <span class="c1"># ...</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to process </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Processing complete&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Benefits of logging over print:</p>
+<ul class="simple">
+<li><p>Can be turned on/off without changing code</p></li>
+<li><p>Automatic timestamps</p></li>
+<li><p>Different levels (DEBUG, INFO, WARNING, ERROR)</p></li>
+<li><p>Can write to files instead of screen</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="appendix-b-modern-python-documentation">
+<h1>Appendix B: Modern Python Documentation<a class="headerlink" href="#appendix-b-modern-python-documentation" title="Link to this heading">#</a></h1>
+<p>[Pro-level] Python 3.5+ supports type hints - optional annotations that document expected types. They appear after parameter names (with a colon) and after the function signature (with an arrow).</p>
+<section id="basic-type-hint-syntax">
+<h2>Basic Type Hint Syntax<a class="headerlink" href="#basic-type-hint-syntax" title="Link to this heading">#</a></h2>
+<p><strong>Reading type hints:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">functionName</span><span class="p">(</span><span class="n">parameter</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">returnType</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">:</span></code> after a parameter means “this parameter should be of this type”</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> before the colon means “this function returns this type”</p></li>
+</ul>
+<p><strong>Simple examples:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a greeting message.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add two integers.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateAverage</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate mean of a list.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="type-hints-with-default-values">
+<h2>Type Hints with Default Values<a class="headerlink" href="#type-hints-with-default-values" title="Link to this heading">#</a></h2>
+<p>When a parameter has both a type hint and a default value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">createAccount</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create user account dictionary.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        username: User&#39;s login name (required)</span>
+<span class="sd">        age: User&#39;s age in years (default: 0)</span>
+<span class="sd">        active: Whether account is active (default: True)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with account information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
+        <span class="s1">&#39;active&#39;</span><span class="p">:</span> <span class="n">active</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Reading this: “<code class="docutils literal notranslate"><span class="pre">username</span></code> must be a string, <code class="docutils literal notranslate"><span class="pre">age</span></code> should be an int with default 0, <code class="docutils literal notranslate"><span class="pre">active</span></code> should be a bool with default True, and the function returns a dict”</p>
+</section>
+<section id="common-type-hints">
+<h2>Common Type Hints<a class="headerlink" href="#common-type-hints" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic types</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processName</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateAge</span><span class="p">(</span><span class="n">birthYear</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">2025</span> <span class="o">-</span> <span class="n">birthYear</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">computePrice</span><span class="p">(</span><span class="n">basePrice</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="mf">1.08</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># Collection types (Python 3.9+)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sumNumbers</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sum a list of integers.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">getStudent</span><span class="p">(</span><span class="n">students</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get student with highest grade.&quot;&quot;&quot;</span>
+    <span class="c1"># dict[str, int] means &quot;keys are strings, values are ints&quot;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">uniqueItems</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert set to sorted list.&quot;&quot;&quot;</span>
+    <span class="c1"># set[str] means &quot;set containing strings&quot;</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">getCoordinates</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate distance from origin.&quot;&quot;&quot;</span>
+    <span class="c1"># tuple[float, float] means &quot;tuple with exactly two floats&quot;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-complex-type-hints">
+<h2>Reading Complex Type Hints<a class="headerlink" href="#reading-complex-type-hints" title="Link to this heading">#</a></h2>
+<p><strong>Lists with specific content:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">processGrades</span><span class="p">(</span><span class="n">grades</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze grade list.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        grades: list[float] means &quot;a list where each item is a float&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict[str, float] means &quot;a dict where keys are strings and values are floats&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="c1"># Calling it:</span>
+<span class="n">classGrades</span> <span class="o">=</span> <span class="p">[</span><span class="mf">85.5</span><span class="p">,</span> <span class="mf">92.0</span><span class="p">,</span> <span class="mf">78.5</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">]</span>  <span class="c1"># list of floats</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">processGrades</span><span class="p">(</span><span class="n">classGrades</span><span class="p">)</span>
+<span class="c1"># Returns: {&#39;mean&#39;: 86.5, &#39;max&#39;: 92.0, &#39;min&#39;: 78.5}</span>
+</pre></div>
+</div>
+<p><strong>Multiple possible types (Union):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">processId</span><span class="p">(</span><span class="n">studentId</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert student ID to string format.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        studentId: int | str means &quot;can be either an int OR a string&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        String representation of ID</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">studentId</span><span class="p">)</span>
+
+<span class="c1"># Both work:</span>
+<span class="n">processId</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>      <span class="c1"># int is OK</span>
+<span class="n">processId</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">)</span>    <span class="c1"># str is also OK</span>
+</pre></div>
+</div>
+<p><strong>Optional values (might be None):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">findStudent</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">students</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find student by name.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict | None means &quot;returns a dict if found, or None if not found&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">students</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">student</span>
+    <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Not found</span>
+
+<span class="c1"># Usage:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">findStudent</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">roster</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># Must check for None!</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;grade&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="practical-example-with-full-type-hints">
+<h2>Practical Example with Full Type Hints<a class="headerlink" href="#practical-example-with-full-type-hints" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateGrade</span><span class="p">(</span><span class="n">score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">maxScore</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate percentage grade.</span>
+<span class="sd">    </span>
+<span class="sd">    Reading the signature:</span>
+<span class="sd">    - score: float means &quot;score must be a floating-point number&quot;</span>
+<span class="sd">    - maxScore: float = 100.0 means &quot;maxScore is a float with default 100.0&quot;</span>
+<span class="sd">    - -&gt; float means &quot;returns a floating-point number&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        score: Points earned</span>
+<span class="sd">        maxScore: Maximum possible points</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Percentage grade (0-100)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">score</span> <span class="o">/</span> <span class="n">maxScore</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">processStudents</span><span class="p">(</span><span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">grades</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a dictionary mapping student names to grades.</span>
+<span class="sd">    </span>
+<span class="sd">    Reading the signature:</span>
+<span class="sd">    - names: list[str] means &quot;a list where each element is a string&quot;</span>
+<span class="sd">    - grades: list[float] means &quot;a list where each element is a float&quot;</span>
+<span class="sd">    - -&gt; dict[str, float] means &quot;returns a dict with string keys and float values&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        names: List of student names</span>
+<span class="sd">        grades: List of corresponding grades</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with name keys and grade values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">grades</span><span class="p">))</span>
+
+<span class="c1"># Usage examples:</span>
+<span class="n">studentNames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>  <span class="c1"># list[str]</span>
+<span class="n">studentGrades</span> <span class="o">=</span> <span class="p">[</span><span class="mf">85.5</span><span class="p">,</span> <span class="mf">92.0</span><span class="p">,</span> <span class="mf">78.5</span><span class="p">]</span>          <span class="c1"># list[float]</span>
+<span class="n">gradeBook</span> <span class="o">=</span> <span class="n">processStudents</span><span class="p">(</span><span class="n">studentNames</span><span class="p">,</span> <span class="n">studentGrades</span><span class="p">)</span>
+<span class="c1"># Returns: {&#39;Alice&#39;: 85.5, &#39;Bob&#39;: 92.0, &#39;Charlie&#39;: 78.5}</span>
+</pre></div>
+</div>
+</section>
+<section id="why-use-type-hints">
+<h2>Why Use Type Hints?<a class="headerlink" href="#why-use-type-hints" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Better IDE support:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">getFullName</span><span class="p">(</span><span class="n">firstName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lastName</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">firstName</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">lastName</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># IDE knows result is a string, so it offers string methods</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">getFullName</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Smith&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>  <span class="c1"># IDE autocompletes .upper(), .lower(), etc.</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Catch errors before running:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">addNumbers</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># Tools like mypy will warn: &quot;Expected int, got str&quot;</span>
+<span class="n">addNumbers</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">)</span>  <span class="c1"># Type error caught before running!</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Documentation that can’t get out of date:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The signature tells you everything you need to know</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateBMI</span><span class="p">(</span><span class="n">weight</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">weight</span> <span class="o">/</span> <span class="p">(</span><span class="n">height</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Clear: weight and height are floats, returns a float</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Easier to understand code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Without type hints - unclear what data types are expected</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="c1"># What are these? Lists? Dicts? Strings?</span>
+    <span class="k">pass</span>
+
+<span class="c1"># With type hints - immediately clear</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># data is a list of dicts</span>
+    <span class="c1"># config is a dict with string keys and string values  </span>
+    <span class="c1"># options is a set of strings</span>
+    <span class="c1"># returns a boolean</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="important-notes-about-type-hints">
+<h2>Important Notes About Type Hints<a class="headerlink" href="#important-notes-about-type-hints" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Type hints are optional</strong> - Python doesn’t enforce them at runtime</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># This runs fine even though we passed strings!</span>
+<span class="c1"># Python doesn&#39;t stop you at runtime</span>
+<span class="n">add</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">)</span>  <span class="c1"># Returns &quot;helloworld&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Use tools like mypy to check types</strong> - Run <code class="docutils literal notranslate"><span class="pre">mypy</span> <span class="pre">script.py</span></code> to find type errors before running</p></li>
+<li><p><strong>Start simple</strong> - You don’t need type hints everywhere immediately. Add them to:</p>
+<ul class="simple">
+<li><p>Public functions (ones others will call)</p></li>
+<li><p>Functions with complex parameters</p></li>
+<li><p>Functions where types aren’t obvious</p></li>
+</ul>
+</li>
+</ol>
+<p>Type hints help:</p>
+<ul class="simple">
+<li><p>IDEs provide better autocomplete</p></li>
+<li><p>Catch type errors before running (with mypy)</p></li>
+<li><p>Document expected types without comments</p></li>
+<li><p>Make code easier to understand for readers</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="appendix-c-professional-script-structure-template">
+<h1>Appendix C: Professional Script Structure Template<a class="headerlink" href="#appendix-c-professional-script-structure-template" title="Link to this heading">#</a></h1>
+<p>Here’s a complete template for professional scripts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">scriptName.py - One-line description</span>
+
+<span class="sd">Longer description of what this script does,</span>
+<span class="sd">any important details about how it works.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    python scriptName.py &lt;requiredArg&gt; [optionalArg]</span>
+
+<span class="sd">Author: Your Name</span>
+<span class="sd">Date: October 2025</span>
+<span class="sd">Version: 1.0.0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Constants</span>
+<span class="n">DEBUG_MODE</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">VERSION</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">helperFunction</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function with descriptive name.&quot;&quot;&quot;</span>
+    <span class="c1"># Implementation</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main program logic.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Exit code (0 for success, non-zero for errors)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running version </span><span class="si">{</span><span class="n">VERSION</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check command-line arguments</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Usage: python </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> &lt;requiredArg&gt;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    
+    <span class="c1"># Main logic</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">helperFunction</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># Success</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Failure</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">exitCode</span> <span class="o">=</span> <span class="n">main</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">exitCode</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="when-scripts-become-modules">
+<h2>9. When Scripts Become Modules<a class="headerlink" href="#when-scripts-become-modules" title="Link to this heading">#</a></h2>
+<p>As your project grows, you’ll organize related functions into modules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myProject</span><span class="o">/</span>
+    <span class="n">main</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Entry point</span>
+    <span class="n">dataLoader</span><span class="o">.</span><span class="n">py</span>    <span class="c1"># Data loading functions</span>
+    <span class="n">analysis</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Analysis functions</span>
+    <span class="n">plotting</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Visualization functions</span>
+</pre></div>
+</div>
+<p>Each module can be both used and tested:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># dataLoader.py</span>
+<span class="sd">&quot;&quot;&quot;Functions for loading and validating data files.&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">loadCSV</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load CSV file and return as list of dictionaries.&quot;&quot;&quot;</span>
+    <span class="c1"># Implementation</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validateData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that data has required fields.&quot;&quot;&quot;</span>
+    <span class="c1"># Implementation</span>
+    <span class="k">return</span> <span class="n">isValid</span>
+
+<span class="c1"># Test code only runs when executed directly</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing dataLoader module...&quot;</span><span class="p">)</span>
+    <span class="n">testData</span> <span class="o">=</span> <span class="n">loadCSV</span><span class="p">(</span><span class="s2">&quot;test.csv&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">testData</span><span class="p">)</span><span class="si">}</span><span class="s2"> records&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tests passed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># main.py</span>
+<span class="sd">&quot;&quot;&quot;Main analysis script.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">loadCSV</span><span class="p">,</span> <span class="n">validateData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculateStatistics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">createHistogram</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">loadCSV</span><span class="p">(</span><span class="s2">&quot;grades.csv&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">validateData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Invalid data&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">calculateStatistics</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">createHistogram</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;gradeDistribution.png&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analysis complete. Mean: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week8A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week9A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 9a Working with Online Data Stores and APIs in Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-and-comments-both-are-necessary">1. Code and Comments: Both Are Necessary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-myth-of-self-documenting-code">The Myth of “Self-Documenting” Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-code-can-tell-you">What Code Can Tell You</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-code-cannot-tell-you">What Code Cannot Tell You</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clear-names-help-but-aren-t-enough">Clear Names Help, But Aren’t Enough</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-where-clear-names-cannot-tell-the-full-story">Example where clear names CANNOT tell the full story:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-why-both-are-needed">Example: Why Both Are Needed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-effective-comments">2. Writing Effective Comments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-magic-numbers-to-named-constants">Extract Magic Numbers to Named Constants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#break-complex-logic-into-well-named-functions">Break Complex Logic into Well-Named Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-comment">3. What to Comment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-comment-mathematical-formulas-and-calculations">Always Comment: Mathematical Formulas and Calculations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-comment-business-logic-and-context">Always Comment: Business Logic and Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-comment-assumptions-and-constraints">Always Comment: Assumptions and Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goes-without-saying-comments-must-match-the-code">Goes Without Saying: Comments must match the code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-patterns-for-real-code">Comment Patterns for Real Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-1-section-headers">Pattern 1: Section Headers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-2-complex-logic-explanation">Pattern 2: Complex Logic Explanation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-3-todo-fixme-and-note">Pattern 3: TODO, FIXME, and NOTE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings-formal-documentation">4. Docstrings: Formal Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-docstrings-google-style">Function Docstrings (Google Style)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpler-function-docstrings">Simpler Function Docstrings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-level-docstrings">Module-Level Docstrings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-interactive-to-scripts">5. From Interactive to Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-scripts-matter">Why Scripts Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#script-vs-interactive-code">Script vs Interactive Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-python-script">Anatomy of a Python Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-if-name-main-guard">The <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code> Guard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shebang-line">The Shebang Line</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-practices-summary">Key Practices Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">Common Mistakes to Avoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-understanding">Check Your Understanding</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-running-scripts-professionally">Appendix A: Running Scripts Professionally</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-command-line-arguments">Handling Command-Line Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-argument-handling-with-argparse">Better Argument Handling with argparse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-error-messages">Proper Error Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-logging-instead-of-print">Using Logging Instead of Print</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-modern-python-documentation">Appendix B: Modern Python Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-type-hint-syntax">Basic Type Hint Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-hints-with-default-values">Type Hints with Default Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-type-hints">Common Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-complex-type-hints">Reading Complex Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-with-full-type-hints">Practical Example with Full Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-type-hints">Why Use Type Hints?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes-about-type-hints">Important Notes About Type Hints</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-c-professional-script-structure-template">Appendix C: Professional Script Structure Template</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-scripts-become-modules">9. When Scripts Become Modules</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

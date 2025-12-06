@@ -1,0 +1,1046 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Weeks 5-10 GPP Review &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gpp-review-2';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 12a: Creating Vectors and Matrices in MATLAB" href="Week12A.html" />
+    <link rel="prev" title="Week 11 Pre-read: Debugging and Profiling" href="Week11A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/gpp-review-2.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Weeks 5-10 GPP Review</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weeks 5-10 GPP Review</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week5a-nested-lists-and-multilevel-indexing">Week5A: Nested lists and Multilevel Indexing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cream-combinations-with-nested-list-comprehensions">Ice cream combinations with nested list comprehensions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6a-mastering-slicing-in-python">Week 6A: Mastering Slicing in Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-slicing-drills">Quick Slicing Drills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-quick-drills-negative-indices">More Quick Drills: Negative Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-basic-slice-practice">Problem 1: Basic Slice Practice</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6b-working-with-arrays-in-numpy">Week 6B: Working with arrays in NumPy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-arrays-types-and-dtypes">Problem 2: Arrays, types and dtypes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-2d-arrays">Problem 4: 2D arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-special-arrays">Problem 6: Special Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-8-logicals-in-arrays">Problem 8: Logicals in arrays</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7a-python-dictionaries">Week 7A: Python dictionaries</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-book-information">Problem 2: Book information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-get-and-pop-on-a-smartphone-dictionary">Problem 3: <code class="docutils literal notranslate"><span class="pre">get()</span></code> and <code class="docutils literal notranslate"><span class="pre">pop()</span></code> on a smartphone dictionary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-keys-values-and-items">Problem 5: <code class="docutils literal notranslate"><span class="pre">.keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">.values()</span></code> and <code class="docutils literal notranslate"><span class="pre">.items()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7b-user-defined-functions">Week 7B: User-defined functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-3">Problem 1.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-1">Problem 2.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-2">Problem 3.2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-8a-argument-passing-location-scope">Week 8A: Argument passing, location, scope</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-1-predict-the-output">Exercise 1.1: Predict the Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-1-fix-the-broken-code">Exercise 3.1: Fix the Broken Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-protecting-your-data">Exercise 4.1: Protecting Your Data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-8b-scripts-comments-and-documentation">Week 8B Scripts, Comments, and Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1">Question 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-7">Quiz 7</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-9b-plotting">Week 9B: Plotting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problem-scatter-plot-train-service-vs-wait-time">Practice Problem: Scatter Plot — Train Service vs Wait Time</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-10a-file-i-o-practice">Week 10A: File I/O Practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-temperature-logger">Problem 1: Temperature Logger</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="weeks-5-10-gpp-review">
+<h1>Weeks 5-10 GPP Review<a class="headerlink" href="#weeks-5-10-gpp-review" title="Link to this heading">#</a></h1>
+<p>Here are a selected (and slighlty edited if necessary) set of GPPs from the past 5 weeks.</p>
+<p><strong>NOTE</strong>: These were selected with an eye toward covering all of the material we have worked on over the last 5 weeks. But inclusion of material here does not suggest that material NOT covered here will NOT be on the test! This document if designed to get you practicing on GPP problems away from the computer. We recommend doing this for ALL GPP problems!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week5a-nested-lists-and-multilevel-indexing">
+<h1>Week5A: Nested lists and Multilevel Indexing<a class="headerlink" href="#week5a-nested-lists-and-multilevel-indexing" title="Link to this heading">#</a></h1>
+<section id="ice-cream-combinations-with-nested-list-comprehensions">
+<h2>Ice cream combinations with nested list comprehensions<a class="headerlink" href="#ice-cream-combinations-with-nested-list-comprehensions" title="Link to this heading">#</a></h2>
+<p>An ice cream shop wants to test every possible combination of ice cream flavors and toppings for a new menu.<br />
+Some combos are disallowed because they would be gross (for example: <code class="docutils literal notranslate"><span class="pre">&quot;oreo&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;peach&quot;</span></code>).</p>
+<p>Your task is to generate the combinations using a <strong>nested list comprehension</strong>.<br />
+That means the result should be a <strong>list of lists</strong>, where each sublist contains all the valid <code class="docutils literal notranslate"><span class="pre">(flavor,</span> <span class="pre">topping)</span></code> pairs for one particular flavor.</p>
+<p><strong>Tasks</strong></p>
+<ol class="arabic">
+<li><p><strong>Small test case</strong></p>
+<ul>
+<li><p>Manually create two short lists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vanilla&quot;</span><span class="p">,</span> <span class="s2">&quot;chocolate&quot;</span><span class="p">,</span> <span class="s2">&quot;strawberry&quot;</span><span class="p">]</span>
+<span class="n">toppings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sprinkles&quot;</span><span class="p">,</span> <span class="s2">&quot;fudge&quot;</span><span class="p">,</span> <span class="s2">&quot;nuts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use a nested list comprehension to generate all <code class="docutils literal notranslate"><span class="pre">(flavor,</span> <span class="pre">topping)</span></code> pairs, but <strong>structure the result by flavor</strong> (i.e., each flavor has its own sublist of topping pairs). Call this nested list <code class="docutils literal notranslate"><span class="pre">combos_small</span></code>.</p></li>
+<li><p>Exclude one specific bad combo (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;strawberry&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;fudge&quot;</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>Large test case</strong></p>
+<ul>
+<li><p>Pretend the shop has 200 flavors and 200 toppings.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>   <span class="c1"># 0, 1, 2, ..., 199</span>
+<span class="n">toppings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use a nested list comprehension to generate a list of 200 sublists.</p></li>
+<li><p>Each sublist should contain all the valid <code class="docutils literal notranslate"><span class="pre">(flavor,</span> <span class="pre">topping)</span></code> pairs for that flavor.</p></li>
+<li><p>Exclude pairs where <code class="docutils literal notranslate"><span class="pre">(flavor</span> <span class="pre">+</span> <span class="pre">topping)</span> <span class="pre">%</span> <span class="pre">17</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-6a-mastering-slicing-in-python">
+<h1>Week 6A: Mastering Slicing in Python<a class="headerlink" href="#week-6a-mastering-slicing-in-python" title="Link to this heading">#</a></h1>
+<section id="quick-slicing-drills">
+<h2>Quick Slicing Drills<a class="headerlink" href="#quick-slicing-drills" title="Link to this heading">#</a></h2>
+<p>Complete these quick exercises to practice basic slicing. Write each answer on one line.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Given these variables:</span>
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Write slices to extract:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Pyt&quot;</span></code> from word</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;hon&quot;</span></code> from word</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;th&quot;</span></code> from word</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[10,</span> <span class="pre">20,</span> <span class="pre">30]</span></code> from numbers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[40,</span> <span class="pre">50,</span> <span class="pre">60]</span></code> from numbers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[70,</span> <span class="pre">80,</span> <span class="pre">90]</span></code> from numbers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[10,</span> <span class="pre">30,</span> <span class="pre">50,</span> <span class="pre">70,</span> <span class="pre">90]</span></code> from numbers (every other, starting at 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[20,</span> <span class="pre">40,</span> <span class="pre">60,</span> <span class="pre">80]</span></code> from numbers (every other, starting at 1)</p></li>
+<li><p>The last element of numbers as a single value</p></li>
+<li><p>The last 3 elements of numbers as a list</p></li>
+</ol>
+</section>
+<section id="more-quick-drills-negative-indices">
+<h2>More Quick Drills: Negative Indices<a class="headerlink" href="#more-quick-drills-negative-indices" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;HelloWorld&quot;</span>
+</pre></div>
+</div>
+<p><strong>Write slices to extract:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[30,</span> <span class="pre">35,</span> <span class="pre">40]</span></code> using negative indices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">10,</span> <span class="pre">15,</span> <span class="pre">20,</span> <span class="pre">25]</span></code> (all but last 3) using negative indices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;World&quot;</span></code> from text using negative indices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Hello&quot;</span></code> from text using negative indices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[40]</span></code> as a list using negative indices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">40</span></code> as a single value using negative index</p></li>
+</ol>
+</section>
+<section id="problem-1-basic-slice-practice">
+<h2>Problem 1: Basic Slice Practice<a class="headerlink" href="#problem-1-basic-slice-practice" title="Link to this heading">#</a></h2>
+<p>Write a program that demonstrates basic slicing on a word.</p>
+<p><strong>Task:</strong> Ask the user for a word, then print:</p>
+<ol class="arabic simple">
+<li><p>The first 3 characters</p></li>
+<li><p>The last 3 characters</p></li>
+<li><p>Characters from index 2 to 5</p></li>
+<li><p>Every other character</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">a</span> <span class="n">word</span><span class="p">:</span> <span class="n">Programming</span>
+<span class="n">First</span> <span class="mi">3</span> <span class="n">characters</span><span class="p">:</span> <span class="n">Pro</span>
+<span class="n">Last</span> <span class="mi">3</span> <span class="n">characters</span><span class="p">:</span> <span class="n">ing</span>
+<span class="n">Characters</span> <span class="mi">2</span> <span class="n">to</span> <span class="mi">5</span><span class="p">:</span> <span class="n">ogr</span>
+<span class="n">Every</span> <span class="n">other</span> <span class="n">character</span><span class="p">:</span> <span class="n">Pormig</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-6b-working-with-arrays-in-numpy">
+<h1>Week 6B: Working with arrays in NumPy<a class="headerlink" href="#week-6b-working-with-arrays-in-numpy" title="Link to this heading">#</a></h1>
+<section id="problem-2-arrays-types-and-dtypes">
+<h2>Problem 2: Arrays, types and dtypes<a class="headerlink" href="#problem-2-arrays-types-and-dtypes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create a one-dimensional array variable using the array function, in which 5 integers are stored.</p></li>
+<li><p>Also create a 1D array variable that stores 6 floats.</p></li>
+<li><p>Print both arrays and their types.</p></li>
+<li><p>Use the dtype method to determine the type of both array variables. Note that no arguments are passed to dtype, and the parentheses are not needed.</p></li>
+</ul>
+</section>
+<section id="problem-4-2d-arrays">
+<h2>Problem 4: 2D arrays<a class="headerlink" href="#problem-4-2d-arrays" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create a nested list variable that stores integers: two inner lists, each of which stores 4 integers.</p></li>
+<li><p>Then, create a 2 by 4 array variable by passing the list to the array function.</p></li>
+<li><p>Print both variables so you can see the difference.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">ndim</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code>, and <code class="docutils literal notranslate"><span class="pre">size</span></code> methods on your 2D array variable.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">reshape</span></code> method to reshape it into as many other arrays as you can.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">transpose</span></code> method to transpose your array.</p></li>
+<li><p>Indexing and slice your 2D array:</p>
+<ul>
+<li><p>Index element at row 0, column 0</p></li>
+<li><p>Index element at row 0, column 1</p></li>
+<li><p>Slice row 0, last column</p></li>
+<li><p>Slice all columns from row 1</p></li>
+<li><p>Slice all rows, column 0</p></li>
+<li><p>Slice all rows, first two columns</p></li>
+</ul>
+</li>
+<li><p>Replace the first row of your 2D array with other numbers.</p></li>
+</ul>
+</section>
+<section id="problem-6-special-arrays">
+<h2>Problem 6: Special Arrays<a class="headerlink" href="#problem-6-special-arrays" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create and print a 3 by 5 array of all zeros (integers).</p></li>
+<li><p>Create and print a 4 by 2 array of all ones (integers).</p></li>
+<li><p>Create and print a 3 by 5 array of all 33’s using <code class="docutils literal notranslate"><span class="pre">np.full</span></code></p></li>
+<li><p>Create a 3D array of all zeros. Print it.</p></li>
+</ul>
+</section>
+<section id="problem-8-logicals-in-arrays">
+<h2>Problem 8: Logicals in arrays<a class="headerlink" href="#problem-8-logicals-in-arrays" title="Link to this heading">#</a></h2>
+<p>Using an array in a Boolean expression results in a logical array.</p>
+<ul class="simple">
+<li><p>Create a 1D array variable <code class="docutils literal notranslate"><span class="pre">my1d</span></code> and try the expression <code class="docutils literal notranslate"><span class="pre">my1d</span> <span class="pre">&lt;</span> <span class="pre">10</span></code>. (Store it in a variable and print it, as shown below</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my1d</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">33</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">mylog</span> <span class="o">=</span> <span class="n">my1d</span> <span class="o">&lt;</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mylog</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Now, use your logical array to index into your original 1D array variable.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my1d</span><span class="p">[</span><span class="n">mylog</span><span class="p">]</span><span class="o">**</span><span class="n">bold</span> <span class="n">text</span><span class="o">**</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-7a-python-dictionaries">
+<h1>Week 7A: Python dictionaries<a class="headerlink" href="#week-7a-python-dictionaries" title="Link to this heading">#</a></h1>
+<section id="problem-2-book-information">
+<h2>Problem 2: Book information<a class="headerlink" href="#problem-2-book-information" title="Link to this heading">#</a></h2>
+<p>You are tasked with storing information about a book in a dictionary. Perform the following steps:</p>
+<ol class="arabic simple">
+<li><p>Create a dictionary named <code class="docutils literal notranslate"><span class="pre">book</span></code> with the following key-value pairs:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'title':</span> <span class="pre">'To</span> <span class="pre">Kill</span> <span class="pre">a</span> <span class="pre">Mockingbird'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'author':</span> <span class="pre">'Harper</span> <span class="pre">Lee'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'year_published':</span> <span class="pre">1960</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'genre':</span> <span class="pre">'Fiction'</span></code></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Print the value associated with the key <code class="docutils literal notranslate"><span class="pre">'author'</span></code>.</p></li>
+<li><p>Check if the key <code class="docutils literal notranslate"><span class="pre">'pages'</span></code> exists in the dictionary and print the result. (Hint: use <code class="docutils literal notranslate"><span class="pre">in</span></code>!)</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to determine the number of key-value pairs in the dictionary and print it.</p></li>
+</ol>
+</section>
+<section id="problem-3-get-and-pop-on-a-smartphone-dictionary">
+<h2>Problem 3: <code class="docutils literal notranslate"><span class="pre">get()</span></code> and <code class="docutils literal notranslate"><span class="pre">pop()</span></code> on a smartphone dictionary<a class="headerlink" href="#problem-3-get-and-pop-on-a-smartphone-dictionary" title="Link to this heading">#</a></h2>
+<p>You are given a dictionary representing a smartphone:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smartphone</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;brand&#39;</span><span class="p">:</span> <span class="s1">&#39;Apple&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;iPhone 13&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;year_released&#39;</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
+    <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="mi">799</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">get</span></code> method to retrieve the value for the key <code class="docutils literal notranslate"><span class="pre">'price'</span></code>.</p></li>
+<li><p>Add a new key-value pair: <code class="docutils literal notranslate"><span class="pre">'storage':</span> <span class="pre">'128GB'</span></code>.</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">'price'</span></code> to <code class="docutils literal notranslate"><span class="pre">749</span></code>.</p></li>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">'year_released'</span></code> key using the <code class="docutils literal notranslate"><span class="pre">pop()</span></code> method.</p></li>
+<li><p>Print the updated dictionary.</p></li>
+</ol>
+</section>
+<section id="problem-5-keys-values-and-items">
+<h2>Problem 5: <code class="docutils literal notranslate"><span class="pre">.keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">.values()</span></code> and <code class="docutils literal notranslate"><span class="pre">.items()</span></code><a class="headerlink" href="#problem-5-keys-values-and-items" title="Link to this heading">#</a></h2>
+<p>You are given a dictionary representing the stock of items in a grocery store:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store_stock</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s1">&#39;milk&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s1">&#39;bread&#39;</span><span class="p">:</span> <span class="mi">15</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">.keys()</span></code> method to print a list of all items in the store.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">.values()</span></code> method to calculate and print the total stock of all items.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">.items()</span></code> method to print each item and its stock as tuples.</p></li>
+<li><p>Use a loop to print each item and its stock in the format: <code class="docutils literal notranslate"><span class="pre">&quot;Item:</span> <span class="pre">&lt;item&gt;,</span> <span class="pre">Stock:</span> <span class="pre">&lt;stock&gt;&quot;</span></code>.</p></li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-7b-user-defined-functions">
+<h1>Week 7B: User-defined functions<a class="headerlink" href="#week-7b-user-defined-functions" title="Link to this heading">#</a></h1>
+<section id="problem-1-3">
+<h2>Problem 1.3<a class="headerlink" href="#problem-1-3" title="Link to this heading">#</a></h2>
+<p>Write a function that will prompt the user for a float in a range. The minimum and maximum values in the range will be passed to the function, in any order. The function should loop to error-check until the user enters a valid number. Make sure that you test your function thoroughly.</p>
+</section>
+<section id="problem-2-1">
+<h2>Problem 2.1<a class="headerlink" href="#problem-2-1" title="Link to this heading">#</a></h2>
+<p>Write a function that will print a box of *’s. Two arguments will be passed to the function: the number of rows to print, and the number of columns (the number of *’s in each row).</p>
+</section>
+<section id="problem-3-2">
+<h2>Problem 3.2<a class="headerlink" href="#problem-3-2" title="Link to this heading">#</a></h2>
+<p>Write a cumulative product function. The function will receive a list of numbers, and will create a new list which is a list of the running products of the numbers in the parameter list. For example, if the list that is passed to the function is <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">2,</span> <span class="pre">5]</span></code>, the returned list would be <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">8,</span> <span class="pre">40]</span></code>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-8a-argument-passing-location-scope">
+<h1>Week 8A: Argument passing, location, scope<a class="headerlink" href="#week-8a-argument-passing-location-scope" title="Link to this heading">#</a></h1>
+<section id="exercise-1-1-predict-the-output">
+<h2>Exercise 1.1: Predict the Output<a class="headerlink" href="#exercise-1-1-predict-the-output" title="Link to this heading">#</a></h2>
+<p>Before running any code, predict what each snippet will print. Then run it to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Snippet A</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">updateScore</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="mi">10</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inside function: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">playerScore</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">updateScore</span><span class="p">(</span><span class="n">playerScore</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outside function: </span><span class="si">{</span><span class="n">playerScore</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Your prediction:</strong></p>
+<ul class="simple">
+<li><p>Inside function: ___________</p></li>
+<li><p>Outside function: ___________</p></li>
+</ul>
+<p><strong>Actual result:</strong> ___________</p>
+<p><strong>Explanation (why did this happen?):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Snippet B</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">updateScores</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inside function: </span><span class="si">{</span><span class="n">scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">playerScores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">78</span><span class="p">]</span>
+<span class="n">updateScores</span><span class="p">(</span><span class="n">playerScores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outside function: </span><span class="si">{</span><span class="n">playerScores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Your prediction:</strong></p>
+<ul class="simple">
+<li><p>Inside function: ___________</p></li>
+<li><p>Outside function: ___________</p></li>
+</ul>
+<p><strong>Actual result:</strong> ___________</p>
+<p><strong>Explanation (why is this different from Snippet A?):</strong></p>
+</section>
+<section id="exercise-3-1-fix-the-broken-code">
+<h2>Exercise 3.1: Fix the Broken Code<a class="headerlink" href="#exercise-3-1-fix-the-broken-code" title="Link to this heading">#</a></h2>
+<p>This code has scope errors. Fix it so it works correctly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Goal: Track how many students have been processed</span>
+<span class="n">studentsProcessed</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">processStudent</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">studentsProcessed</span> <span class="o">=</span> <span class="n">studentsProcessed</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Processed: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">processStudent</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+<span class="n">processStudent</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+<span class="n">processStudent</span><span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total processed: </span><span class="si">{</span><span class="n">studentsProcessed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Should print 3</span>
+</pre></div>
+</div>
+</section>
+<section id="exercise-4-1-protecting-your-data">
+<h2>Exercise 4.1: Protecting Your Data<a class="headerlink" href="#exercise-4-1-protecting-your-data" title="Link to this heading">#</a></h2>
+<p>You’re analyzing student grades and need to sort them, but you want to keep the original order too.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
+
+<span class="c1"># Method 1: Try this (wrong way)</span>
+<span class="n">sortedGrades1</span> <span class="o">=</span> <span class="n">grades</span>
+<span class="n">sortedGrades1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: </span><span class="si">{</span><span class="n">grades</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sorted: </span><span class="si">{</span><span class="n">sortedGrades1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>What went wrong?</strong></p>
+<hr class="docutils" />
+<p><strong>Now fix it using .copy():</strong></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-8b-scripts-comments-and-documentation">
+<h1>Week 8B Scripts, Comments, and Documentation<a class="headerlink" href="#week-8b-scripts-comments-and-documentation" title="Link to this heading">#</a></h1>
+<section id="question-1">
+<h2>Question 1<a class="headerlink" href="#question-1" title="Link to this heading">#</a></h2>
+<p>This function calculates the area of a triangle. Add ONE comment explaining the formula:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateArea</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">base</span> <span class="o">*</span> <span class="n">height</span> 
+</pre></div>
+</div>
+</section>
+<section id="quiz-7">
+<h2>Quiz 7<a class="headerlink" href="#quiz-7" title="Link to this heading">#</a></h2>
+<p>Write a script that:</p>
+<ul class="simple">
+<li><p>Creates a function called <code class="docutils literal notranslate"><span class="pre">applyBonus</span></code> that takes a list of scores and a bonus amount. The function should:</p>
+<ul>
+<li><p>Add the bonus to each score in the list</p></li>
+<li><p>NOT modify the original list</p></li>
+<li><p>Return the new list with bonuses applied</p></li>
+</ul>
+</li>
+<li><p>Creates a short (3-5 elements) list of scores, pre-bonus</p></li>
+<li><p>Uses the <code class="docutils literal notranslate"><span class="pre">applyBonus</span></code> to apply the bonuses to the list of scores</p></li>
+<li><p>Calculates</p>
+<ul>
+<li><p>the sum of the scores pre-bonus</p></li>
+<li><p>the sum of the scores with bonuses applied</p></li>
+</ul>
+</li>
+</ul>
+<p>In addition, include a docstring and appropriate comments.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-9b-plotting">
+<h1>Week 9B: Plotting<a class="headerlink" href="#week-9b-plotting" title="Link to this heading">#</a></h1>
+<p>Try the fill in the blank problem from below. Revisit our <a class="reference external" href="https://colab.research.google.com/drive/1p0AU1aephf-jbK0DxcBeugnYnOvjqAHY">plotting examples notebook</a> if you need a refresher!</p>
+<section id="practice-problem-scatter-plot-train-service-vs-wait-time">
+<h2>Practice Problem: Scatter Plot — Train Service vs Wait Time<a class="headerlink" href="#practice-problem-scatter-plot-train-service-vs-wait-time" title="Link to this heading">#</a></h2>
+<p>You have data showing how the number of trains per hour affects passengers’ average wait time:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Trains per Hour</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>10</p></th>
+<th class="head"><p>12</p></th>
+<th class="head"><p>15</p></th>
+<th class="head"><p>18</p></th>
+<th class="head"><p>20</p></th>
+<th class="head"><p>22</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Average Wait (minutes)</p></td>
+<td><p>7.5</p></td>
+<td><p>6.0</p></td>
+<td><p>5.0</p></td>
+<td><p>4.0</p></td>
+<td><p>3.3</p></td>
+<td><p>3.0</p></td>
+<td><p>2.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Write a Python script that produces a scatter plot showing this relationship using <strong>matplotlib</strong>.<br />
+Fill in the missing parts so that the code:</p>
+<ul class="simple">
+<li><p>creates a figure of size 10 × 6</p></li>
+<li><p>plots green points with moderate size and partial transparency</p></li>
+<li><p>labels both axes and adds a title</p></li>
+<li><p>includes a grid and a tight layout</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">trains_per_hour</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">]</span>
+<span class="n">avg_wait</span> <span class="o">=</span> <span class="p">[</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">____</span><span class="p">,</span> <span class="n">____</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">________</span><span class="p">(</span><span class="n">trains_per_hour</span><span class="p">,</span> <span class="n">avg_wait</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">____</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">____</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;____&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">________</span><span class="p">(</span><span class="s1">&#39;Trains per Hour&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">________</span><span class="p">(</span><span class="s1">&#39;Average Wait Time (minutes)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">________</span><span class="p">(</span><span class="s1">&#39;Relationship: Service Frequency vs Wait Time&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">________</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">________</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-10a-file-i-o-practice">
+<h1>Week 10A: File I/O Practice<a class="headerlink" href="#week-10a-file-i-o-practice" title="Link to this heading">#</a></h1>
+<section id="problem-1-temperature-logger">
+<h2>Problem 1: Temperature Logger<a class="headerlink" href="#problem-1-temperature-logger" title="Link to this heading">#</a></h2>
+<p><strong>Part A: Write the logger</strong></p>
+<p>Create a cell that:</p>
+<ol class="arabic simple">
+<li><p>Asks the user for their name</p></li>
+<li><p>Asks them to enter temperatures (in Celsius) one at a time</p></li>
+<li><p>After each temperature, asks if they want to enter another (y/n)</p></li>
+<li><p>When they are done, writes all data to a file called <code class="docutils literal notranslate"><span class="pre">tempLog.txt</span></code></p></li>
+</ol>
+<p>Format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Observer</span><span class="p">:</span> <span class="n">Alice</span>
+<span class="mf">22.5</span>
+<span class="mf">23.1</span>
+<span class="mf">21.8</span>
+<span class="mf">24.2</span>
+</pre></div>
+</div>
+<p><strong>Part B: Read and analyze</strong></p>
+<p>Create a cell that:</p>
+<ol class="arabic simple">
+<li><p>Reads the data from <code class="docutils literal notranslate"><span class="pre">tempLog.txt</span></code></p></li>
+<li><p>Prints the observer’s name</p></li>
+<li><p>Calculates and prints:</p>
+<ul class="simple">
+<li><p>Number of readings</p></li>
+<li><p>Average temperature</p></li>
+<li><p>Highest temperature</p></li>
+<li><p>Lowest temperature</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week11A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 11 Pre-read: Debugging and Profiling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week12A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 12a: Creating Vectors and Matrices in MATLAB</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weeks 5-10 GPP Review</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week5a-nested-lists-and-multilevel-indexing">Week5A: Nested lists and Multilevel Indexing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cream-combinations-with-nested-list-comprehensions">Ice cream combinations with nested list comprehensions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6a-mastering-slicing-in-python">Week 6A: Mastering Slicing in Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-slicing-drills">Quick Slicing Drills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-quick-drills-negative-indices">More Quick Drills: Negative Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-basic-slice-practice">Problem 1: Basic Slice Practice</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6b-working-with-arrays-in-numpy">Week 6B: Working with arrays in NumPy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-arrays-types-and-dtypes">Problem 2: Arrays, types and dtypes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-2d-arrays">Problem 4: 2D arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-special-arrays">Problem 6: Special Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-8-logicals-in-arrays">Problem 8: Logicals in arrays</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7a-python-dictionaries">Week 7A: Python dictionaries</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-book-information">Problem 2: Book information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-get-and-pop-on-a-smartphone-dictionary">Problem 3: <code class="docutils literal notranslate"><span class="pre">get()</span></code> and <code class="docutils literal notranslate"><span class="pre">pop()</span></code> on a smartphone dictionary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-keys-values-and-items">Problem 5: <code class="docutils literal notranslate"><span class="pre">.keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">.values()</span></code> and <code class="docutils literal notranslate"><span class="pre">.items()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7b-user-defined-functions">Week 7B: User-defined functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-3">Problem 1.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-1">Problem 2.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-2">Problem 3.2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-8a-argument-passing-location-scope">Week 8A: Argument passing, location, scope</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-1-predict-the-output">Exercise 1.1: Predict the Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-1-fix-the-broken-code">Exercise 3.1: Fix the Broken Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-protecting-your-data">Exercise 4.1: Protecting Your Data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-8b-scripts-comments-and-documentation">Week 8B Scripts, Comments, and Documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1">Question 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-7">Quiz 7</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-9b-plotting">Week 9B: Plotting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problem-scatter-plot-train-service-vs-wait-time">Practice Problem: Scatter Plot — Train Service vs Wait Time</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-10a-file-i-o-practice">Week 10A: File I/O Practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-temperature-logger">Problem 1: Temperature Logger</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

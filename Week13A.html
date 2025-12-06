@@ -1,0 +1,1512 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 13a: MATLAB Scripts, Documentation, and File I/O &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week13A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week14A: User Functions and Modular Programming in MATLAB" href="Week14A.html" />
+    <link rel="prev" title="Week 12B: Vector and Matrix Operations in MATLAB" href="Week12B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week13A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 13a: MATLAB Scripts, Documentation, and File I/O</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab-scripts">1. MATLAB Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-script">What is a Script?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-script">Creating a Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-script">Running a Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences-from-python">Key Differences from Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-script">Example Script</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documenting-your-code">2. Documenting Your Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-line-comments">Single-Line Comments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-line-comments-block-comments">Multi-Line Comments (Block Comments)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#header-documentation">Header Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-help-command">The <code class="docutils literal notranslate"><span class="pre">help</span></code> Command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-from-different-file-types">3. Importing Data from Different File Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-files-comma-separated-values">CSV Files (Comma-Separated Values)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-readmatrix-numeric-data-only">Using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> (Numeric Data Only)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-readtable-mixed-data-types-recommended">Using <code class="docutils literal notranslate"><span class="pre">readtable</span></code> (Mixed Data Types - Recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-headers-and-options">Handling Headers and Options</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-files-xlsx-xls">Excel Files (.xlsx, .xls)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-excel-data">Reading Excel Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-excel-data">Writing Excel Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-with-delimiters">Text Files with Delimiters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-files">Image Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-image-data-structure">Understanding Image Data Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-color-images">Working with Color Images</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-color-and-grayscale">Converting Between Color and Grayscale</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-modified-color-images">Creating Modified Color Images</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#image-data-types">Image Data Types</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-images">Saving Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data-for-reuse">4. Saving Data for Reuse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8. Saving Data for Reuse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-mat-files">Advantages of .mat Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-to-mat-files">Saving to .mat Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-from-mat-files">Loading from .mat Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-files-best-for-data-exchange">CSV Files - Best for Data Exchange</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-csv-files">Writing CSV Files</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-files-best-for-reports-and-sharing">Excel Files - Best for Reports and Sharing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-for-custom-formats">Text Files - For Custom Formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-format">Choosing the Right Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-directories-and-file-paths">5. Working with Directories and File Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#current-directory-operations">Current Directory Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-and-changing-directories">Checking and Changing Directories</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-directory-contents">Listing Directory Contents</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-file-paths">Building File Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fullfile-function-recommended">The fullfile Function (Recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-separators">Path Separators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-vs-absolute-paths">Relative vs Absolute Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-paths">Absolute Paths</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-paths">Relative Paths</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-managing-directories">Creating and Managing Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-existence">Checking Existence</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files-and-directories">Deleting Files and Directories</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-multiple-files">Working with Multiple Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-all-files-in-a-directory">Processing All Files in a Directory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-matching-with-dir">Pattern Matching with dir</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizing-project-files">Organizing Project Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-directory-structure">Recommended Directory Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-saving-results-to-organized-folders">Example: Saving Results to Organized Folders</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-file-information">Getting File Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-file-paths">Best Practices for File Paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-input-output-basic-operations">7. File Input/Output - Basic Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-text-files">Reading Text Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-load-for-simple-numeric-data">Method 1: <code class="docutils literal notranslate"><span class="pre">load</span></code> for Simple Numeric Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-readmatrix-recommended-for-modern-matlab">Method 2: <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> (Recommended for Modern MATLAB)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-3-reading-line-by-line-with-fopen-fgetl-fclose">Method 3: Reading Line by Line with <code class="docutils literal notranslate"><span class="pre">fopen</span></code>, <code class="docutils literal notranslate"><span class="pre">fgetl</span></code>, <code class="docutils literal notranslate"><span class="pre">fclose</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-all-lines-from-a-file">Reading All Lines from a File</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-text-files">Writing Text Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-save-for-simple-numeric-data">Method 1: <code class="docutils literal notranslate"><span class="pre">save</span></code> for Simple Numeric Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-fprintf-for-formatted-output">Method 2: <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> for Formatted Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-management-best-practices">9. File Management Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-if-files-exist">Check if Files Exist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-modes">File Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-close-files">Always Close Files</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-13a-matlab-scripts-documentation-and-file-i-o">
+<h1>Week 13a: MATLAB Scripts, Documentation, and File I/O<a class="headerlink" href="#week-13a-matlab-scripts-documentation-and-file-i-o" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this prereading, you should be able to:</p>
+<ul class="simple">
+<li><p>Create and run MATLAB script files</p></li>
+<li><p>Document your code with comments and function headers</p></li>
+<li><p>Read data from and write data to text files</p></li>
+<li><p>Load and save MATLAB data files</p></li>
+</ul>
+</section>
+<section id="matlab-scripts">
+<h2>1. MATLAB Scripts<a class="headerlink" href="#matlab-scripts" title="Link to this heading">#</a></h2>
+<section id="what-is-a-script">
+<h3>What is a Script?<a class="headerlink" href="#what-is-a-script" title="Link to this heading">#</a></h3>
+<p>A script is a file containing a sequence of MATLAB commands that execute together. Scripts are similar to Python <code class="docutils literal notranslate"><span class="pre">.py</span></code> files but use the <code class="docutils literal notranslate"><span class="pre">.m</span></code> extension in MATLAB.</p>
+</section>
+<section id="creating-a-script">
+<h3>Creating a Script<a class="headerlink" href="#creating-a-script" title="Link to this heading">#</a></h3>
+<p>To create a new script:</p>
+<ol class="arabic simple">
+<li><p>Click <strong>New Script</strong> in the MATLAB toolbar, or</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">edit</span> <span class="pre">scriptname.m</span></code> in the command window</p></li>
+</ol>
+</section>
+<section id="running-a-script">
+<h3>Running a Script<a class="headerlink" href="#running-a-script" title="Link to this heading">#</a></h3>
+<p>There are three ways to run a script:</p>
+<ol class="arabic simple">
+<li><p>Click the <strong>Run</strong> button in the editor</p></li>
+<li><p>Press <strong>F5</strong> while in the editor</p></li>
+<li><p>Type the script name (without <code class="docutils literal notranslate"><span class="pre">.m</span></code>) in the command window</p></li>
+</ol>
+</section>
+<section id="key-differences-from-python">
+<h3>Key Differences from Python<a class="headerlink" href="#key-differences-from-python" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MATLAB scripts share the workspace with the command window (no explicit <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> needed)</p></li>
+<li><p>All variables created in a script remain in the workspace after execution</p></li>
+<li><p>Scripts don’t require special syntax to run; just save and execute</p></li>
+</ul>
+</section>
+<section id="example-script">
+<h3>Example Script<a class="headerlink" href="#example-script" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% data_analysis.m</span>
+<span class="c">% This script analyzes temperature data</span>
+
+<span class="n">temperatures</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w"> </span><span class="mi">76</span><span class="p">];</span>
+<span class="n">avg_temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">temperatures</span><span class="p">);</span>
+<span class="n">max_temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">temperatures</span><span class="p">);</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Average temperature: %.2f°F\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">avg_temp</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Maximum temperature: %.2f°F\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">max_temp</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="documenting-your-code">
+<h2>2. Documenting Your Code<a class="headerlink" href="#documenting-your-code" title="Link to this heading">#</a></h2>
+<section id="single-line-comments">
+<h3>Single-Line Comments<a class="headerlink" href="#single-line-comments" title="Link to this heading">#</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">%</span></code> symbol for comments (similar to <code class="docutils literal notranslate"><span class="pre">#</span></code> in Python):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% This is a comment</span>
+<span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">  </span><span class="c">% Inline comment</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-line-comments-block-comments">
+<h3>Multi-Line Comments (Block Comments)<a class="headerlink" href="#multi-line-comments-block-comments" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">%{</span></code> and <code class="docutils literal notranslate"><span class="pre">%}</span></code> for block comments:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="cm">%{</span>
+<span class="cm">This is a multi-line comment.</span>
+<span class="cm">It can span several lines.</span>
+<span class="cm">Useful for longer explanations.</span>
+<span class="cm">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="header-documentation">
+<h3>Header Documentation<a class="headerlink" href="#header-documentation" title="Link to this heading">#</a></h3>
+<p>Always include a header at the top of your scripts with:</p>
+<ul class="simple">
+<li><p>Purpose of the script</p></li>
+<li><p>Author and date</p></li>
+<li><p>Input requirements</p></li>
+<li><p>Output description</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% ANALYZE_GRADES - Calculate statistics for student grades</span>
+<span class="c">%</span>
+<span class="c">% Author: Your Name</span>
+<span class="c">% Date: November 2025</span>
+<span class="c">%</span>
+<span class="c">% Description:</span>
+<span class="c">%   This script reads grade data, calculates mean and median,</span>
+<span class="c">%   and generates a histogram of the distribution.</span>
+<span class="c">%</span>
+<span class="c">% Inputs: grades.txt (text file with one grade per line)</span>
+<span class="c">% Outputs: Grade statistics printed to console and histogram figure</span>
+</pre></div>
+</div>
+</section>
+<section id="the-help-command">
+<h3>The <code class="docutils literal notranslate"><span class="pre">help</span></code> Command<a class="headerlink" href="#the-help-command" title="Link to this heading">#</a></h3>
+<p>When you type <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">scriptname</span></code>, MATLAB displays the first contiguous comment block. This makes good header documentation essential for code reusability.</p>
+</section>
+</section>
+<section id="importing-data-from-different-file-types">
+<h2>3. Importing Data from Different File Types<a class="headerlink" href="#importing-data-from-different-file-types" title="Link to this heading">#</a></h2>
+<p>MATLAB can work with many file formats. Choosing the right import function depends on your data structure and file type.</p>
+<section id="csv-files-comma-separated-values">
+<h3>CSV Files (Comma-Separated Values)<a class="headerlink" href="#csv-files-comma-separated-values" title="Link to this heading">#</a></h3>
+<p>CSV files are common for spreadsheet data and data exchange between programs.</p>
+<section id="using-readmatrix-numeric-data-only">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> (Numeric Data Only)<a class="headerlink" href="#using-readmatrix-numeric-data-only" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;grades.csv&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Returns numeric array</span>
+</pre></div>
+</div>
+</section>
+<section id="using-readtable-mixed-data-types-recommended">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">readtable</span></code> (Mixed Data Types - Recommended)<a class="headerlink" href="#using-readtable-mixed-data-types-recommended" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dataTable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readtable</span><span class="p">(</span><span class="s">&#39;students.csv&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Returns table with column names</span>
+<span class="c">% Access columns by name</span>
+<span class="n">names</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dataTable</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+<span class="n">scores</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dataTable</span><span class="p">.</span><span class="n">Score</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-headers-and-options">
+<h4>Handling Headers and Options<a class="headerlink" href="#handling-headers-and-options" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Skip header rows, specify delimiter</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;NumHeaderLines&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c">% Read table with specific options</span>
+<span class="n">opts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">detectImportOptions</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">);</span>
+<span class="n">opts</span><span class="p">.</span><span class="n">VariableTypes</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;double&#39;</span><span class="p">};</span><span class="w">  </span><span class="c">% Force column 3 to be numeric</span>
+<span class="n">dataTable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readtable</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="excel-files-xlsx-xls">
+<h3>Excel Files (.xlsx, .xls)<a class="headerlink" href="#excel-files-xlsx-xls" title="Link to this heading">#</a></h3>
+<p>Excel files can contain multiple sheets and mixed data types.</p>
+<section id="reading-excel-data">
+<h4>Reading Excel Data<a class="headerlink" href="#reading-excel-data" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read numeric data from first sheet</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;experiment.xlsx&#39;</span><span class="p">);</span>
+
+<span class="c">% Read as table (preserves headers and data types)</span>
+<span class="n">dataTable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readtable</span><span class="p">(</span><span class="s">&#39;experiment.xlsx&#39;</span><span class="p">);</span>
+
+<span class="c">% Read specific sheet</span>
+<span class="n">dataTable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readtable</span><span class="p">(</span><span class="s">&#39;experiment.xlsx&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Sheet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Results&#39;</span><span class="p">);</span>
+
+<span class="c">% Read specific range</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;experiment.xlsx&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Range&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;B2:D10&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-excel-data">
+<h4>Writing Excel Data<a class="headerlink" href="#writing-excel-data" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Write matrix to Excel</span>
+<span class="n">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">];</span>
+<span class="nb">writematrix</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;output.xlsx&#39;</span><span class="p">);</span>
+
+<span class="c">% Write table to Excel (includes headers)</span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">([</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="mi">6</span><span class="p">],</span><span class="w"> </span><span class="s">&#39;VariableNames&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;B&#39;</span><span class="p">});</span>
+<span class="nb">writetable</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;output.xlsx&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="text-files-with-delimiters">
+<h3>Text Files with Delimiters<a class="headerlink" href="#text-files-with-delimiters" title="Link to this heading">#</a></h3>
+<p>For tab-delimited or other custom formats:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Tab-delimited file</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Delimiter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;\t&#39;</span><span class="p">);</span>
+
+<span class="c">% Space-delimited file</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Delimiter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39; &#39;</span><span class="p">);</span>
+
+<span class="c">% Custom delimiter</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Delimiter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="image-files">
+<h3>Image Files<a class="headerlink" href="#image-files" title="Link to this heading">#</a></h3>
+<p>MATLAB can read and write various image formats and handles color images as 3D arrays.</p>
+<section id="understanding-image-data-structure">
+<h4>Understanding Image Data Structure<a class="headerlink" href="#understanding-image-data-structure" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read image</span>
+<span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;photo.jpg&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Works with .jpg, .png, .tif, etc.</span>
+
+<span class="c">% Check image dimensions</span>
+<span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w">  </span><span class="c">% Returns [height, width, channels]</span>
+<span class="c">% Grayscale: [rows, cols] - 2D array</span>
+<span class="c">% Color (RGB): [rows, cols, 3] - 3D array with red, green, blue layers</span>
+</pre></div>
+</div>
+</section>
+<section id="working-with-color-images">
+<h4>Working with Color Images<a class="headerlink" href="#working-with-color-images" title="Link to this heading">#</a></h4>
+<p>Color images in MATLAB are stored as 3D arrays where:</p>
+<ul class="simple">
+<li><p>1st dimension = height (rows)</p></li>
+<li><p>2nd dimension = width (columns)</p></li>
+<li><p>3rd dimension = color channels (3 layers: Red, Green, Blue)</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read a color image</span>
+<span class="n">colorImg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;sunset.jpg&#39;</span><span class="p">);</span>
+
+<span class="c">% Access individual color channels</span>
+<span class="n">redChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">colorImg</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">    </span><span class="c">% All red values</span>
+<span class="n">greenChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">colorImg</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">  </span><span class="c">% All green values</span>
+<span class="n">blueChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">colorImg</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">   </span><span class="c">% All blue values</span>
+
+<span class="c">% Display original and channels</span>
+<span class="nb">figure</span><span class="p">;</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="nb">imshow</span><span class="p">(</span><span class="n">colorImg</span><span class="p">);</span><span class="w"> </span><span class="nb">title</span><span class="p">(</span><span class="s">&#39;Original&#39;</span><span class="p">);</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="nb">imshow</span><span class="p">(</span><span class="n">redChannel</span><span class="p">);</span><span class="w"> </span><span class="nb">title</span><span class="p">(</span><span class="s">&#39;Red Channel&#39;</span><span class="p">);</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="nb">imshow</span><span class="p">(</span><span class="n">greenChannel</span><span class="p">);</span><span class="w"> </span><span class="nb">title</span><span class="p">(</span><span class="s">&#39;Green Channel&#39;</span><span class="p">);</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="nb">imshow</span><span class="p">(</span><span class="n">blueChannel</span><span class="p">);</span><span class="w"> </span><span class="nb">title</span><span class="p">(</span><span class="s">&#39;Blue Channel&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="converting-between-color-and-grayscale">
+<h4>Converting Between Color and Grayscale<a class="headerlink" href="#converting-between-color-and-grayscale" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Convert color to grayscale</span>
+<span class="n">grayImg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rgb2gray</span><span class="p">(</span><span class="n">colorImg</span><span class="p">);</span>
+
+<span class="c">% Convert grayscale to &quot;color&quot; (3 identical channels)</span>
+<span class="n">colorFromGray</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">grayImg</span><span class="p">,</span><span class="w"> </span><span class="n">grayImg</span><span class="p">,</span><span class="w"> </span><span class="n">grayImg</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-modified-color-images">
+<h4>Creating Modified Color Images<a class="headerlink" href="#creating-modified-color-images" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a copy and modify specific channel</span>
+<span class="n">modifiedImg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">colorImg</span><span class="p">;</span>
+<span class="n">modifiedImg</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">modifiedImg</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span><span class="w">  </span><span class="c">% Boost red channel</span>
+
+<span class="c">% Set a channel to zero (remove that color)</span>
+<span class="n">noRed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">colorImg</span><span class="p">;</span>
+<span class="n">noRed</span><span class="p">(:,</span><span class="w"> </span><span class="p">:,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c">% Remove all red</span>
+</pre></div>
+</div>
+</section>
+<section id="image-data-types">
+<h4>Image Data Types<a class="headerlink" href="#image-data-types" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Most images are uint8 (0-255)</span>
+<span class="nb">class</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w">  </span><span class="c">% Usually returns &#39;uint8&#39;</span>
+
+<span class="c">% Convert to double for calculations (0.0-1.0 range)</span>
+<span class="n">imgDouble</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">im2double</span><span class="p">(</span><span class="n">img</span><span class="p">);</span>
+
+<span class="c">% Convert back to uint8 for display/saving</span>
+<span class="n">imgUint8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">im2uint8</span><span class="p">(</span><span class="n">imgDouble</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="saving-images">
+<h4>Saving Images<a class="headerlink" href="#saving-images" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Write image</span>
+<span class="nb">imwrite</span><span class="p">(</span><span class="n">colorImg</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;output.png&#39;</span><span class="p">);</span>
+
+<span class="c">% Write with quality setting (for JPEG)</span>
+<span class="nb">imwrite</span><span class="p">(</span><span class="n">colorImg</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;output.jpg&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Quality&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="saving-data-for-reuse">
+<h2>4. Saving Data for Reuse<a class="headerlink" href="#saving-data-for-reuse" title="Link to this heading">#</a></h2>
+</section>
+<section id="id1">
+<h2>8. Saving Data for Reuse<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">.mat</span></code> files are MATLAB’s native format and the most efficient way to save workspace data.</p>
+<section id="advantages-of-mat-files">
+<h3>Advantages of .mat Files<a class="headerlink" href="#advantages-of-mat-files" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fast to read and write</p></li>
+<li><p>Preserves variable names and data types</p></li>
+<li><p>Can store any MATLAB data type (matrices, tables, structures, cell arrays)</p></li>
+<li><p>Compressed by default to save space</p></li>
+</ul>
+</section>
+<section id="saving-to-mat-files">
+<h3>Saving to .mat Files<a class="headerlink" href="#saving-to-mat-files" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Save specific variables</span>
+<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="mi">73</span><span class="p">];</span>
+<span class="n">pressure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1013</span><span class="p">,</span><span class="w"> </span><span class="mi">1015</span><span class="p">,</span><span class="w"> </span><span class="mi">1012</span><span class="p">,</span><span class="w"> </span><span class="mi">1014</span><span class="p">];</span>
+<span class="nb">save</span><span class="p">(</span><span class="s">&#39;experiment_data.mat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;temperature&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;pressure&#39;</span><span class="p">);</span>
+
+<span class="c">% Save all workspace variables</span>
+<span class="nb">save</span><span class="p">(</span><span class="s">&#39;my_workspace.mat&#39;</span><span class="p">);</span>
+
+<span class="c">% Save with version compatibility (for older MATLAB versions)</span>
+<span class="nb">save</span><span class="p">(</span><span class="s">&#39;data.mat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;-v7.3&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="loading-from-mat-files">
+<h3>Loading from .mat Files<a class="headerlink" href="#loading-from-mat-files" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load all variables from file</span>
+<span class="nb">load</span><span class="p">(</span><span class="s">&#39;experiment_data.mat&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Variables appear in workspace</span>
+
+<span class="c">% Load specific variables only</span>
+<span class="nb">load</span><span class="p">(</span><span class="s">&#39;experiment_data.mat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;temperature&#39;</span><span class="p">);</span>
+
+<span class="c">% Load into a structure (avoids overwriting existing variables)</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;experiment_data.mat&#39;</span><span class="p">);</span>
+<span class="n">temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">temperature</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="csv-files-best-for-data-exchange">
+<h3>CSV Files - Best for Data Exchange<a class="headerlink" href="#csv-files-best-for-data-exchange" title="Link to this heading">#</a></h3>
+<p>Use CSV when sharing data with other programs (Excel, Python, R) or for human-readable output.</p>
+<section id="writing-csv-files">
+<h4>Writing CSV Files<a class="headerlink" href="#writing-csv-files" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Write matrix to CSV</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">];</span>
+<span class="nb">writematrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;results.csv&#39;</span><span class="p">);</span>
+
+<span class="c">% Write table to CSV (includes column headers)</span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">([</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="mi">30</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">40</span><span class="p">;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"> </span><span class="mi">60</span><span class="p">],</span><span class="w"> </span><span class="s">&#39;VariableNames&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;Time&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Value&#39;</span><span class="p">});</span>
+<span class="nb">writetable</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;results.csv&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="excel-files-best-for-reports-and-sharing">
+<h3>Excel Files - Best for Reports and Sharing<a class="headerlink" href="#excel-files-best-for-reports-and-sharing" title="Link to this heading">#</a></h3>
+<p>Excel files are ideal when you need formatting or want non-technical users to view your data.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Write to specific sheet</span>
+<span class="nb">writematrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;report.xlsx&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Sheet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Raw Data&#39;</span><span class="p">);</span>
+<span class="nb">writematrix</span><span class="p">(</span><span class="nb">summary</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;report.xlsx&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Sheet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Summary&#39;</span><span class="p">);</span>
+
+<span class="c">% Write table with headers</span>
+<span class="nb">writetable</span><span class="p">(</span><span class="n">dataTable</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;report.xlsx&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Sheet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Results&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="text-files-for-custom-formats">
+<h3>Text Files - For Custom Formats<a class="headerlink" href="#text-files-for-custom-formats" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> when you need complete control over formatting:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="s">&#39;report.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;w&#39;</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;=== Experimental Results ===\n\n&#39;</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Average: %.2f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Std Dev: %.2f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">std</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="choosing-the-right-format">
+<h3>Choosing the Right Format<a class="headerlink" href="#choosing-the-right-format" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>Use When</p></th>
+<th class="head"><p>Advantages</p></th>
+<th class="head"><p>Disadvantages</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>.mat</p></td>
+<td><p>Working within MATLAB</p></td>
+<td><p>Fast, preserves types</p></td>
+<td><p>MATLAB-specific</p></td>
+</tr>
+<tr class="row-odd"><td><p>.csv</p></td>
+<td><p>Sharing with other programs</p></td>
+<td><p>Universal, readable</p></td>
+<td><p>Numeric/text only</p></td>
+</tr>
+<tr class="row-even"><td><p>.xlsx</p></td>
+<td><p>Creating reports</p></td>
+<td><p>Formatted, familiar</p></td>
+<td><p>Slower, requires Excel</p></td>
+</tr>
+<tr class="row-odd"><td><p>.txt</p></td>
+<td><p>Custom formatting needed</p></td>
+<td><p>Full control</p></td>
+<td><p>Manual parsing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="working-with-directories-and-file-paths">
+<h2>5. Working with Directories and File Paths<a class="headerlink" href="#working-with-directories-and-file-paths" title="Link to this heading">#</a></h2>
+<p>Understanding how to navigate directories and manage file paths is essential for organizing your projects and working with data files.</p>
+<section id="current-directory-operations">
+<h3>Current Directory Operations<a class="headerlink" href="#current-directory-operations" title="Link to this heading">#</a></h3>
+<section id="checking-and-changing-directories">
+<h4>Checking and Changing Directories<a class="headerlink" href="#checking-and-changing-directories" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Show current directory</span>
+<span class="n">currentDir</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pwd</span>
+
+<span class="c">% Change directory (absolute path)</span>
+<span class="nb">cd</span><span class="p">(</span><span class="s">&#39;C:\Users\YourName\Documents\MATLAB&#39;</span><span class="p">)</span>
+
+<span class="c">% Change to parent directory</span>
+<span class="nb">cd</span><span class="w"> </span><span class="p">..</span>
+
+<span class="c">% Change to subdirectory</span>
+<span class="nb">cd</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">)</span>
+
+<span class="c">% Return to previous directory</span>
+<span class="nb">cd</span><span class="p">(</span><span class="n">currentDir</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="listing-directory-contents">
+<h4>Listing Directory Contents<a class="headerlink" href="#listing-directory-contents" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% List all files and folders in current directory</span>
+<span class="nb">dir</span>
+
+<span class="c">% List specific file types</span>
+<span class="nb">dir</span><span class="p">(</span><span class="s">&#39;*.csv&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% All CSV files</span>
+<span class="nb">dir</span><span class="p">(</span><span class="s">&#39;*.mat&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% All MAT files</span>
+<span class="nb">dir</span><span class="p">(</span><span class="s">&#39;Data/*.txt&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% All text files in Data subdirectory</span>
+
+<span class="c">% Store directory listing in variable</span>
+<span class="n">files</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dir</span><span class="p">(</span><span class="s">&#39;*.csv&#39;</span><span class="p">);</span>
+<span class="c">% Access properties</span>
+<span class="n">firstFile</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">files</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">name</span><span class="p">;</span><span class="w">  </span><span class="c">% Name of first file</span>
+<span class="n">fileSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">files</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">bytes</span><span class="p">;</span><span class="w">  </span><span class="c">% Size in bytes</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="building-file-paths">
+<h3>Building File Paths<a class="headerlink" href="#building-file-paths" title="Link to this heading">#</a></h3>
+<section id="the-fullfile-function-recommended">
+<h4>The fullfile Function (Recommended)<a class="headerlink" href="#the-fullfile-function-recommended" title="Link to this heading">#</a></h4>
+<p>Using <code class="docutils literal notranslate"><span class="pre">fullfile</span></code> ensures your code works across different operating systems (Windows, Mac, Linux):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Build path to file in subdirectory</span>
+<span class="n">folder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;Data&#39;</span><span class="p">;</span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;experiment1.csv&#39;</span><span class="p">;</span>
+<span class="n">filepath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="c">% Result: &#39;Data\experiment1.csv&#39; (Windows) or &#39;Data/experiment1.csv&#39; (Mac/Linux)</span>
+
+<span class="c">% Build nested directory path</span>
+<span class="n">basePath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;C:\Users\YourName\Documents&#39;</span><span class="p">;</span>
+<span class="n">project</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;MATLAB_Project&#39;</span><span class="p">;</span>
+<span class="n">dataFolder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;Data&#39;</span><span class="p">;</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;results.mat&#39;</span><span class="p">;</span>
+<span class="n">fullPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">basePath</span><span class="p">,</span><span class="w"> </span><span class="n">project</span><span class="p">,</span><span class="w"> </span><span class="n">dataFolder</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">);</span>
+
+<span class="c">% Use in file operations</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="n">fullPath</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="path-separators">
+<h4>Path Separators<a class="headerlink" href="#path-separators" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Windows uses backslash</span>
+<span class="n">windowsPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;C:\Users\Data\file.csv&#39;</span><span class="p">;</span>
+
+<span class="c">% Mac/Linux use forward slash</span>
+<span class="n">unixPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/home/user/Data/file.csv&#39;</span><span class="p">;</span>
+
+<span class="c">% filesep gives the correct separator for your system</span>
+<span class="n">separator</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">filesep</span><span class="p">;</span><span class="w">  </span><span class="c">% &#39;\&#39; on Windows, &#39;/&#39; on Mac/Linux</span>
+
+<span class="c">% Manual path building (not recommended)</span>
+<span class="n">manualPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&#39;Data&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">filesep</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;results.csv&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="relative-vs-absolute-paths">
+<h3>Relative vs Absolute Paths<a class="headerlink" href="#relative-vs-absolute-paths" title="Link to this heading">#</a></h3>
+<section id="absolute-paths">
+<h4>Absolute Paths<a class="headerlink" href="#absolute-paths" title="Link to this heading">#</a></h4>
+<p>Full path from the root of your file system:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Windows absolute path</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;C:\Users\YourName\Documents\data.csv&#39;</span><span class="p">);</span>
+
+<span class="c">% Mac/Linux absolute path</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;/home/username/Documents/data.csv&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="relative-paths">
+<h4>Relative Paths<a class="headerlink" href="#relative-paths" title="Link to this heading">#</a></h4>
+<p>Path relative to your current directory:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% File in current directory</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">);</span>
+
+<span class="c">% File in subdirectory</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;Data\experiment1.csv&#39;</span><span class="p">);</span>
+<span class="c">% Or better (cross-platform):</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;experiment1.csv&#39;</span><span class="p">));</span>
+
+<span class="c">% File in parent directory</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;..\data.csv&#39;</span><span class="p">);</span>
+<span class="c">% Or better:</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="s">&#39;..&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;data.csv&#39;</span><span class="p">));</span>
+
+<span class="c">% File two levels up</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="s">&#39;..&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;..&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;shared_data.csv&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-and-managing-directories">
+<h3>Creating and Managing Directories<a class="headerlink" href="#creating-and-managing-directories" title="Link to this heading">#</a></h3>
+<section id="creating-directories">
+<h4>Creating Directories<a class="headerlink" href="#creating-directories" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create single directory</span>
+<span class="nb">mkdir</span><span class="p">(</span><span class="s">&#39;Results&#39;</span><span class="p">)</span>
+
+<span class="c">% Create nested directories</span>
+<span class="nb">mkdir</span><span class="p">(</span><span class="s">&#39;Data\Processed&#39;</span><span class="p">)</span>
+<span class="c">% Or cross-platform:</span>
+<span class="nb">mkdir</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Processed&#39;</span><span class="p">))</span>
+
+<span class="c">% Check if directory exists before creating</span>
+<span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">isfolder</span><span class="p">(</span><span class="s">&#39;Results&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">mkdir</span><span class="p">(</span><span class="s">&#39;Results&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="checking-existence">
+<h4>Checking Existence<a class="headerlink" href="#checking-existence" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Check if file exists</span>
+<span class="k">if</span><span class="w"> </span><span class="nb">isfile</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">);</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">error</span><span class="p">(</span><span class="s">&#39;File not found!&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">% Check if directory exists</span>
+<span class="k">if</span><span class="w"> </span><span class="nb">isfolder</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">cd</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">)</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">mkdir</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="deleting-files-and-directories">
+<h4>Deleting Files and Directories<a class="headerlink" href="#deleting-files-and-directories" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Delete a file</span>
+<span class="nb">delete</span><span class="p">(</span><span class="s">&#39;old_results.txt&#39;</span><span class="p">)</span>
+
+<span class="c">% Delete directory (must be empty)</span>
+<span class="nb">rmdir</span><span class="p">(</span><span class="s">&#39;OldData&#39;</span><span class="p">)</span>
+
+<span class="c">% Delete directory and all contents</span>
+<span class="nb">rmdir</span><span class="p">(</span><span class="s">&#39;OldData&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% &#39;s&#39; flag for recursive deletion</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-multiple-files">
+<h3>Working with Multiple Files<a class="headerlink" href="#working-with-multiple-files" title="Link to this heading">#</a></h3>
+<section id="processing-all-files-in-a-directory">
+<h4>Processing All Files in a Directory<a class="headerlink" href="#processing-all-files-in-a-directory" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get list of all CSV files</span>
+<span class="n">fileList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dir</span><span class="p">(</span><span class="s">&#39;*.csv&#39;</span><span class="p">);</span>
+
+<span class="c">% Loop through each file</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">fileList</span><span class="p">)</span>
+<span class="w">    </span><span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fileList</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="n">filepath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">fileList</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">folder</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">% Read and process each file</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="n">filepath</span><span class="p">);</span>
+<span class="w">    </span><span class="n">avgValue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;all&#39;</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;File: %s, Average: %.2f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">avgValue</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="pattern-matching-with-dir">
+<h4>Pattern Matching with dir<a class="headerlink" href="#pattern-matching-with-dir" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Find all files starting with &quot;exp&quot;</span>
+<span class="n">files</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dir</span><span class="p">(</span><span class="s">&#39;exp*.csv&#39;</span><span class="p">);</span>
+
+<span class="c">% Find all files containing &quot;2024&quot;</span>
+<span class="n">files</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dir</span><span class="p">(</span><span class="s">&#39;*2024*.txt&#39;</span><span class="p">);</span>
+
+<span class="c">% Find files in subdirectories (R2016b and later)</span>
+<span class="n">files</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dir</span><span class="p">(</span><span class="s">&#39;**/*.csv&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Recursive search for all CSV files</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="organizing-project-files">
+<h3>Organizing Project Files<a class="headerlink" href="#organizing-project-files" title="Link to this heading">#</a></h3>
+<section id="recommended-directory-structure">
+<h4>Recommended Directory Structure<a class="headerlink" href="#recommended-directory-structure" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MyProject/
+├── Data/
+│   ├── Raw/
+│   └── Processed/
+├── Scripts/
+├── Results/
+│   ├── Figures/
+│   └── Tables/
+└── Documentation/
+</pre></div>
+</div>
+</section>
+<section id="example-saving-results-to-organized-folders">
+<h4>Example: Saving Results to Organized Folders<a class="headerlink" href="#example-saving-results-to-organized-folders" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set up project structure</span>
+<span class="n">projectRoot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pwd</span><span class="p">;</span>
+<span class="n">resultsFolder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">projectRoot</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Results&#39;</span><span class="p">);</span>
+<span class="n">figuresFolder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">resultsFolder</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Figures&#39;</span><span class="p">);</span>
+
+<span class="c">% Create folders if they don&#39;t exist</span>
+<span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">isfolder</span><span class="p">(</span><span class="n">resultsFolder</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">mkdir</span><span class="p">(</span><span class="n">resultsFolder</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">isfolder</span><span class="p">(</span><span class="n">figuresFolder</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">mkdir</span><span class="p">(</span><span class="n">figuresFolder</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">% Save figure to organized location</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="nb">saveas</span><span class="p">(</span><span class="nb">gcf</span><span class="p">,</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">figuresFolder</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;plot1.png&#39;</span><span class="p">));</span>
+
+<span class="c">% Save data to organized location</span>
+<span class="nb">save</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="n">resultsFolder</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;analysis_results.mat&#39;</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;results&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="getting-file-information">
+<h3>Getting File Information<a class="headerlink" href="#getting-file-information" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get detailed file information</span>
+<span class="n">fileInfo</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dir</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">);</span>
+<span class="nb">fileName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fileInfo</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+<span class="n">fileSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fileInfo</span><span class="p">.</span><span class="n">bytes</span><span class="p">;</span>
+<span class="n">dateModified</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fileInfo</span><span class="p">.</span><span class="n">date</span><span class="p">;</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;File: %s\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">fileName</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Size: %d bytes\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fileSize</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Modified: %s\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dateModified</span><span class="p">);</span>
+
+<span class="c">% Extract parts of file path</span>
+<span class="p">[</span><span class="n">filepath</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ext</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fileparts</span><span class="p">(</span><span class="s">&#39;Data\experiment1.csv&#39;</span><span class="p">);</span>
+<span class="c">% filepath = &#39;Data&#39;</span>
+<span class="c">% name = &#39;experiment1&#39;</span>
+<span class="c">% ext = &#39;.csv&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices-for-file-paths">
+<h3>Best Practices for File Paths<a class="headerlink" href="#best-practices-for-file-paths" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">fullfile</span></code> for portability</strong> - Your code will work on any operating system</p></li>
+<li><p><strong>Use relative paths when possible</strong> - Makes projects easier to share</p></li>
+<li><p><strong>Check for existence before operations</strong> - Use <code class="docutils literal notranslate"><span class="pre">isfile</span></code> and <code class="docutils literal notranslate"><span class="pre">isfolder</span></code></p></li>
+<li><p><strong>Organize with subdirectories</strong> - Separate raw data, processed data, and results</p></li>
+<li><p><strong>Use meaningful directory names</strong> - Clear structure helps with project management</p></li>
+<li><p><strong>Avoid spaces in file/folder names</strong> - Use underscores instead: <code class="docutils literal notranslate"><span class="pre">my_data.csv</span></code> not <code class="docutils literal notranslate"><span class="pre">my</span> <span class="pre">data.csv</span></code></p></li>
+</ol>
+</section>
+<section id="common-pitfalls">
+<h3>Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% DON&#39;T: Hardcode full paths</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;C:\Users\John\Documents\MATLAB\data.csv&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Won&#39;t work on other computers</span>
+
+<span class="c">% DO: Use relative paths</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;data.csv&#39;</span><span class="p">));</span>
+
+<span class="c">% DON&#39;T: Use system-specific separators</span>
+<span class="nb">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;Data\Raw\experiment.csv&#39;</span><span class="p">;</span><span class="w">  </span><span class="c">% Breaks on Mac/Linux</span>
+
+<span class="c">% DO: Use fullfile</span>
+<span class="nb">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="s">&#39;Data&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Raw&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;experiment.csv&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-input-output-basic-operations">
+<h2>7. File Input/Output - Basic Operations<a class="headerlink" href="#file-input-output-basic-operations" title="Link to this heading">#</a></h2>
+<section id="reading-text-files">
+<h3>Reading Text Files<a class="headerlink" href="#reading-text-files" title="Link to this heading">#</a></h3>
+<section id="method-1-load-for-simple-numeric-data">
+<h4>Method 1: <code class="docutils literal notranslate"><span class="pre">load</span></code> for Simple Numeric Data<a class="headerlink" href="#method-1-load-for-simple-numeric-data" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">load</span></code> command reads numeric data from text files:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;numbers.txt&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% Creates variable with file data</span>
+</pre></div>
+</div>
+</section>
+<section id="method-2-readmatrix-recommended-for-modern-matlab">
+<h4>Method 2: <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> (Recommended for Modern MATLAB)<a class="headerlink" href="#method-2-readmatrix-recommended-for-modern-matlab" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;datafile.txt&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% More flexible than load</span>
+</pre></div>
+</div>
+</section>
+<section id="method-3-reading-line-by-line-with-fopen-fgetl-fclose">
+<h4>Method 3: Reading Line by Line with <code class="docutils literal notranslate"><span class="pre">fopen</span></code>, <code class="docutils literal notranslate"><span class="pre">fgetl</span></code>, <code class="docutils literal notranslate"><span class="pre">fclose</span></code><a class="headerlink" href="#method-3-reading-line-by-line-with-fopen-fgetl-fclose" title="Link to this heading">#</a></h4>
+<p>For more control:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% &#39;r&#39; means read mode</span>
+<span class="nb">line</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fgetl</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span><span class="w">  </span><span class="c">% Get one line</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span><span class="w">  </span><span class="c">% Always close files!</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-all-lines-from-a-file">
+<h4>Reading All Lines from a File<a class="headerlink" href="#reading-all-lines-from-a-file" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">);</span>
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="k">while</span><span class="w"> </span><span class="o">~</span><span class="nb">feof</span><span class="p">(</span><span class="n">fileID</span><span class="p">)</span><span class="w">  </span><span class="c">% while not end-of-file</span>
+<span class="w">    </span><span class="nb">line</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fgetl</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">str2double</span><span class="p">(</span><span class="nb">line</span><span class="p">);</span><span class="w">  </span><span class="c">% Convert string to number</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="n">value</span><span class="p">];</span>
+<span class="k">end</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="writing-text-files">
+<h3>Writing Text Files<a class="headerlink" href="#writing-text-files" title="Link to this heading">#</a></h3>
+<section id="method-1-save-for-simple-numeric-data">
+<h4>Method 1: <code class="docutils literal notranslate"><span class="pre">save</span></code> for Simple Numeric Data<a class="headerlink" href="#method-1-save-for-simple-numeric-data" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">];</span>
+<span class="nb">save</span><span class="p">(</span><span class="s">&#39;results.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;results&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;-ascii&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="method-2-fprintf-for-formatted-output">
+<h4>Method 2: <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> for Formatted Output<a class="headerlink" href="#method-2-fprintf-for-formatted-output" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="s">&#39;output.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;w&#39;</span><span class="p">);</span><span class="w">  </span><span class="c">% &#39;w&#39; means write mode</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Temperature: %.2f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Pressure: %.2f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">);</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Common format specifiers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%d</span></code> - integer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%f</span></code> - floating point</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%.2f</span></code> - floating point with 2 decimal places</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%s</span></code> - string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\n</span></code> - newline</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="file-management-best-practices">
+<h2>9. File Management Best Practices<a class="headerlink" href="#file-management-best-practices" title="Link to this heading">#</a></h2>
+<section id="check-if-files-exist">
+<h3>Check if Files Exist<a class="headerlink" href="#check-if-files-exist" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="nb">isfile</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;data.txt&#39;</span><span class="p">);</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">error</span><span class="p">(</span><span class="s">&#39;File not found!&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="file-modes">
+<h3>File Modes<a class="headerlink" href="#file-modes" title="Link to this heading">#</a></h3>
+<p>When using <code class="docutils literal notranslate"><span class="pre">fopen</span></code>, remember these modes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'r'</span></code> - read only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'w'</span></code> - write (overwrites existing file)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'a'</span></code> - append (adds to end of existing file)</p></li>
+</ul>
+</section>
+<section id="always-close-files">
+<h3>Always Close Files<a class="headerlink" href="#always-close-files" title="Link to this heading">#</a></h3>
+<p>Forgetting to close files can cause problems. Always use <code class="docutils literal notranslate"><span class="pre">fclose(fileID)</span></code> after opening files with <code class="docutils literal notranslate"><span class="pre">fopen</span></code>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week12B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 12B: Vector and Matrix Operations in MATLAB</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week14A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week14A: User Functions and Modular Programming in MATLAB</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab-scripts">1. MATLAB Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-script">What is a Script?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-script">Creating a Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-script">Running a Script</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences-from-python">Key Differences from Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-script">Example Script</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documenting-your-code">2. Documenting Your Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-line-comments">Single-Line Comments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-line-comments-block-comments">Multi-Line Comments (Block Comments)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#header-documentation">Header Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-help-command">The <code class="docutils literal notranslate"><span class="pre">help</span></code> Command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-from-different-file-types">3. Importing Data from Different File Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-files-comma-separated-values">CSV Files (Comma-Separated Values)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-readmatrix-numeric-data-only">Using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> (Numeric Data Only)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-readtable-mixed-data-types-recommended">Using <code class="docutils literal notranslate"><span class="pre">readtable</span></code> (Mixed Data Types - Recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-headers-and-options">Handling Headers and Options</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-files-xlsx-xls">Excel Files (.xlsx, .xls)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-excel-data">Reading Excel Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-excel-data">Writing Excel Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-with-delimiters">Text Files with Delimiters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-files">Image Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-image-data-structure">Understanding Image Data Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-color-images">Working with Color Images</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-color-and-grayscale">Converting Between Color and Grayscale</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-modified-color-images">Creating Modified Color Images</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#image-data-types">Image Data Types</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-images">Saving Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data-for-reuse">4. Saving Data for Reuse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8. Saving Data for Reuse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-mat-files">Advantages of .mat Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-to-mat-files">Saving to .mat Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-from-mat-files">Loading from .mat Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-files-best-for-data-exchange">CSV Files - Best for Data Exchange</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-csv-files">Writing CSV Files</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-files-best-for-reports-and-sharing">Excel Files - Best for Reports and Sharing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-for-custom-formats">Text Files - For Custom Formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-format">Choosing the Right Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-directories-and-file-paths">5. Working with Directories and File Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#current-directory-operations">Current Directory Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-and-changing-directories">Checking and Changing Directories</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-directory-contents">Listing Directory Contents</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-file-paths">Building File Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fullfile-function-recommended">The fullfile Function (Recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-separators">Path Separators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-vs-absolute-paths">Relative vs Absolute Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-paths">Absolute Paths</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-paths">Relative Paths</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-managing-directories">Creating and Managing Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-existence">Checking Existence</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files-and-directories">Deleting Files and Directories</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-multiple-files">Working with Multiple Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-all-files-in-a-directory">Processing All Files in a Directory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-matching-with-dir">Pattern Matching with dir</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizing-project-files">Organizing Project Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-directory-structure">Recommended Directory Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-saving-results-to-organized-folders">Example: Saving Results to Organized Folders</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-file-information">Getting File Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-file-paths">Best Practices for File Paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-input-output-basic-operations">7. File Input/Output - Basic Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-text-files">Reading Text Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-load-for-simple-numeric-data">Method 1: <code class="docutils literal notranslate"><span class="pre">load</span></code> for Simple Numeric Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-readmatrix-recommended-for-modern-matlab">Method 2: <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> (Recommended for Modern MATLAB)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-3-reading-line-by-line-with-fopen-fgetl-fclose">Method 3: Reading Line by Line with <code class="docutils literal notranslate"><span class="pre">fopen</span></code>, <code class="docutils literal notranslate"><span class="pre">fgetl</span></code>, <code class="docutils literal notranslate"><span class="pre">fclose</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-all-lines-from-a-file">Reading All Lines from a File</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-text-files">Writing Text Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-save-for-simple-numeric-data">Method 1: <code class="docutils literal notranslate"><span class="pre">save</span></code> for Simple Numeric Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-fprintf-for-formatted-output">Method 2: <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> for Formatted Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-management-best-practices">9. File Management Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-if-files-exist">Check if Files Exist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-modes">File Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#always-close-files">Always Close Files</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
