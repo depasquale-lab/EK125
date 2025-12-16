@@ -1,0 +1,1159 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 6B Preread: Digging into arrays with NumPy &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week6B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 7A Preread: Dictionaries and Intro to Pandas" href="Week7A.html" />
+    <link rel="prev" title="Week 6A Pre-read: Mastering Slicing in Python" href="Week6A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week6B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 6B Preread: Digging into arrays with NumPy</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-basics">Array Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-arrays-and-subarrays">Creating Arrays and Subarrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-array-function-and-attributes-of-arrays">The array function and attributes of arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-methods-that-create-arrays">Functions and methods that create arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing">Indexing and Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-slicing">Multidimensional Slicing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-rows-and-columns">Slicing Rows and Columns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-subarrays">Slicing Subarrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-step-size">Including a Step Size</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-arrays">3D Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-dimensions">Changing Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-arrays">Combining Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-operations-on-arrays">Functions and Operations on Arrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operations">Operations</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-6b-preread-digging-into-arrays-with-numpy">
+<h1>Week 6B Preread: Digging into arrays with NumPy<a class="headerlink" href="#week-6b-preread-digging-into-arrays-with-numpy" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The NumPy module is used extensively by Python programmers for mathematical and scientific computing. Most of the NumPy library is based on arrays, which are data structures that store values (elements) that are all the same type.  Typically the elements in arrays are numbers, either integers or floats. The numpy module has many built-in functions and the array objects have many associated methods for working with numbers to facilitate applications such as linear algebra and statistics.  Many data science applications work extensively with the numpy module.</p>
+<p>Since it is a module, numpy must first be imported. It is very common to rename it as np:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<p>The rest of this chapter will assume that the numpy module has been imported in this manner.</p>
+</section>
+<section id="array-basics">
+<h2>Array Basics<a class="headerlink" href="#array-basics" title="Link to this heading">#</a></h2>
+<p>Arrays have dimensions. An array with one dimension is either a row or a column. Sometimes these are called vectors, either a row vector or a column vector.  Like other sequences in Python such as lists, arrays can be indexed, and the indices begin at 0.</p>
+<p>A one dimensional array which is a row vector containing 4 elements might be depicted as:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>0</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Value</p></td>
+<td><p>33</p></td>
+<td><p>11</p></td>
+<td><p>-5</p></td>
+<td><p>14</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In NumPy, the dimensions are called axes, so this is an array with one axis. We say that this is a 1 x 4 (read “1 by 4”) array; it has 1 row and 4 columns.  The length of the array is the number of elements, which is 4.</p>
+<p>A one dimensional column vector might be depicted as:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>47</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>15</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Again, this is an array with one axis. We say that it is a 3 x 1 array; it has 3 rows and 1 column. The length of this array is 3.</p>
+<p>Elements in a one dimensional array are found using one index.</p>
+<p>A two dimensional array has two axes. A two dimensional array looks like a table, with both rows and columns.  For example, a 2 x 4 array (2 rows, 4 columns) might be depicted as:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>0</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>-2</p></td>
+<td><p>18</p></td>
+<td><p>9</p></td>
+<td><p>32</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>44</p></td>
+<td><p>-7</p></td>
+<td><p>4</p></td>
+<td><p>99</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The first axis is the rows, so the length of the first axis is 2. The second axis is the columns, so the length of the second axis is 4.  Two dimensional arrays have indices for both the rows and the columns, and both start at 0. Elements are indexed using two indices, the first for the row, and the second for the column.</p>
+<p>In general, an n-dimensional array has n dimensions, or axes. Elements are indexed using n indices. Arrays with two or more dimensions are frequently called matrices.</p>
+<p>A scalar, which is a single value, is said to have a dimension of 0 in NumPy. Scalars are not indexed.</p>
+</section>
+<section id="creating-arrays-and-subarrays">
+<h2>Creating Arrays and Subarrays<a class="headerlink" href="#creating-arrays-and-subarrays" title="Link to this heading">#</a></h2>
+<section id="the-array-function-and-attributes-of-arrays">
+<h3>The array function and attributes of arrays<a class="headerlink" href="#the-array-function-and-attributes-of-arrays" title="Link to this heading">#</a></h3>
+<p>The basic function that is used to create arrays is the function ndarray, but this function has a simpler alias called array, which we will use.  One method for creating a one dimensional array is to convert a list (or a tuple) to an array using the array function. For the rest of this chapter, we will assume that the array function has been imported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Note how the array is displayed by just typing the variable name and by using the print function, and note the type of the array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span>
+<span class="go">array([ 31, 42, 11])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr1d</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">arr1d</span><span class="p">))</span>
+<span class="go">[31 42 11] &lt;class &#39;numpy.ndarray&#39;&gt;</span>
+</pre></div>
+</div>
+<p>The type of the data elements can be determined using the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr1d</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">int64</span>
+</pre></div>
+</div>
+<p>The type <code class="docutils literal notranslate"><span class="pre">int64</span></code> is an integer type that uses 64 bits to store integers.</p>
+<p>There are several methods that return the number of dimensions, and the lengths of the axes.  The ndim method returns the number of dimensions, or in other words the number of axes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="o">.</span><span class="n">ndim</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The lengths of the axes are found using the shape method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3,)</span>
+</pre></div>
+</div>
+<p>In this case, there is only one axis since it is a one-dimensional array, and the length is 3. Notice that the result is returned as a tuple.</p>
+<p>The size of an array is the number of elements. This is always going to be a single integer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="o">.</span><span class="n">size</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>Two dimensional arrays can be created by passing a nested list (a list of lists) to the array function. In the following example, two lists, each with 3 numbers, are used to create a 2 x 3 array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">33</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">)</span>
+<span class="go">[[ 1  3  8]</span>
+<span class="go">[-2  5 33]]</span>
+</pre></div>
+</div>
+<p>The two nested lists must have the same number of elements, so there are the same number of elements in each row of the array.  The number of dimensions is 2. The shape function returns the tuple (2, 3) since it is a 2 x 3 array, and the size (the total number of elements) is 6.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span><span class="o">.</span><span class="n">ndim</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span><span class="o">.</span><span class="n">size</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+</section>
+<section id="functions-and-methods-that-create-arrays">
+<h3>Functions and methods that create arrays<a class="headerlink" href="#functions-and-methods-that-create-arrays" title="Link to this heading">#</a></h3>
+<p>There are quite a few ways in which arrays can be created.  Arrays can be created using a range:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rgarr</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rgarr</span><span class="p">)</span>
+<span class="go">[0 1 2 3 4]</span>
+</pre></div>
+</div>
+<p>The numpy function arange specifically creates an array using a range.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rgarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rgarr</span><span class="p">)</span>
+<span class="go">[0 1 2 3 4]</span>
+</pre></div>
+</div>
+<p>Like the <code class="docutils literal notranslate"><span class="pre">range</span></code> function, arange can specify starting, ending, and step values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">myarr</span><span class="p">)</span>
+<span class="go">[3 5 7]</span>
+</pre></div>
+</div>
+<p>There are several other functions that can be used to create arrays.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">linspace</span></code> function can be used to create array elements that are linearly spaced within a specified range. The following specifies that the range begins with 1, ends with 9, with 3 linearly spaced points. The linspace function determines the step value (in this case, 4). Notice that the default type returned by <code class="docutils literal notranslate"><span class="pre">linspace</span></code> is float64, even if the numbers are integers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">myarr</span><span class="p">,</span> <span class="n">myarr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">[1. 5. 9.] float64</span>
+</pre></div>
+</div>
+<p>If the number of elements is not specified, the default is 50. Also, the type can be specified using <code class="docutils literal notranslate"><span class="pre">dtype</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">myarr</span><span class="p">,</span> <span class="n">myarr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">[1 5 9] int16</span>
+</pre></div>
+</div>
+<p>The type <code class="docutils literal notranslate"><span class="pre">int16</span></code> is an integer type that uses 16 bits, so it stores smaller integers than the type int64.</p>
+<p>An array of all zeros can be created using the <code class="docutils literal notranslate"><span class="pre">zeros</span></code> function, by specifying the shape. The default type of each element is float64, but like the linspace function, this can be modified using dtype.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
+<span class="go">[[0 0 0 0]</span>
+<span class="go">[0 0 0 0]]</span>
+</pre></div>
+</div>
+<p>If only one integer <code class="docutils literal notranslate"><span class="pre">n</span></code> is specified for the shape, a 1 x n row vector is created.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">zarr</span><span class="p">)</span>
+<span class="go">[0. 0. 0.]</span>
+</pre></div>
+</div>
+<p>Three dimensional arrays can be created by specifying a tuple of 3 integers for the shape. For example, a shape of <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">3,</span> <span class="pre">5)</span></code> creates two 3 x 5 arrays. Notice that when displayed, the two arrays are printed separately with a blank line in between them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">))</span>
+<span class="go">[[[0 0 0 0 0]</span>
+<span class="go">[0 0 0 0 0]</span>
+<span class="go">[0 0 0 0 0]]</span>
+
+<span class="go">[[0 0 0 0 0]</span>
+<span class="go">[0 0 0 0 0]</span>
+<span class="go">[0 0 0 0 0]]]</span>
+</pre></div>
+</div>
+<p>Images are often stored as three dimensional arrays.  Arrays with more than 3 dimensions can also be created, but it becomes more difficult to visualize them and to find useful applications for them.</p>
+<p>One reason for creating an array of all zeros might be if they are going to be running sums or counters.</p>
+<p>Arrays of all ones can be created using the ones function, which uses the same format as the zeros function.  An array of all ones might be used as a starting point for running products.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
+<span class="go">[1 1 1 1 1 1]</span>
+</pre></div>
+</div>
+<p>To fill in an array with any number other than zeros or ones, the full function can be used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="mi">11</span><span class="p">))</span>
+<span class="go">[[11 11 11]</span>
+<span class="go">[11 11 11]]</span>
+</pre></div>
+</div>
+<p>Instead of just a single number, a set of numbers to be used for each row can be passed to the full function, for example using range.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">newmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">newmat</span><span class="p">)</span>
+<span class="go">[[0 1 2 3]</span>
+<span class="go">[0 1 2 3]</span>
+<span class="go">[0 1 2 3]]</span>
+</pre></div>
+</div>
+<p>Another function that creates arrays is the <code class="docutils literal notranslate"><span class="pre">empty</span></code> function, which contrary to its name does not create an empty array, but fills in the elements with whatever is currently in the memory locations used for the array. This function is useful when the shape of an array is known, but the actual values in the elements will be filled in later.  Of course, your results may vary!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weird</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">weird</span><span class="p">)</span>
+<span class="go">[-2.68156159e+154 -3.11108761e+231  2.68678769e+154  2.82470694e-309]</span>
+</pre></div>
+</div>
+<p>It is frequently useful to create arrays in which random numbers are stored in the elements. NumPy has a random module that has a method, <code class="docutils literal notranslate"><span class="pre">default_rng</span></code>, which is used to create a random number generator. Once that has been created, the method random can be used to create random floats, and the method integers can be used to create random integers in a specified range.</p>
+<p>An integer can be passed to default_rng which is the seed for the random number generator; if no argument is passed the seed will be obtained from the operating system.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">farr</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">farr</span><span class="p">)</span>
+<span class="go">[0.74899722 0.9414599  0.70685837]</span>
+</pre></div>
+</div>
+<p>In the following example, a 1 x 4 array of random integers is created in the range from 3 to 9 inclusive.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([9, 6, 3, 9])</span>
+</pre></div>
+</div>
+</section>
+<section id="indexing-and-slicing">
+<h3>Indexing and Slicing<a class="headerlink" href="#indexing-and-slicing" title="Link to this heading">#</a></h3>
+<p>Arrays can be indexed and sliced similarly to Python sequences such as lists. The indices begin at 0, and negative indices allow indexing from the end of the array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">42</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">11</span>
+</pre></div>
+</div>
+<p>With two dimensional arrays, the row index is given first, and then the column index.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">33</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">)</span>
+<span class="go">[[ 1  3  8]</span>
+<span class="go">[-2  5 33]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">33</span>
+</pre></div>
+</div>
+<p>Slicing creates another array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="p">[:]</span>
+<span class="go">array([31, 42, 11])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:]</span>
+<span class="go">array([3, 8])</span>
+</pre></div>
+</div>
+<p>In addition to using integer indices, NumPy allows logical indexing.  With logical indexing, Boolean expressions resulting in <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> can be used to index into an array. This returns the elements from the array for which the corresponding element in the logical array is True.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">logarr</span> <span class="o">=</span> <span class="n">arr1d</span> <span class="o">&gt;</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logarr</span>
+<span class="go">array([ True,  True, False])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr1d</span><span class="p">[</span><span class="n">logarr</span><span class="p">]</span>
+<span class="go">array([31, 42])</span>
+</pre></div>
+</div>
+<p>Notice that for a two dimensional array, with logical indexing the resulting  array is flattened into a one dimensional array.  The elements are taken from the original array one row at a time.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">)</span>
+<span class="go">[[ 1  3  8]</span>
+<span class="go">[-2  5 33]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2d</span><span class="p">[</span><span class="n">arr2d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([ 1,  3,  8,  5, 33])</span>
+</pre></div>
+</div>
+</section>
+<section id="multidimensional-slicing">
+<h3>Multidimensional Slicing<a class="headerlink" href="#multidimensional-slicing" title="Link to this heading">#</a></h3>
+<p>Just like lists, NumPy arrays can be sliced using the <code class="docutils literal notranslate"><span class="pre">:</span></code> operator. But because arrays can have multiple axes (dimensions), NumPy allows <strong>slicing along each axis</strong> simultaneously using a comma-separated list of slice specifications.</p>
+<p>For a 2 × 4 array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">44</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># [[-2 18  9 32]</span>
+<span class="c1">#  [44 -7  4 99]]</span>
+</pre></div>
+</div>
+<p>The <strong>first index</strong> corresponds to the <strong>row</strong>, and the <strong>second index</strong> to the <strong>column</strong>.</p>
+<section id="slicing-rows-and-columns">
+<h4>Slicing Rows and Columns<a class="headerlink" href="#slicing-rows-and-columns" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># First row (row 0), all columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="c1"># → [-2 18  9 32]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># All rows, second column (column 1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="c1"># → [18 -7]</span>
+</pre></div>
+</div>
+</section>
+<section id="slicing-subarrays">
+<h4>Slicing Subarrays<a class="headerlink" href="#slicing-subarrays" title="Link to this heading">#</a></h4>
+<p>You can extract rectangular blocks by slicing along both axes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rows 0 through 1, columns 1 through 2</span>
+<span class="n">sub</span> <span class="o">=</span> <span class="n">arr2d</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output:</span>
+<span class="c1"># [[18  9]</span>
+<span class="c1">#  [-7  4]]</span>
+</pre></div>
+</div>
+<p>This is a <strong>2 × 2 subarray</strong>, taken from the middle of <code class="docutils literal notranslate"><span class="pre">arr2d</span></code>.</p>
+</section>
+<section id="including-a-step-size">
+<h4>Including a Step Size<a class="headerlink" href="#including-a-step-size" title="Link to this heading">#</a></h4>
+<p>NumPy slicing follows the pattern:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># start : stop : step</span>
+</pre></div>
+</div>
+<p>You can include a <strong>step size</strong> along any axis. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Every other column from all rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">[:,</span> <span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output:</span>
+<span class="c1"># [[-2  9]</span>
+<span class="c1">#  [44  4]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take every row, but every other column starting at index 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output:</span>
+<span class="c1"># [[ 18  32]</span>
+<span class="c1">#  [ -7  99]]</span>
+</pre></div>
+</div>
+</section>
+<section id="d-arrays">
+<h4>3D Arrays<a class="headerlink" href="#d-arrays" title="Link to this heading">#</a></h4>
+<p>The same slicing logic extends naturally to higher dimensions. For example, with a 3D array shaped <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">3,</span> <span class="pre">4)</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arr3d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (2, 3, 4)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take the first &quot;layer&quot; (axis 0)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take all layers, first row, columns 1–3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take every other column in every row of the first layer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Think of each comma as moving to the next axis. This makes multidimensional slicing a powerful way to extract structured portions of data—like rows, columns, planes, or sub-blocks—without looping.</p>
+</section>
+</section>
+<section id="changing-dimensions">
+<h3>Changing Dimensions<a class="headerlink" href="#changing-dimensions" title="Link to this heading">#</a></h3>
+<p>There are NumPy methods that change the shape of an array.</p>
+<p>The reshape method can take any array and reshape it into a new array, as long as the new array has the same number of elements as the original. For example, a 1 x 6 array could be reshaped into a 6 x 1 array, a 2 x 3 array, or a 3 x 2 array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">myarr</span><span class="p">)</span>
+<span class="go">[0 1 2 3 4 5]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[0],</span>
+<span class="go">[1],</span>
+<span class="go">[2],</span>
+<span class="go">[3],</span>
+<span class="go">[4],</span>
+<span class="go">[5]])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2by3</span> <span class="o">=</span> <span class="n">myarr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr2by3</span><span class="p">)</span>
+<span class="go">[[0 1 2]</span>
+<span class="go">[3 4 5]]</span>
+</pre></div>
+</div>
+<p>The reshape method returns a reshaped array, but does not modify the original array. The resize method works just like reshape except that it does modify the original array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myarr</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">myarr</span><span class="p">)</span>
+<span class="go">[[0 1]</span>
+<span class="go">[2 3]</span>
+<span class="go">[4 5]]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ravel</span></code> method flattens an n-dimensional array into a one dimensional array. The default is that it flattens it one row at a time. The ravel method returns a flattened array, but does not modify the original.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr2by3</span><span class="p">)</span>
+<span class="go">[[0 1 2]</span>
+<span class="go">[3 4 5]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr2by3</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="go">array([0, 1, 2, 3, 4, 5])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr2by3</span><span class="p">)</span>
+<span class="go">[[0 1 2]</span>
+<span class="go">[3 4 5]]</span>
+</pre></div>
+</div>
+<p>The method named simply <code class="docutils literal notranslate"><span class="pre">T</span></code> transposes an array, which for a two dimensional array means that it interchanges the rows and columns. The method returns a new array, but does not modify the original. In the following example, the first row [0 1 2] becomes the first column, and the second row becomes the second column. The other way to view it is that the first column becomes the first row, the second column becomes the second row, and the third column becomes the third row.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr3by2</span> <span class="o">=</span> <span class="n">arr2by3</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">arr3by2</span><span class="p">)</span>
+<span class="go">[[0 3]</span>
+<span class="go">[1 4]</span>
+<span class="go">[2 5]]</span>
+</pre></div>
+</div>
+</section>
+<section id="combining-arrays">
+<h3>Combining Arrays<a class="headerlink" href="#combining-arrays" title="Link to this heading">#</a></h3>
+<p>There are several functions that create new arrays by combining existing arrays.</p>
+<p>The function vstack vertically stacks, or concatenates, arrays. A tuple consisting of the arrays to be stacked is passed to the vstack function.  In this case the one-dimensional arrays have to have the same number of elements so that the columns will match up in the stacked array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arrone</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arrtwo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">22</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">arrone</span><span class="p">,</span> <span class="n">arrtwo</span><span class="p">))</span>
+<span class="go">array([[ 4, 11,  9],</span>
+<span class="go">[ 3, 15, 22]])</span>
+</pre></div>
+</div>
+<p>The function hstack horizontally stacks arrays.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">arrtwo</span><span class="p">,</span><span class="n">arrone</span><span class="p">))</span>
+<span class="go">array([ 3, 15, 22,  4, 11,  9])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="functions-and-operations-on-arrays">
+<h2>Functions and Operations on Arrays<a class="headerlink" href="#functions-and-operations-on-arrays" title="Link to this heading">#</a></h2>
+<p>NumPy has functions that take arrays as arguments, and operations that can be performed on entire arrays.</p>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
+<p>NumPy has universal functions (<code class="docutils literal notranslate"><span class="pre">ufuncs</span></code>) to which an entire array can be passed. The function is evaluated on every element, returning an array with the same dimensions as the original.  These include trig functions such as <code class="docutils literal notranslate"><span class="pre">sin</span></code>, <code class="docutils literal notranslate"><span class="pre">cos</span></code>, <code class="docutils literal notranslate"><span class="pre">tan</span></code>, etc. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.</span>      <span class="mf">0.6981317</span>  <span class="mf">1.3962634</span>  <span class="mf">2.0943951</span>  <span class="mf">2.7925268</span>  <span class="mf">3.4906585</span>
+<span class="mf">4.1887902</span>  <span class="mf">4.88692191</span> <span class="mf">5.58505361</span> <span class="mf">6.28318531</span><span class="p">]</span>
+<span class="p">[</span> <span class="mf">0.00000000e+00</span>  <span class="mf">6.42787610e-01</span>  <span class="mf">9.84807753e-01</span>  <span class="mf">8.66025404e-01</span>
+<span class="mf">3.42020143e-01</span> <span class="o">-</span><span class="mf">3.42020143e-01</span> <span class="o">-</span><span class="mf">8.66025404e-01</span> <span class="o">-</span><span class="mf">9.84807753e-01</span>
+<span class="o">-</span><span class="mf">6.42787610e-01</span> <span class="o">-</span><span class="mf">2.44929360e-16</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Other <code class="docutils literal notranslate"><span class="pre">ufuncs</span></code> include the square root function <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, the absolute value function <code class="docutils literal notranslate"><span class="pre">abs</span></code>, and exponential functions.  For example, we could get the absolute value of every element in a 2D array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span>  <span class="mi">1</span>  <span class="o">-</span><span class="mi">1</span>   <span class="mi">7</span> <span class="o">-</span><span class="mi">10</span>   <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span>  <span class="mi">6</span>   <span class="mi">2</span>   <span class="mi">6</span>  <span class="o">-</span><span class="mi">5</span>  <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span> <span class="o">-</span><span class="mi">1</span>   <span class="mi">1</span> <span class="o">-</span><span class="mi">10</span>  <span class="o">-</span><span class="mi">6</span>   <span class="mi">9</span><span class="p">]]</span>
+
+<span class="p">[[</span> <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">7</span> <span class="mi">10</span>  <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span> <span class="mi">6</span>  <span class="mi">2</span>  <span class="mi">6</span>  <span class="mi">5</span>  <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span> <span class="mi">1</span>  <span class="mi">1</span> <span class="mi">10</span>  <span class="mi">6</span>  <span class="mi">9</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>There are aggregation functions that perform tasks such as summing elements, multiplying elements, and finding minimum and maximum values. By default, the aggregation is performed on the entire array, but to aggregate on just rows or columns, the axis can be specified.
+For example, let’s first create a 2D array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nums</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">96</span> <span class="mi">91</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">68</span> <span class="mi">64</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">60</span> <span class="mi">97</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">77</span> <span class="mi">77</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>To find the overall minimum, the min function is used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="go">60</span>
+</pre></div>
+</div>
+<p>To find the minimum for each column, specify axis 0:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">array([60, 64])</span>
+</pre></div>
+</div>
+<p>To find the minimum for each row, specify axis 1:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smin</span>
+<span class="go">array([91, 64, 60, 77])</span>
+</pre></div>
+</div>
+<p>Other unfuncs that work the same way (overall, or specify the axis) include <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">median</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code> (standard deviation), and <code class="docutils literal notranslate"><span class="pre">var</span></code> (variance).</p>
+<p>The aggregation functions also include <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">prod</span></code>.  For example, to get an overall sum:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nums</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="go">[[3 9 7 3]</span>
+<span class="go">[1 0 2 8]</span>
+<span class="go">[2 0 0 1]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="go">36</span>
+</pre></div>
+</div>
+<p>To get a sum for every column:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 6,  9,  9, 12])</span>
+</pre></div>
+</div>
+</section>
+<section id="operations">
+<h3>Operations<a class="headerlink" href="#operations" title="Link to this heading">#</a></h3>
+<p>Numerical operations can be performed on entire arrays. Scalar operations involve an array and one scalar.  For example, to add 5 to every element in an array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rowvec</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rowvec</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="go">array([ 2, 33, 11])</span>
+</pre></div>
+</div>
+<p>Operations such as addition, subtraction, multiplication, division, and exponentiation can be performed on arrays of any dimension.  For example, to divide every element in a 2D array by 2:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">18</span> <span class="mi">17</span> <span class="mi">13</span> <span class="mi">11</span> <span class="mi">15</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">14</span> <span class="mi">12</span> <span class="mi">13</span> <span class="mi">12</span> <span class="mi">16</span><span class="p">]]</span>
+
+<span class="p">[[</span><span class="mf">9.</span>  <span class="mf">8.5</span> <span class="mf">6.5</span> <span class="mf">5.5</span> <span class="mf">7.5</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">7.</span>  <span class="mf">6.</span>  <span class="mf">6.5</span> <span class="mf">6.</span>  <span class="mf">8.</span> <span class="p">]]</span>
+</pre></div>
+</div>
+<p>Array operations are operations that are performed element by element on two arrays that have the same dimensions.</p>
+<p>For example, the following creates two 1 x 5 arrays, or vectors, and adds the corresponding elements to create another 1 x 5 array. This is array addition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vec1</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vec2</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vec1</span> <span class="o">+</span> <span class="n">vec2</span>
+<span class="go">array([ 9,  3, 11,  7, 10])</span>
+</pre></div>
+</div>
+<p>Similarly, array multiplication is an element-by-element operation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">mat1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">mat2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat1</span><span class="o">*</span><span class="n">mat2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">3</span> <span class="mi">9</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">4</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]]</span>
+
+<span class="p">[[</span><span class="mi">4</span> <span class="mi">2</span> <span class="mi">6</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">8</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">]]</span>
+
+<span class="p">[[</span><span class="mi">12</span> <span class="mi">18</span> <span class="mi">18</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">32</span>  <span class="mi">0</span>  <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Note: this is array multiplication, not matrix multiplication.  Matrix multiplication is not performed element-by-element, and will be described later in the course.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week6A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 6A Pre-read: Mastering Slicing in Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week7A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 7A Preread: Dictionaries and Intro to Pandas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-basics">Array Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-arrays-and-subarrays">Creating Arrays and Subarrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-array-function-and-attributes-of-arrays">The array function and attributes of arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-methods-that-create-arrays">Functions and methods that create arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing">Indexing and Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-slicing">Multidimensional Slicing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-rows-and-columns">Slicing Rows and Columns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-subarrays">Slicing Subarrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-step-size">Including a Step Size</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-arrays">3D Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-dimensions">Changing Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-arrays">Combining Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-operations-on-arrays">Functions and Operations on Arrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operations">Operations</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

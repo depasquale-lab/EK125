@@ -1,0 +1,1177 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week3A Preread: Coding Basics Wrap-up and Selection Statements &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week3A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week3B Preread: Basic Loops - for and while" href="Week3B.html" />
+    <link rel="prev" title="Class 2B: Booleans and Basic Logic" href="Week2B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week3A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week3A Preread: Coding Basics Wrap-up and Selection Statements</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-basics-wrap-up-strings-objects-methods-input-casting-and-output-formatting">Coding Basics Wrap-up: Strings, Objects &amp; Methods, Input, Casting, and Output Formatting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-escape-characters-indexing-and-slicing">1. Strings: Escape Characters, Indexing, and Slicing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-strings">Creating Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escape-characters">Escape Characters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing">Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember-strings-are-immutable">REMEMBER: Strings Are Immutable!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-with-strings">Common Mistakes with Strings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-and-methods">2. Objects and Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-strings">Methods for Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-lists">Methods for Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-methods">Common Errors with Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-input">3. User Input</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-input">Common Errors with Input</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-casting-converting-between-types">4. Type Casting (Converting Between Types)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-casting">Common Errors with Casting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-formatting">5. Output Formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escape-characters-in-output">Escape Characters in Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-strings">f-Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#field-width-and-alignment">Field Width and Alignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-output">Common Errors with Output</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-statements">Selection Statements</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-statements">If Statements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statements">If-else Statements</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week3a-preread-coding-basics-wrap-up-and-selection-statements">
+<h1>Week3A Preread: Coding Basics Wrap-up and Selection Statements<a class="headerlink" href="#week3a-preread-coding-basics-wrap-up-and-selection-statements" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="coding-basics-wrap-up-strings-objects-methods-input-casting-and-output-formatting">
+<h1>Coding Basics Wrap-up: Strings, Objects &amp; Methods, Input, Casting, and Output Formatting<a class="headerlink" href="#coding-basics-wrap-up-strings-objects-methods-input-casting-and-output-formatting" title="Link to this heading">#</a></h1>
+<p>Before we start working with <strong>selection statements</strong>, we need to wrap up a few loose ends on our basic foundational skills. We might retread some ground we’ve already covered, but we want to make sure we didn’t miss anything critical! These include:</p>
+<ul class="simple">
+<li><p>‘escape characters’ when working with <strong>strings</strong>,</p></li>
+<li><p>understanding <strong>objects and methods</strong>,</p></li>
+<li><p>using <strong>input</strong> to interact with the user,</p></li>
+<li><p>performing <strong>type casting</strong> to safely convert between types, and</p></li>
+<li><p>controlling <strong>output formatting</strong> for readable results.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="strings-escape-characters-indexing-and-slicing">
+<h2>1. Strings: Escape Characters, Indexing, and Slicing<a class="headerlink" href="#strings-escape-characters-indexing-and-slicing" title="Link to this heading">#</a></h2>
+<p>As we’ve discussed, strings are sequences of characters. Because they are sequences, we can index, slice, and iterate through them. Strings are central in Python: every input you receive from the keyboard is a string, every filename is a string, and every printed message is a string.</p>
+<section id="creating-strings">
+<h3>Creating Strings<a class="headerlink" href="#creating-strings" title="Link to this heading">#</a></h3>
+<p>Strings can be created using single quotes, double quotes, or triple quotes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s2">&quot;World&quot;</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;A longer string</span>
+<span class="s1">that can span multiple lines&#39;&#39;&#39;</span>
+<span class="n">s4</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;A longer string</span>
+<span class="s2">that can span multiple lines&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>All four are strings. The choice of quote often depends on whether the string itself contains quotes.</p>
+</section>
+<hr class="docutils" />
+<section id="escape-characters">
+<h3>Escape Characters<a class="headerlink" href="#escape-characters" title="Link to this heading">#</a></h3>
+<p>Certain characters cannot be typed directly into a string, so Python uses escape sequences — a backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> followed by another character.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">\n</span></code> – newline</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\t</span></code> – tab</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\'</span></code> – single quote</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\&quot;</span></code> – double quote</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\\</span></code> – backslash</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\n</span><span class="s2">World&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column1</span><span class="se">\t</span><span class="s2">Column2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Isn</span><span class="se">\&#39;</span><span class="s1">t this neat?&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The character </span><span class="se">\&quot;</span><span class="s2">a</span><span class="se">\&quot;</span><span class="s2"> is a short string&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A backslash looks like this: </span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span>
+<span class="n">World</span>
+<span class="n">Column1</span>    <span class="n">Column2</span>
+<span class="n">Isn</span><span class="s1">&#39;t this neat?</span>
+<span class="n">The</span> <span class="n">character</span> <span class="s2">&quot;a&quot;</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">short</span> <span class="n">string</span>
+<span class="n">A</span> <span class="n">backslash</span> <span class="n">looks</span> <span class="n">like</span> <span class="n">this</span><span class="p">:</span> \
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="indexing">
+<h2>Indexing<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h2>
+<p>Each character in a string has an index, starting at 0:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># P</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>   <span class="c1"># n</span>
+</pre></div>
+</div>
+<p>Negative indices count from the end:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># n</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># o</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="slicing">
+<h3>Slicing<a class="headerlink" href="#slicing" title="Link to this heading">#</a></h3>
+<p>Slicing extracts a part of a string: <code class="docutils literal notranslate"><span class="pre">string[start:end]</span></code> returns characters from <code class="docutils literal notranslate"><span class="pre">start</span></code> up to but <strong>not including</strong> <code class="docutils literal notranslate"><span class="pre">end</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># &#39;Py&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>   <span class="c1"># &#39;tho&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>    <span class="c1"># &#39;Pyt&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>    <span class="c1"># &#39;hon&#39;</span>
+</pre></div>
+</div>
+<p><strong>Remember</strong>: the slice excludes the end index. <code class="docutils literal notranslate"><span class="pre">&quot;Python&quot;[0:2]</span></code> is <code class="docutils literal notranslate"><span class="pre">'Py'</span></code>, not <code class="docutils literal notranslate"><span class="pre">'Pyt'</span></code>.</p>
+</section>
+<hr class="docutils" />
+<section id="remember-strings-are-immutable">
+<h3>REMEMBER: Strings Are Immutable!<a class="headerlink" href="#remember-strings-are-immutable" title="Link to this heading">#</a></h3>
+<p>We’ve discussed this, but remember as we point out slicing and indexing a string, remember that strings <strong>cannot be changed in place</strong>. Once created, they remain fixed. To “change” a string, build a new one:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;cat&quot;</span>
+<span class="c1"># s[0] = &quot;b&quot;   # ERROR: strings don’t support assignment</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>   <span class="c1"># slice and concatenate</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>          <span class="c1"># &quot;bat&quot;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="common-mistakes-with-strings">
+<h3>Common Mistakes with Strings<a class="headerlink" href="#common-mistakes-with-strings" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Treating them like mutable lists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;dog&quot;</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;c&quot;</span>   <span class="c1"># ERROR</span>
+</pre></div>
+</div>
+</li>
+<li><p>Forgetting that slices exclude the end index.</p></li>
+<li><p>Misunderstanding escape sequences:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a backslash: </span><span class="se">\&quot;</span><span class="s2">)   # ERROR</span>
+</pre></div>
+</div>
+<p>Must be written as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a backslash: </span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="objects-and-methods">
+<h2>2. Objects and Methods<a class="headerlink" href="#objects-and-methods" title="Link to this heading">#</a></h2>
+<p>In Python, everything is an <strong>object</strong>: numbers, strings, lists, dictionaries. Each object has associated data and <strong>methods</strong> (we’ve also called them <strong>functions</strong> tied to that object). We’ve seen lots of objects and methods already, so some of the following may look familiar. But we wanted to formally point out the notion of <strong>objects</strong> and <strong>methods</strong>, which are important concepts as we move forward!</p>
+<section id="methods-for-strings">
+<h3>Methods for Strings<a class="headerlink" href="#methods-for-strings" title="Link to this heading">#</a></h3>
+<p>Methods are invoked with dot notation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>       <span class="c1"># &#39;PYTHON&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>       <span class="c1"># &#39;python&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>  <span class="c1"># &#39;Python&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>       <span class="c1"># &#39;Python&#39;</span>
+</pre></div>
+</div>
+<p>Replacement and searching:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;py&quot;</span><span class="p">,</span> <span class="s2">&quot;java&quot;</span><span class="p">))</span>  <span class="c1"># &#39;javathon&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">))</span>             <span class="c1"># 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">))</span>              <span class="c1"># -1 (not found)</span>
+</pre></div>
+</div>
+<p>Whitespace removal:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;   Hello World   &quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>   <span class="c1"># &#39;Hello World&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>  <span class="c1"># &#39;Hello World   &#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>  <span class="c1"># &#39;   Hello World&#39;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="methods-for-lists">
+<h3>Methods for Lists<a class="headerlink" href="#methods-for-lists" title="Link to this heading">#</a></h3>
+<p>Lists are also objects, with their own methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>     <span class="c1"># add to the end</span>
+<span class="n">numbers</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>        <span class="c1"># sort in place</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>        <span class="c1"># [1, 2, 3, 4]</span>
+
+<span class="n">numbers</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>     <span class="c1"># reverse in place</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>        <span class="c1"># [4, 3, 2, 1]</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="common-errors-with-methods">
+<h3>Common Errors with Methods<a class="headerlink" href="#common-errors-with-methods" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Forgetting parentheses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>   <span class="c1"># prints function object, not &#39;PYTHON&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Calling methods on the wrong type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">num</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>   <span class="c1"># ERROR</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="user-input">
+<h2>3. User Input<a class="headerlink" href="#user-input" title="Link to this heading">#</a></h2>
+<p>Programs can read input from the keyboard using the <strong><code class="docutils literal notranslate"><span class="pre">input()</span></code></strong> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello,&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sample run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>What is your name? Alice
+Hello, Alice
+</pre></div>
+</div>
+<p><strong>Important:</strong> <code class="docutils literal notranslate"><span class="pre">input()</span></code> always returns a string.</p>
+<hr class="docutils" />
+<section id="common-errors-with-input">
+<h3>Common Errors with Input<a class="headerlink" href="#common-errors-with-input" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Forgetting that input returns a string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How old are you? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">age</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># ERROR: string + int</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="type-casting-converting-between-types">
+<h2>4. Type Casting (Converting Between Types)<a class="headerlink" href="#type-casting-converting-between-types" title="Link to this heading">#</a></h2>
+<p>Because <code class="docutils literal notranslate"><span class="pre">input()</span></code> produces strings, we often need to convert to numbers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How old are you? &quot;</span><span class="p">)</span>
+<span class="n">numage</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Next year you will be&quot;</span><span class="p">,</span> <span class="n">numage</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are other conversions, that allow us to ‘cast’ (or convert) between the different object types we’ve discussed, such as <code class="docutils literal notranslate"><span class="pre">floats</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, and <code class="docutils literal notranslate"><span class="pre">bools</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">))</span>       <span class="c1"># 42</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;3.14&quot;</span><span class="p">))</span>   <span class="c1"># 3.14</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>        <span class="c1"># &#39;123&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>         <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>         <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>        <span class="c1"># True</span>
+</pre></div>
+</div>
+<p>That last one seems crazy! What’s going on there? In Python, the <code class="docutils literal notranslate"><span class="pre">bool()</span></code> method converts a value to a Boolean. The rule is based on the concept of truthiness: <code class="docutils literal notranslate"><span class="pre">bool(x)</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> if x is one of the “falsy” values. Common falsy values include:</p>
+<ul class="simple">
+<li><p>0 (integer zero)</p></li>
+<li><p>0.0 (floating-point zero)</p></li>
+<li><p>“” (empty string)</p></li>
+<li><p>[] (empty list), {} (empty dict), () (empty tuple), set() (empty set)</p></li>
+<li><p>None</p></li>
+<li><p>False</p></li>
+</ul>
+<p>Everything else is considered “truthy”, so <code class="docutils literal notranslate"><span class="pre">bool(x)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> for anything not in this list!</p>
+<hr class="docutils" />
+<section id="common-errors-with-casting">
+<h3>Common Errors with Casting<a class="headerlink" href="#common-errors-with-casting" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Trying to cast invalid strings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>   <span class="c1"># ERROR</span>
+<span class="nb">float</span><span class="p">(</span><span class="s2">&quot;ten&quot;</span><span class="p">)</span>   <span class="c1"># ERROR</span>
+</pre></div>
+</div>
+</li>
+<li><p>Forgetting that <code class="docutils literal notranslate"><span class="pre">bool(&quot;0&quot;)</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> because any non-empty string is True.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="output-formatting">
+<h2>5. Output Formatting<a class="headerlink" href="#output-formatting" title="Link to this heading">#</a></h2>
+<p>Controlling the appearance of printed output makes programs more readable.</p>
+<section id="escape-characters-in-output">
+<h3>Escape Characters in Output<a class="headerlink" href="#escape-characters-in-output" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\n</span><span class="s2">World&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Isn</span><span class="se">\&#39;</span><span class="s2">t this great?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The character </span><span class="se">\&quot;</span><span class="s2">a</span><span class="se">\&quot;</span><span class="s2"> is a short string&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span>
+<span class="n">World</span>
+<span class="n">Isn</span><span class="s1">&#39;t this great?</span>
+<span class="n">The</span> <span class="n">character</span> <span class="s2">&quot;a&quot;</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">short</span> <span class="n">string</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="f-strings">
+<h3>f-Strings<a class="headerlink" href="#f-strings" title="Link to this heading">#</a></h3>
+<p>We’ve seen this a few times, and now we are goign to learn it properly! A ‘f-string’ embeds variables directly into strings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;My name is </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> and I am </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Alice</span> <span class="ow">and</span> <span class="n">I</span> <span class="n">am</span> <span class="mi">21</span> <span class="n">years</span> <span class="n">old</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="field-width-and-alignment">
+<h3>Field Width and Alignment<a class="headerlink" href="#field-width-and-alignment" title="Link to this heading">#</a></h3>
+<p>When you use an f-string like <code class="docutils literal notranslate"><span class="pre">{num:8d}</span></code>, the part after the colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) is called the <strong>format specifier</strong>, and the colon itself acts as a <strong>delimiter</strong> separating the variable from its formatting instructions. For integers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">8</span></code> → sets the <strong>field width</strong> to 8 characters. If the number has fewer digits, spaces are added.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> → <strong>left-aligns</strong> the number in the field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> → <strong>right-aligns</strong> (default for numbers).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">^</span></code> → <strong>centers</strong> the number.</p></li>
+</ul>
+<p>So in <code class="docutils literal notranslate"><span class="pre">xx{num:&lt;8d}xx</span></code>, the <code class="docutils literal notranslate"><span class="pre">1234</span></code> takes up 4 characters, and 4 spaces are added on the right to fill the width of 8.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;xx</span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">8d</span><span class="si">}</span><span class="s2">xx&quot;</span><span class="p">)</span>   <span class="c1"># right aligned</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;xx</span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">&lt;8d</span><span class="si">}</span><span class="s2">xx&quot;</span><span class="p">)</span>  <span class="c1"># left aligned</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;xx</span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">^8d</span><span class="si">}</span><span class="s2">xx&quot;</span><span class="p">)</span>  <span class="c1"># centered</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span>    <span class="mi">1234</span><span class="n">xx</span>
+<span class="n">xx1234</span>    <span class="n">xx</span>
+<span class="n">xx</span>  <span class="mi">1234</span>  <span class="n">xx</span>
+</pre></div>
+</div>
+<p>For floating-point numbers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.2f</span></code> → rounds to 2 decimal places.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">8.3f</span></code> → total field width of 8 characters, rounded to 3 decimals. Spaces are added if needed to meet the width.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code> → scientific notation (e.g., <code class="docutils literal notranslate"><span class="pre">3.141590e+00</span></code>).</p></li>
+</ul>
+<p>Mechanically, Python first <strong>rounds the number</strong> according to the precision, then <strong>pads it with spaces</strong> if the field width is larger than the resulting string, and finally <strong>aligns</strong> it according to <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, or <code class="docutils literal notranslate"><span class="pre">^</span></code>.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi is </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>      <span class="c1"># 2 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi is </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">8.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>     <span class="c1"># width 8, 3 decimals</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi is </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>        <span class="c1"># scientific notation</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Pi</span> <span class="ow">is</span> <span class="mf">3.14</span>
+<span class="n">Pi</span> <span class="ow">is</span>    <span class="mf">3.142</span>
+<span class="n">Pi</span> <span class="ow">is</span> <span class="mf">3.141590e+00</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">=</span> <span class="pre">1234</span></code> with width 8:</p>
+<ul class="simple">
+<li><p>Right-aligned → <code class="docutils literal notranslate"><span class="pre">&quot;</span>&#160;&#160;&#160; <span class="pre">1234&quot;</span></code></p></li>
+<li><p>Left-aligned → <code class="docutils literal notranslate"><span class="pre">&quot;1234</span>&#160;&#160;&#160; <span class="pre">&quot;</span></code></p></li>
+<li><p>Centered → <code class="docutils literal notranslate"><span class="pre">&quot;</span>&#160; <span class="pre">1234</span>&#160; <span class="pre">&quot;</span></code></p></li>
+</ul>
+<p>For <code class="docutils literal notranslate"><span class="pre">pi</span> <span class="pre">=</span> <span class="pre">3.14159</span></code> with <code class="docutils literal notranslate"><span class="pre">8.3f</span></code>:</p>
+<ul class="simple">
+<li><p>Formatted → <code class="docutils literal notranslate"><span class="pre">&quot;</span>&#160;&#160; <span class="pre">3.142&quot;</span></code> (rounded to 3 decimals, padded with spaces to reach width 8)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integer alignment</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">1234</span>
+
+<span class="n">right_aligned</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">8d</span><span class="si">}</span><span class="s2">&quot;</span>   <span class="c1"># right-aligned (default)</span>
+<span class="n">left_aligned</span>  <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">&lt;8d</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># left-aligned</span>
+<span class="n">centered</span>      <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">^8d</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># centered</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integer alignment examples:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Right-aligned: &#39;</span><span class="si">{</span><span class="n">right_aligned</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Left-aligned:  &#39;</span><span class="si">{</span><span class="n">left_aligned</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Centered:      &#39;</span><span class="si">{</span><span class="n">centered</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Floating-point formatting</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">formatted_pi</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">8.3f</span><span class="si">}</span><span class="s2">&quot;</span>   <span class="c1"># width 8, 3 decimal places</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Floating-point example:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Formatted pi: &#39;</span><span class="si">{</span><span class="n">formatted_pi</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Integer</span> <span class="n">alignment</span> <span class="n">examples</span><span class="p">:</span>
+<span class="n">Right</span><span class="o">-</span><span class="n">aligned</span><span class="p">:</span> <span class="s1">&#39;    1234&#39;</span>
+<span class="n">Left</span><span class="o">-</span><span class="n">aligned</span><span class="p">:</span>  <span class="s1">&#39;1234    &#39;</span>
+<span class="n">Centered</span><span class="p">:</span>      <span class="s1">&#39;  1234  &#39;</span>
+
+<span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">example</span><span class="p">:</span>
+<span class="n">Formatted</span> <span class="n">pi</span><span class="p">:</span> <span class="s1">&#39;   3.142&#39;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="common-errors-with-output">
+<h3>Common Errors with Output<a class="headerlink" href="#common-errors-with-output" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Forgetting the <code class="docutils literal notranslate"><span class="pre">f</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello </span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">)</span>   <span class="c1"># literally prints {name}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Wrong specifier:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   <span class="c1"># ERROR, &#39;d&#39; is for integers</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Strings are sequences: use indexing, slicing, and escape sequences.</p></li>
+<li><p>Objects (like strings, lists) come with useful <strong>methods</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input()</span></code> always produces a string. Convert with casting functions (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>).</p></li>
+<li><p>f-strings allow rich formatting for readable and precise output.</p></li>
+<li><p>Most errors come from forgetting types: strings vs. ints, method parentheses, format specifiers.</p></li>
+</ul>
+<br>
+<br>
+<br>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="selection-statements">
+<h1>Selection Statements<a class="headerlink" href="#selection-statements" title="Link to this heading">#</a></h1>
+<p><strong>AT LAST! WE ARE MOVING ON TO SELECCTION STATEMENTS!</strong></p>
+<p>It is possible in a program to choose <strong>whether statements are executed or not</strong>, or to <strong>choose between statements or sets of statements</strong>. Statements that accomplish this are called <strong>selection statements</strong> and include the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement and the <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement. Python has additional selection statements including the <code class="docutils literal notranslate"><span class="pre">match</span></code> statement and <code class="docutils literal notranslate"><span class="pre">try-except</span></code>.</p>
+<section id="if-statements">
+<h2>If Statements<a class="headerlink" href="#if-statements" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement chooses whether statement(s) are executed or not. The general form is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="n">action</span>
+<span class="c1"># rest of code</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement starts with the reserved word <code class="docutils literal notranslate"><span class="pre">if</span></code>, then an expression that evaluates to either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>, then a colon. The expression is frequently called a <strong>condition</strong>. After that, the action of the <code class="docutils literal notranslate"><span class="pre">if</span></code> is indented. The action consists of one or more statements that are executed only if the expression evaluates to <code class="docutils literal notranslate"><span class="pre">True</span></code>. If the expression evaluates to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the action is skipped.</p>
+<p>The indentation is very important in Python. If the action consists of more than one statement, all must be indented to the same level. It is customary to indent by 4 spaces.</p>
+<p>In the following example, it is <code class="docutils literal notranslate"><span class="pre">True</span></code> that the value of the variable num is less than 50, so the  action is executed, which prints ‘It is smaller’.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;OK&#39;</span><span class="p">)</span> 
+<span class="n">num</span> <span class="o">=</span> <span class="mi">33</span>  
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is smaller&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;And that is it&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OK</span>
+<span class="n">It</span> <span class="ow">is</span> <span class="n">smaller</span>
+<span class="n">And</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">it</span>
+</pre></div>
+</div>
+<p>If the value of num is changed to be something greater than or equal to 50, the action would be skipped entirely.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;OK&#39;</span><span class="p">)</span> 
+<span class="n">num</span> <span class="o">=</span> <span class="mi">62</span> 
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is smaller&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;And that is it&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OK</span>
+<span class="n">And</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">it</span>
+</pre></div>
+</div>
+<p>Of course, building in the value of the variable <code class="docutils literal notranslate"><span class="pre">num</span></code> by assigning a value and then testing it does not really make sense! It would make much more sense to generate a random number (which we will get too soon!) or to prompt the user for the value of the variable num, and then print (or not) based on what the user entered.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prompt the user to enter a number</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please enter a number: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Check the value and print a message if it is smaller than 50</span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is smaller&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;And that is it&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">It</span> <span class="ow">is</span> <span class="n">smaller</span>
+<span class="n">And</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">it</span>
+</pre></div>
+</div>
+<p>We can use the in operator to test to see whether a particular character is in a string, or whether a particular value is in a list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="s1">&#39;abcde&#39;</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Yay, there is an &#39;x&#39;!&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Done</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Again, it would make more sense if the string was not built in. It could instead be something entered by the user.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please enter your name: &#39;</span><span class="p">)</span> 
+<span class="k">if</span> <span class="s1">&#39;z&#39;</span> <span class="ow">in</span> <span class="n">urname</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Yay, there is a &#39;z&#39;!&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;OK.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Please enter your name: Frazier
+Yay, there is a &#39;z&#39;!
+OK.
+</pre></div>
+</div>
+</section>
+<section id="if-else-statements">
+<h2>If-else Statements<a class="headerlink" href="#if-else-statements" title="Link to this heading">#</a></h2>
+<p>To choose between two statements, or sets of statements, the <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement is used. The general form is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="n">ifaction</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">elseaction</span>
+<span class="c1"># rest of code</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement chooses between two actions, called ‘ifaction’ and ‘elseaction’ here. The way it works is that the condition is evaluated. If the value of the condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>, then all of the statements in the ‘ifaction’ will be executed, and the <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement ends. If, on the other  and, the value of the condition is <code class="docutils literal notranslate"><span class="pre">False</span></code>, the statement(s) in the second action, ‘elseaction’, will  be executed. The <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement chooses between executing the ‘ifaction’ or the ‘elseaction’. One of these actions, and only one, will be executed. The terminology is that ‘control’ goes to the chosen action, and those statements are executed. Once the statements in the chosen action have been executed, control goes to the rest of the code after the <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a number: &#39;</span><span class="p">)</span> 
+<span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># convert the string to a float </span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a negative number&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a nonnegative number&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, the user is asked for a number. The code then prints whether it is a negative  number or a nonnegative number. Here are two examples of what the output would look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">a</span> <span class="n">number</span><span class="p">:</span> <span class="o">-</span><span class="mi">33</span>
+<span class="o">-</span><span class="mf">33.0</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">negative</span> <span class="n">number</span>
+<span class="n">Enter</span> <span class="n">a</span> <span class="n">number</span><span class="p">:</span> <span class="mi">14</span>
+<span class="mf">14.0</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">nonnegative</span> <span class="n">number</span>
+</pre></div>
+</div>
+<p>In order to choose from more than one option, it is possible to nest <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statements, which  means putting one inside of another.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a number: &#39;</span><span class="p">)</span> 
+<span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># convert the string to a float </span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a negative number&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is a zero&#39;</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a positive number&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When this is executed, the expression <code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> is evaluated. If that is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the code prints that it is a negative number and the entire <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement ends. If, however, it is <code class="docutils literal notranslate"><span class="pre">False</span></code>, the action consisting of the second <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement is executed. The second, nested, <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement evaluates the expression <code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">==</span> <span class="pre">0</span></code>. If that expression is <code class="docutils literal notranslate"><span class="pre">True</span></code>, it prints that it is a zero, and if not it prints that it is a positive number.</p>
+<p>Notice the indentation. If we get sloppy with our indentation, we might see the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a number: &#39;</span><span class="p">)</span> 
+<span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># convert the string to a float </span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a negative number&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+<span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is a zero&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a positive number&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;/tmp/ipython-input-4246442818.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span>
+  <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="o">^</span>
+<span class="ne">IndentationError</span><span class="p">:</span> <span class="n">expected</span> <span class="n">an</span> <span class="n">indented</span> <span class="n">block</span> <span class="n">after</span> <span class="s1">&#39;else&#39;</span> <span class="n">statement</span> <span class="n">on</span> <span class="n">line</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Is there an easier way to implement the logic of dividing our search into three cases, positive, negative, and 0? This can be simplified using the <code class="docutils literal notranslate"><span class="pre">elif</span></code> keyword, as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a number: &#39;</span><span class="p">)</span> 
+<span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># convert the string to a float </span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a negative number&#39;</span><span class="p">)</span> 
+<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is a zero&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is a positive number&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">elif</span></code>, it is not necessary to have else followed by another <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement. The indentation, which is required in Python, is also simpler using <code class="docutils literal notranslate"><span class="pre">elif</span></code>. There can be as many <code class="docutils literal notranslate"><span class="pre">elif</span></code> clauses as necessary to handle all of the possible actions. It is not a requirement to have an <code class="docutils literal notranslate"><span class="pre">else</span></code> at the very end, although it is common to do so to handle ‘none of the above’.</p>
+<p>Note that in Python, unlike many languages, relational operators can be chained together. The  expression <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">b</span></code>, for example, is equivalent to the expression <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">x</span></code> <code class="docutils literal notranslate"><span class="pre">and</span></code> <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">b</span></code>. The following will test whether or not a variable <code class="docutils literal notranslate"><span class="pre">num</span></code> is in the range from 5 to 10 inclusive.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">5</span> <span class="o">&lt;=</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In range&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not in range&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Like <code class="docutils literal notranslate"><span class="pre">if</span></code> statements, <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statements can also be used with strings. For example, the following uses the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator to determine whether or not the character <code class="docutils literal notranslate"><span class="pre">‘x’</span></code> is in a string variable <code class="docutils literal notranslate"><span class="pre">mystr</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">mystr</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There is an x!&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Alas, no x.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement can also be used to print the range of a number, for example from user input:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prompt the user to enter a number</span>
+<span class="n">ri</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please enter a number between 0 and 10: &quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">ri</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;in range 0 to 5 inclusive&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">ri</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;in range 5 through 10&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;out of the expected range (0 to 10)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="ow">is</span> <span class="ow">in</span> <span class="nb">range</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">5</span> <span class="n">inclusive</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week2B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Class 2B: Booleans and Basic Logic</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week3B.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-basics-wrap-up-strings-objects-methods-input-casting-and-output-formatting">Coding Basics Wrap-up: Strings, Objects &amp; Methods, Input, Casting, and Output Formatting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-escape-characters-indexing-and-slicing">1. Strings: Escape Characters, Indexing, and Slicing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-strings">Creating Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escape-characters">Escape Characters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing">Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember-strings-are-immutable">REMEMBER: Strings Are Immutable!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-with-strings">Common Mistakes with Strings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-and-methods">2. Objects and Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-strings">Methods for Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-lists">Methods for Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-methods">Common Errors with Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-input">3. User Input</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-input">Common Errors with Input</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-casting-converting-between-types">4. Type Casting (Converting Between Types)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-casting">Common Errors with Casting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-formatting">5. Output Formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escape-characters-in-output">Escape Characters in Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-strings">f-Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#field-width-and-alignment">Field Width and Alignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors-with-output">Common Errors with Output</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-statements">Selection Statements</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-statements">If Statements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statements">If-else Statements</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

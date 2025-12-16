@@ -1,0 +1,1187 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Class 1B: Intro to colab and why program? &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week1B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class 2A: Sequences, Strings, and Lists in Python" href="Week2A.html" />
+    <link rel="prev" title="Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week1B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Class 1B: Intro to colab and why program?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Class 1B: Intro to colab and why program?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-interactive-programming-using-google-colab">1. Introduction to Interactive Programming Using Google Colab</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-google-colab">Why Google Colab?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-notebook-structure">Understanding Notebook Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-cells-vs-code-cells">Markdown Cells vs. Code Cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-prompts">Execution Prompts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-multiline-expressions">Example: Multiline Expressions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-code-in-a-colab-notebook">Running Code in a Colab Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-run-a-code-cell">How to Run a Code Cell</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-python-code-structure-and-comments">Writing Python Code: Structure and Comments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-comments-to-document-your-code">Using Comments to Document Your Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-variables-in-python">Declaring Variables in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-storing-and-displaying-data">Example: Storing and Displaying Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-variables-dynamically">Modifying Variables Dynamically</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reassigning-variable-values">Reassigning Variable Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-and-accessing-notebooks-via-google-drive">Saving and Accessing Notebooks via Google Drive</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-your-own-copy">Saving Your Own Copy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-work-later">Accessing Work Later</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-engineers-need-programming">2. Why Engineers Need Programming</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-programming-enhances-engineering-practice">How Programming Enhances Engineering Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-in-programming-the-role-of-variables">Data in Programming: The Role of Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-updating-variables-in-python">Declaring and Updating Variables in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-syntax">Assignment Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-readable-code-naming-conventions">Writing Readable Code: Naming Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-snake-case">What is snake_case?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-naming">Best Practices for Naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-in-python">Data Types in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-types">Numeric Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operators">Arithmetic Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values">Boolean Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordered-collections">Ordered Collections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-sequences">Immutable Sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-value-pairs">Key-Value Pairs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-unordered-values">Unique Unordered Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constants-and-immutability">Constants and Immutability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-constants-in-python">Representing Constants in Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-vs-mutable-data">Immutable vs. Mutable Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-types-include">Immutable Types Include:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutable-types-include">Mutable Types Include:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-clarification-variables-vs-values">Important Clarification: Variables vs. Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pythons-built-in-functions">Python’s Built-in Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-displaying-output"><code class="docutils literal notranslate"><span class="pre">print()</span></code>: Displaying Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#round-rounding-numbers"><code class="docutils literal notranslate"><span class="pre">round()</span></code>: Rounding Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-checking-a-variables-data-type"><code class="docutils literal notranslate"><span class="pre">type()</span></code>: Checking a Variable’s Data Type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#del-deleting-variables"><code class="docutils literal notranslate"><span class="pre">del</span></code>: Deleting Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-naming-note-dont-shadow-built-ins">A Naming Note: Don’t Shadow Built-ins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="class-1b-intro-to-colab-and-why-program">
+<h1>Class 1B: Intro to colab and why program?<a class="headerlink" href="#class-1b-intro-to-colab-and-why-program" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-interactive-programming-using-google-colab">
+<h1>1. Introduction to Interactive Programming Using Google Colab<a class="headerlink" href="#introduction-to-interactive-programming-using-google-colab" title="Link to this heading">#</a></h1>
+<p>In this course, we will write and execute Python code using Google Colab—short for “Collaboratory”—rather than spending class time configuring development environments. Colab provides a browser-based coding platform that is especially well-suited to interactive programming and data-driven tasks. It supports Python natively and includes built-in libraries commonly used in engineering and data science.</p>
+<section id="why-google-colab">
+<h2>Why Google Colab?<a class="headerlink" href="#why-google-colab" title="Link to this heading">#</a></h2>
+<p>Colab offers numerous advantages that make it ideal for classroom use:</p>
+<ul class="simple">
+<li><p>No installation required — code runs directly in the browser</p></li>
+<li><p>Interactive execution — edit code cells and rerun immediately</p></li>
+<li><p>Markdown integration — include documentation and notes alongside code</p></li>
+<li><p>Pre-installed libraries — access tools like NumPy, Pandas, and Matplotlib</p></li>
+<li><p>Seamless cloud storage — notebooks save automatically to Google Drive</p></li>
+</ul>
+<p>This cloud-based structure allows students to focus on learning programming concepts without worrying about local machine setup or compatibility issues.</p>
+</section>
+<section id="understanding-notebook-structure">
+<h2>Understanding Notebook Structure<a class="headerlink" href="#understanding-notebook-structure" title="Link to this heading">#</a></h2>
+<p>Google Colab notebooks are organized as a sequence of cells, which can contain either formatted text or executable code. This structure encourages an interactive, readable approach to programming—making it easy to mix explanation and execution in a single document.</p>
+<p>A new Colab notebook will look like this:</p>
+<p><img alt="Alt text" src="_images/image_11.png" /></p>
+<p>It automatically includes a single code cell.  If you mouse over the hidden “bars” between cells like we’ve done here, you’ll see the buttons to add cells.</p>
+<section id="markdown-cells-vs-code-cells">
+<h3>Markdown Cells vs. Code Cells<a class="headerlink" href="#markdown-cells-vs-code-cells" title="Link to this heading">#</a></h3>
+<p>There are two types of cells used in Colab:</p>
+<ul class="simple">
+<li><p><strong>Markdown cells</strong> allow you to format explanations, instructions, or comments using rich text. These cells do not execute code, but they help make the notebook readable and instructional.</p></li>
+<li><p><strong>Code cells</strong> contain Python code and can be run independently. Each time a code cell is executed, Colab returns the result directly below it.</p></li>
+</ul>
+</section>
+<section id="execution-prompts">
+<h3>Execution Prompts<a class="headerlink" href="#execution-prompts" title="Link to this heading">#</a></h3>
+<p>Python code written in basic interpreters like the command-line Python shell is often preceded by prompts such as <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> for input and <code class="docutils literal notranslate"><span class="pre">...</span></code> for multiline input. In contrast, Colab adopts a numbered format:</p>
+<p><img alt="Alt text" src="_images/image_13.png" /></p>
+<p>Each time a cell runs, its input/output numbers update to reflect the order of execution.</p>
+</section>
+<section id="example-multiline-expressions">
+<h3>Example: Multiline Expressions<a class="headerlink" href="#example-multiline-expressions" title="Link to this heading">#</a></h3>
+<p>Python allows multiline expressions using parentheses, which is particularly useful when lines are long or logically grouped:</p>
+<p>Python Shell:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span>
+
+<span class="go">... 3 + 4)</span>
+
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>In Colab:</p>
+<p><img alt="Alt text" src="_images/image_14.png" /></p>
+</section>
+</section>
+<section id="running-code-in-a-colab-notebook">
+<h2>Running Code in a Colab Notebook<a class="headerlink" href="#running-code-in-a-colab-notebook" title="Link to this heading">#</a></h2>
+<p>Executing Python code in a Colab notebook is simple and intuitive. Each code cell acts like a self-contained mini-program that can be edited and rerun without affecting the rest of the notebook.</p>
+<section id="how-to-run-a-code-cell">
+<h3>How to Run a Code Cell<a class="headerlink" href="#how-to-run-a-code-cell" title="Link to this heading">#</a></h3>
+<p>To execute a code cell:</p>
+<ul class="simple">
+<li><p>Click inside the cell and type your Python code</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Enter</span></code> to run the cell and move to the next one</p></li>
+<li><p>Or, click the <strong>Run</strong> button (a small ▶️ at the left of the cell, see the bottom cell in the image above)</p></li>
+</ul>
+<p>Colab displays the result of each cell directly below the code, allowing you to verify your output immediately.</p>
+<p>This responsive execution model allows for quick experimentation and encourages exploratory learning.</p>
+</section>
+</section>
+<section id="writing-python-code-structure-and-comments">
+<h2>Writing Python Code: Structure and Comments<a class="headerlink" href="#writing-python-code-structure-and-comments" title="Link to this heading">#</a></h2>
+<p>Python code is designed to be clean and readable, following a straightforward syntax that makes it ideal for beginners and professionals alike. At its core, Python code consists of <strong>variables, expressions, functions</strong>, and <strong>control flow</strong> statements.</p>
+<section id="using-comments-to-document-your-code">
+<h3>Using Comments to Document Your Code<a class="headerlink" href="#using-comments-to-document-your-code" title="Link to this heading">#</a></h3>
+<p>In Python, anything following a # symbol is considered a <strong>comment</strong> and is ignored by the interpreter. Comments are crucial for documenting what your code does and why—it’s a habit of good programmers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a comment explaining the next line</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mi">72</span>
+</pre></div>
+</div>
+<p>Use comments to explain complex logic, specify units, or provide context to collaborators (and to your future self).  Comments appear green in Colab so you can distinguish them from executable code.</p>
+</section>
+</section>
+<section id="declaring-variables-in-python">
+<h2>Declaring Variables in Python<a class="headerlink" href="#declaring-variables-in-python" title="Link to this heading">#</a></h2>
+<p>A <strong>variable</strong> is a named reference to data stored in memory. Variables allow you to label information and refer back to it later in your program.</p>
+<p>Python uses <strong>assignment statements</strong> to create variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">variable_name</span> <span class="o">=</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p>There’s no need to declare a type in advance—Python automatically infers it based on the assigned value. (That squiggly line is Colab telling you there’s something off with your formatting.  Here, it’s expecting single quotes around the word value, because value is a string.  More on that later.)</p>
+<section id="example-storing-and-displaying-data">
+<h3>Example: Storing and Displaying Data<a class="headerlink" href="#example-storing-and-displaying-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Alice&#39;</span>      <span class="c1">#Asssigning a string</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">21</span>            <span class="c1">#Assigning a number</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student name:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student age:&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Student</span> <span class="n">name</span><span class="p">:</span> <span class="n">Alice</span>
+<span class="n">Student</span> <span class="n">age</span><span class="p">:</span> <span class="mi">21</span>
+</pre></div>
+</div>
+<p>This approach makes Python flexible and efficient for quick experimentation and rapid development.</p>
+</section>
+</section>
+<section id="modifying-variables-dynamically">
+<h2>Modifying Variables Dynamically<a class="headerlink" href="#modifying-variables-dynamically" title="Link to this heading">#</a></h2>
+<p>One of the powerful features of Python in Colab notebooks is the ability to <strong>change the value of variables</strong> and immediately rerun code cells to observe the updated behavior. This dynamic workflow enables rapid experimentation and real-time debugging.</p>
+<section id="reassigning-variable-values">
+<h3>Reassigning Variable Values<a class="headerlink" href="#reassigning-variable-values" title="Link to this heading">#</a></h3>
+<p>You can reassign a new value to an existing variable at any time:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial value:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initial</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Later in the notebook, you might update that value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">10</span>      <span class="c1">#Increments the value of x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updated value:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Updated</span> <span class="n">value</span><span class="p">:</span> <span class="mi">15</span>
+</pre></div>
+</div>
+<p>This approach reinforces the <strong>interactive nature of Colab notebooks</strong>. You’re not tied to a fixed sequence of execution—each cell can be run and rerun independently, which makes it easy to refine your logic, explore hypotheses, and test different outcomes on the fly.</p>
+</section>
+</section>
+<section id="saving-and-accessing-notebooks-via-google-drive">
+<h2>Saving and Accessing Notebooks via Google Drive<a class="headerlink" href="#saving-and-accessing-notebooks-via-google-drive" title="Link to this heading">#</a></h2>
+<p>Colab notebooks live in the cloud, which means your work is automatically saved and easily accessible from any device with internet access. Throughout this course, all assignments and coding activities will be distributed as notebook links via our course site.</p>
+<p><img alt="Alt text" src="_images/image_26.png" /></p>
+<section id="saving-your-own-copy">
+<h3>Saving Your Own Copy<a class="headerlink" href="#saving-your-own-copy" title="Link to this heading">#</a></h3>
+<p>To preserve your edits and submit work:</p>
+<ol class="arabic simple">
+<li><p>Open the shared Colab link from Blackboard.</p></li>
+<li><p>In the notebook menu, click <strong>File → Save a Copy in Drive</strong>.</p></li>
+<li><p>Your personal copy will be saved to a folder called “Colab Notebooks” in your Google Drive.</p></li>
+</ol>
+<p>This copy is fully yours—you can modify, rename, or organize it however you’d like.</p>
+</section>
+<section id="accessing-work-later">
+<h3>Accessing Work Later<a class="headerlink" href="#accessing-work-later" title="Link to this heading">#</a></h3>
+<p>Once saved, you can return to your notebook at any time by navigating to:</p>
+<p><strong>Google Drive → Colab Notebooks → [Your File Name].ipynb</strong></p>
+<p>If you’re going to turn the file in, we recommend adding your name to the end of the original file name, which will correspond to the class it was assigned in.  There’s no need to redownload or re-upload anything; your work stays synced across sessions.</p>
+<p>💡 Tip: You can also bookmark your personalized notebook links for even faster access.</p>
+<p>Perfect—here we go with the next section, carrying forward that same voice and clarity:</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="why-engineers-need-programming">
+<h1>2. Why Engineers Need Programming<a class="headerlink" href="#why-engineers-need-programming" title="Link to this heading">#</a></h1>
+<p>Programming is a fundamental skill for modern engineers. Whether you’re designing mechanical systems, analyzing electrical circuits, or processing large datasets, code provides a powerful toolkit for solving problems efficiently and accurately.</p>
+<section id="how-programming-enhances-engineering-practice">
+<h2>How Programming Enhances Engineering Practice<a class="headerlink" href="#how-programming-enhances-engineering-practice" title="Link to this heading">#</a></h2>
+<p>Here are just a few ways that programming empowers engineers:</p>
+<ul class="simple">
+<li><p><strong>Automating repetitive tasks</strong> — like data processing, simulation, or report generation</p></li>
+<li><p><strong>Modeling and simulating systems</strong> — such as stress analysis or heat transfer</p></li>
+<li><p><strong>Controlling hardware and interfaces</strong> — for robotics, sensors, or embedded systems</p></li>
+<li><p><strong>Analyzing and visualizing data</strong> — making sense of complex experiments or diagnostics</p></li>
+</ul>
+<p>Mastering programming doesn’t just make tasks easier—it expands what’s possible.</p>
+</section>
+<section id="data-in-programming-the-role-of-variables">
+<h2>Data in Programming: The Role of Variables<a class="headerlink" href="#data-in-programming-the-role-of-variables" title="Link to this heading">#</a></h2>
+<p>To harness the power of code, you’ll first need to understand how computers store and manipulate information. That starts with <strong>variables</strong>.</p>
+<p>A variable is like a labeled container for data: it holds a value that can be retrieved or changed over time. This makes variables fundamental to virtually every program you’ll write.</p>
+<p>Think of a <strong>digital thermometer</strong> that updates the room temperature in real time. Each time the sensor reads a new value, it updates the variable storing that temperature.</p>
+</section>
+<section id="declaring-and-updating-variables-in-python">
+<h2>Declaring and Updating Variables in Python<a class="headerlink" href="#declaring-and-updating-variables-in-python" title="Link to this heading">#</a></h2>
+<p>In Python, <strong>variables</strong> are created using a simple assignment statement, binding a name to a value. There’s no need to specify a data type in advance—Python uses dynamic typing to determine the type automatically based on the assigned value.</p>
+<section id="assignment-syntax">
+<h3>Assignment Syntax<a class="headerlink" href="#assignment-syntax" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">variable_name</span> <span class="o">=</span> <span class="n">expression</span>
+</pre></div>
+</div>
+<p>This straightforward syntax allows for quick experimentation. Python evaluates the right-hand side and assigns the result to the variable on the left.</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>              <span class="c1">#Integer</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>      <span class="c1">#String</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">36.5</span>  <span class="c1">#Floating-point (float )</span>
+</pre></div>
+</div>
+<p>Variables in Python can be re-assigned easily—reusing the name to reference a new value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">8</span>
+</pre></div>
+</div>
+<p>🔍 Note: Python doesn’t mutate the value in place—it reassigns the variable name to a <strong>new memory location</strong> containing the updated value. This detail becomes important when working with mutable and immutable data types.</p>
+</section>
+</section>
+<section id="writing-readable-code-naming-conventions">
+<h2>Writing Readable Code: Naming Conventions<a class="headerlink" href="#writing-readable-code-naming-conventions" title="Link to this heading">#</a></h2>
+<p>Good variable names make code easier to understand, debug, and maintain. In this course, we’ll follow the standard naming style for Python: <strong>snake_case</strong>.</p>
+<section id="what-is-snake-case">
+<h3>What is snake_case?<a class="headerlink" href="#what-is-snake-case" title="Link to this heading">#</a></h3>
+<p>Snake_case means writing compound names in all lowercase, separating words with underscores:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student_name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">total_cost</span> <span class="o">=</span> <span class="mf">49.99</span>
+</pre></div>
+</div>
+<p>This contrasts with other styles like:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">camelCase</span></code> → e.g., <code class="docutils literal notranslate"><span class="pre">studentName</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> → e.g., <code class="docutils literal notranslate"><span class="pre">StudentName</span></code></p></li>
+</ul>
+<p>Python programmers overwhelmingly prefer snake_case for variables and function names.</p>
+</section>
+<section id="best-practices-for-naming">
+<h3>Best Practices for Naming<a class="headerlink" href="#best-practices-for-naming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>✅ Use names that clearly describe the variable’s role (<code class="docutils literal notranslate"><span class="pre">volume</span></code>, <code class="docutils literal notranslate"><span class="pre">speed_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor_value</span></code>)</p></li>
+<li><p>✅ Stick with lowercase letters and underscores</p></li>
+<li><p>❌ Avoid using Python <strong>keywords</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">def</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span></code>)</p></li>
+<li><p>❌ Never start a name with a number (e.g., <code class="docutils literal notranslate"><span class="pre">3data</span></code> is invalid)</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3>Examples<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Good</span>
+<span class="n">price_per_item</span> <span class="o">=</span> <span class="mf">5.99</span>
+<span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+
+<span class="c1">#Bad</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">5.99</span>        <span class="c1">#too vaue</span>
+<span class="n">xyz</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>   <span class="c1">#Meaningless</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-types-in-python">
+<h2>Data Types in Python<a class="headerlink" href="#data-types-in-python" title="Link to this heading">#</a></h2>
+<p>Every piece of data in a Python program has a <strong>type</strong>—a classification that determines what kind of information it is and what operations can be performed on it. Python includes several built-in data types that are commonly used in engineering and scientific programming.</p>
+<section id="numeric-types">
+<h3>Numeric Types<a class="headerlink" href="#numeric-types" title="Link to this heading">#</a></h3>
+<p>Python supports three primary numeric types:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: Integer values (whole numbers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code>: Numbers with decimal points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">complex</span></code>: Numbers with real and imaginary parts</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">population</span> <span class="o">=</span> <span class="mi">5000</span>       <span class="c1">#int</span>
+<span class="n">pi_value</span> <span class="o">=</span> <span class="mf">3.14159</span>      <span class="c1">#float</span>
+<span class="n">voltage</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>  <span class="c1">#complex (3 + 4j)</span>
+</pre></div>
+</div>
+<p>Python also supports <strong>scientific notation</strong> for very large or small numbers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="mf">2e3</span>      <span class="c1">#equivalent to 2000.0 (float)</span>
+<span class="n">distance</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">2000.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="arithmetic-operators">
+<h2>Arithmetic Operators<a class="headerlink" href="#arithmetic-operators" title="Link to this heading">#</a></h2>
+<p>You can use a variety of math operators with numeric types—just like you would in a calculator.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Addition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Subtraction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">-</span> <span class="pre">4</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Multiplication</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">*</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>Float Division</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">/</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2.5</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p>Integer (floor) Division</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">//</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>Remainder (modulus)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">%</span> <span class="pre">4</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p>Exponentiation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">**</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">25</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These operators can be used with variables as well:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Area:&quot;</span><span class="p">,</span> <span class="n">area</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Area</span><span class="p">:</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Python evaluates expressions following standard order of operations (PEMDAS), so parentheses can help group operations as needed.</p>
+<p>##Other Common Python Data Types</p>
+<p>Beyond numbers, Python provides built-in types for handling text, logical values, and structured collections. These are essential for representing real-world information in programs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">str</span></code>: <strong>Strings (Text)</strong></p>
+<p>A <strong>string</strong> is a sequence of characters enclosed in quotes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Welcome to programming!&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Welcome to programming!
+</pre></div>
+</div>
+<p>You can store names, messages, filenames—any kind of text. Strings can also include escape characters like <code class="docutils literal notranslate"><span class="pre">\n</span></code> for new lines.</p>
+<section id="boolean-values">
+<h3>Boolean Values<a class="headerlink" href="#boolean-values" title="Link to this heading">#</a></h3>
+<p>A <strong>boolean</strong> (or <code class="docutils literal notranslate"><span class="pre">bool</span></code>) represents truth values—either True or False. Booleans are commonly used in comparisons and control flow.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">is_ready</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">has_errors</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">is_ready</span><span class="p">,</span> <span class="n">has_errors</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+<section id="ordered-collections">
+<h3>Ordered Collections<a class="headerlink" href="#ordered-collections" title="Link to this heading">#</a></h3>
+<p>A <strong>list</strong> holds multiple items in a specific order. Lists are <strong>mutable</strong>, meaning you can change their contents.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">73</span><span class="p">]</span>
+<span class="c1"># You access elements by index (starting at 0):</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temperatures</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">75</span>
+</pre></div>
+</div>
+</section>
+<section id="immutable-sequences">
+<h3>Immutable Sequences<a class="headerlink" href="#immutable-sequences" title="Link to this heading">#</a></h3>
+<p>A <strong>tuple</strong> is similar to a list but <strong>cannot be changed</strong> after it’s created.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span><span class="mi">1080</span><span class="p">)</span>
+<span class="n">dimensions</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span><span class="mi">1080</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Tuples are useful when you want to group related values that should remain fixed.  Note the difference between declaring a list and a tuple.  The list uses square brackets while the list uses parentheses.</p>
+</section>
+<section id="key-value-pairs">
+<h3>Key-Value Pairs<a class="headerlink" href="#key-value-pairs" title="Link to this heading">#</a></h3>
+<p>A <strong>dictionary</strong> maps keys to values—like a miniature database.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">}</span>
+<span class="c1"># You can look up values by key:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Alice</span>
+</pre></div>
+</div>
+</section>
+<section id="unique-unordered-values">
+<h3>Unique Unordered Values<a class="headerlink" href="#unique-unordered-values" title="Link to this heading">#</a></h3>
+<p>A <strong>set</strong> is an unordered collection of unique items—duplicates are automatically removed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>These types will be explored more deeply in future lessons, but it’s helpful to start seeing how varied and flexible Python’s data structures are.</p>
+</section>
+</section>
+<section id="constants-and-immutability">
+<h2>Constants and Immutability<a class="headerlink" href="#constants-and-immutability" title="Link to this heading">#</a></h2>
+<p>Some values in a program are intended to remain unchanged throughout its execution. While Python doesn’t enforce constants the way some languages do, there are standard conventions for signaling that a variable should not be altered.</p>
+<section id="representing-constants-in-python">
+<h3>Representing Constants in Python<a class="headerlink" href="#representing-constants-in-python" title="Link to this heading">#</a></h3>
+<p>Although Python lacks a built-in <code class="docutils literal notranslate"><span class="pre">const</span></code> keyword, programmers use all-uppercase variable names to indicate constants:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PI</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">MAX_SPEED</span> <span class="o">=</span> <span class="mi">120</span>
+</pre></div>
+</div>
+<p>Using uppercase helps convey intent: these values should not be reassigned during program execution. It’s a convention—Python won’t prevent changes, but the community encourages treating such values as fixed.</p>
+</section>
+</section>
+<section id="immutable-vs-mutable-data">
+<h2>Immutable vs. Mutable Data<a class="headerlink" href="#immutable-vs-mutable-data" title="Link to this heading">#</a></h2>
+<p>Certain data types in Python are <strong>immutable</strong>—once an object is created, it cannot be changed. Others are <strong>mutable</strong>, meaning their contents can be modified in place.</p>
+<section id="immutable-types-include">
+<h3>Immutable Types Include:<a class="headerlink" href="#immutable-types-include" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code> – whole numbers (e.g., <code class="docutils literal notranslate"><span class="pre">5</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code> – decimal numbers (e.g., <code class="docutils literal notranslate"><span class="pre">3.14</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code> – text (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code> – ordered groups (e.g., <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frozenset</span></code> – unchangeable version of a set</p></li>
+</ul>
+</section>
+<section id="mutable-types-include">
+<h3>Mutable Types Include:<a class="headerlink" href="#mutable-types-include" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code> – ordered collections</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dict</span></code> – key-value mappings</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span></code> – unordered, unique values</p></li>
+</ul>
+</section>
+<section id="important-clarification-variables-vs-values">
+<h3>Important Clarification: Variables vs. Values<a class="headerlink" href="#important-clarification-variables-vs-values" title="Link to this heading">#</a></h3>
+<p>Even though immutable types like integers and strings can’t be altered <strong>in place</strong>, variables that refer to them <strong>can still be reassigned</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># Now x refers to a new object with the value 6</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>In this example, x didn’t mutate the number <code class="docutils literal notranslate"><span class="pre">5</span></code>; rather, Python created a <strong>new</strong> integer object (<code class="docutils literal notranslate"><span class="pre">6</span></code>) and reassigned the name <code class="docutils literal notranslate"><span class="pre">x</span></code> to it.</p>
+<p>The same is true for strings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;Smith&quot;</span> <span class="c1"># Creates a new string; original &quot;Alice&quot; is unchanged</span>
+<span class="n">name</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Alice Smith&#39;</span>
+</pre></div>
+</div>
+<p>This behavior will become more important as we move into collections, where mutability affects how variables interact with memory and references.</p>
+</section>
+</section>
+<section id="pythons-built-in-functions">
+<h2>Python’s Built-in Functions<a class="headerlink" href="#pythons-built-in-functions" title="Link to this heading">#</a></h2>
+<p>Python provides a wide collection of <strong>built-in functions</strong>—ready-made tools that perform common tasks. These functions are always available and don’t require any imports. You’ve already met <code class="docutils literal notranslate"><span class="pre">print()</span></code> in earlier examples; now let’s explore a few others that you’ll likely use early and often.</p>
+<section id="print-displaying-output">
+<h3><code class="docutils literal notranslate"><span class="pre">print()</span></code>: Displaying Output<a class="headerlink" href="#print-displaying-output" title="Link to this heading">#</a></h3>
+<p>Used to send output to the screen. You can print strings, variables, or expressions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of x:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Value</span> <span class="n">of</span> <span class="n">x</span><span class="p">:</span> <span class="mi">5</span>
+<span class="mi">7</span>
+</pre></div>
+</div>
+<p>Print is often used for debugging or giving feedback to users.</p>
+</section>
+<section id="round-rounding-numbers">
+<h3><code class="docutils literal notranslate"><span class="pre">round()</span></code>: Rounding Numbers<a class="headerlink" href="#round-rounding-numbers" title="Link to this heading">#</a></h3>
+<p>Rounds a float to the nearest integer, or to a specified number of decimal places.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="mf">7.6</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">8</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="mi">8</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">2.67</span>
+</pre></div>
+</div>
+<p>This is helpful when formatting numeric results for display or reporting.</p>
+</section>
+<section id="type-checking-a-variables-data-type">
+<h3><code class="docutils literal notranslate"><span class="pre">type()</span></code>: Checking a Variable’s Data Type<a class="headerlink" href="#type-checking-a-variables-data-type" title="Link to this heading">#</a></h3>
+<p>Returns the type of the value referenced by a variable.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;float&#39;&gt;
+&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+<p>This is useful when debugging or when you’re unsure how Python is interpreting a value.</p>
+</section>
+<section id="del-deleting-variables">
+<h3><code class="docutils literal notranslate"><span class="pre">del</span></code>: Deleting Variables<a class="headerlink" href="#del-deleting-variables" title="Link to this heading">#</a></h3>
+<p>Removes a variable from memory. Once deleted, a variable can’t be used until reassigned.</p>
+<p><img alt="Alt text" src="_images/image_22.png" /></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">del</span></code> with care—it’s not often needed in beginner programs.</p>
+</section>
+<section id="a-naming-note-dont-shadow-built-ins">
+<h3>A Naming Note: Don’t Shadow Built-ins<a class="headerlink" href="#a-naming-note-dont-shadow-built-ins" title="Link to this heading">#</a></h3>
+<p>Avoid using the same names as Python’s built-in functions for your own variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="o">=</span> <span class="s2">&quot;Oops   # This overwrites the print function!</span>
+</pre></div>
+</div>
+<p>If you accidentally overwrite one, you can recover it by restarting your Colab runtime or using <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">print</span></code>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to this <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">book</span></code>: HTML rendered mardown files for EK125 Pre-readings</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week2A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Class 2A: Sequences, Strings, and Lists in Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Class 1B: Intro to colab and why program?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-interactive-programming-using-google-colab">1. Introduction to Interactive Programming Using Google Colab</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-google-colab">Why Google Colab?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-notebook-structure">Understanding Notebook Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-cells-vs-code-cells">Markdown Cells vs. Code Cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-prompts">Execution Prompts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-multiline-expressions">Example: Multiline Expressions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-code-in-a-colab-notebook">Running Code in a Colab Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-run-a-code-cell">How to Run a Code Cell</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-python-code-structure-and-comments">Writing Python Code: Structure and Comments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-comments-to-document-your-code">Using Comments to Document Your Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-variables-in-python">Declaring Variables in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-storing-and-displaying-data">Example: Storing and Displaying Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-variables-dynamically">Modifying Variables Dynamically</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reassigning-variable-values">Reassigning Variable Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-and-accessing-notebooks-via-google-drive">Saving and Accessing Notebooks via Google Drive</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-your-own-copy">Saving Your Own Copy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-work-later">Accessing Work Later</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-engineers-need-programming">2. Why Engineers Need Programming</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-programming-enhances-engineering-practice">How Programming Enhances Engineering Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-in-programming-the-role-of-variables">Data in Programming: The Role of Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-updating-variables-in-python">Declaring and Updating Variables in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-syntax">Assignment Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-readable-code-naming-conventions">Writing Readable Code: Naming Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-snake-case">What is snake_case?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-naming">Best Practices for Naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-in-python">Data Types in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-types">Numeric Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operators">Arithmetic Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values">Boolean Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordered-collections">Ordered Collections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-sequences">Immutable Sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-value-pairs">Key-Value Pairs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-unordered-values">Unique Unordered Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constants-and-immutability">Constants and Immutability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-constants-in-python">Representing Constants in Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-vs-mutable-data">Immutable vs. Mutable Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-types-include">Immutable Types Include:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutable-types-include">Mutable Types Include:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-clarification-variables-vs-values">Important Clarification: Variables vs. Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pythons-built-in-functions">Python’s Built-in Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-displaying-output"><code class="docutils literal notranslate"><span class="pre">print()</span></code>: Displaying Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#round-rounding-numbers"><code class="docutils literal notranslate"><span class="pre">round()</span></code>: Rounding Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-checking-a-variables-data-type"><code class="docutils literal notranslate"><span class="pre">type()</span></code>: Checking a Variable’s Data Type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#del-deleting-variables"><code class="docutils literal notranslate"><span class="pre">del</span></code>: Deleting Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-naming-note-dont-shadow-built-ins">A Naming Note: Don’t Shadow Built-ins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

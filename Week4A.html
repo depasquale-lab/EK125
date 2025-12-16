@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week4A Preread: Nested Loops &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week4A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week4B Preread: Advanced Loops using List Comprehensions" href="Week4B.html" />
+    <link rel="prev" title="Week3B Preread: Basic Loops - for and while" href="Week3B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week4A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week4A Preread: Nested Loops</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-loops">Nested loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-if-inside-a-loop">Using <code class="docutils literal notranslate"><span class="pre">if</span></code> Inside a Loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-even-and-odd-numbers">Example: Even and Odd Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-behavior">Step-by-step behavior</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-is-important">Why this is important</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week4a-preread-nested-loops">
+<h1>Week4A Preread: Nested Loops<a class="headerlink" href="#week4a-preread-nested-loops" title="Link to this heading">#</a></h1>
+<section id="nested-loops">
+<h2>Nested loops<a class="headerlink" href="#nested-loops" title="Link to this heading">#</a></h2>
+<p>A nested loop is one loop inside of another. In other words, the action of a loop contains  another loop. Frequently, a nested loop is a nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, in which one for loop is part of the action of another for loop.</p>
+<p>In the following example, a list of words is created. A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop loops through all of the words, and then for each word, another for loop loops to print each character followed by a space.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wordlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s2">&quot;hi&quot;</span><span class="p">,</span> <span class="s1">&#39;ciao&#39;</span><span class="p">]</span> 
+<span class="k">for</span> <span class="n">myword</span> <span class="ow">in</span> <span class="n">wordlist</span><span class="p">:</span> 
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">myword</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">()</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s it!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="n">e</span> <span class="n">l</span> <span class="n">l</span> <span class="n">o</span>
+<span class="n">h</span> <span class="n">i</span>
+<span class="n">c</span> <span class="n">i</span> <span class="n">a</span> <span class="n">o</span>
+<span class="n">That</span><span class="s1">&#39;s it!</span>
+</pre></div>
+</div>
+<p>The first loop is called the outer loop. The action of the outer loop consists of two statements:</p>
+<ul class="simple">
+<li><p>loop to print each character and a space</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">print()</span></code> to move the cursor down for the next word</p></li>
+</ul>
+<p>The second loop, that loops over the characters, is called the inner loop. The action of the inner loop is a single <code class="docutils literal notranslate"><span class="pre">print</span></code> statement. After the nested loop, there is another <code class="docutils literal notranslate"><span class="pre">print</span></code> statement to print “That’s it!”. The outer loop iterates over the words in the list. For each word, the inner loop  iterates over the characters in that word.</p>
+<p>So, the first time in the outer loop the variable myword will store ‘hello’. The inner loop variable will then iterate through all of the characters in the variable <code class="docutils literal notranslate"><span class="pre">myword</span></code>, and for each it will print the character and then a space (all on the same line). After the inner loop has completed, the <code class="docutils literal notranslate"><span class="pre">print()</span></code> statement will print a newline character, and that is it for the action of the outer loop.  Once this action has completed, the variable <code class="docutils literal notranslate"><span class="pre">myword</span></code> will store the second string in the list, “hi”. The inner loop will then iterate through all of its characters and print each one followed by a space. After both characters have been printed, the <code class="docutils literal notranslate"><span class="pre">print()</span></code> moves the cursor down to the  next line. Finally, myword gets the value ‘ciao’, and the inner loop prints all of its characters on one line and then a newline at the end. Once the variable myword has iterated through all 3 words in the list, the outer loop is done so the code prints “That’s it!” after the nested loop has completed.</p>
+<p>The following is an example of a nested loop, in which the outer loop repeats 3 times. Each  time the action is executed, the next integer (0 then 1 then 2) is printed, followed by a colon  and a space. The inner loop then prints, 5 times, a single ‘*’. The second argument, end=’’,  keeps all of the *’s on the same line and does not print anything between them. The <code class="docutils literal notranslate"><span class="pre">print()</span></code>
+after the inner loop prints the newline character by default, so each of the 3 actions from the  outer loop is on a separate line.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">:</span> <span class="o">*****</span>
+<span class="mi">1</span><span class="p">:</span> <span class="o">*****</span>
+<span class="mi">2</span><span class="p">:</span> <span class="o">*****</span>
+</pre></div>
+</div>
+<p>The outer loop specifies that the action will be repeated 3 times. The action of the outer loop  consists of 3 statements:</p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">print</span></code> statement to print the value of the outer loop variable</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to repeat the action of printing a single ‘*’ 5 times on the same line</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">print</span></code> statement to move the cursor down for the next value of the outer loop variable</p></li>
+</ul>
+<p>Instead of looping 5 times to print a ‘*’, the following inner loop repeats <code class="docutils literal notranslate"><span class="pre">num</span></code> times, where <code class="docutils literal notranslate"><span class="pre">num</span></code> is the value of the outer loop variable (plus 1, so it repeats once, then twice, then three times).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>  
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">:</span> <span class="o">*</span>
+<span class="mi">1</span><span class="p">:</span> <span class="o">**</span>
+<span class="mi">2</span><span class="p">:</span> <span class="o">***</span>
+</pre></div>
+</div>
+<p>If instead of printing 0, 1, and 2 in the beginning of the lines, we wanted 1, 2, and 3, the code  would instead look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>  
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span> <span class="o">*</span>
+<span class="mi">2</span><span class="p">:</span> <span class="o">**</span>
+<span class="mi">3</span><span class="p">:</span> <span class="o">***</span>
+</pre></div>
+</div>
+<p>These were examples of nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops. Nested loops can also contain <code class="docutils literal notranslate"><span class="pre">while</span></code> loops.
+For example, let’s say we want the user to enter 3 positive numbers. That means we will use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to repeat the action 3 times. Each time, we will error-check using a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop to make  sure that each time a positive number is entered. The algorithm is:</p>
+<ul class="simple">
+<li><p>Loop 3 times</p>
+<ul>
+<li><p>Prompt the user for a positive number</p></li>
+<li><p>While the number is not positive</p>
+<ul>
+<li><p>Print error message</p></li>
+<li><p>Prompt again</p></li>
+</ul>
+</li>
+<li><p>Print the positive number</p></li>
+</ul>
+</li>
+</ul>
+<p>Here is an implementation of the algorithm:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> 
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a positive number: &#39;</span><span class="p">)</span>  
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> 
+    <span class="k">while</span> <span class="p">(</span><span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please follow directions!&#39;</span><span class="p">)</span>  
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a positive number: &#39;</span><span class="p">)</span> 
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Thanks for entering&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Enter a positive number: 4
+Thanks for entering 4.0
+
+Enter a positive number: -3.3
+Please follow directions!
+Enter a positive number: 5.1
+Thanks for entering 5.1
+
+Enter a positive number: -6
+Please follow directions!
+Enter a positive number: 11
+Thanks for entering 11.0
+</pre></div>
+</div>
+<p>An extra <code class="docutils literal notranslate"><span class="pre">print()</span></code> was added to the action of the outer for loop in order to separate each of the actions of the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+</section>
+<section id="using-if-inside-a-loop">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">if</span></code> Inside a Loop<a class="headerlink" href="#using-if-inside-a-loop" title="Link to this heading">#</a></h2>
+<p>So far we have seen loops that repeat the same action every time. In practice, we often want the action to change depending on the current value of the loop variable. This is where an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement inside a loop becomes useful.</p>
+<section id="example-even-and-odd-numbers">
+<h3>Example: Even and Odd Numbers<a class="headerlink" href="#example-even-and-odd-numbers" title="Link to this heading">#</a></h3>
+<p>Let’s look at the numbers from 0 through 9. For each number, we want to decide whether it is even or odd. To do this, we use the <strong>modulus operator <code class="docutils literal notranslate"><span class="pre">%</span></code></strong>, which gives the remainder after division. If a number divided by 2 has no remainder (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code>), the number is even. Otherwise, it is odd.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>          <span class="c1"># loop through the numbers 0,1,2,...,9</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>           <span class="c1"># condition: is n evenly divisible by 2?</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">&quot;is even&quot;</span><span class="p">)</span>  <span class="c1"># runs when the condition is true</span>
+    <span class="k">else</span><span class="p">:</span>                    
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">&quot;is odd&quot;</span><span class="p">)</span>   <span class="c1"># runs when the condition is false</span>
+</pre></div>
+</div>
+</section>
+<section id="step-by-step-behavior">
+<h3>Step-by-step behavior<a class="headerlink" href="#step-by-step-behavior" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>On the first iteration, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">0</span></code>. Since <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code>, the <code class="docutils literal notranslate"><span class="pre">if</span></code> branch runs and prints <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">is</span> <span class="pre">even</span></code>.</p></li>
+<li><p>On the next iteration, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1</span></code>. Since <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code> is false, the <code class="docutils literal notranslate"><span class="pre">else</span></code> branch runs and prints <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">is</span> <span class="pre">odd</span></code>.</p></li>
+<li><p>The loop continues this way for each number up to <code class="docutils literal notranslate"><span class="pre">9</span></code>.</p></li>
+</ul>
+<p>Output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="mi">1</span> <span class="ow">is</span> <span class="n">odd</span>
+<span class="mi">2</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="mi">3</span> <span class="ow">is</span> <span class="n">odd</span>
+<span class="mi">4</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="mi">5</span> <span class="ow">is</span> <span class="n">odd</span>
+<span class="mi">6</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="mi">7</span> <span class="ow">is</span> <span class="n">odd</span>
+<span class="mi">8</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="mi">9</span> <span class="ow">is</span> <span class="n">odd</span>
+</pre></div>
+</div>
+</section>
+<section id="why-this-is-important">
+<h3>Why this is important<a class="headerlink" href="#why-this-is-important" title="Link to this heading">#</a></h3>
+<p>Combining loops with conditionals lets us write much more powerful programs.</p>
+<ul class="simple">
+<li><p>The <strong>loop</strong> controls how many times the block of code runs.</p></li>
+<li><p>The <strong>if/else</strong> decides which action to take on each iteration.</p></li>
+</ul>
+<p>This combination is used constantly in programming. With the same idea, you could:</p>
+<ul class="simple">
+<li><p>Print only the negative numbers in a list.</p></li>
+<li><p>Count how many numbers are above a certain threshold.</p></li>
+<li><p>Skip or handle special cases differently while processing data.</p></li>
+</ul>
+<p>In short: loops let us repeat work, and <code class="docutils literal notranslate"><span class="pre">if</span></code> statements let us choose actions. Together, they form one of the most common and useful patterns in Python.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week3B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week4B.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week4B Preread: Advanced Loops using List Comprehensions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-loops">Nested loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-if-inside-a-loop">Using <code class="docutils literal notranslate"><span class="pre">if</span></code> Inside a Loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-even-and-odd-numbers">Example: Even and Odd Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-behavior">Step-by-step behavior</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-is-important">Why this is important</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

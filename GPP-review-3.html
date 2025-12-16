@@ -1,0 +1,1242 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MATLAB Practice Problems for Paper Exam Review &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'GPP-review-3';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 15A: Useful MATLAB Toolboxes" href="Week15A.html" />
+    <link rel="prev" title="Week14A: User Functions and Modular Programming in MATLAB" href="Week14A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/GPP-review-3.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MATLAB Practice Problems for Paper Exam Review</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-10b-from-python-to-matlab-syntax-and-plotting">Week 10B: From Python to MATLAB - Syntax and Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax-differences">Basic Syntax Differences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-11-debugging-and-loops">Week 11: Debugging and Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-syntax">Loop Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-concepts">Debugging Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-concepts">Performance Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-12a-creating-vectors-and-matrices">Week 12A: Creating Vectors and Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-matrices">Creating Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-matrix-elements">Accessing Matrix Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrix-creating-functions">Special Matrix-Creating Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenating-matrices">Concatenating Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-matrices">Modifying Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-arrays">Reshaping Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-12b-vector-and-matrix-operations">Week 12B: Vector and Matrix Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-operations">Scalar Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operations-and-indexing">Logical Operations and Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-functions">Statistical Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-manipulation-functions">Matrix Manipulation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-functions">Square Matrix Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-13a-file-i-o-and-scripts">Week 13A: File I/O and Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#script-basics">Script Basics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directory-operations">Directory Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data">Reading Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-data">Writing Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-review-problems-all-readings">Comprehensive Review Problems (All Readings)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-reference-for-students">Quick Reference for Students</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-syntax-reminders">Key Syntax Reminders:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Loop Syntax:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-confusion-points">Common Confusion Points:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="matlab-practice-problems-for-paper-exam-review">
+<h1>MATLAB Practice Problems for Paper Exam Review<a class="headerlink" href="#matlab-practice-problems-for-paper-exam-review" title="Link to this heading">#</a></h1>
+<section id="week-10b-from-python-to-matlab-syntax-and-plotting">
+<h2>Week 10B: From Python to MATLAB - Syntax and Plotting<a class="headerlink" href="#week-10b-from-python-to-matlab-syntax-and-plotting" title="Link to this heading">#</a></h2>
+<section id="basic-syntax-differences">
+<h3>Basic Syntax Differences<a class="headerlink" href="#basic-syntax-differences" title="Link to this heading">#</a></h3>
+<p><strong>Problem 1:</strong> Without using MATLAB, predict the output of the following code:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Problem 2:</strong> What is the difference between these two indexing operations?</p>
+<ul class="simple">
+<li><p>Python: <code class="docutils literal notranslate"><span class="pre">my_list[0]</span></code></p></li>
+<li><p>MATLAB: <code class="docutils literal notranslate"><span class="pre">my_array(1)</span></code></p></li>
+</ul>
+<p><strong>Problem 3:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code>, what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec(3)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec(end)</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">vec(2:4)</span></code></p></li>
+</ul>
+<p><strong>Problem 4:</strong> Write MATLAB code to create the following vectors:</p>
+<ul class="simple">
+<li><p>a) A row vector with values 3, 6, 9, 12, 15 using the colon operator</p></li>
+<li><p>b) A row vector with values from 10 to 50 with a step of 5</p></li>
+<li><p>c) A vector with 5 evenly spaced points from 0 to 20 using linspace</p></li>
+</ul>
+</section>
+<section id="plotting">
+<h3>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h3>
+<p><strong>Problem 5:</strong> Write the MATLAB code to:</p>
+<ul class="simple">
+<li><p>a) Plot <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x²</span></code> for x values from 0 to 10</p></li>
+<li><p>b) Add a title “Quadratic Function”</p></li>
+<li><p>c) Label the x-axis “x values” and y-axis “y values”</p></li>
+<li><p>d) Add a grid to the plot</p></li>
+</ul>
+<p><strong>Problem 6:</strong> What line style, color, and marker would the following create?</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">'r--o')</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">'b:*')</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">'k-s')</span></code></p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">'g-.^')</span></code></p></li>
+</ul>
+<p><strong>Problem 7:</strong> Write code to create a figure with 2 rows and 1 column of subplots. In the first subplot, plot sin(x), and in the second, plot cos(x), for x from 0 to 2π.</p>
+<p><strong>Problem 8:</strong> Given the following code, what would happen?</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mf">0.5</span><span class="p">:</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">y1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="n">y2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y1</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y2</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;Linear&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Quadratic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Problem 9:</strong> Write the code to create a scatter plot of 50 random points and give it an appropriate title.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="week-11-debugging-and-loops">
+<h2>Week 11: Debugging and Loops<a class="headerlink" href="#week-11-debugging-and-loops" title="Link to this heading">#</a></h2>
+<section id="loop-syntax">
+<h3>Loop Syntax<a class="headerlink" href="#loop-syntax" title="Link to this heading">#</a></h3>
+<p><strong>Problem 10:</strong> Convert this Python loop to MATLAB:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Problem 11:</strong> What does this MATLAB loop output?</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="nb">sum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">i</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="nb">disp</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Problem 12:</strong> Convert this Python while loop to MATLAB:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p><strong>Problem 13:</strong> What will be the final value of <code class="docutils literal notranslate"><span class="pre">result</span></code> after this loop executes?</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-concepts">
+<h3>Debugging Concepts<a class="headerlink" href="#debugging-concepts" title="Link to this heading">#</a></h3>
+<p><strong>Problem 14:</strong> Given this code:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">];</span>
+<span class="n">threshold</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="nb">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">numbers</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">threshold</span>
+<span class="w">        </span><span class="nb">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>If you set a breakpoint at line 3 (<code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">=</span> <span class="pre">0;</span></code>) and step through, what would be the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> after:</p>
+<ul class="simple">
+<li><p>a) The 1st iteration?</p></li>
+<li><p>b) The 3rd iteration?</p></li>
+<li><p>c) The loop completes?</p></li>
+</ul>
+<p><strong>Problem 15:</strong> This code has a bug. Identify the problem:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">];</span>
+<span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="nb">i</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="n">average</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">count</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Problem 16:</strong> What error will occur when running this code, and why?</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">];</span>
+<span class="n">limit</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="n">position</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">values</span><span class="p">(</span><span class="n">position</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">limit</span>
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-concepts">
+<h3>Performance Concepts<a class="headerlink" href="#performance-concepts" title="Link to this heading">#</a></h3>
+<p><strong>Problem 17:</strong> Which of these two code snippets would run faster, and why?</p>
+<p><strong>Version A:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1000</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="nb">i</span><span class="o">^</span><span class="mi">2</span><span class="p">];</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Version B:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1000</span>
+<span class="w">    </span><span class="n">result</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Problem 18:</strong> Rewrite this loop using vectorization:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="week-12a-creating-vectors-and-matrices">
+<h2>Week 12A: Creating Vectors and Matrices<a class="headerlink" href="#week-12a-creating-vectors-and-matrices" title="Link to this heading">#</a></h2>
+<section id="creating-matrices">
+<h3>Creating Matrices<a class="headerlink" href="#creating-matrices" title="Link to this heading">#</a></h3>
+<p><strong>Problem 19:</strong> Write MATLAB code to create this matrix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">3</span>  <span class="mi">4</span>
+<span class="mi">5</span>  <span class="mi">6</span>  <span class="mi">7</span>  <span class="mi">8</span>
+<span class="mi">9</span>  <span class="mi">10</span> <span class="mi">11</span> <span class="mi">12</span>
+</pre></div>
+</div>
+<p><strong>Problem 20:</strong> What’s the difference between creating these two vectors?</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec1</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec2</span> <span class="pre">=</span> <span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3;</span> <span class="pre">4]</span></code></p></li>
+</ul>
+<p><strong>Problem 21:</strong> Write MATLAB code to create a column vector with values 2, 4, 6, 8 using:</p>
+<ul class="simple">
+<li><p>a) Direct entry with semicolons</p></li>
+<li><p>b) The colon operator and transpose</p></li>
+</ul>
+</section>
+<section id="accessing-matrix-elements">
+<h3>Accessing Matrix Elements<a class="headerlink" href="#accessing-matrix-elements" title="Link to this heading">#</a></h3>
+<p><strong>Problem 22:</strong> Given this matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w">  </span><span class="mi">2</span><span class="w">  </span><span class="mi">3</span><span class="w">  </span><span class="mi">4</span>
+<span class="w">       </span><span class="mi">5</span><span class="w">  </span><span class="mi">6</span><span class="w">  </span><span class="mi">7</span><span class="w">  </span><span class="mi">8</span>
+<span class="w">       </span><span class="mi">9</span><span class="w">  </span><span class="mi">10</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">12</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>What value would be returned by:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">mat(2,3)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">mat(1,:)</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">mat(:,4)</span></code></p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">mat(2:3,</span> <span class="pre">2:3)</span></code></p></li>
+<li><p>e) <code class="docutils literal notranslate"><span class="pre">mat(end,</span> <span class="pre">end)</span></code></p></li>
+</ul>
+</section>
+<section id="special-matrix-creating-functions">
+<h3>Special Matrix-Creating Functions<a class="headerlink" href="#special-matrix-creating-functions" title="Link to this heading">#</a></h3>
+<p><strong>Problem 23:</strong> Write the MATLAB code to create:</p>
+<ul class="simple">
+<li><p>a) A 3×3 matrix of all zeros</p></li>
+<li><p>b) A 2×4 matrix of all ones</p></li>
+<li><p>c) A 4×4 identity matrix</p></li>
+<li><p>d) A 3×2 matrix of random integers between 5 and 15</p></li>
+</ul>
+<p><strong>Problem 24:</strong> What’s the difference between:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">rand(3,</span> <span class="pre">3)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">randn(3,</span> <span class="pre">3)</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">randi(10,</span> <span class="pre">3,</span> <span class="pre">3)</span></code></p></li>
+</ul>
+</section>
+<section id="concatenating-matrices">
+<h3>Concatenating Matrices<a class="headerlink" href="#concatenating-matrices" title="Link to this heading">#</a></h3>
+<p><strong>Problem 25:</strong> Given <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2;</span> <span class="pre">3</span> <span class="pre">4]</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">[5</span> <span class="pre">6;</span> <span class="pre">7</span> <span class="pre">8]</span></code>, what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B]</span></code> (horizontal concatenation)</p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">[A;</span> <span class="pre">B]</span></code> (vertical concatenation)</p></li>
+</ul>
+<p><strong>Problem 26:</strong> Given <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3]</span></code> and <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">[4</span> <span class="pre">5</span> <span class="pre">6]</span></code>, can you perform:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">[C,</span> <span class="pre">D]</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">[C;</span> <span class="pre">D]</span></code>
+For each, explain why it works or doesn’t work, and give the result if it works.</p></li>
+</ul>
+<p><strong>Problem 27:</strong> What would happen if you tried to concatenate these matrices?</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">4</span><span class="w"> </span><span class="s">5</span><span class="w"> </span><span class="s">6]</span><span class="p">;</span>
+<span class="n">B</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">9</span><span class="w"> </span><span class="s">10]</span><span class="p">;</span>
+<span class="n">C</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="modifying-matrices">
+<h3>Modifying Matrices<a class="headerlink" href="#modifying-matrices" title="Link to this heading">#</a></h3>
+<p><strong>Problem 28:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[10</span> <span class="pre">20</span> <span class="pre">30</span> <span class="pre">40</span> <span class="pre">50]</span></code>, write code to:</p>
+<ul class="simple">
+<li><p>a) Change the third element to 99</p></li>
+<li><p>b) Change elements 2 through 4 to all be 0</p></li>
+</ul>
+<p><strong>Problem 29:</strong> Given this matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">       </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span>
+<span class="w">       </span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Write code to:</p>
+<ul class="simple">
+<li><p>a) Replace the second row with [40 50 60]</p></li>
+<li><p>b) Replace the first column with [10; 20; 30]</p></li>
+<li><p>c) Replace the 2×2 submatrix in the lower-right corner with zeros</p></li>
+</ul>
+<p><strong>Problem 30:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[5,</span> <span class="pre">12,</span> <span class="pre">8,</span> <span class="pre">3,</span> <span class="pre">15,</span> <span class="pre">9]</span></code>, write code to:</p>
+<ul class="simple">
+<li><p>a) Replace all values greater than 10 with 10</p></li>
+<li><p>b) Replace all values less than 5 with 5</p></li>
+</ul>
+</section>
+<section id="reshaping-arrays">
+<h3>Reshaping Arrays<a class="headerlink" href="#reshaping-arrays" title="Link to this heading">#</a></h3>
+<p><strong>Problem 31:</strong> Given <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6</span> <span class="pre">7</span> <span class="pre">8</span> <span class="pre">9</span> <span class="pre">10</span> <span class="pre">11</span> <span class="pre">12]</span></code>, what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">reshape(A,</span> <span class="pre">[3,</span> <span class="pre">4])</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">reshape(A,</span> <span class="pre">[2,</span> <span class="pre">6])</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">reshape(A,</span> <span class="pre">[4,</span> <span class="pre">3])</span></code></p></li>
+</ul>
+<p><strong>Problem 32:</strong> You have a 2×6 matrix and want to reshape it into a 3×4 matrix. Is this possible? Why or why not?</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="week-12b-vector-and-matrix-operations">
+<h2>Week 12B: Vector and Matrix Operations<a class="headerlink" href="#week-12b-vector-and-matrix-operations" title="Link to this heading">#</a></h2>
+<section id="scalar-operations">
+<h3>Scalar Operations<a class="headerlink" href="#scalar-operations" title="Link to this heading">#</a></h3>
+<p><strong>Problem 33:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8]</span></code>, calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">*</span> <span class="pre">3</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">+</span> <span class="pre">10</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">-</span> <span class="pre">5</span></code></p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">/</span> <span class="pre">2</span></code></p></li>
+</ul>
+<p><strong>Problem 34:</strong> Given this matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span>
+<span class="w">       </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">mat</span> <span class="pre">*</span> <span class="pre">2</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">mat</span> <span class="pre">+</span> <span class="pre">10</span></code></p></li>
+</ul>
+</section>
+<section id="array-operations">
+<h3>Array Operations<a class="headerlink" href="#array-operations" title="Link to this heading">#</a></h3>
+<p><strong>Problem 35:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8]</span></code>, calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">.^</span> <span class="pre">2</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">.*</span> <span class="pre">vec</span></code></p></li>
+</ul>
+<p><strong>Problem 36:</strong> What’s the difference between these two operations?</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">.*</span></code> (element-wise multiplication)</p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">*</span></code> (matrix multiplication)</p></li>
+</ul>
+<p><strong>Problem 37:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec1</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code> and <code class="docutils literal notranslate"><span class="pre">vec2</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>, calculate:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec1</span> <span class="pre">+</span> <span class="pre">vec2</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec1</span> <span class="pre">.*</span> <span class="pre">vec2</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">vec1</span> <span class="pre">./</span> <span class="pre">vec2</span></code></p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">vec1</span> <span class="pre">.^</span> <span class="pre">vec2</span></code></p></li>
+</ul>
+<p><strong>Problem 38:</strong> Given <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2;</span> <span class="pre">3</span> <span class="pre">4]</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">[2</span> <span class="pre">0;</span> <span class="pre">1</span> <span class="pre">2]</span></code>, calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">.*</span> <span class="pre">B</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">./</span> <span class="pre">B</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">.^</span> <span class="pre">2</span></code></p></li>
+</ul>
+</section>
+<section id="matrix-multiplication">
+<h3>Matrix Multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h3>
+<p><strong>Problem 39:</strong> Given <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2;</span> <span class="pre">3</span> <span class="pre">4]</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">[2</span> <span class="pre">0;</span> <span class="pre">1</span> <span class="pre">2]</span></code>, calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">*</span> <span class="pre">A</span></code></p></li>
+<li><p>c) Are the results the same? Why or why not?</p></li>
+</ul>
+<p><strong>Problem 40:</strong> Can you perform matrix multiplication <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> for the following cases? If yes, what are the dimensions of the result?</p>
+<ul class="simple">
+<li><p>a) A is 3×4, B is 4×2</p></li>
+<li><p>b) A is 2×3, B is 2×3</p></li>
+<li><p>c) A is 3×1, B is 1×4</p></li>
+<li><p>d) A is 2×2, B is 2×2</p></li>
+</ul>
+<p><strong>Problem 41:</strong> Given <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3]</span></code> (1×3) and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">[4;</span> <span class="pre">5;</span> <span class="pre">6]</span></code> (3×1), calculate:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">*</span> <span class="pre">A</span></code></p></li>
+<li><p>c) What are the dimensions of each result?</p></li>
+</ul>
+</section>
+<section id="logical-operations-and-indexing">
+<h3>Logical Operations and Indexing<a class="headerlink" href="#logical-operations-and-indexing" title="Link to this heading">#</a></h3>
+<p><strong>Problem 42:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[5,</span> <span class="pre">12,</span> <span class="pre">8,</span> <span class="pre">3,</span> <span class="pre">15,</span> <span class="pre">9]</span></code>, what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">&lt;</span> <span class="pre">10</span></code> (write the logical array)</p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">&gt;</span> <span class="pre">7</span></code> (write the logical array)</p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">==</span> <span class="pre">8</span></code> (write the logical array)</p></li>
+</ul>
+<p><strong>Problem 43:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[5,</span> <span class="pre">12,</span> <span class="pre">8,</span> <span class="pre">3,</span> <span class="pre">15,</span> <span class="pre">9]</span></code> and the logical arrays from Problem 42a, what would be returned by:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">vec(vec</span> <span class="pre">&lt;</span> <span class="pre">10)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">vec(vec</span> <span class="pre">&gt;</span> <span class="pre">7)</span></code></p></li>
+</ul>
+<p><strong>Problem 44:</strong> Given this matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w">  </span><span class="mi">5</span><span class="w">  </span><span class="mi">8</span>
+<span class="w">       </span><span class="mi">3</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mi">6</span>
+<span class="w">       </span><span class="mi">7</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Write the logical array that would result from:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">mat</span> <span class="pre">&gt;</span> <span class="pre">5</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">mat</span> <span class="pre">&lt;</span> <span class="pre">4</span></code></p></li>
+</ul>
+</section>
+<section id="statistical-functions">
+<h3>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">#</a></h3>
+<p><strong>Problem 45:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[3,</span> <span class="pre">7,</span> <span class="pre">2,</span> <span class="pre">9,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">1]</span></code>, calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">min(vec)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">max(vec)</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">sum(vec)</span></code></p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">mean(vec)</span></code></p></li>
+</ul>
+<p><strong>Problem 46:</strong> Given the matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">       </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span>
+<span class="w">       </span><span class="mi">7</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Calculate by hand:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">sum(mat)</span></code> (sum of each column)</p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">max(mat)</span></code> (max of each column)</p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">min(mat,</span> <span class="pre">2)</span></code> (min of each row)</p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">mean(mat,</span> <span class="pre">2)</span></code> (mean of each row)</p></li>
+<li><p>e) <code class="docutils literal notranslate"><span class="pre">sum(sum(mat))</span></code> (overall sum)</p></li>
+</ul>
+<p><strong>Problem 47:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[10</span> <span class="pre">20</span> <span class="pre">30</span> <span class="pre">40</span> <span class="pre">50]</span></code>, calculate:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">diff(vec)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">cumsum(vec)</span></code></p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">prod(vec)</span></code></p></li>
+</ul>
+<p><strong>Problem 48:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[8,</span> <span class="pre">2,</span> <span class="pre">15,</span> <span class="pre">4,</span> <span class="pre">11,</span> <span class="pre">3,</span> <span class="pre">9]</span></code>, what would be returned by:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">sort(vec)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">median(vec)</span></code></p></li>
+</ul>
+</section>
+<section id="matrix-manipulation-functions">
+<h3>Matrix Manipulation Functions<a class="headerlink" href="#matrix-manipulation-functions" title="Link to this heading">#</a></h3>
+<p><strong>Problem 49:</strong> Given <code class="docutils literal notranslate"><span class="pre">mat</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3;</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6]</span></code> (a 2×3 matrix), what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">mat'</span></code> (transpose)</p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">fliplr(mat)</span></code> (flip left-right)</p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">flipud(mat)</span></code> (flip up-down)</p></li>
+<li><p>d) <code class="docutils literal notranslate"><span class="pre">rot90(mat)</span></code> (rotate 90 degrees)</p></li>
+</ul>
+<p><strong>Problem 50:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">11]</span></code>, what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">fliplr(vec)</span></code></p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">flip(vec)</span></code></p></li>
+</ul>
+<p><strong>Problem 51:</strong> Given <code class="docutils literal notranslate"><span class="pre">mymat</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2;</span> <span class="pre">3</span> <span class="pre">4]</span></code>, what would be the result of:</p>
+<ul class="simple">
+<li><p>a) <code class="docutils literal notranslate"><span class="pre">repmat(mymat,</span> <span class="pre">2,</span> <span class="pre">1)</span></code> (replicate 2 rows, 1 column)</p></li>
+<li><p>b) <code class="docutils literal notranslate"><span class="pre">repmat(mymat,</span> <span class="pre">1,</span> <span class="pre">3)</span></code> (replicate 1 row, 3 columns)</p></li>
+<li><p>c) <code class="docutils literal notranslate"><span class="pre">repelem(mymat,</span> <span class="pre">2,</span> <span class="pre">2)</span></code> (replicate each element 2×2)</p></li>
+</ul>
+</section>
+<section id="square-matrix-functions">
+<h3>Square Matrix Functions<a class="headerlink" href="#square-matrix-functions" title="Link to this heading">#</a></h3>
+<p><strong>Problem 52:</strong> Given this matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">       </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">       </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>a) What would <code class="docutils literal notranslate"><span class="pre">diag(mat)</span></code> return?</p></li>
+<li><p>b) What would <code class="docutils literal notranslate"><span class="pre">trace(mat)</span></code> return?</p></li>
+<li><p>c) What would <code class="docutils literal notranslate"><span class="pre">isdiag(mat)</span></code> return?</p></li>
+<li><p>d) Is this matrix symmetric? What would <code class="docutils literal notranslate"><span class="pre">issymmetric(mat)</span></code> return?</p></li>
+</ul>
+<p><strong>Problem 53:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code>, what would <code class="docutils literal notranslate"><span class="pre">diag(vec)</span></code> create?</p>
+<p><strong>Problem 54:</strong> What does <code class="docutils literal notranslate"><span class="pre">eye(5)</span></code> create? Write out the matrix.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="week-13a-file-i-o-and-scripts">
+<h2>Week 13A: File I/O and Scripts<a class="headerlink" href="#week-13a-file-i-o-and-scripts" title="Link to this heading">#</a></h2>
+<section id="script-basics">
+<h3>Script Basics<a class="headerlink" href="#script-basics" title="Link to this heading">#</a></h3>
+<p><strong>Problem 55:</strong> What’s the difference between running these two lines in a script?</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Problem 56:</strong> Write the <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> statement to display “Temperature: 72.5 degrees” where 72.5 is stored in a variable called <code class="docutils literal notranslate"><span class="pre">temp</span></code>.</p>
+<p><strong>Problem 57:</strong> You have Fahrenheit temperature stored in variable <code class="docutils literal notranslate"><span class="pre">F</span></code>. Write the code to:</p>
+<ul class="simple">
+<li><p>a) Convert to Celsius: C = (F - 32) × 5/9</p></li>
+<li><p>b) Convert to Kelvin: K = C + 273.15</p></li>
+<li><p>c) Display all three with labels using <code class="docutils literal notranslate"><span class="pre">fprintf</span></code></p></li>
+</ul>
+</section>
+<section id="directory-operations">
+<h3>Directory Operations<a class="headerlink" href="#directory-operations" title="Link to this heading">#</a></h3>
+<p><strong>Problem 58:</strong> Write MATLAB commands to:</p>
+<ul class="simple">
+<li><p>a) Display your current working directory</p></li>
+<li><p>b) Check if a folder called “Data” exists</p></li>
+<li><p>c) Create the folder “Data” if it doesn’t exist</p></li>
+</ul>
+<p><strong>Problem 59:</strong> Rewrite this Windows-specific path using <code class="docutils literal notranslate"><span class="pre">fullfile</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;Results\Figures\plot1.png&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Problem 60:</strong> What command would you use to check if a file called <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> exists?</p>
+</section>
+<section id="reading-data">
+<h3>Reading Data<a class="headerlink" href="#reading-data" title="Link to this heading">#</a></h3>
+<p><strong>Problem 61:</strong> You have a CSV file <code class="docutils literal notranslate"><span class="pre">scores.csv</span></code> with student names and test scores. Write the command to read it into a table variable called <code class="docutils literal notranslate"><span class="pre">studentData</span></code>.</p>
+<p><strong>Problem 62:</strong> After reading an image with <code class="docutils literal notranslate"><span class="pre">img</span> <span class="pre">=</span> <span class="pre">imread('photo.png')</span></code>, how would you:</p>
+<ul class="simple">
+<li><p>a) Display the image</p></li>
+<li><p>b) Extract just the red channel</p></li>
+<li><p>c) Save the red channel as a new image</p></li>
+</ul>
+</section>
+<section id="writing-data">
+<h3>Writing Data<a class="headerlink" href="#writing-data" title="Link to this heading">#</a></h3>
+<p><strong>Problem 63:</strong> You have variables <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">temperature</span></code>. Write the code to save both variables to a MAT file called <code class="docutils literal notranslate"><span class="pre">experiment_data.mat</span></code>.</p>
+<p><strong>Problem 64:</strong> Write code using <code class="docutils literal notranslate"><span class="pre">fopen</span></code>, <code class="docutils literal notranslate"><span class="pre">fprintf</span></code>, and <code class="docutils literal notranslate"><span class="pre">fclose</span></code> to create a text file <code class="docutils literal notranslate"><span class="pre">output.txt</span></code> that contains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Experiment</span> <span class="n">Results</span>
+<span class="n">Average</span><span class="p">:</span> <span class="mf">45.6</span>
+<span class="n">Maximum</span><span class="p">:</span> <span class="mf">89.2</span>
+</pre></div>
+</div>
+<p>where 45.6 is stored in variable <code class="docutils literal notranslate"><span class="pre">avg</span></code> and 89.2 is in variable <code class="docutils literal notranslate"><span class="pre">maxVal</span></code>.</p>
+<p><strong>Problem 65:</strong> Write code to save a figure to a file called <code class="docutils literal notranslate"><span class="pre">results_plot.png</span></code> in a folder called <code class="docutils literal notranslate"><span class="pre">Figures</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="comprehensive-review-problems-all-readings">
+<h2>Comprehensive Review Problems (All Readings)<a class="headerlink" href="#comprehensive-review-problems-all-readings" title="Link to this heading">#</a></h2>
+<p><strong>Problem 66:</strong> Given <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[2</span> <span class="pre">5;</span> <span class="pre">1</span> <span class="pre">3]</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">[4</span> <span class="pre">1;</span> <span class="pre">2</span> <span class="pre">6]</span></code>:</p>
+<ul class="simple">
+<li><p>a) Calculate <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">+</span> <span class="pre">B</span></code></p></li>
+<li><p>b) Calculate <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">.*</span> <span class="pre">B</span></code></p></li>
+<li><p>c) Calculate <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code></p></li>
+<li><p>d) Calculate <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">.^</span> <span class="pre">2</span></code></p></li>
+<li><p>e) Calculate <code class="docutils literal notranslate"><span class="pre">A'</span></code></p></li>
+</ul>
+<p><strong>Problem 67:</strong> Write MATLAB code that would:</p>
+<ul class="simple">
+<li><p>a) Create a row vector from 1 to 20</p></li>
+<li><p>b) Extract every other element (1, 3, 5, …)</p></li>
+<li><p>c) Compute the square of each extracted element</p></li>
+<li><p>d) Calculate the sum of all squared values</p></li>
+</ul>
+<p><strong>Problem 68:</strong> Given <code class="docutils literal notranslate"><span class="pre">vec</span> <span class="pre">=</span> <span class="pre">[8,</span> <span class="pre">3,</span> <span class="pre">15,</span> <span class="pre">6,</span> <span class="pre">12,</span> <span class="pre">9]</span></code>:</p>
+<ul class="simple">
+<li><p>a) Create a logical array showing which values are greater than 7</p></li>
+<li><p>b) Extract only the values greater than 7</p></li>
+<li><p>c) Replace all values less than 10 with 10</p></li>
+<li><p>d) Calculate the mean of the modified vector</p></li>
+</ul>
+<p><strong>Problem 69:</strong> Create the following in MATLAB code:</p>
+<ul class="simple">
+<li><p>a) A 3×3 matrix with 1s on the diagonal and 0s elsewhere</p></li>
+<li><p>b) Multiply this matrix by the vector [5; 10; 15]</p></li>
+<li><p>c) What is special about multiplying by an identity matrix?</p></li>
+</ul>
+<p><strong>Problem 70:</strong> Write complete MATLAB code to:</p>
+<ul class="simple">
+<li><p>a) Create x values from 0 to 10 with 100 points</p></li>
+<li><p>b) Calculate y = sin(x) and z = cos(x)</p></li>
+<li><p>c) Create a figure with two subplots (one above the other)</p></li>
+<li><p>d) Plot y vs x in the first subplot with a red solid line</p></li>
+<li><p>e) Plot z vs x in the second subplot with a blue dashed line</p></li>
+<li><p>f) Add appropriate titles and labels to both subplots</p></li>
+<li><p>g) Add a grid to both plots</p></li>
+</ul>
+<p><strong>Problem 71:</strong> Debug this code that’s supposed to count how many numbers in an array are positive:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">];</span>
+<span class="nb">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">numbers</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="nb">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">count</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="nb">disp</span><span class="p">(</span><span class="nb">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Problem 72:</strong> This code is supposed to find the position of the maximum value in an array. Find and fix the bug:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">];</span>
+<span class="n">maxPos</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">maxVal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxVal</span>
+<span class="w">        </span><span class="n">maxVal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="nb">i</span><span class="p">);</span>
+<span class="w">        </span><span class="n">maxPos</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="nb">disp</span><span class="p">([</span><span class="s">&#39;Maximum value is at position: &#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">num2str</span><span class="p">(</span><span class="n">maxPos</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p><strong>Problem 73:</strong> Which version would run faster for large arrays, and why?</p>
+<p><strong>Version A:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">threshold</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Version B:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">threshold</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Problem 74:</strong> You need to analyze temperature data. Write a script that:</p>
+<ul class="simple">
+<li><p>a) Creates a row vector of 24 temperatures (one per hour) using <code class="docutils literal notranslate"><span class="pre">randi</span></code> between 60 and 90</p></li>
+<li><p>b) Calculates the mean temperature</p></li>
+<li><p>c) Finds how many hours were above 75 degrees</p></li>
+<li><p>d) Creates a plot of temperature vs hour with appropriate labels</p></li>
+<li><p>e) Saves the plot as <code class="docutils literal notranslate"><span class="pre">temperature_analysis.png</span></code></p></li>
+</ul>
+<p><strong>Problem 75:</strong> Write a complete script that:</p>
+<ul class="simple">
+<li><p>a) Checks if a folder <code class="docutils literal notranslate"><span class="pre">Output</span></code> exists, creates it if not</p></li>
+<li><p>b) Generates random data: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">linspace(0,</span> <span class="pre">10,</span> <span class="pre">50)</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">2*x</span> <span class="pre">+</span> <span class="pre">randn(1,50)</span></code></p></li>
+<li><p>c) Saves both x and y to <code class="docutils literal notranslate"><span class="pre">Output/data.mat</span></code></p></li>
+<li><p>d) Creates a scatter plot of y vs x</p></li>
+<li><p>e) Saves the figure to <code class="docutils literal notranslate"><span class="pre">Output/scatter_plot.png</span></code></p></li>
+<li><p>f) Uses <code class="docutils literal notranslate"><span class="pre">fullfile</span></code> for all paths</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="quick-reference-for-students">
+<h2>Quick Reference for Students<a class="headerlink" href="#quick-reference-for-students" title="Link to this heading">#</a></h2>
+<section id="key-syntax-reminders">
+<h3>Key Syntax Reminders:<a class="headerlink" href="#key-syntax-reminders" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MATLAB indexing starts at <strong>1</strong> (not 0)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">;</span></code> to <strong>suppress output</strong></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">;</span></code> to separate <strong>rows</strong> in matrices</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">,</span></code> or spaces to separate <strong>columns</strong> in matrices</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">'</span></code> for <strong>transpose</strong></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">end</span></code> for <strong>last element</strong> or to <strong>close loops/conditionals</strong></p></li>
+<li><p>Element-wise operations need a <strong>dot</strong> (<code class="docutils literal notranslate"><span class="pre">.*,</span> <span class="pre">./,</span> <span class="pre">.^</span></code>)</p></li>
+<li><p>Matrix multiplication uses just <code class="docutils literal notranslate"><span class="pre">*</span></code> (no dot)</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3>Loop Syntax:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">=</span> <span class="pre">1:n</span></code> … <code class="docutils literal notranslate"><span class="pre">end</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">condition</span></code> … <code class="docutils literal notranslate"><span class="pre">end</span></code></p></li>
+<li><p>No indentation required, but <code class="docutils literal notranslate"><span class="pre">end</span></code> is mandatory</p></li>
+</ul>
+</section>
+<section id="file-i-o">
+<h3>File I/O:<a class="headerlink" href="#file-i-o" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">readtable('file.csv')</span></code> for CSV files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">imread('image.png')</span></code> for images</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save('file.mat',</span> <span class="pre">'var1',</span> <span class="pre">'var2')</span></code> for MAT files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fopen</span></code>, <code class="docutils literal notranslate"><span class="pre">fprintf</span></code>, <code class="docutils literal notranslate"><span class="pre">fclose</span></code> for text files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fullfile('folder',</span> <span class="pre">'file.ext')</span></code> for cross-platform paths</p></li>
+</ul>
+</section>
+<section id="common-confusion-points">
+<h3>Common Confusion Points:<a class="headerlink" href="#common-confusion-points" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.*</span></code> vs <code class="docutils literal notranslate"><span class="pre">*</span></code> (element-wise vs matrix multiplication)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B]</span></code> vs <code class="docutils literal notranslate"><span class="pre">[A;</span> <span class="pre">B]</span></code> (horizontal vs vertical concatenation)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ones(3)</span></code> vs <code class="docutils literal notranslate"><span class="pre">eye(3)</span></code> (all ones vs identity matrix)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rand</span></code> vs <code class="docutils literal notranslate"><span class="pre">randn</span></code> vs <code class="docutils literal notranslate"><span class="pre">randi</span></code> (uniform vs normal vs integer)</p></li>
+<li><p>Column-wise vs row-wise operations (default is column-wise)</p></li>
+<li><p>Growing arrays in loops is SLOW - preallocate with <code class="docutils literal notranslate"><span class="pre">zeros</span></code> instead</p></li>
+<li><p>Vectorization is usually faster than loops</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week14A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week14A: User Functions and Modular Programming in MATLAB</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week15A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 15A: Useful MATLAB Toolboxes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-10b-from-python-to-matlab-syntax-and-plotting">Week 10B: From Python to MATLAB - Syntax and Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax-differences">Basic Syntax Differences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-11-debugging-and-loops">Week 11: Debugging and Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-syntax">Loop Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-concepts">Debugging Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-concepts">Performance Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-12a-creating-vectors-and-matrices">Week 12A: Creating Vectors and Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-matrices">Creating Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-matrix-elements">Accessing Matrix Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrix-creating-functions">Special Matrix-Creating Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenating-matrices">Concatenating Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-matrices">Modifying Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-arrays">Reshaping Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-12b-vector-and-matrix-operations">Week 12B: Vector and Matrix Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-operations">Scalar Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operations-and-indexing">Logical Operations and Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-functions">Statistical Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-manipulation-functions">Matrix Manipulation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-functions">Square Matrix Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#week-13a-file-i-o-and-scripts">Week 13A: File I/O and Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#script-basics">Script Basics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directory-operations">Directory Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data">Reading Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-data">Writing Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-review-problems-all-readings">Comprehensive Review Problems (All Readings)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-reference-for-students">Quick Reference for Students</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-syntax-reminders">Key Syntax Reminders:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Loop Syntax:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-confusion-points">Common Confusion Points:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

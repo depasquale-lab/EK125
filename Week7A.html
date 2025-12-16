@@ -1,0 +1,1021 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 7A Preread: Dictionaries and Intro to Pandas &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week7A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 7B Preread: User-Defined Functions and Modular Program introduction" href="Week7B.html" />
+    <link rel="prev" title="Week 6B Preread: Digging into arrays with NumPy" href="Week6B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week7A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 7A Preread: Dictionaries and Intro to Pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pandas">Introduction to Pandas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-7a-preread-dictionaries-and-intro-to-pandas">
+<h1>Week 7A Preread: Dictionaries and Intro to Pandas<a class="headerlink" href="#week-7a-preread-dictionaries-and-intro-to-pandas" title="Link to this heading">#</a></h1>
+<p>A Python dictionary is a built-in data structure that stores data as key–value pairs, allowing fast lookup, insertion, and deletion by key. It is enclosed in curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code> and uses a colon : to separate each key from its value.</p>
+<p>Pandas is a data manipulation library that is built on NumPy. The basic Pandas data structures are <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>. <code class="docutils literal notranslate"><span class="pre">Series</span></code> are essentially one-dimensional arrays and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> are two-dimensional arrays, but the row and/or columns can be labeled. Python dictionaries are commonly used to create Series and DataFrames. In this section, we will first introduce dictionaries, and then in an introduction to Pandas, will use dictionaries to create <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>.</p>
+<p>Dictionaries will be the topic of the morning, and Pandas the afternoon. Thus, only the Dictionaries sections is strictly necessary for the GPP, but reading on both will likely be helpful.</p>
+<section id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading">#</a></h2>
+<p>Dictionaries are a Python data structure, but they are a mapping type, not a sequence.  This is because indexing into a dictionary is accomplished using <strong>keys</strong>, not integers. The type of a dictionary is <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+<p>Dictionaries are created by putting key-value pairs in curly braces (<code class="docutils literal notranslate"><span class="pre">{}</span></code>). Keys are names specified as strings. The pair is specified as a key followed by a colon, followed by the value for that key, as in <code class="docutils literal notranslate"><span class="pre">‘key’:value</span></code>.  The following is an example of a dictionary that stores information about a particular hurricane.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Bertha&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">1952</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Values can be retrieved from a dictionary by giving the name of the dictionary variable and then the name of the key in square brackets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
+<span class="go">1952</span>
+</pre></div>
+</div>
+<p>An error will result if the key does not exist in the dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyError</span><span class="p">:</span> <span class="s1">&#39;size&#39;</span>
+</pre></div>
+</div>
+<p>An error will also occur if you try to index using an integer; values are only referenced using keys.</p>
+<p>Dictionaries are a mutable type. Values can be modified using assignment statements.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span>
+<span class="go">{&#39;name&#39;: &#39;Bertha&#39;, &#39;year&#39;: 1952, &#39;category&#39;: 5}</span>
+</pre></div>
+</div>
+<p>More key-value pairs can be added to a dictionary in the same way.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="p">[</span><span class="s1">&#39;eyewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span>
+<span class="go">{&#39;name&#39;: &#39;Bertha&#39;, &#39;year&#39;: 1952, &#39;category&#39;: 5, &#39;eyewidth&#39;: 400}</span>
+</pre></div>
+</div>
+<p>Key-value pairs can be deleted from a dictionary using the <code class="docutils literal notranslate"><span class="pre">del</span></code> command.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">bigone</span><span class="p">[</span><span class="s1">&#39;eyewidth&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span>
+<span class="go">{&#39;name&#39;: &#39;Bertha&#39;, &#39;year&#39;: 1952, &#39;category&#39;: 5}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> function returns the number of key-value pairs in the dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">bigone</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> operators can be used to find whether a key is in a dictionary or not.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;year&#39;</span> <span class="ow">in</span> <span class="n">bigone</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;sqarea&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bigone</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> function will return a list of all of the key names from a dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">bigone</span><span class="p">)</span>
+<span class="go">[&#39;name&#39;, &#39;year&#39;, &#39;category&#39;]</span>
+</pre></div>
+</div>
+<p>There are a number of methods that work with dictionaries.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get</span></code> method retrieves a value from a dictionary; it returns <code class="docutils literal notranslate"><span class="pre">None</span></code> by default if the key is not in the dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
+<span class="go">1952</span>
+</pre></div>
+</div>
+<p>If the key is not in the dictionary, the value <code class="docutils literal notranslate"><span class="pre">None</span></code> that is returned is not automatically shown, but can be printed, or tested in a selection statement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bigone</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">))</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+<p>A value other than <code class="docutils literal notranslate"><span class="pre">None</span></code> can also be specified to be used if the key is not in the dictionary, e.g. a flag value of -999.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">999</span><span class="p">)</span>
+<span class="go">-999</span>
+</pre></div>
+</div>
+<p>Note that this does not add a key-value pair to the dictionary.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get</span></code> method is therefore safer to use than just putting a key name in square brackets, since get will return a value if the key is not found, whereas using square brackets will result in an error if the key is not found.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pop</span></code> method deletes an item from a dictionary and returns its value. A default value to return can be specified in case the key is not in the dictionary; if the default is not specified and the key is not found in the dictionary, an error results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">delcat</span> <span class="o">=</span> <span class="n">bigone</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delcat</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span>
+<span class="go">{&#39;name&#39;: &#39;Bertha&#39;, &#39;year&#39;: 1952}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">)</span>
+<span class="go">KeyError: &#39;size&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">999</span><span class="p">)</span>
+<span class="go">-999</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">popitem</span></code> method deletes the last key-value pair in a dictionary, and returns this as a tuple.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">bigone</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+<span class="go">year 1952</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">clear</span></code> method deletes all of the key-value pairs from a dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span>
+<span class="go">{}</span>
+</pre></div>
+</div>
+<p>There are also methods that can be used to iterate: <code class="docutils literal notranslate"><span class="pre">keys()</span></code>, <code class="docutils literal notranslate"><span class="pre">values()</span></code>, and <code class="docutils literal notranslate"><span class="pre">items()</span></code>, for the dictionary’s keys, values, and key-value pairs, respectively.</p>
+<p>For example, the following call to the keys method returns the names of the keys. Technically, it returns a <code class="docutils literal notranslate"><span class="pre">view</span></code> object, <code class="docutils literal notranslate"><span class="pre">dict_keys</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Bertha&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">1952</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bigone</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys([&#39;name&#39;, &#39;year&#39;, &#39;category&#39;])</span>
+</pre></div>
+</div>
+<p>Normally, the <code class="docutils literal notranslate"><span class="pre">view</span></code> object would not be accessed or displayed, however. Instead, it would be typical to iterate over the result.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">kname</span> <span class="ow">in</span> <span class="n">bigone</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The key is&#39;</span><span class="p">,</span> <span class="n">kname</span><span class="p">)</span>
+<span class="n">The</span> <span class="n">key</span> <span class="ow">is</span> <span class="n">name</span>
+<span class="n">The</span> <span class="n">key</span> <span class="ow">is</span> <span class="n">year</span>
+<span class="n">The</span> <span class="n">key</span> <span class="ow">is</span> <span class="n">category</span>
+</pre></div>
+</div>
+<p>To loop over the key-value pairs, the <code class="docutils literal notranslate"><span class="pre">items</span></code> method is used, and two iterator variables are created to store the keys and values individually.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bigone</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The value of&#39;</span><span class="p">,</span><span class="nb">repr</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="s1">&#39;is&#39;</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+<span class="n">The</span> <span class="n">value</span> <span class="n">of</span> <span class="s1">&#39;name&#39;</span> <span class="ow">is</span> <span class="n">Bertha</span>
+<span class="n">The</span> <span class="n">value</span> <span class="n">of</span> <span class="s1">&#39;year&#39;</span> <span class="ow">is</span> <span class="mi">1952</span>
+<span class="n">The</span> <span class="n">value</span> <span class="n">of</span> <span class="s1">&#39;category&#39;</span> <span class="ow">is</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>We have stored information about one hurricane in a dictionary.  In order to store information on more than one hurricane, we could create a list of dictionaries.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hurr0</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bertha&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">1952</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hurr1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">1990</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hurr2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Camilla&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">1960</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hurricanes</span> <span class="o">=</span> <span class="p">[</span><span class="n">hurr0</span><span class="p">,</span> <span class="n">hurr1</span><span class="p">,</span> <span class="n">hurr2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hurricanes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># show example</span>
+<span class="go">{&#39;name&#39;: &#39;Camilla&#39;, &#39;year&#39;: 1960, &#39;category&#39;: 5}</span>
+</pre></div>
+</div>
+<p>Once we have a list of dictionaries, we could iterate through the list, for example to print information on the more powerful hurricanes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The largest hurricanes were:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">hurr</span> <span class="ow">in</span> <span class="n">hurricanes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">hurr</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">hurr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]))</span>
+<span class="n">The</span> <span class="n">largest</span> <span class="n">hurricanes</span> <span class="n">were</span><span class="p">:</span>
+<span class="s1">&#39;Bertha&#39;</span>
+<span class="s1">&#39;Camilla&#39;</span>
+</pre></div>
+</div>
+<p>It is also possible for values in a dictionary to be data structures themselves. This has already been done, since strings are a sequence data type. Another possibility would be to have a list as a value.  Note also in this example that each key-value pair is entered on a separate line, which makes it easier to read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">icdessert</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;flavor&#39;</span><span class="p">:</span> <span class="s1">&#39;malted&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;cone&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;nscoops&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;addins&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pecans&#39;</span><span class="p">,</span> <span class="s1">&#39;chocolate chips&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">icdessert</span><span class="p">[</span><span class="s1">&#39;addins&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;pecans&#39;</span><span class="p">,</span> <span class="s1">&#39;chocolate chips&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Since the key <code class="docutils literal notranslate"><span class="pre">addins</span></code> is a list, it can be indexed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">icdessert</span><span class="p">[</span><span class="s1">&#39;addins&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;pecans&#39;</span>
+</pre></div>
+</div>
+<p>We could use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to print the elements from the list individually.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your ice cream add-ins are:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">yummy</span> <span class="ow">in</span> <span class="n">icdessert</span><span class="p">[</span><span class="s1">&#39;addins&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">yummy</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span><span class="s1">&#39;!!!&#39;</span><span class="p">)</span>
+<span class="n">Your</span> <span class="n">ice</span> <span class="n">cream</span> <span class="n">add</span><span class="o">-</span><span class="n">ins</span> <span class="n">are</span><span class="p">:</span>
+<span class="n">Pecans</span> <span class="err">!!!</span>
+<span class="n">Chocolate</span> <span class="n">Chips</span> <span class="err">!!!</span>
+</pre></div>
+</div>
+<p>For a dictionary comprehension, key-value pairs must be created.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cubedict</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="o">**</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cubedict</span>
+<span class="go">{0: 0, 1: 1, 2: 8, 3: 27, 4: 64}</span>
+</pre></div>
+</div>
+</section>
+<section id="introduction-to-pandas">
+<h2>Introduction to Pandas<a class="headerlink" href="#introduction-to-pandas" title="Link to this heading">#</a></h2>
+<p>The morning GPP will strictly be on dictionaries, but the homework will cover Pandas, which will also be the topic of the lecture. So this reading is strictly optional (i.e., you don’t need it for the preclass assessment) but it will likely be useful.</p>
+<p>Since Pandas is built on NumPy, they are frequently imported together using the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<p>The rest of this section will assume that these have been imported.</p>
+<section id="series">
+<h3>Series<a class="headerlink" href="#series" title="Link to this heading">#</a></h3>
+<p>A Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> is a one-dimensional array that can be created using a list or an array. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numseries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numseries</span>
+<span class="go">0    11</span>
+<span class="go">1    33</span>
+<span class="go">2    15</span>
+<span class="go">3     2</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Notice that the indices are explicitly listed as part of the Series (which must be capitalized) and that the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is also stored in the variable and displayed.</p>
+<p>The numbers can be accessed using values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numseries</span><span class="o">.</span><span class="n">values</span>
+<span class="go">array([11, 33, 15,  2])</span>
+</pre></div>
+</div>
+<p>You can see that it is stored as a NumPy array.  You can index into the Series and slice it, just like in Python and NumPy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">11</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numseries</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">1    33</span>
+<span class="go">2    15</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>The indices can be accessed using index, although the result might not be what you would expect!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numseries</span><span class="o">.</span><span class="n">index</span>
+<span class="go">RangeIndex(start=0, stop=4, step=1)</span>
+</pre></div>
+</div>
+<p>From this you can see that the indices are a <code class="docutils literal notranslate"><span class="pre">range</span></code> beginning at 0. Indices can also be specified.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numlabels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numlabels</span>
+<span class="go">a    11</span>
+<span class="go">b    33</span>
+<span class="go">c    15</span>
+<span class="go">d     2</span>
+<span class="go">dtype: int64</span>
+<span class="go">The labels can then be used to index and slice into the Series. </span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numlabels</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="go">15</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numlabels</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
+<span class="go">b    33</span>
+<span class="go">c    15</span>
+<span class="go">d     2</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Implicit integer indices can also be used to index and to slice into the Series. Notice, however, that using <code class="docutils literal notranslate"><span class="pre">'b':'d'</span></code> returns 3 rows, whereas [1:3] only returns 2 (like Python and NumPy).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numlabels</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">b    33</span>
+<span class="go">c    15</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>A Series can also be created using a dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numlab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">numdict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numlab</span>
+<span class="go">a    11</span>
+<span class="go">b    33</span>
+<span class="go">c    15</span>
+<span class="go">d     2</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<section id="dataframes">
+<h4>DataFrames<a class="headerlink" href="#dataframes" title="Link to this heading">#</a></h4>
+<p>A Pandas DataFrame looks like a two-dimensional array with labels for the rows and the columns. A DataFrame can be constructed from a single Series, for example from above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">numlab</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Nums&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nl</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Nums</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td><p>33</p></td>
+</tr>
+<tr class="row-even"><td><p>c</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>d</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>DataFrames usually have multiple columns, however.</p>
+<p>Let’s create a DataFrame with information on students by constructing multiple Series using dictionaries.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">id_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Joey&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="mi">234</span><span class="p">,</span> <span class="s1">&#39;Juanita&#39;</span><span class="p">:</span> <span class="mi">456</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">:</span> <span class="mi">678</span><span class="p">}</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">id_dict</span><span class="p">)</span>
+<span class="n">exam1_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Joey&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">,</span> <span class="s1">&#39;Javier&#39;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> <span class="s1">&#39;Juanita&#39;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+<span class="n">exam1s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">exam1_dict</span><span class="p">)</span>
+<span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span> <span class="s1">&#39;Exam1&#39;</span><span class="p">:</span> <span class="n">exam1s</span><span class="p">})</span>
+<span class="n">students</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>ID</p></th>
+<th class="head"><p>Exam1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Joey</p></td>
+<td><p>123</p></td>
+<td><p>95</p></td>
+</tr>
+<tr class="row-odd"><td><p>Javier</p></td>
+<td><p>234</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>Juanita</p></td>
+<td><p>456</p></td>
+<td><p>88</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jane</p></td>
+<td><p>678</p></td>
+<td><p>100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The index attribute shows the indices, which are in an Index object that stores the row labels.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">index</span>
+<span class="go">Index([&#39;Joey&#39;, &#39;Javier&#39;, &#39;Juanita&#39;, &#39;Jane&#39;], dtype=&#39;object&#39;)</span>
+</pre></div>
+</div>
+<p>The columns attribute shows the indices, which are in an Index object that stores the column labels.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">columns</span>
+<span class="go">Index([&#39;ID&#39;, &#39;Exam1&#39;], dtype=&#39;object&#39;)</span>
+</pre></div>
+</div>
+<p>The values attribute returns the numbers in the two columns as a 2D array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">values</span>
+<span class="go">array([[123,  95],</span>
+<span class="go">       [234,  99],</span>
+<span class="go">       [456,  88],</span>
+<span class="go">       [678, 100]])</span>
+</pre></div>
+</div>
+<p>In order to access a column in the DataFrame, the column name can be specified in two ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idcol</span> <span class="o">=</span> <span class="n">students</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idcol</span>
+<span class="go">Joey       123</span>
+<span class="go">Javier     234</span>
+<span class="go">Juanita    456</span>
+<span class="go">Jane       678</span>
+<span class="go">Name: ID, dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idcol</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">ID</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idcol</span>
+<span class="go">Joey       123</span>
+<span class="go">Javier     234</span>
+<span class="go">Juanita    456</span>
+<span class="go">Jane       678</span>
+<span class="go">Name: ID, dtype: int64</span>
+</pre></div>
+</div>
+<p>Note that this is a Series. Then, to access an individual Id from the Series, we can index using the implicit integer index or using the row label.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idcol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">123</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idcol</span><span class="p">[</span><span class="s1">&#39;Javier&#39;</span><span class="p">]</span>
+<span class="go">234</span>
+</pre></div>
+</div>
+<p>Of course, it is not necessary to extract the column first before indexing to get an individual value. These can be combined.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">ID</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">123</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">][</span><span class="s1">&#39;Jane&#39;</span><span class="p">]</span>
+<span class="go">678</span>
+</pre></div>
+</div>
+<p>In order to access a row in a DataFrame, the iloc method can be used with an implicit index, or the loc method can be used with a label.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Juanita&#39;</span><span class="p">]</span>
+<span class="go">ID       456</span>
+<span class="go">Exam1     88</span>
+<span class="go">Name: Juanita, dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">ID       456</span>
+<span class="go">Exam1     88</span>
+<span class="go">Name: Juanita, dtype: int64</span>
+</pre></div>
+</div>
+<p>Note that this is a Series.</p>
+<p>There are several functions and methods that can be used to find the dimensions of a DataFrame. The <code class="docutils literal notranslate"><span class="pre">len</span> </code>function can be used to find the number of rows, and by specifying <code class="docutils literal notranslate"><span class="pre">.columns</span></code> the number of columns.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">shape</span></code> method will return both dimensions as a tuple.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 2)</span>
+</pre></div>
+</div>
+<p>A column can be added to the DataFrame as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="p">[</span><span class="s1">&#39;Exam2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">97</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">students</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>ID</p></th>
+<th class="head"><p>Exam1</p></th>
+<th class="head"><p>Exam2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Joey</p></td>
+<td><p>123</p></td>
+<td><p>95</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Javier</p></td>
+<td><p>234</p></td>
+<td><p>99</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>Juanita</p></td>
+<td><p>456</p></td>
+<td><p>88</p></td>
+<td><p>98</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jane</p></td>
+<td><p>678</p></td>
+<td><p>100</p></td>
+<td><p>97</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Column(s) can be deleted using the drop method. This must be assigned to the DataFrame object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span> <span class="o">=</span> <span class="n">students</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">students</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Exam1</p></th>
+<th class="head"><p>Exam2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Joey</p></td>
+<td><p>95</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Javier</p></td>
+<td><p>99</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>Juanita</p></td>
+<td><p>88</p></td>
+<td><p>98</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jane</p></td>
+<td><p>100</p></td>
+<td><p>97</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Statistical methods that can be used include <code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">sum()</span></code>, <code class="docutils literal notranslate"><span class="pre">min()</span></code>, <code class="docutils literal notranslate"><span class="pre">max()</span></code>, <code class="docutils literal notranslate"><span class="pre">std()</span></code>, and <code class="docutils literal notranslate"><span class="pre">var()</span></code>. They can be used with the entire DataFrame, or an individual column.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">Exam1    95.5</span>
+<span class="go">Exam2    98.5</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>If a DataFrame object is large, which it frequently will be if read from a file, the first 5 rows can be viewed using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> method, and the last 5 rows can be viewed using the <code class="docutils literal notranslate"><span class="pre">tail()</span></code> method.</p>
+<p>Frequently <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> are created by reading in data from a .csv (comma separated value) file or spreadsheet file, which we will focus on later in the class.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week6B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 6B Preread: Digging into arrays with NumPy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week7B.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 7B Preread: User-Defined Functions and Modular Program introduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pandas">Introduction to Pandas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

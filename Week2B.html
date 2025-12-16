@@ -1,0 +1,1351 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Class 2B: Booleans and Basic Logic &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week2B';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week3A Preread: Coding Basics Wrap-up and Selection Statements" href="Week3A.html" />
+    <link rel="prev" title="Class 2A: Sequences, Strings, and Lists in Python" href="Week2A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week2B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Class 2B: Booleans and Basic Logic</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-booleans">1. Introduction to Booleans</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-context">Historical Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values-in-memory">Boolean Values in Memory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intelligent-naming-of-boolean-variables">2. Intelligent Naming of Boolean Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-golden-rule-boolean-names-should-ask-questions">The Golden Rule: Boolean Names Should Ask Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-boolean-naming-patterns">Common Boolean Naming Patterns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-and-after-examples">Before and After Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-boolean-names-use-with-caution">Negative Boolean Names - Use with Caution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-function-names">Boolean Function Names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-operators">3. Comparison Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-different-data-types">Comparing Different Data Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chaining-comparisons">Chaining Comparisons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-operators">4. Boolean Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-operator-and">AND Operator (<code class="docutils literal notranslate"><span class="pre">and</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-operator-or">OR Operator (<code class="docutils literal notranslate"><span class="pre">or</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-operator-not">NOT Operator (<code class="docutils literal notranslate"><span class="pre">not</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#truth-tables">5. Truth Tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-truth-table">AND Truth Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-truth-table">OR Truth Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-truth-table">NOT Truth Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-truth-table-example">Complex Truth Table Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-precedence-and-parentheses">6. Operator Precedence and Parentheses</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practice-use-parentheses-for-clarity">Best Practice: Use Parentheses for Clarity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-circuit-evaluation">7. Short-Circuit Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-short-circuiting">AND Short-Circuiting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-short-circuiting">OR Short-Circuiting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">Practical Applications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-booleans-in-conditional-statements">8. Using Booleans in Conditional Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-conditions">Simple Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-decision-trees">Complex Decision Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guard-clauses">Guard Clauses</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-and-best-practices">9. Common Pitfalls and Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-vs-equality">Assignment vs. Equality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-to-boolean-values">Comparing to Boolean Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#truthy-and-falsy-values">Truthy and Falsy Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-morgan-s-laws">De Morgan’s Laws</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-boolean-patterns">10. Advanced Boolean Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ternary-operator">The Ternary Operator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-condition-checking">Multiple Condition Checking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions-for-self-check">11. Practice Questions for Self-Check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-applications">12. Real-World Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-authentication">User Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-rules">Business Rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">Data Validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead">Looking Ahead</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="class-2b-booleans-and-basic-logic">
+<h1>Class 2B: Booleans and Basic Logic<a class="headerlink" href="#class-2b-booleans-and-basic-logic" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this reading, you should understand:</p>
+<ul class="simple">
+<li><p>What Boolean values are and how they work</p></li>
+<li><p>How to name Boolean variables intelligently</p></li>
+<li><p>Boolean operators (and, or, not)</p></li>
+<li><p>Comparison operators and their behavior with different data types</p></li>
+<li><p>How to use Booleans in conditional statements</p></li>
+<li><p>Truth tables for logical operations</p></li>
+<li><p>Operator precedence in Boolean expressions</p></li>
+<li><p>Short-circuit evaluation</p></li>
+<li><p>Advanced Boolean patterns and best practices</p></li>
+</ul>
+</section>
+<section id="introduction-to-booleans">
+<h2>1. Introduction to Booleans<a class="headerlink" href="#introduction-to-booleans" title="Link to this heading">#</a></h2>
+<p>A Boolean is a data type that can only have two values: <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Named after mathematician George Boole (1815-1864), Booleans are fundamental to programming logic and decision-making. In computer science, Booleans form the foundation of all logical operations and control flow.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">isRaining</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">isWeekend</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">isRaining</span><span class="p">))</span>  <span class="c1"># &lt;class &#39;bool&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">isRaining</span><span class="p">,</span> <span class="nb">bool</span><span class="p">))</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+<section id="historical-context">
+<h3>Historical Context<a class="headerlink" href="#historical-context" title="Link to this heading">#</a></h3>
+<p>George Boole developed Boolean algebra in the mid-19th century as a way to represent logic mathematically. This work became crucial for computer science, as digital computers operate using binary logic (on/off, 1/0, true/false).</p>
+</section>
+<section id="boolean-values-in-memory">
+<h3>Boolean Values in Memory<a class="headerlink" href="#boolean-values-in-memory" title="Link to this heading">#</a></h3>
+<p>In Python, <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> are actually special instances of integers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>   <span class="c1"># 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="kc">True</span> <span class="o">+</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># 2 (Don&#39;t ever do this, it&#39;s wrong and python is bad for allowing it. It should be ashamed.)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="intelligent-naming-of-boolean-variables">
+<h2>2. Intelligent Naming of Boolean Variables<a class="headerlink" href="#intelligent-naming-of-boolean-variables" title="Link to this heading">#</a></h2>
+<p>One of the most important skills in programming is choosing clear, descriptive names for your Boolean variables. A well-named Boolean variable should pose a question that the Boolean value answers.</p>
+<section id="the-golden-rule-boolean-names-should-ask-questions">
+<h3>The Golden Rule: Boolean Names Should Ask Questions<a class="headerlink" href="#the-golden-rule-boolean-names-should-ask-questions" title="Link to this heading">#</a></h3>
+<p><strong>Good Boolean names clearly indicate what <code class="docutils literal notranslate"><span class="pre">True</span></code> means:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Excellent Boolean names - crystal clear what True means</span>
+<span class="n">hasCats</span> <span class="o">=</span> <span class="kc">True</span>          <span class="c1"># User has cats</span>
+<span class="n">isValid</span> <span class="o">=</span> <span class="kc">True</span>          <span class="c1"># Something is valid  </span>
+<span class="n">isLoggedIn</span> <span class="o">=</span> <span class="kc">False</span>      <span class="c1"># User is logged in</span>
+<span class="n">canDrive</span> <span class="o">=</span> <span class="kc">True</span>         <span class="c1"># Person can drive</span>
+<span class="n">hasPermission</span> <span class="o">=</span> <span class="kc">False</span>   <span class="c1"># User has permission</span>
+<span class="n">isComplete</span> <span class="o">=</span> <span class="kc">True</span>       <span class="c1"># Task is complete</span>
+<span class="n">shouldContinue</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Program should continue</span>
+</pre></div>
+</div>
+<p><strong>Poor Boolean names - ambiguous what <code class="docutils literal notranslate"><span class="pre">True</span></code> means:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bad Boolean names - unclear what True represents</span>
+<span class="n">cats</span> <span class="o">=</span> <span class="kc">True</span>            <span class="c1"># Does this mean &quot;has cats&quot;? &quot;likes cats&quot;? &quot;is a cat&quot;?</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>          <span class="c1"># What is valid? The input? The user? The state?</span>
+<span class="n">user</span> <span class="o">=</span> <span class="kc">True</span>            <span class="c1"># Is this a user? Does a user exist? Is user active?</span>
+<span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>         <span class="c1"># What status? What does False mean for status?</span>
+</pre></div>
+</div>
+</section>
+<section id="common-boolean-naming-patterns">
+<h3>Common Boolean Naming Patterns<a class="headerlink" href="#common-boolean-naming-patterns" title="Link to this heading">#</a></h3>
+<p><strong>1. <code class="docutils literal notranslate"><span class="pre">has</span></code> prefix - indicates possession or presence:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hasChildren</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hasInsurance</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">hasValidLicense</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hasRequiredPermissions</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p><strong>2. <code class="docutils literal notranslate"><span class="pre">is</span></code> prefix - indicates state or condition:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">isAdult</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">isActive</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">isVisible</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">isAuthenticated</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p><strong>3. <code class="docutils literal notranslate"><span class="pre">can</span></code> prefix - indicates ability or permission:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">canEdit</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">canDelete</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">canAccessAdmin</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">canWithdraw</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p><strong>4. <code class="docutils literal notranslate"><span class="pre">should</span></code> prefix - indicates recommended action:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">shouldSaveFile</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">shouldShowWarning</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">shouldRetry</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">shouldExit</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p><strong>5. <code class="docutils literal notranslate"><span class="pre">will</span></code> prefix - indicates future action:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">willExpire</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">willOverwrite</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">willSendEmail</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="before-and-after-examples">
+<h3>Before and After Examples<a class="headerlink" href="#before-and-after-examples" title="Link to this heading">#</a></h3>
+<p><strong>Poor naming:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">adult</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span>        <span class="c1"># Unclear: is this person an adult?</span>
+<span class="n">weekend</span> <span class="o">=</span> <span class="n">dayOfWeek</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;sunday&quot;</span><span class="p">]</span>  <span class="c1"># Unclear meaning</span>
+<span class="n">rain</span> <span class="o">=</span> <span class="n">weatherData</span><span class="p">[</span><span class="s2">&quot;precipitation&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="c1"># Ambiguous</span>
+</pre></div>
+</div>
+<p><strong>Better naming:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">isAdult</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span>           <span class="c1"># Clear: person is an adult</span>
+<span class="n">isWeekend</span> <span class="o">=</span> <span class="n">dayOfWeek</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;sunday&quot;</span><span class="p">]</span>  <span class="c1"># Clear: today is weekend</span>
+<span class="n">isRaining</span> <span class="o">=</span> <span class="n">weatherData</span><span class="p">[</span><span class="s2">&quot;precipitation&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>     <span class="c1"># Clear: it is raining</span>
+</pre></div>
+</div>
+</section>
+<section id="negative-boolean-names-use-with-caution">
+<h3>Negative Boolean Names - Use with Caution<a class="headerlink" href="#negative-boolean-names-use-with-caution" title="Link to this heading">#</a></h3>
+<p>Be careful with negative Boolean names as they can create confusing double negatives:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Confusing negative naming</span>
+<span class="n">isNotLoggedIn</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">isNotLoggedIn</span><span class="p">:</span>  <span class="c1"># Double negative - hard to read!</span>
+    <span class="n">showDashboard</span><span class="p">()</span>
+
+<span class="c1"># Better positive naming</span>
+<span class="n">isLoggedIn</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">isLoggedIn</span><span class="p">:</span>  <span class="c1"># Much clearer!</span>
+    <span class="n">showDashboard</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>When negative names make sense:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sometimes negative names are more natural</span>
+<span class="n">isEmpty</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">isInvalid</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">isValidFormat</span><span class="p">(</span><span class="n">userInput</span><span class="p">)</span>
+<span class="n">isDisabled</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">userAccount</span><span class="o">.</span><span class="n">isActive</span>
+</pre></div>
+</div>
+</section>
+<section id="boolean-function-names">
+<h3>Boolean Function Names<a class="headerlink" href="#boolean-function-names" title="Link to this heading">#</a></h3>
+<p>Functions that return Booleans should also follow question-naming patterns:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">isValidEmail</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;@&quot;</span> <span class="ow">in</span> <span class="n">email</span> <span class="ow">and</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">email</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hasEnoughFunds</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">amount</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">canAccessResource</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">isActive</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">hasPermission</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">shouldShowDisclaimer</span><span class="p">(</span><span class="n">userAge</span><span class="p">,</span> <span class="n">hasAcceptedTerms</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">userAge</span> <span class="o">&lt;</span> <span class="mi">18</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">hasAcceptedTerms</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comparison-operators">
+<h2>3. Comparison Operators<a class="headerlink" href="#comparison-operators" title="Link to this heading">#</a></h2>
+<p>Comparison operators evaluate relationships between values and return Boolean results. These operators work with various data types, not just numbers.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p>Equal to</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(5</span> <span class="pre">==</span> <span class="pre">5)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">!=</span></code></p></td>
+<td><p>Not equal to</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(5</span> <span class="pre">!=</span> <span class="pre">3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Greater than</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(7</span> <span class="pre">&gt;</span> <span class="pre">3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Less than</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(2</span> <span class="pre">&lt;</span> <span class="pre">8)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>Greater than or equal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(5</span> <span class="pre">&gt;=</span> <span class="pre">5)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>Less than or equal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(3</span> <span class="pre">&lt;=</span> <span class="pre">7)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="comparing-different-data-types">
+<h3>Comparing Different Data Types<a class="headerlink" href="#comparing-different-data-types" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numbers</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">canVote</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span>  <span class="c1"># True</span>
+<span class="n">isMinor</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span>   <span class="c1"># False</span>
+
+<span class="c1"># Strings (lexicographic comparison)</span>
+<span class="n">name1</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">name2</span> <span class="o">=</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">name1</span> <span class="o">&lt;</span> <span class="n">name2</span><span class="p">)</span>  <span class="c1"># True (A comes before B alphabetically)</span>
+
+<span class="c1"># String length comparisons</span>
+<span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;world&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span>  <span class="c1"># True (both have 5 characters)</span>
+
+<span class="c1"># Case sensitivity matters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span> <span class="o">==</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>  <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+<section id="chaining-comparisons">
+<h3>Chaining Comparisons<a class="headerlink" href="#chaining-comparisons" title="Link to this heading">#</a></h3>
+<p>Python allows chaining comparisons, which is both powerful and readable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="c1"># Instead of: (score &gt;= 80) and (score &lt; 90)</span>
+<span class="n">isB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span> <span class="o">&lt;=</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">)</span>  <span class="c1"># True - much cleaner!</span>
+
+<span class="n">temperature</span> <span class="o">=</span> <span class="mi">72</span>
+<span class="n">isComfortable</span> <span class="o">=</span> <span class="p">(</span><span class="mi">65</span> <span class="o">&lt;=</span> <span class="n">temperature</span> <span class="o">&lt;=</span> <span class="mi">75</span><span class="p">)</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="boolean-operators">
+<h2>4. Boolean Operators<a class="headerlink" href="#boolean-operators" title="Link to this heading">#</a></h2>
+<section id="and-operator-and">
+<h3>AND Operator (<code class="docutils literal notranslate"><span class="pre">and</span></code>)<a class="headerlink" href="#and-operator-and" title="Link to this heading">#</a></h3>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> only when both conditions are <code class="docutils literal notranslate"><span class="pre">True</span></code>. This is like requiring two keys to open a lock.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hasLicense</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hasInsurance</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hasRegistration</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">canDrive</span> <span class="o">=</span> <span class="n">hasLicense</span> <span class="ow">and</span> <span class="n">hasInsurance</span> <span class="ow">and</span> <span class="n">hasRegistration</span>  <span class="c1"># True</span>
+
+<span class="c1"># Real-world example</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">hasJob</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">creditScore</span> <span class="o">=</span> <span class="mi">750</span>
+<span class="n">canGetLoan</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">)</span> <span class="ow">and</span> <span class="n">hasJob</span> <span class="ow">and</span> <span class="p">(</span><span class="n">creditScore</span> <span class="o">&gt;=</span> <span class="mi">700</span><span class="p">)</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+<section id="or-operator-or">
+<h3>OR Operator (<code class="docutils literal notranslate"><span class="pre">or</span></code>)<a class="headerlink" href="#or-operator-or" title="Link to this heading">#</a></h3>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when at least one condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>. This is like having multiple ways to achieve something.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">isWeekend</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">isHoliday</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">isSick</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">canSleepIn</span> <span class="o">=</span> <span class="n">isWeekend</span> <span class="ow">or</span> <span class="n">isHoliday</span> <span class="ow">or</span> <span class="n">isSick</span>  <span class="c1"># True</span>
+
+<span class="c1"># Real-world example</span>
+<span class="n">hasCollegeDegree</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">hasExperience</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hasCertification</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">isQualified</span> <span class="o">=</span> <span class="n">hasCollegeDegree</span> <span class="ow">or</span> <span class="p">(</span><span class="n">hasExperience</span> <span class="ow">and</span> <span class="n">hasCertification</span><span class="p">)</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+<section id="not-operator-not">
+<h3>NOT Operator (<code class="docutils literal notranslate"><span class="pre">not</span></code>)<a class="headerlink" href="#not-operator-not" title="Link to this heading">#</a></h3>
+<p>Reverses the Boolean value. This is useful for expressing negative conditions clearly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">isRaining</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">isSunny</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">isRaining</span>  <span class="c1"># True</span>
+
+<span class="c1"># Multiple negations can be confusing - be careful!</span>
+<span class="n">isNotUnavailable</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="ow">not</span> <span class="n">isRaining</span><span class="p">)</span>  <span class="c1"># Same as isRaining</span>
+
+<span class="c1"># Better to use positive logic when possible</span>
+<span class="n">isAvailable</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Clearer than isNotUnavailable = not isUnavailable</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="truth-tables">
+<h2>5. Truth Tables<a class="headerlink" href="#truth-tables" title="Link to this heading">#</a></h2>
+<p>Understanding truth tables is crucial for predicting Boolean expression results.</p>
+<section id="and-truth-table">
+<h3>AND Truth Table<a class="headerlink" href="#and-truth-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>AND</strong></p></th>
+<th class="head"><p>A=False</p></th>
+<th class="head"><p>A=True</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>B=False</p></td>
+<td><p><strong>False</strong></p></td>
+<td><p><strong>False</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>B=True</p></td>
+<td><p><strong>False</strong></p></td>
+<td><p><strong>True</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="or-truth-table">
+<h3>OR Truth Table<a class="headerlink" href="#or-truth-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>OR</strong></p></th>
+<th class="head"><p>A=False</p></th>
+<th class="head"><p>A=True</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>B=False</p></td>
+<td><p><strong>False</strong></p></td>
+<td><p><strong>True</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>B=True</p></td>
+<td><p><strong>True</strong></p></td>
+<td><p><strong>True</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="not-truth-table">
+<h3>NOT Truth Table<a class="headerlink" href="#not-truth-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>NOT</strong></p></th>
+<th class="head"><p><strong>Result</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A=False</p></td>
+<td><p><strong>True</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>A=True</p></td>
+<td><p><strong>False</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="complex-truth-table-example">
+<h3>Complex Truth Table Example<a class="headerlink" href="#complex-truth-table-example" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s trace through: (A and B) or (not C)</span>
+<span class="c1"># When A=True, B=False, C=True</span>
+<span class="n">A</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">B</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">C</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">step1</span> <span class="o">=</span> <span class="n">A</span> <span class="ow">and</span> <span class="n">B</span>      <span class="c1"># True and False = False</span>
+<span class="n">step2</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">C</span>        <span class="c1"># not True = False</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">step1</span> <span class="ow">or</span> <span class="n">step2</span>  <span class="c1"># False or False = False</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="operator-precedence-and-parentheses">
+<h2>6. Operator Precedence and Parentheses<a class="headerlink" href="#operator-precedence-and-parentheses" title="Link to this heading">#</a></h2>
+<p>Just like mathematical operators, Boolean operators have precedence rules:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">not</span></code> (highest precedence)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">or</span></code> (lowest precedence)</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># These expressions are equivalent:</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="ow">not</span> <span class="kc">True</span> <span class="ow">or</span> <span class="kc">False</span> <span class="ow">and</span> <span class="kc">True</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="p">(</span><span class="ow">not</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="kc">False</span> <span class="ow">and</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># False or False = False</span>
+
+<span class="c1"># But this is different:</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="kc">True</span> <span class="ow">or</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="kc">True</span>  <span class="c1"># not True and True = False</span>
+</pre></div>
+</div>
+<section id="best-practice-use-parentheses-for-clarity">
+<h3>Best Practice: Use Parentheses for Clarity<a class="headerlink" href="#best-practice-use-parentheses-for-clarity" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hard to read</span>
+<span class="n">eligibleForDiscount</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">)</span> <span class="ow">or</span> <span class="n">isStudent</span> <span class="ow">and</span> <span class="n">hasValidId</span> <span class="ow">or</span> <span class="n">isVeteran</span>
+
+<span class="c1"># Much clearer</span>
+<span class="n">eligibleForDiscount</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">isStudent</span> <span class="ow">and</span> <span class="n">hasValidId</span><span class="p">)</span> <span class="ow">or</span> <span class="n">isVeteran</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="short-circuit-evaluation">
+<h2>7. Short-Circuit Evaluation<a class="headerlink" href="#short-circuit-evaluation" title="Link to this heading">#</a></h2>
+<p>Python uses short-circuit evaluation, meaning it stops evaluating as soon as the result is determined.</p>
+<section id="and-short-circuiting">
+<h3>AND Short-Circuiting<a class="headerlink" href="#and-short-circuiting" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">expensiveFunction</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is expensive to compute!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="n">hasPermission</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1"># expensiveFunction() is never called because hasPermission is False</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">hasPermission</span> <span class="ow">and</span> <span class="n">expensiveFunction</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="or-short-circuiting">
+<h3>OR Short-Circuiting<a class="headerlink" href="#or-short-circuiting" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">isWeekend</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># checkWorkSchedule() is never called because isWeekend is True</span>
+<span class="n">canRelax</span> <span class="o">=</span> <span class="n">isWeekend</span> <span class="ow">or</span> <span class="n">checkWorkSchedule</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="practical-applications">
+<h3>Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Safe division</span>
+<span class="n">divisor</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># This won&#39;t cause a division by zero error</span>
+<span class="n">safeDivision</span> <span class="o">=</span> <span class="p">(</span><span class="n">divisor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">100</span> <span class="o">/</span> <span class="n">divisor</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Safe list access</span>
+<span class="n">myList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1"># This won&#39;t cause an index error</span>
+<span class="n">hasElement</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">myList</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">myList</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-booleans-in-conditional-statements">
+<h2>8. Using Booleans in Conditional Statements<a class="headerlink" href="#using-booleans-in-conditional-statements" title="Link to this heading">#</a></h2>
+<section id="simple-conditions">
+<h3>Simple Conditions<a class="headerlink" href="#simple-conditions" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">humidity</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perfect weather for a picnic!&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="p">(</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">humidity</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pretty good weather&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maybe stay inside today&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="complex-decision-trees">
+<h3>Complex Decision Trees<a class="headerlink" href="#complex-decision-trees" title="Link to this heading">#</a></h3>
+<p>Sometimes you need to make decisions based on multiple factors with different priorities. Here’s an example of a clothing recommendation system that considers temperature as the primary factor, then adjusts for weather conditions.</p>
+<p>The logic prioritizes temperature first (cold vs. cool vs. warm), then considers weather conditions within each temperature range, flowing from most restrictive conditions to least restrictive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">determineClothing</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">isRaining</span><span class="p">,</span> <span class="n">isWindy</span><span class="p">):</span>
+    <span class="c1"># Primary decision: temperature range</span>
+    <span class="k">if</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">:</span>  <span class="c1"># Cold weather (below freezing)</span>
+        <span class="k">if</span> <span class="n">isRaining</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Winter coat and waterproof boots&quot;</span>
+        <span class="k">elif</span> <span class="n">isWindy</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Heavy winter jacket and scarf&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Warm winter coat&quot;</span>
+    <span class="k">elif</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>  <span class="c1"># Cool weather </span>
+        <span class="k">if</span> <span class="n">isRaining</span> <span class="ow">and</span> <span class="n">isWindy</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Rain jacket and layers&quot;</span>
+        <span class="k">elif</span> <span class="n">isRaining</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Light jacket and umbrella&quot;</span>
+        <span class="k">elif</span> <span class="n">isWindy</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Windbreaker&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Light sweater&quot;</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Warm weather (50°F and above)</span>
+        <span class="k">if</span> <span class="n">isRaining</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Light rain jacket&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;T-shirt and shorts&quot;</span>
+</pre></div>
+</div>
+<p><strong>Why this structure matters:</strong> You might notice that we’re testing temperature multiple times (<code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">32</span></code>, then <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">50</span></code>), which might seem inefficient. However, the order is critically important! The <code class="docutils literal notranslate"><span class="pre">if-elif-else</span></code> structure ensures that:</p>
+<ol class="arabic simple">
+<li><p><strong>Only one branch executes</strong> - once a condition is met, the rest are skipped</p></li>
+<li><p><strong>Order determines precedence</strong> - we check coldest temperatures first because they override other considerations</p></li>
+<li><p><strong>Each temperature range gets its own weather logic</strong> - what you wear when it’s raining at 25°F is very different from raining at 75°F</p></li>
+</ol>
+<p>If we reversed the order and checked <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">&lt;</span> <span class="pre">50</span></code> first, a temperature of 25°F would incorrectly match the “cool weather” branch instead of the “cold weather” branch!</p>
+</section>
+<section id="guard-clauses">
+<h3>Guard Clauses<a class="headerlink" href="#guard-clauses" title="Link to this heading">#</a></h3>
+<p>Sometimes it’s clearer to handle edge cases first:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">hasPayment</span><span class="p">,</span> <span class="n">isLoggedIn</span><span class="p">):</span>
+    <span class="c1"># Guard clauses handle problems early</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">isLoggedIn</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Please log in first&quot;</span>
+    
+    <span class="k">if</span> <span class="n">items</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="s2">&quot;Cart is empty&quot;</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hasPayment</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Please add payment method&quot;</span>
+    
+    <span class="c1"># Main logic only runs if all conditions are met</span>
+    <span class="k">return</span> <span class="s2">&quot;Order processed successfully&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-pitfalls-and-best-practices">
+<h2>9. Common Pitfalls and Best Practices<a class="headerlink" href="#common-pitfalls-and-best-practices" title="Link to this heading">#</a></h2>
+<section id="assignment-vs-equality">
+<h3>Assignment vs. Equality<a class="headerlink" href="#assignment-vs-equality" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Wrong - assignment (single =)</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">100</span><span class="p">:</span>  <span class="c1"># SyntaxError: invalid syntax</span>
+    <span class="c1"># Be careful in other languages though, many will let you do this! Boo other languages!</span>
+
+<span class="c1"># Correct - comparison (double ==)</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perfect score!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Also correct - for checking truthiness</span>
+<span class="k">if</span> <span class="n">score</span><span class="p">:</span>  <span class="c1"># True if score is non-zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have a score!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="comparing-to-boolean-values">
+<h3>Comparing to Boolean Values<a class="headerlink" href="#comparing-to-boolean-values" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Avoid this shorthand - it&#39;s unclear what&#39;s being tested</span>
+<span class="n">isReady</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">isReady</span><span class="p">:</span>  <span class="c1"># What is this checking? That isReady exists? That it&#39;s True?</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ready!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Much better - explicit and clear</span>
+<span class="k">if</span> <span class="n">isReady</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>  <span class="c1"># Crystal clear - checking if isReady equals True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ready!&quot;</span><span class="p">)</span>
+
+<span class="c1"># For negative conditions, also be explicit</span>
+<span class="k">if</span> <span class="n">isReady</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not ready yet&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> We won’t use these shorthand forms in class, but you’ll see them in the wild when reading other people’s code.</p>
+</section>
+<section id="truthy-and-falsy-values">
+<h3>Truthy and Falsy Values<a class="headerlink" href="#truthy-and-falsy-values" title="Link to this heading">#</a></h3>
+<p>In Python, some non-Boolean values are considered “truthy” or “falsy”:</p>
+<p><strong>Falsy values:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, <code class="docutils literal notranslate"><span class="pre">0j</span></code> (numeric zeros)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">''</span></code> (empty strings)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">()</span></code>, <code class="docutils literal notranslate"><span class="pre">{}</span></code> (empty collections)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+<p><strong>Truthy values:</strong> Everything else</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examples of truthy/falsy evaluation</span>
+<span class="n">score</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="k">if</span> <span class="n">score</span><span class="p">:</span>  <span class="c1"># True because 85 is truthy</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have a score!&quot;</span><span class="p">)</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>  <span class="c1"># True because empty string is falsy</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter your name&quot;</span><span class="p">)</span>
+
+<span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">if</span> <span class="n">items</span> <span class="o">==</span> <span class="p">[]:</span>  <span class="c1"># Explicit check for empty list</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your cart is empty&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> items&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="de-morgan-s-laws">
+<h3>De Morgan’s Laws<a class="headerlink" href="#de-morgan-s-laws" title="Link to this heading">#</a></h3>
+<p>These logical equivalencies can help simplify complex conditions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># De Morgan&#39;s Law 1: not (A and B) == (not A) or (not B)</span>
+<span class="c1"># These are equivalent:</span>
+<span class="n">condition1</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">hasLicense</span> <span class="ow">and</span> <span class="n">hasInsurance</span><span class="p">)</span>
+<span class="n">condition2</span> <span class="o">=</span> <span class="p">(</span><span class="ow">not</span> <span class="n">hasLicense</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">hasInsurance</span><span class="p">)</span>
+
+<span class="c1"># De Morgan&#39;s Law 2: not (A or B) == (not A) and (not B)</span>
+<span class="c1"># These are equivalent:</span>
+<span class="n">condition3</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">isWeekend</span> <span class="ow">or</span> <span class="n">isHoliday</span><span class="p">)</span>
+<span class="n">condition4</span> <span class="o">=</span> <span class="p">(</span><span class="ow">not</span> <span class="n">isWeekend</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">isHoliday</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-boolean-patterns">
+<h2>10. Advanced Boolean Patterns<a class="headerlink" href="#advanced-boolean-patterns" title="Link to this heading">#</a></h2>
+<section id="the-ternary-operator">
+<h3>The Ternary Operator<a class="headerlink" href="#the-ternary-operator" title="Link to this heading">#</a></h3>
+<p>Python’s ternary operator provides a concise way to assign values based on conditions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Traditional if-else</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;adult&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;minor&quot;</span>
+
+<span class="c1"># Ternary operator</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;adult&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;minor&quot;</span>
+
+<span class="c1"># Can be chained, but use sparingly</span>
+<span class="n">grade</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;B&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;C&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;F&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-condition-checking">
+<h3>Multiple Condition Checking<a class="headerlink" href="#multiple-condition-checking" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">checkStudentEligibility</span><span class="p">(</span><span class="n">gpa</span><span class="p">,</span> <span class="n">credits</span><span class="p">,</span> <span class="n">hasApplication</span><span class="p">):</span>
+    <span class="c1"># Check multiple conditions systematically</span>
+    <span class="n">meetsGpaRequirement</span> <span class="o">=</span> <span class="p">(</span><span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">3.0</span><span class="p">)</span>
+    <span class="n">meetsCreditsRequirement</span> <span class="o">=</span> <span class="p">(</span><span class="n">credits</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="n">hasCompletedApplication</span> <span class="o">=</span> <span class="n">hasApplication</span>
+    
+    <span class="c1"># All conditions must be true</span>
+    <span class="n">isEligible</span> <span class="o">=</span> <span class="n">meetsGpaRequirement</span> <span class="ow">and</span> <span class="n">meetsCreditsRequirement</span> <span class="ow">and</span> <span class="n">hasCompletedApplication</span>
+    
+    <span class="c1"># Provide detailed feedback</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">meetsGpaRequirement</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPA requirement not met (need 3.0 or higher)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">meetsCreditsRequirement</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credit requirement not met (need 60 or more)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hasCompletedApplication</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Application not submitted&quot;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">isEligible</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practice-questions-for-self-check">
+<h2>11. Practice Questions for Self-Check<a class="headerlink" href="#practice-questions-for-self-check" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>What does <code class="docutils literal notranslate"><span class="pre">True</span> <span class="pre">and</span> <span class="pre">False</span> <span class="pre">or</span> <span class="pre">True</span></code> evaluate to? (Answer: True)</p></li>
+<li><p>What is the result of <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">(5</span> <span class="pre">&gt;</span> <span class="pre">3</span> <span class="pre">and</span> <span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">4)</span></code>? (Answer: False)</p></li>
+<li><p>When would you use the <code class="docutils literal notranslate"><span class="pre">or</span></code> operator in a conditional statement?</p></li>
+<li><p>What’s the difference between <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">==</span></code> in Python?</p></li>
+<li><p>What does <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">(True</span> <span class="pre">or</span> <span class="pre">False)</span> <span class="pre">and</span> <span class="pre">True</span></code> evaluate to? (Answer: False)</p></li>
+<li><p>Is <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span> <span class="pre">and</span> <span class="pre">&quot;world&quot;</span></code> truthy or falsy? (Answer: Truthy - returns “world”)</p></li>
+<li><p>What happens with <code class="docutils literal notranslate"><span class="pre">[]</span> <span class="pre">or</span> <span class="pre">&quot;default&quot;</span></code>? (Answer: Returns “default”)</p></li>
+<li><p>How does short-circuit evaluation work with <code class="docutils literal notranslate"><span class="pre">False</span> <span class="pre">and</span> <span class="pre">expensiveFunction()</span></code>?</p></li>
+</ol>
+</section>
+<section id="real-world-applications">
+<h2>12. Real-World Applications<a class="headerlink" href="#real-world-applications" title="Link to this heading">#</a></h2>
+<section id="user-authentication">
+<h3>User Authentication<a class="headerlink" href="#user-authentication" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">authenticateUser</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">isAccountActive</span><span class="p">):</span>
+    <span class="n">hasValidCredentials</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">accountStatus</span> <span class="o">=</span> <span class="n">isAccountActive</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isAccountLocked</span>
+    <span class="k">return</span> <span class="n">hasValidCredentials</span> <span class="ow">and</span> <span class="n">accountStatus</span>
+</pre></div>
+</div>
+</section>
+<section id="business-rules">
+<h3>Business Rules<a class="headerlink" href="#business-rules" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculateShipping</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">isPriority</span><span class="p">):</span>
+    <span class="n">freeShippingEligible</span> <span class="o">=</span> <span class="p">(</span><span class="n">weight</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">distance</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rushDelivery</span> <span class="o">=</span> <span class="n">isPriority</span> <span class="ow">and</span> <span class="p">(</span><span class="n">distance</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">freeShippingEligible</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rushDelivery</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">rushDelivery</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">25</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</section>
+<section id="data-validation">
+<h3>Data Validation<a class="headerlink" href="#data-validation" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validateFormData</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">):</span>
+    <span class="n">validAge</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span> <span class="o">&lt;=</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">120</span><span class="p">)</span>
+    <span class="n">validEmail</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;@&quot;</span> <span class="ow">in</span> <span class="n">email</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">validPhone</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phone</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="ow">and</span> <span class="n">phone</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">validAge</span> <span class="ow">and</span> <span class="n">validEmail</span> <span class="ow">and</span> <span class="n">validPhone</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Booleans are essential for program logic and decision-making</p></li>
+<li><p>Boolean variable names should ask questions that their values answer</p></li>
+<li><p>Comparison operators create Boolean values from comparisons</p></li>
+<li><p>Boolean operators (<code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code>) combine Boolean values according to specific rules</p></li>
+<li><p>Understanding truth tables helps predict logical operation results</p></li>
+<li><p>Operator precedence matters: <code class="docutils literal notranslate"><span class="pre">not</span></code> before <code class="docutils literal notranslate"><span class="pre">and</span></code> before <code class="docutils literal notranslate"><span class="pre">or</span></code></p></li>
+<li><p>Short-circuit evaluation can improve performance and prevent errors</p></li>
+<li><p>Use parentheses to make complex expressions clear</p></li>
+<li><p>Avoid comparing directly to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p>Understanding the structure of decision trees helps write better conditional logic</p></li>
+</ul>
+</section>
+<section id="looking-ahead">
+<h2>Looking Ahead<a class="headerlink" href="#looking-ahead" title="Link to this heading">#</a></h2>
+<p>Understanding Boolean logic is fundamental to programming because it forms the basis for:</p>
+<ul class="simple">
+<li><p>Conditional statements and control flow</p></li>
+<li><p>Loop conditions and termination</p></li>
+<li><p>Function return values and validation</p></li>
+<li><p>Algorithm design and optimization</p></li>
+<li><p>Database queries and filtering</p></li>
+<li><p>User interface logic and form validation</p></li>
+</ul>
+<p><strong>Next:</strong> In class, we’ll practice writing complex Boolean expressions and see how they’re used in real programming scenarios. We’ll also explore debugging techniques to help you find and fix Boolean logic errors in your code.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week2A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Class 2A: Sequences, Strings, and Lists in Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week3A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week3A Preread: Coding Basics Wrap-up and Selection Statements</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-booleans">1. Introduction to Booleans</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-context">Historical Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values-in-memory">Boolean Values in Memory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intelligent-naming-of-boolean-variables">2. Intelligent Naming of Boolean Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-golden-rule-boolean-names-should-ask-questions">The Golden Rule: Boolean Names Should Ask Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-boolean-naming-patterns">Common Boolean Naming Patterns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-and-after-examples">Before and After Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-boolean-names-use-with-caution">Negative Boolean Names - Use with Caution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-function-names">Boolean Function Names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-operators">3. Comparison Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-different-data-types">Comparing Different Data Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chaining-comparisons">Chaining Comparisons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-operators">4. Boolean Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-operator-and">AND Operator (<code class="docutils literal notranslate"><span class="pre">and</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-operator-or">OR Operator (<code class="docutils literal notranslate"><span class="pre">or</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-operator-not">NOT Operator (<code class="docutils literal notranslate"><span class="pre">not</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#truth-tables">5. Truth Tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-truth-table">AND Truth Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-truth-table">OR Truth Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-truth-table">NOT Truth Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-truth-table-example">Complex Truth Table Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-precedence-and-parentheses">6. Operator Precedence and Parentheses</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practice-use-parentheses-for-clarity">Best Practice: Use Parentheses for Clarity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-circuit-evaluation">7. Short-Circuit Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-short-circuiting">AND Short-Circuiting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-short-circuiting">OR Short-Circuiting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">Practical Applications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-booleans-in-conditional-statements">8. Using Booleans in Conditional Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-conditions">Simple Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-decision-trees">Complex Decision Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#guard-clauses">Guard Clauses</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-and-best-practices">9. Common Pitfalls and Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-vs-equality">Assignment vs. Equality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-to-boolean-values">Comparing to Boolean Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#truthy-and-falsy-values">Truthy and Falsy Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-morgan-s-laws">De Morgan’s Laws</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-boolean-patterns">10. Advanced Boolean Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ternary-operator">The Ternary Operator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-condition-checking">Multiple Condition Checking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions-for-self-check">11. Practice Questions for Self-Check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-applications">12. Real-World Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-authentication">User Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-rules">Business Rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">Data Validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead">Looking Ahead</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

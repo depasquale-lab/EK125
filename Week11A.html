@@ -1,0 +1,1187 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 11 Pre-read: Debugging and Profiling &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week11A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Weeks 5-10 GPP Review" href="gpp-review-2.html" />
+    <link rel="prev" title="Week 10b: From Python to MATLAB: Syntax and Plotting" href="Week10B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week11A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 11 Pre-read: Debugging and Profiling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-code-execution-flow">1. Understanding Code Execution Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-debugging">2. What is Debugging?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-ide">What is an IDE?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-ide-debugging-tools-help">3. How IDE Debugging Tools Help</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-error-messages-with-ide-support">Reading Error Messages with IDE Support</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-print-statements-inspecting-variables-interactively">Beyond Print Statements: Inspecting Variables Interactively</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-isolation-systematic-with-breakpoints">Making Isolation Systematic with Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepping-through-code-watching-execution-flow">Stepping Through Code: Watching Execution Flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ide-debugging-features">4. IDE Debugging Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepping-through-code">Stepping Through Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-variables-while-paused">Examining Variables While Paused</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-breakpoints-vs-print-statements">When to Use Breakpoints vs Print Statements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-code-performance">5. Understanding Code Performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-profiling">What is Profiling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">Why Profile?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-execution-time">Measuring Execution Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-approaches">Comparing Approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-profiler-finding-bottlenecks-automatically">6. The Profiler: Finding Bottlenecks Automatically</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-profilers-provide">What Profilers Provide</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matlab-s-debugger-and-profiler">7. Using MATLAB’s Debugger and Profiler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-and-using-breakpoints-in-matlab">Setting and Using Breakpoints in MATLAB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matlab-s-profiler">Using MATLAB’s Profiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-and-profiling-together">Debugging and Profiling Together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-performance-issues">8. Common Performance Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-debugging-and-profiling">9. Connecting Debugging and Profiling</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-11-pre-read-debugging-and-profiling">
+<h1>Week 11 Pre-read: Debugging and Profiling<a class="headerlink" href="#week-11-pre-read-debugging-and-profiling" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this reading, you should understand:</p>
+<ul class="simple">
+<li><p>What debugging is and why it’s a critical programming skill</p></li>
+<li><p>Common debugging strategies that work across languages</p></li>
+<li><p>What code profiling is and why it matters</p></li>
+<li><p>How to identify performance bottlenecks in your code</p></li>
+<li><p>The relationship between correctness and performance</p></li>
+</ul>
+</section>
+<section id="understanding-code-execution-flow">
+<h2>1. Understanding Code Execution Flow<a class="headerlink" href="#understanding-code-execution-flow" title="Link to this heading">#</a></h2>
+<p>Before you can debug effectively, you need to understand how your code executes. Programs run line by line, but this flow can be interrupted by:</p>
+<ul class="simple">
+<li><p>Function calls (jumping to another piece of code)</p></li>
+<li><p>Loops (repeating the same lines multiple times)</p></li>
+<li><p>Conditional statements (skipping certain lines)</p></li>
+<li><p>Errors (stopping execution entirely)</p></li>
+</ul>
+<p>When debugging, you’re trying to find where the actual execution flow differs from what you intended.</p>
+</section>
+<section id="what-is-debugging">
+<h2>2. What is Debugging?<a class="headerlink" href="#what-is-debugging" title="Link to this heading">#</a></h2>
+<p>Debugging is the process of finding and fixing errors in your code. The term comes from the early days of computing when a moth caused a malfunction in a computer - engineers had to “debug” the machine. Today, we use the term for finding any problem in code.</p>
+<p>There are three main types of errors:</p>
+<p><strong>Syntax Errors</strong>: The code violates the language’s rules and won’t run at all.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># Error: should use == not =</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% MATLAB example</span>
+<span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="w">  </span><span class="c">% Error: should use == not =</span>
+<span class="w">    </span><span class="nb">disp</span><span class="p">(</span><span class="s">&#39;Hello&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Runtime Errors</strong>: The code runs but crashes due to an illegal operation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>  <span class="c1"># Error: index out of range</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% MATLAB example</span>
+<span class="n">numbers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="w">  </span><span class="c">% Error: Index exceeds array dimensions</span>
+</pre></div>
+</div>
+<p><strong>Logic Errors</strong>: The code runs without crashing but produces incorrect results. These are the hardest to find.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example - calculating average</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateAverage</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Bug: shouldn&#39;t add 1</span>
+    <span class="k">return</span> <span class="n">average</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% MATLAB example - calculating average</span>
+<span class="k">function</span><span class="w"> </span>average<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">calculateAverage</span><span class="p">(</span>scores<span class="p">)</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">);</span>
+<span class="w">    </span><span class="n">average</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="c">% Bug: shouldn&#39;t add 1</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The code runs, but the average is wrong. This is a logic error.</p>
+<section id="what-is-an-ide">
+<h3>What is an IDE?<a class="headerlink" href="#what-is-an-ide" title="Link to this heading">#</a></h3>
+<p>An <strong>Integrated Development Environment (IDE)</strong> is a program that combines multiple programming tools into a single application. Instead of using separate programs for writing code, running it, and finding bugs, an IDE provides all these tools in one place.</p>
+<p>Think of it like the difference between:</p>
+<ul class="simple">
+<li><p>Cooking with individual tools scattered across your kitchen (cutting board in one place, knives in a drawer, stove across the room)</p></li>
+<li><p>Cooking at a well-organized workstation where everything you need is within reach</p></li>
+</ul>
+<p>MATLAB is an IDE - it includes an editor for writing code, a command window for running code, tools for viewing variables, and debugging features all in one interface. Google Colab, which you’ve been using for Python, is also a type of IDE (web-based rather than desktop-based).</p>
+</section>
+</section>
+<section id="how-ide-debugging-tools-help">
+<h2>3. How IDE Debugging Tools Help<a class="headerlink" href="#how-ide-debugging-tools-help" title="Link to this heading">#</a></h2>
+<p>You’ve already learned basic debugging strategies like reading error messages and using print statements. IDEs provide specialized tools that make these strategies more powerful and efficient.</p>
+<section id="reading-error-messages-with-ide-support">
+<h3>Reading Error Messages with IDE Support<a class="headerlink" href="#reading-error-messages-with-ide-support" title="Link to this heading">#</a></h3>
+<p>When an error occurs, the IDE doesn’t just print an error message - it actively helps you locate and understand the problem.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>  
+<span class="c1"># IndexError: list index out of range</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% MATLAB example</span>
+<span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">  </span>
+<span class="c">% Index exceeds array dimensions</span>
+</pre></div>
+</div>
+<p>The IDE enhances error messages by:</p>
+<ul class="simple">
+<li><p>Highlighting the exact line where the error occurred in your code</p></li>
+<li><p>Letting you click the line number to jump directly to the problem</p></li>
+<li><p>Showing the call stack (which functions called which) to trace how you got there</p></li>
+<li><p>Displaying current variable values so you can see what caused the error</p></li>
+</ul>
+<p>Instead of hunting through your code to find line 47, the IDE takes you there instantly.</p>
+</section>
+<section id="beyond-print-statements-inspecting-variables-interactively">
+<h3>Beyond Print Statements: Inspecting Variables Interactively<a class="headerlink" href="#beyond-print-statements-inspecting-variables-interactively" title="Link to this heading">#</a></h3>
+<p>Print statements require you to decide in advance what to check:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculateGrade</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+    <span class="n">totalScore</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total score: </span><span class="si">{</span><span class="n">totalScore</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Must decide to print this</span>
+    
+    <span class="n">numberOfScores</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of scores: </span><span class="si">{</span><span class="n">numberOfScores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># And this</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="n">totalScore</span> <span class="o">/</span> <span class="n">numberOfScores</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># And this</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>But what if you also need to see what <code class="docutils literal notranslate"><span class="pre">scores</span></code> contains? Or what if you want to try a different calculation? You’d have to add more print statements, run the code again, and wait for results.</p>
+<p>The IDE’s debugging tools let you pause execution and inspect <strong>everything</strong> interactively:</p>
+<ul class="simple">
+<li><p>See all variable values at once without printing them</p></li>
+<li><p>Try calculations on the fly to test hypotheses</p></li>
+<li><p>Modify variables to test different scenarios</p></li>
+<li><p>All without changing your source code</p></li>
+</ul>
+</section>
+<section id="making-isolation-systematic-with-breakpoints">
+<h3>Making Isolation Systematic with Breakpoints<a class="headerlink" href="#making-isolation-systematic-with-breakpoints" title="Link to this heading">#</a></h3>
+<p>When isolating problems, you might comment out code sections to narrow down where the bug is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example: Commenting out code to find the bug</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">processData</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">cleanData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="c1"># print(f&quot;After cleaning: {cleaned}&quot;)</span>
+    
+    <span class="c1"># normalized = normalizeData(cleaned)</span>
+    <span class="c1"># print(f&quot;After normalizing: {normalized}&quot;)</span>
+    
+    <span class="c1"># result = analyzeData(normalized)</span>
+    <span class="c1"># return result</span>
+</pre></div>
+</div>
+<p>This is tedious: you modify code, run it, see results, then modify again. The IDE’s breakpoint feature lets you pause execution at any line without modifying your code. You can:</p>
+<ul class="simple">
+<li><p>Pause before suspicious code to verify inputs are correct</p></li>
+<li><p>Check variable values at that exact moment</p></li>
+<li><p>Execute the next line and immediately see how variables change</p></li>
+<li><p>Continue or step through code line by line</p></li>
+</ul>
+</section>
+<section id="stepping-through-code-watching-execution-flow">
+<h3>Stepping Through Code: Watching Execution Flow<a class="headerlink" href="#stepping-through-code-watching-execution-flow" title="Link to this heading">#</a></h3>
+<p>When code behaves unexpectedly, you often don’t know which part is wrong. Stepping lets you execute one line at a time and watch exactly what happens.</p>
+<p>Consider code with complex control flow:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>result<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">processScores</span><span class="p">(</span>scores<span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">validScores</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">scores</span><span class="p">(</span><span class="n">scores</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">validScores</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">validScores</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Without stepping, you might not know which branch executed. With stepping:</p>
+<ul class="simple">
+<li><p>Execute one line at a time</p></li>
+<li><p>See which <code class="docutils literal notranslate"><span class="pre">if</span></code> conditions evaluate to true</p></li>
+<li><p>Watch exactly which branch the code takes</p></li>
+<li><p>Verify that each line does what you expect</p></li>
+</ul>
+<p>The IDE shows you a cursor on the current line, so you always know where you are in the execution flow.</p>
+</section>
+</section>
+<section id="ide-debugging-features">
+<h2>4. IDE Debugging Features<a class="headerlink" href="#ide-debugging-features" title="Link to this heading">#</a></h2>
+<p>Modern programming environments provide tools that go beyond simple print statements. These tools let you pause code execution and inspect what’s happening in detail.</p>
+<section id="breakpoints">
+<h3>Breakpoints<a class="headerlink" href="#breakpoints" title="Link to this heading">#</a></h3>
+<p>A breakpoint tells the program to pause execution at a specific line. When code reaches a breakpoint:</p>
+<ul class="simple">
+<li><p>Execution stops before running that line</p></li>
+<li><p>You can examine all variable values</p></li>
+<li><p>You can execute commands to test hypotheses</p></li>
+<li><p>You can step through code one line at a time</p></li>
+</ul>
+<p>In MATLAB, you set breakpoints by clicking next to the line number in the editor (a red dot appears).</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>area<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">calculateTrapezoidArea</span><span class="p">(</span>base1, base2, height<span class="p">)</span>
+<span class="w">    </span><span class="c">% Set breakpoint on the next line to inspect inputs</span>
+<span class="w">    </span><span class="n">averageBase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">base1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">base2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c">% &lt;- Breakpoint here</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">% When paused, you can examine variables</span>
+<span class="w">    </span><span class="nb">area</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">averageBase</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">height</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>When execution pauses at the breakpoint, you can verify that <code class="docutils literal notranslate"><span class="pre">base1</span></code>, <code class="docutils literal notranslate"><span class="pre">base2</span></code>, and <code class="docutils literal notranslate"><span class="pre">height</span></code> contain the values you expect before the calculation proceeds.</p>
+</section>
+<section id="stepping-through-code">
+<h3>Stepping Through Code<a class="headerlink" href="#stepping-through-code" title="Link to this heading">#</a></h3>
+<p>Once paused at a breakpoint, you can control execution:</p>
+<ul class="simple">
+<li><p><strong>Step</strong>: Execute the current line and pause at the next line</p></li>
+<li><p><strong>Step In</strong>: If the current line calls a function, jump into that function</p></li>
+<li><p><strong>Step Out</strong>: Finish the current function and pause in the calling code</p></li>
+<li><p><strong>Continue</strong>: Resume normal execution until the next breakpoint</p></li>
+</ul>
+<p>This lets you watch exactly how your code executes, line by line, and see how variable values change.</p>
+</section>
+<section id="examining-variables-while-paused">
+<h3>Examining Variables While Paused<a class="headerlink" href="#examining-variables-while-paused" title="Link to this heading">#</a></h3>
+<p>While paused at a breakpoint, you can:</p>
+<ul class="simple">
+<li><p>View all current variable values</p></li>
+<li><p>Execute commands to test calculations</p></li>
+<li><p>Modify variable values to test different scenarios</p></li>
+<li><p>Verify your assumptions about what the code is doing</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Example: While paused in MATLAB debug mode</span>
+<span class="c">% You can type variable names to see their values:</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">base1</span>
+<span class="n">base1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">base2</span>
+<span class="n">base2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">15</span>
+
+<span class="c">% You can even run calculations:</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">testArea</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">base1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">base2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">testArea</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">62.5</span>
+</pre></div>
+</div>
+<p>This is far more powerful than print statements because you can interactively explore your code’s state without modifying the source code.</p>
+</section>
+<section id="when-to-use-breakpoints-vs-print-statements">
+<h3>When to Use Breakpoints vs Print Statements<a class="headerlink" href="#when-to-use-breakpoints-vs-print-statements" title="Link to this heading">#</a></h3>
+<p>Use print statements when:</p>
+<ul class="simple">
+<li><p>You want to see how values change over many iterations</p></li>
+<li><p>The error is intermittent or hard to reproduce</p></li>
+<li><p>You need a permanent record of what the code did</p></li>
+</ul>
+<p>Use breakpoints when:</p>
+<ul class="simple">
+<li><p>You need to inspect many variables at once</p></li>
+<li><p>You want to test hypotheses interactively</p></li>
+<li><p>You need to step through complex logic carefully</p></li>
+<li><p>The bug occurs at a specific point you’ve identified</p></li>
+</ul>
+</section>
+</section>
+<section id="understanding-code-performance">
+<h2>5. Understanding Code Performance<a class="headerlink" href="#understanding-code-performance" title="Link to this heading">#</a></h2>
+<p>Not all code that works correctly performs well. Some programs take seconds while equivalent programs take minutes or hours. This matters when:</p>
+<ul class="simple">
+<li><p>Processing large datasets</p></li>
+<li><p>Running simulations many times</p></li>
+<li><p>Creating interactive applications</p></li>
+<li><p>Meeting project deadlines with limited computing resources</p></li>
+</ul>
+<section id="what-is-profiling">
+<h3>What is Profiling?<a class="headerlink" href="#what-is-profiling" title="Link to this heading">#</a></h3>
+<p>Profiling means measuring how long each part of your code takes to execute. This helps you find <strong>bottlenecks</strong>: the specific lines or functions that consume most of the running time.</p>
+<p>Think of profiling like finding traffic jams on a commute. If your drive takes an hour, profiling might reveal that 50 minutes are spent on one particular highway segment. Fix that bottleneck by taking a different route, and your commute might drop to 15 minutes. Similarly, if your program takes 10 minutes to run, profiling might show that 9 minutes are spent in a single function. Optimize that function, and your program might run in 1 minute.</p>
+</section>
+<section id="why-profile">
+<h3>Why Profile?<a class="headerlink" href="#why-profile" title="Link to this heading">#</a></h3>
+<p>Before optimizing code, you need to know where the problems are. Programmers are often wrong about which parts are slow. Profiling gives you data instead of guesses.</p>
+<p><strong>The Golden Rule of Optimization</strong>: Measure first, optimize second.</p>
+<p>Many beginning programmers try to optimize everything, making code complex and hard to read. Profiling tells you to optimize only the 10% of code that takes 90% of the time.</p>
+</section>
+<section id="measuring-execution-time">
+<h3>Measuring Execution Time<a class="headerlink" href="#measuring-execution-time" title="Link to this heading">#</a></h3>
+<p>Both Python and MATLAB provide simple ways to measure how long code takes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example using time module</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># Code to measure</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">i</span>
+<span class="n">endTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loop took </span><span class="si">{</span><span class="n">endTime</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">startTime</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% MATLAB example using tic/toc</span>
+<span class="nb">tic</span><span class="w">  </span><span class="c">% Start timer</span>
+<span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1000000</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">i</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="n">elapsedTime</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">toc</span><span class="p">;</span><span class="w">  </span><span class="c">% Stop timer</span>
+
+<span class="nb">disp</span><span class="p">([</span><span class="s">&#39;Loop took &#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">num2str</span><span class="p">(</span><span class="n">elapsedTime</span><span class="p">),</span><span class="w"> </span><span class="s">&#39; seconds&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="comparing-approaches">
+<h3>Comparing Approaches<a class="headerlink" href="#comparing-approaches" title="Link to this heading">#</a></h3>
+<p>Often, you want to compare different implementations of the same logic:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python example: Which is faster?</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Approach 1: Using a loop</span>
+<span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">i</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">startTime</span>
+
+<span class="c1"># Approach 2: Using built-in sum</span>
+<span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">startTime</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loop: </span><span class="si">{</span><span class="n">time1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sum: </span><span class="si">{</span><span class="n">time2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speedup: </span><span class="si">{</span><span class="n">time1</span><span class="o">/</span><span class="n">time2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x faster&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% MATLAB example: Which is faster?</span>
+
+<span class="c">% Approach 1: Using a loop</span>
+<span class="nb">tic</span>
+<span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1000000</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">i</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="n">time1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">toc</span><span class="p">;</span>
+
+<span class="c">% Approach 2: Using built-in sum</span>
+<span class="nb">tic</span>
+<span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1000000</span><span class="p">);</span>
+<span class="n">time2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">toc</span><span class="p">;</span>
+
+<span class="nb">disp</span><span class="p">([</span><span class="s">&#39;Loop: &#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">num2str</span><span class="p">(</span><span class="n">time1</span><span class="p">),</span><span class="w"> </span><span class="s">&#39; seconds&#39;</span><span class="p">])</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s">&#39;Sum: &#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">num2str</span><span class="p">(</span><span class="n">time2</span><span class="p">),</span><span class="w"> </span><span class="s">&#39; seconds&#39;</span><span class="p">])</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s">&#39;Speedup: &#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">num2str</span><span class="p">(</span><span class="n">time1</span><span class="o">/</span><span class="n">time2</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;x faster&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>In both languages, the built-in <code class="docutils literal notranslate"><span class="pre">sum</span></code> function is typically much faster than writing your own loop.</p>
+</section>
+</section>
+<section id="the-profiler-finding-bottlenecks-automatically">
+<h2>6. The Profiler: Finding Bottlenecks Automatically<a class="headerlink" href="#the-profiler-finding-bottlenecks-automatically" title="Link to this heading">#</a></h2>
+<p>Manually timing different sections of code works for small programs, but becomes tedious for large projects with many functions. Profilers automatically measure time spent in each function and on each line.</p>
+<section id="what-profilers-provide">
+<h3>What Profilers Provide<a class="headerlink" href="#what-profilers-provide" title="Link to this heading">#</a></h3>
+<p>A profiler runs your code and tracks:</p>
+<ul class="simple">
+<li><p>Total time for each function</p></li>
+<li><p>Number of times each function was called</p></li>
+<li><p>Time spent on each individual line within functions</p></li>
+<li><p>Which functions call which other functions</p></li>
+</ul>
+<p>MATLAB’s profiler provides a visual report that uses color coding:</p>
+<ul class="simple">
+<li><p>Red/dark sections: Most time spent here (investigate these first)</p></li>
+<li><p>Yellow/medium sections: Moderate time spent</p></li>
+<li><p>Green/light sections: Little time spent (probably fine)</p></li>
+</ul>
+<p>To use MATLAB’s profiler:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">profile</span><span class="w"> </span><span class="n">on</span><span class="w">          </span><span class="c">% Start profiling</span>
+<span class="n">myFunction</span><span class="p">();</span><span class="w">       </span><span class="c">% Run your code</span>
+<span class="nb">profile</span><span class="w"> </span><span class="n">viewer</span><span class="w">      </span><span class="c">% Open visual report</span>
+</pre></div>
+</div>
+<p>The profiler report shows you exactly where your program spends its time, letting you focus optimization efforts on the code that matters most.</p>
+</section>
+</section>
+<section id="using-matlab-s-debugger-and-profiler">
+<h2>7. Using MATLAB’s Debugger and Profiler<a class="headerlink" href="#using-matlab-s-debugger-and-profiler" title="Link to this heading">#</a></h2>
+<p>Now that you understand the concepts, here are the specific steps for using MATLAB’s debugging and profiling tools.</p>
+<section id="setting-and-using-breakpoints-in-matlab">
+<h3>Setting and Using Breakpoints in MATLAB<a class="headerlink" href="#setting-and-using-breakpoints-in-matlab" title="Link to this heading">#</a></h3>
+<p><strong>To set a breakpoint:</strong></p>
+<ol class="arabic simple">
+<li><p>Open your <code class="docutils literal notranslate"><span class="pre">.m</span></code> file in the MATLAB Editor</p></li>
+<li><p>Find the line where you want to pause execution</p></li>
+<li><p>Click the small dash (<code class="docutils literal notranslate"><span class="pre">-</span></code>) to the left of the line number</p></li>
+<li><p>A red circle appears, indicating a breakpoint is set</p></li>
+</ol>
+<p><strong>Alternative method using commands:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set breakpoint at line 10 in myFunction.m</span>
+<span class="nb">dbstop</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">myFunction</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="c">% Set breakpoint when an error occurs</span>
+<span class="nb">dbstop</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">error</span>
+
+<span class="c">% List all breakpoints</span>
+<span class="nb">dbstatus</span>
+
+<span class="c">% Clear a specific breakpoint</span>
+<span class="nb">dbclear</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">myFunction</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="c">% Clear all breakpoints</span>
+<span class="nb">dbclear</span><span class="w"> </span><span class="nb">all</span>
+</pre></div>
+</div>
+<p><strong>When your code hits a breakpoint:</strong></p>
+<ul class="simple">
+<li><p>Execution pauses before executing that line</p></li>
+<li><p>The command prompt changes to <code class="docutils literal notranslate"><span class="pre">K&gt;&gt;</span></code> (debug mode)</p></li>
+<li><p>A green arrow shows the current line</p></li>
+<li><p>The Editor highlights the current line</p></li>
+</ul>
+<p><strong>Controlling execution while paused:</strong></p>
+<ul class="simple">
+<li><p><strong>Continue</strong> (or <code class="docutils literal notranslate"><span class="pre">dbcont</span></code>): Resume normal execution until next breakpoint</p></li>
+<li><p><strong>Step</strong> (or <code class="docutils literal notranslate"><span class="pre">dbstep</span></code>): Execute current line and pause at next line</p></li>
+<li><p><strong>Step In</strong> (or <code class="docutils literal notranslate"><span class="pre">dbstep</span> <span class="pre">in</span></code>): If current line calls a function, enter that function</p></li>
+<li><p><strong>Step Out</strong> (or <code class="docutils literal notranslate"><span class="pre">dbstep</span> <span class="pre">out</span></code>): Finish current function and return to caller</p></li>
+<li><p><strong>Quit Debug Mode</strong> (or <code class="docutils literal notranslate"><span class="pre">dbquit</span></code>): Stop debugging and return to normal mode</p></li>
+</ul>
+<p><strong>Examining variables in debug mode:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% While paused at K&gt;&gt; prompt, type variable names</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span>
+<span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span>
+
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">myArray</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">87.5</span>
+
+<span class="c">% You can also execute any MATLAB command</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">plot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="nb">values</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="nb">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-matlab-s-profiler">
+<h3>Using MATLAB’s Profiler<a class="headerlink" href="#using-matlab-s-profiler" title="Link to this heading">#</a></h3>
+<p><strong>To profile your code:</strong></p>
+<p><strong>Method 1: Using the GUI</strong></p>
+<ol class="arabic simple">
+<li><p>Go to the MATLAB Home tab</p></li>
+<li><p>Click “Run and Time” button</p></li>
+<li><p>Select your script or function</p></li>
+<li><p>MATLAB runs your code and opens the Profiler report</p></li>
+</ol>
+<p><strong>Method 2: Using commands</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Start profiling</span>
+<span class="nb">profile</span><span class="w"> </span><span class="n">on</span>
+
+<span class="c">% Run your code</span>
+<span class="n">myFunction</span><span class="p">(</span><span class="n">inputData</span><span class="p">);</span>
+
+<span class="c">% Stop profiling and view results</span>
+<span class="nb">profile</span><span class="w"> </span><span class="n">viewer</span>
+
+<span class="c">% Or get profile data programmatically</span>
+<span class="n">profileData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">profile</span><span class="p">(</span><span class="s">&#39;info&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Reading the Profiler Report:</strong></p>
+<p>The profiler shows a list of all functions that ran, sorted by time spent. For each function, you see:</p>
+<ul class="simple">
+<li><p><strong>Total Time</strong>: How long was spent in this function</p></li>
+<li><p><strong>Self Time</strong>: Time spent in this function excluding functions it called</p></li>
+<li><p><strong>Calls</strong>: How many times this function was called</p></li>
+</ul>
+<p>Click on a function name to see line-by-line timing:</p>
+<ul class="simple">
+<li><p>Lines are color-coded (red = slow, yellow = medium, green = fast)</p></li>
+<li><p>Each line shows how many times it executed</p></li>
+<li><p>Each line shows total time spent on that line</p></li>
+</ul>
+<p><strong>What to look for:</strong></p>
+<ol class="arabic simple">
+<li><p>Functions with high total time (these are bottlenecks)</p></li>
+<li><p>Functions called many times unnecessarily</p></li>
+<li><p>Individual lines that take surprisingly long</p></li>
+<li><p>Loops that could be vectorized</p></li>
+</ol>
+<p><strong>Example profiling workflow:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Profile your code</span>
+<span class="nb">profile</span><span class="w"> </span><span class="n">on</span>
+<span class="n">resultsData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">processLargeDataset</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="n">profile</span><span class="w"> </span><span class="s">viewer</span>
+
+<span class="c">% Look at the report, identify slow function</span>
+<span class="c">% Suppose findMatches() takes 90% of time</span>
+
+<span class="c">% Optimize findMatches(), then profile again</span>
+<span class="nb">profile</span><span class="w"> </span><span class="n">on</span>
+<span class="n">resultsData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">processLargeDataset</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="n">profile</span><span class="w"> </span><span class="s">viewer</span>
+
+<span class="c">% Compare times to see improvement</span>
+</pre></div>
+</div>
+<p><strong>Common profiler commands:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Clear previous profiling data</span>
+<span class="nb">profile</span><span class="w"> </span><span class="nb">clear</span>
+
+<span class="c">% Turn off profiler</span>
+<span class="nb">profile</span><span class="w"> </span><span class="n">off</span>
+
+<span class="c">% Get detailed profiling statistics</span>
+<span class="n">stats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">profile</span><span class="p">(</span><span class="s">&#39;info&#39;</span><span class="p">);</span>
+
+<span class="c">% View specific function details</span>
+<span class="n">profsave</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;profileResults&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% Save to HTML file</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-and-profiling-together">
+<h3>Debugging and Profiling Together<a class="headerlink" href="#debugging-and-profiling-together" title="Link to this heading">#</a></h3>
+<p><strong>Typical workflow:</strong></p>
+<ol class="arabic simple">
+<li><p>Write code and test basic functionality</p></li>
+<li><p>If bugs appear, set breakpoints to investigate</p></li>
+<li><p>Use stepping to understand execution flow</p></li>
+<li><p>Fix bugs and verify correctness</p></li>
+<li><p>If code is too slow, run profiler</p></li>
+<li><p>Identify bottleneck functions from profiler report</p></li>
+<li><p>Set breakpoints in slow functions to understand why they’re slow</p></li>
+<li><p>Optimize the slow sections</p></li>
+<li><p>Profile again to verify improvement</p></li>
+</ol>
+<p><strong>Example debugging session:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% You have a bug in calculateStatistics.m</span>
+<span class="c">% Set a breakpoint at the start of the function</span>
+<span class="nb">dbstop</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">calculateStatistics</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="c">% Run your code</span>
+<span class="n">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">calculateStatistics</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+<span class="c">% Code pauses at breakpoint</span>
+<span class="c">% Check input</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c">% Step through line by line</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">dbstep</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">dbstep</span>
+
+<span class="c">% Notice variable has unexpected value</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">filteredData</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">filteredData</span><span class="p">)</span><span class="w">  </span><span class="c">% Should be 100 but is 0!</span>
+
+<span class="c">% Found the bug - now fix it</span>
+<span class="n">K</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">dbquit</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-performance-issues">
+<h2>8. Common Performance Issues<a class="headerlink" href="#common-performance-issues" title="Link to this heading">#</a></h2>
+<p>Based on profiling data, you might find:</p>
+<p><strong>Growing arrays in loops</strong> (slow):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Slow: array grows each iteration</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">10000</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="nb">i</span><span class="o">^</span><span class="mi">2</span><span class="p">];</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Pre-allocating arrays</strong> (fast):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Fast: array size set once</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">10000</span>
+<span class="w">    </span><span class="n">result</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Using vectorization instead of loops</strong> (fastest):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Fastest: no loop at all</span>
+<span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">10000</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Profiling helps you identify these patterns in your own code.</p>
+</section>
+<section id="connecting-debugging-and-profiling">
+<h2>9. Connecting Debugging and Profiling<a class="headerlink" href="#connecting-debugging-and-profiling" title="Link to this heading">#</a></h2>
+<p>These tools work together:</p>
+<ul class="simple">
+<li><p><strong>Debugging</strong> helps you find what’s wrong (correctness)</p></li>
+<li><p><strong>Profiling</strong> helps you find what’s slow (performance)</p></li>
+</ul>
+<p>Workflow:</p>
+<ol class="arabic simple">
+<li><p>Write code that works correctly (use debugging if needed)</p></li>
+<li><p>If code runs too slowly, use profiler to find bottlenecks</p></li>
+<li><p>Optimize only the slow parts</p></li>
+<li><p>Debug again to ensure optimizations didn’t break anything</p></li>
+<li><p>Profile again to measure improvement</p></li>
+</ol>
+<p>Never optimize code before it works correctly. Never assume you know what’s slow without measuring. The profiler gives you facts, not guesses.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week10B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 10b: From Python to MATLAB: Syntax and Plotting</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gpp-review-2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Weeks 5-10 GPP Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-code-execution-flow">1. Understanding Code Execution Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-debugging">2. What is Debugging?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-ide">What is an IDE?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-ide-debugging-tools-help">3. How IDE Debugging Tools Help</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-error-messages-with-ide-support">Reading Error Messages with IDE Support</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-print-statements-inspecting-variables-interactively">Beyond Print Statements: Inspecting Variables Interactively</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-isolation-systematic-with-breakpoints">Making Isolation Systematic with Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepping-through-code-watching-execution-flow">Stepping Through Code: Watching Execution Flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ide-debugging-features">4. IDE Debugging Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepping-through-code">Stepping Through Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-variables-while-paused">Examining Variables While Paused</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-breakpoints-vs-print-statements">When to Use Breakpoints vs Print Statements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-code-performance">5. Understanding Code Performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-profiling">What is Profiling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">Why Profile?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-execution-time">Measuring Execution Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-approaches">Comparing Approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-profiler-finding-bottlenecks-automatically">6. The Profiler: Finding Bottlenecks Automatically</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-profilers-provide">What Profilers Provide</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matlab-s-debugger-and-profiler">7. Using MATLAB’s Debugger and Profiler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-and-using-breakpoints-in-matlab">Setting and Using Breakpoints in MATLAB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matlab-s-profiler">Using MATLAB’s Profiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-and-profiling-together">Debugging and Profiling Together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-performance-issues">8. Common Performance Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-debugging-and-profiling">9. Connecting Debugging and Profiling</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

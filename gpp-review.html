@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Weeks 1-4 GPP Review &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gpp-review';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 6A Pre-read: Mastering Slicing in Python" href="Week6A.html" />
+    <link rel="prev" title="Week 5A Preread: Nested lists and Multilevel Indexing" href="Week5A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/gpp-review.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Weeks 1-4 GPP Review</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weeks 1-4 GPP Review</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week1b-intro-to-python">Week1B: Intro to Python!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2a-morning-assignment-working-with-sequences">Week 2A Morning Assignment: Working with Sequences</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-string-exploration">Part 1: String Exploration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-1-string-basics">Task 1.1: String Basics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-list-operations">Part 2: List Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-1-list-creation-and-access">Task 2.1: List Creation and Access</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-2-list-modification-challenge">Task 2.2: List Modification Challenge</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-mixed-practice">Part 3: Mixed Practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-1-data-processing">Task 3.1: Data Processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2b-morning-assignment-boolean-logic-practice">Week 2B Morning Assignment: Boolean Logic Practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-weather-decision-system">Part 2: Weather Decision System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-grade-calculator-with-conditions">Part 3: Grade Calculator with Conditions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3a-morning-assignment-coding-basics-wrap-up-and-selection-statements">Week 3A Morning Assignment: Coding Basics Wrap-up and Selection Statements</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-f-strings-escape-characters-the-input-function-and-type-casting">Part 1: f-strings, escape characters, the <code class="docutils literal notranslate"><span class="pre">input()</span></code> function and type casting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-2-series-resistor-voltage-report">Problem 1.2: Series Resistor Voltage Report</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-basic-selection-statements">Part 2: Basic selection statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-2-prize-number-generator">Problem 2.2: Prize Number Generator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-nested-selection-statements">Part 3: Nested selection statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-3-selections-and-booleans">Problem 3.3: Selections AND booleans</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3b-morning-assignment-for-and-while-loops">Week 3B Morning Assignment: <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-for-loops">Part 1: <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-7-running-products">Part 1.7: Running products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-8-loops-and-selection">Part 1.8: Loops and selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-9-for-and-random-char-from-a-string">Part 1.9: <code class="docutils literal notranslate"><span class="pre">for</span></code> and random <code class="docutils literal notranslate"><span class="pre">char</span></code> from a string</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-while-loops">Part 2: <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-2-while-and-random-numbers">Part 2.2 <code class="docutils literal notranslate"><span class="pre">while()</span></code> and random numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-3-while-loops-counting-and-averages">Part 2.3: While Loops — Counting and Averages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4a-morning-assignment-nested-for-loops">Week 4A Morning Assignment: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-formatted-output-with-nested-loops">Problem 2: Formatted output with nested loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-nested-while-and-for-loops">Problem 6: Nested <code class="docutils literal notranslate"><span class="pre">while</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-9-running-sum">Problem 9: Running sum</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4b-morning-assignment-advanced-loops-using-list-comprehensions">Week 4B Morning Assignment: Advanced loops using list comprehensions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-using-complex-range-calls-in-for-loops">Problem 2: Using complex <code class="docutils literal notranslate"><span class="pre">range</span></code> calls in <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-enumerate">Problem 4: Enumerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-vectorizing-with-built-in-operations">Problem 5: Vectorizing with built-in operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-list-of-numbers-find-the-minimum-using-the-built-in-min-function-and-also-by-using-a-loop">5.3: Create a list of numbers. Find the minimum using the built-in <strong>min</strong> function, and also by using a loop.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-list-comprehensions">Problem 6: List comprehensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-absolute-value-of-every-element-in-a-list-of-numbers-do-this-2-ways-using-a-list-comprehension-and-using-a-for-loop">6.2: Get the absolute value of every element in a list of numbers. Do this 2 ways: using a list comprehension and using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-a-set-of-vowels-from-a-given-string-using-a-list-comprehension-hint-this-will-require-using-an-if-as-part-of-the-comprehension">6.4: Generate a set of vowels from a given string using a list comprehension. <strong>Hint</strong>: this will require using an <code class="docutils literal notranslate"><span class="pre">if</span></code> as part of the comprehension.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-list-of-numbers-write-code-that-will-create-a-new-list-which-is-for-every-element-in-the-original-list-that-number-plus-its-index-for-example-4-8-2-would-become-4-0-8-1-2-2-or-4-9-4-do-this-3-ways-using-a-list-comprehension-with-range-using-a-list-comprehension-with-enumerate-and-using-a-for-loop">6.5: Create a list of numbers. Write code that will create a new list which is, for every element in the original list, that number plus its index. For example, [4, 8, 2] would become [4+0, 8+1, 2+2] or [4, 9, 4]. Do this 3 ways: using a list comprehension with <code class="docutils literal notranslate"><span class="pre">range</span></code>, using a list comprehension with <code class="docutils literal notranslate"><span class="pre">enumerate</span></code>, and using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-a-list-comprehension-you-can-have-multiple-for-clauses-create-a-list-of-x-y-values-where-x-ranges-from-1-to-3-and-y-ranges-from-1-to-4-using-a-list-comprehension">6.7: In a list comprehension, you can have multiple <code class="docutils literal notranslate"><span class="pre">for</span></code> clauses. Create a list of x+y values, where x ranges from 1 to 3 and y ranges from 1 to 4, using a list comprehension.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="weeks-1-4-gpp-review">
+<h1>Weeks 1-4 GPP Review<a class="headerlink" href="#weeks-1-4-gpp-review" title="Link to this heading">#</a></h1>
+<p>Here are a selected (and slighlty edited if necessary) set of GPPs from the past 4 weeks.</p>
+<p><strong>NOTE</strong>: These were selected with an eye toward covering all of the material we have worked on over the last 4 weeks. But inclusion of material here does not suggest that material NOT covered here will NOT be on the test! This document if designed to get you practicing on GPP problems away from the computer. We recommend doing this for ALL GPP problems!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week1b-intro-to-python">
+<h1>Week1B: Intro to Python!<a class="headerlink" href="#week1b-intro-to-python" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Enter an expression over two lines using the <code class="docutils literal notranslate"><span class="pre">\</span></code></p></li>
+<li><p>So, without entering this code, what would <code class="docutils literal notranslate"><span class="pre">round(-5.7)</span></code> return?</p></li>
+<li><p>Create two number variables and print their values using one print statement.</p></li>
+<li><p>Create an integer variable and a float variable and print their types.</p></li>
+<li><p>Create an integer variable <code class="docutils literal notranslate"><span class="pre">num</span></code>, and print the values of <code class="docutils literal notranslate"><span class="pre">num</span></code> raised to the third power, and <code class="docutils literal notranslate"><span class="pre">num</span></code> raised to the fifth power.</p></li>
+<li><p>Write an expression using scientific notation that would result in the number 30000.</p></li>
+<li><p>Create a variable to store the cost of a bagel (let’s say $2.25). Create a constant to store the tax rate (let’s say 3 percent). What would the total cost of the bagel be? Round this to two decimal places since it’s money.</p></li>
+<li><p>Create variables <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">3</span></code>. Calculate their sum and difference. Use <code class="docutils literal notranslate"><span class="pre">//</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code> to divide them.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-2a-morning-assignment-working-with-sequences">
+<h1>Week 2A Morning Assignment: Working with Sequences<a class="headerlink" href="#week-2a-morning-assignment-working-with-sequences" title="Link to this heading">#</a></h1>
+<section id="part-1-string-exploration">
+<h2>Part 1: String Exploration<a class="headerlink" href="#part-1-string-exploration" title="Link to this heading">#</a></h2>
+<section id="task-1-1-string-basics">
+<h3>Task 1.1: String Basics<a class="headerlink" href="#task-1-1-string-basics" title="Link to this heading">#</a></h3>
+<p>Given this string: sentence = “The quick brown fox jumps over the lazy dog”</p>
+<p>Write code to:</p>
+<ol class="arabic simple">
+<li><p>Print the first character</p></li>
+<li><p>Print the last character</p></li>
+<li><p>Print the length of the sentence</p></li>
+<li><p>Check if the word “fox” is in the sentence</p></li>
+</ol>
+</section>
+</section>
+<section id="part-2-list-operations">
+<h2>Part 2: List Operations<a class="headerlink" href="#part-2-list-operations" title="Link to this heading">#</a></h2>
+<section id="task-2-1-list-creation-and-access">
+<h3>Task 2.1: List Creation and Access<a class="headerlink" href="#task-2-1-list-creation-and-access" title="Link to this heading">#</a></h3>
+<p>Create a list containing the names of your three team members
+<code class="docutils literal notranslate"><span class="pre">teamNames</span> <span class="pre">=</span> <span class="pre">[&quot;bob&quot;,</span> <span class="pre">&quot;sally&quot;,</span> <span class="pre">&quot;george&quot;]</span></code></p>
+<p>Write code to:</p>
+<ol class="arabic simple">
+<li><p>Print the first team member’s name</p></li>
+<li><p>Print the last team member’s name</p></li>
+<li><p>Print how many people are on your team</p></li>
+<li><p>Add a fourth name “TA Helper” to the list</p></li>
+</ol>
+</section>
+<section id="task-2-2-list-modification-challenge">
+<h3>Task 2.2: List Modification Challenge<a class="headerlink" href="#task-2-2-list-modification-challenge" title="Link to this heading">#</a></h3>
+<p>Start with this list:
+<code class="docutils literal notranslate"><span class="pre">numbers</span> <span class="pre">=</span> <span class="pre">[10,</span> <span class="pre">20,</span> <span class="pre">30,</span> <span class="pre">40,</span> <span class="pre">50]</span></code></p>
+<p>Without retyping the entire list, use list methods to:</p>
+<ol class="arabic simple">
+<li><p>Change the third number from <code class="docutils literal notranslate"><span class="pre">30</span></code> to <code class="docutils literal notranslate"><span class="pre">35</span></code></p></li>
+<li><p>Add the number 60 to the end</p></li>
+<li><p>Insert the number 5 at the beginning (Careful, this is a little harder!)</p></li>
+<li><p>Remove the number 40 from the list</p></li>
+<li><p>Remove the last number from the list</p></li>
+</ol>
+<p>Print the final list - it should be <code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">10,</span> <span class="pre">20,</span> <span class="pre">35,</span> <span class="pre">50]</span></code></p>
+</section>
+</section>
+<section id="part-3-mixed-practice">
+<h2>Part 3: Mixed Practice<a class="headerlink" href="#part-3-mixed-practice" title="Link to this heading">#</a></h2>
+<section id="task-3-1-data-processing">
+<h3>Task 3.1: Data Processing<a class="headerlink" href="#task-3-1-data-processing" title="Link to this heading">#</a></h3>
+<p>Your team has collected some survey data. Help clean and process it:</p>
+<p>Raw survey responses (some have extra spaces, inconsistent capitalization)
+<code class="docutils literal notranslate"><span class="pre">responses</span> <span class="pre">=</span> <span class="pre">[&quot;yes&quot;,</span> <span class="pre">&quot;NO&quot;,</span> <span class="pre">&quot;maybe&quot;,</span> <span class="pre">&quot;YES&quot;,</span> <span class="pre">&quot;no&quot;,</span> <span class="pre">&quot;Maybe&quot;,</span> <span class="pre">&quot;yes&quot;]</span></code></p>
+<p>Write code to:</p>
+<ol class="arabic simple">
+<li><p>Clean each response (convert to lowercase)</p></li>
+<li><p>Count how many “yes”, “no”, and “maybe” responses there are</p></li>
+<li><p>Create separate lists for each type of response</p></li>
+<li><p>Create separate tuples for each type of response</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-2b-morning-assignment-boolean-logic-practice">
+<h1>Week 2B Morning Assignment: Boolean Logic Practice<a class="headerlink" href="#week-2b-morning-assignment-boolean-logic-practice" title="Link to this heading">#</a></h1>
+<section id="part-2-weather-decision-system">
+<h2>Part 2: Weather Decision System<a class="headerlink" href="#part-2-weather-decision-system" title="Link to this heading">#</a></h2>
+<p>Create a program that helps decide what to wear based on weather conditions.</p>
+<p><strong>Your Task:</strong> Complete the TODO sections with appropriate Boolean expressions using parentheses.</p>
+<p><strong>Important:</strong> Use explicit Boolean comparisons throughout!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather conditions</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter temperature (°F): &quot;</span><span class="p">))</span>
+<span class="n">isRaining</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Is it raining? (yes/no): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span>
+<span class="n">isWindy</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Is it windy? (yes/no): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter humidity percentage: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Decision logic - complete these conditions using explicit comparisons</span>
+<span class="n">needsJacket</span> <span class="o">=</span> <span class="p">(</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span> <span class="ow">or</span> <span class="n">isWindy</span>
+<span class="n">needsUmbrella</span> <span class="o">=</span> <span class="c1"># TODO: Complete this condition</span>
+<span class="n">isComfortable</span> <span class="o">=</span> <span class="c1"># TODO: Complete this condition (temp between 65-80, not raining, humidity &lt; 70)</span>
+<span class="n">stayInside</span> <span class="o">=</span> <span class="c1"># TODO: Complete this condition (very cold OR very hot OR raining AND windy)</span>
+
+<span class="c1"># Output recommendations using explicit Boolean checks</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Weather Recommendations ---&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">needsJacket</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bring a jacket!&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">needsUmbrella</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Take an umbrella!&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">isComfortable</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perfect weather to be outside!&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">stayInside</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maybe consider staying indoors today&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="part-3-grade-calculator-with-conditions">
+<h2>Part 3: Grade Calculator with Conditions<a class="headerlink" href="#part-3-grade-calculator-with-conditions" title="Link to this heading">#</a></h2>
+<p>Create a grade evaluation system using clear Boolean naming and explicit comparisons:</p>
+<p><strong>Your Task:</strong> Complete the Boolean expressions using proper naming and parentheses.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Student information</span>
+<span class="n">homeworkScore</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter homework average (0-100): &quot;</span><span class="p">))</span>
+<span class="n">examScore</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter exam score (0-100): &quot;</span><span class="p">))</span>
+<span class="n">attendanceRate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter attendance rate (0-100%): &quot;</span><span class="p">))</span>
+<span class="n">hasExtraCredit</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Extra credit completed? (yes/no): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span>
+
+<span class="c1"># Grade calculations</span>
+<span class="n">finalScore</span> <span class="o">=</span> <span class="p">(</span><span class="n">homeworkScore</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">examScore</span> <span class="o">*</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">hasExtraCredit</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">finalScore</span> <span class="o">=</span> <span class="n">finalScore</span> <span class="o">+</span> <span class="mi">5</span>  <span class="c1"># 5 point bonus</span>
+
+<span class="c1"># Conditions to determine - work together on these using good Boolean naming</span>
+<span class="n">isPassing</span> <span class="o">=</span> <span class="c1"># TODO: final score &gt;= 60 AND attendance &gt;= 75%</span>
+<span class="n">hasHonors</span> <span class="o">=</span> <span class="c1"># TODO: final score &gt;= 90 AND attendance &gt;= 95%</span>
+<span class="n">needsImprovement</span> <span class="o">=</span> <span class="c1"># TODO: homework &lt; 70 OR exam &lt; 65 OR attendance &lt; 80%</span>
+<span class="n">isExcellent</span> <span class="o">=</span> <span class="c1"># TODO: final score &gt;= 95 AND attendance == 100 AND hasExtraCredit</span>
+
+<span class="c1"># Output results using explicit Boolean comparisons</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final Score: </span><span class="si">{</span><span class="n">finalScore</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attendance: </span><span class="si">{</span><span class="n">attendanceRate</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">isExcellent</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Excellent work! You&#39;re a star student!&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">hasHonors</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Honors achievement!&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">isPassing</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Passing grade - well done!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not passing - please see instructor&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">needsImprovement</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Areas for improvement identified&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-3a-morning-assignment-coding-basics-wrap-up-and-selection-statements">
+<h1>Week 3A Morning Assignment: Coding Basics Wrap-up and Selection Statements<a class="headerlink" href="#week-3a-morning-assignment-coding-basics-wrap-up-and-selection-statements" title="Link to this heading">#</a></h1>
+<section id="part-1-f-strings-escape-characters-the-input-function-and-type-casting">
+<h2>Part 1: f-strings, escape characters, the <code class="docutils literal notranslate"><span class="pre">input()</span></code> function and type casting<a class="headerlink" href="#part-1-f-strings-escape-characters-the-input-function-and-type-casting" title="Link to this heading">#</a></h2>
+<section id="problem-1-2-series-resistor-voltage-report">
+<h3>Problem 1.2: Series Resistor Voltage Report<a class="headerlink" href="#problem-1-2-series-resistor-voltage-report" title="Link to this heading">#</a></h3>
+<p>Write a Python program that:</p>
+<ol class="arabic">
+<li><p>Prompts the user to enter <strong>two resistors</strong>, including:</p>
+<ul class="simple">
+<li><p>The <strong>name</strong> of each resistor (string)</p></li>
+<li><p>The <strong>resistance in ohms</strong> (integer)</p></li>
+</ul>
+</li>
+<li><p>Prompts the user to enter the <strong>current in amps</strong> (float), which is the same through both resistors in series.</p></li>
+<li><p>Calculates:</p>
+<ul>
+<li><p>The <strong>voltage across each resistor</strong> using Ohm’s Law:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">I</span> <span class="o">*</span> <span class="n">R</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <strong>total voltage</strong> across both resistors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">V_total</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">V2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Prints a <strong>formatted report</strong> including:</p>
+<ul class="simple">
+<li><p>Each resistor’s name in <strong>uppercase</strong></p></li>
+<li><p>Resistance using the word <code class="docutils literal notranslate"><span class="pre">&quot;ohms&quot;</span></code></p></li>
+<li><p>Current with <strong>3 decimal places</strong></p></li>
+<li><p>Voltage with <strong>2 decimal places</strong></p></li>
+<li><p>Columns aligned using <strong><code class="docutils literal notranslate"><span class="pre">\t</span></code></strong></p></li>
+<li><p>A title and separator lines using <strong><code class="docutils literal notranslate"><span class="pre">\n</span></code></strong></p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Example run:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">name</span> <span class="n">of</span> <span class="n">resistor</span> <span class="mi">1</span><span class="p">:</span> <span class="n">R1</span>
+<span class="n">Enter</span> <span class="n">resistance</span> <span class="n">of</span> <span class="n">R1</span> <span class="p">(</span><span class="n">ohms</span><span class="p">):</span> <span class="mi">220</span>
+<span class="n">Enter</span> <span class="n">name</span> <span class="n">of</span> <span class="n">resistor</span> <span class="mi">2</span><span class="p">:</span> <span class="n">R2</span>
+<span class="n">Enter</span> <span class="n">resistance</span> <span class="n">of</span> <span class="n">R2</span> <span class="p">(</span><span class="n">ohms</span><span class="p">):</span> <span class="mi">330</span>
+<span class="n">Enter</span> <span class="n">current</span> <span class="p">(</span><span class="n">amps</span><span class="p">):</span> <span class="mf">0.125</span>
+
+<span class="n">SERIES</span> <span class="n">RESISTOR</span> <span class="n">REPORT</span>
+<span class="o">-----------------------------</span>
+<span class="n">Name</span>        <span class="n">Resistance</span>    <span class="n">Current</span>    <span class="n">Voltage</span>
+<span class="n">R1</span>          <span class="mi">220</span> <span class="n">ohms</span>      <span class="mf">0.125</span> <span class="n">A</span>   <span class="mf">27.50</span> <span class="n">V</span>
+<span class="n">R2</span>          <span class="mi">330</span> <span class="n">ohms</span>      <span class="mf">0.125</span> <span class="n">A</span>   <span class="mf">41.25</span> <span class="n">V</span>
+<span class="o">-----------------------------</span>
+<span class="n">Total</span> <span class="n">Resistance</span><span class="p">:</span> <span class="mi">550</span> <span class="n">ohms</span>
+<span class="n">Total</span> <span class="n">Voltage</span><span class="p">:</span>    <span class="mf">68.75</span> <span class="n">V</span>
+</pre></div>
+</div>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">int()</span></code> to convert resistances to integers.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">float()</span></code> to convert current to a floating-point number.</p></li>
+<li><p>Use f-strings for all formatted output.</p></li>
+<li><p>Use escape characters <code class="docutils literal notranslate"><span class="pre">\n</span></code> for new lines and <code class="docutils literal notranslate"><span class="pre">\t</span></code> for column alignment.</p></li>
+</ul>
+</section>
+</section>
+<section id="part-2-basic-selection-statements">
+<h2>Part 2: Basic selection statements<a class="headerlink" href="#part-2-basic-selection-statements" title="Link to this heading">#</a></h2>
+<section id="problem-2-2-prize-number-generator">
+<h3>Problem 2.2: Prize Number Generator<a class="headerlink" href="#problem-2-2-prize-number-generator" title="Link to this heading">#</a></h3>
+<p>Instead of soliciting user input, we could also use a random number as an input to test. Very soon we will talk about better ways to generate <em>real</em> random numbers, but for now, we’ll stick with a more brute force approach.</p>
+<p>Write a Python program that generates a “random-ish” number between 1 and 100 <strong>without using any imports</strong>. (We will cover imports in Week3B).</p>
+<p>Your program should:</p>
+<ol class="arabic simple">
+<li><p>Ask the user to type something unpredictable (letters, numbers, or a mix).</p></li>
+<li><p>Convert the user input into a number between 1 and 100 using a simple calculation (for example, using the length of the input).</p></li>
+<li><p>Print the generated number.</p></li>
+<li><p>Check if the number is smaller than 5.</p>
+<ul class="simple">
+<li><p>If it is, print a message telling the user they have won a prize.</p></li>
+<li><p>Otherwise, print a message saying there is no prize.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Example run:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Type</span> <span class="n">something</span> <span class="n">random</span><span class="p">:</span> <span class="n">hello</span>
+<span class="n">The</span> <span class="n">generated</span> <span class="n">number</span> <span class="ow">is</span><span class="p">:</span> <span class="mi">5</span>
+<span class="n">Sorry</span><span class="p">,</span> <span class="n">no</span> <span class="n">prize</span> <span class="n">this</span> <span class="n">time</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Type something random: a
+The generated number is: 1
+Congratulations! You won a prize!
+</pre></div>
+</div>
+<p><strong>Hints:</strong></p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">len()</span></code> to get the length of the input.</p></li>
+<li><p>Use arithmetic (<code class="docutils literal notranslate"><span class="pre">%</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>) to keep the number in the 1–100 range.</p></li>
+<li><p>Use an <code class="docutils literal notranslate"><span class="pre">if/else</span></code> statement to check if the number is smaller than 5.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">print()</span></code> to display messages.</p></li>
+</ul>
+</section>
+</section>
+<section id="part-3-nested-selection-statements">
+<h2>Part 3: Nested selection statements<a class="headerlink" href="#part-3-nested-selection-statements" title="Link to this heading">#</a></h2>
+<section id="problem-3-3-selections-and-booleans">
+<h3>Problem 3.3: Selections AND booleans<a class="headerlink" href="#problem-3-3-selections-and-booleans" title="Link to this heading">#</a></h3>
+<p>In <strong>Week 2</strong>, we learned about <em>booleans</em> and the boolean relational operators: <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code>, <code class="docutils literal notranslate"><span class="pre">and</span></code>, and <code class="docutils literal notranslate"><span class="pre">or</span></code>. Using those operators.</p>
+<p>Write a Python program that asks the user to enter:</p>
+<ul class="simple">
+<li><p>The number of cats</p></li>
+<li><p>The number of dogs</p></li>
+</ul>
+<p>Then use <strong>booleans</strong> and the boolean relational operators (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code>, <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>) to compare the two values.</p>
+<p>Your program should print messages according to the following rules:</p>
+<ol class="arabic simple">
+<li><p>If there is at least one cat, print <code class="docutils literal notranslate"><span class="pre">Squeee!</span></code></p></li>
+<li><p>If there are 5 cats or more, print <code class="docutils literal notranslate"><span class="pre">Purr...</span></code></p></li>
+<li><p>If there are 5 dogs or more, print <code class="docutils literal notranslate"><span class="pre">Arf!</span></code></p></li>
+<li><p>If there are either more than 10 cats <strong>or</strong> more than 10 dogs, print <code class="docutils literal notranslate"><span class="pre">Where</span> <span class="pre">frends?</span></code></p></li>
+<li><p>If there are more than 10 cats <strong>and</strong> more than 10 dogs, print <code class="docutils literal notranslate"><span class="pre">Frends!</span></code></p></li>
+<li><p>If there are exactly as many cats as dogs, print <code class="docutils literal notranslate"><span class="pre">Perfection.</span></code></p></li>
+</ol>
+<p>To get practice with more boolean logic, also add these extra checks:<br />
+7. If the number of cats and dogs is <strong>not equal</strong>, print <code class="docutils literal notranslate"><span class="pre">Not</span> <span class="pre">balanced.</span></code><br />
+8. If there are fewer cats than dogs, print <code class="docutils literal notranslate"><span class="pre">More</span> <span class="pre">dogs</span> <span class="pre">than</span> <span class="pre">cats.</span></code><br />
+9. If there are at least twice as many cats as dogs, print <code class="docutils literal notranslate"><span class="pre">Cats</span> <span class="pre">rule!</span></code><br />
+10. If there are at least twice as many dogs as cats, print <code class="docutils literal notranslate"><span class="pre">Dogs</span> <span class="pre">rule!</span></code><br />
+11. If there are <strong>no cats and no dogs</strong> (zero of both), print <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">pets</span> <span class="pre">at</span> <span class="pre">all!</span></code></p>
+<p><strong>Example run:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Enter the number of cats: 12
+Enter the number of dogs: 12
+Squeee!
+Purr...
+Arf!
+Where frends?
+Frends!
+Perfection.
+</pre></div>
+</div>
+<p><strong>Requirements:</strong></p>
+<ul class="simple">
+<li><p>Use at least <strong>6 different boolean operators</strong> (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code>, <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>) in your solution.</p></li>
+<li><p>Each rule should be checked with an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement (not <code class="docutils literal notranslate"><span class="pre">elif</span></code>), because more than one condition may be true.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-3b-morning-assignment-for-and-while-loops">
+<h1>Week 3B Morning Assignment: <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops<a class="headerlink" href="#week-3b-morning-assignment-for-and-while-loops" title="Link to this heading">#</a></h1>
+<section id="part-1-for-loops">
+<h2>Part 1: <code class="docutils literal notranslate"><span class="pre">for</span></code> loops<a class="headerlink" href="#part-1-for-loops" title="Link to this heading">#</a></h2>
+<section id="part-1-7-running-products">
+<h3>Part 1.7: Running products<a class="headerlink" href="#part-1-7-running-products" title="Link to this heading">#</a></h3>
+<p>A running product is the product of numbers. A running sum is initialized to 0, so the first time something is added to it, it does not change. A running product, on the other hand, is initialized to 1. The following should calculate a running product of the integers from 1 to 5.</p>
+<p>Identify what is wrong and write code that fixes it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">runprod</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+   <span class="n">runprod</span> <span class="o">=</span> <span class="n">runprod</span> <span class="o">*</span> <span class="n">i</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The product so far is&#39;</span><span class="p">,</span> <span class="n">runprod</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="part-1-8-loops-and-selection">
+<h3>Part 1.8: Loops and selection<a class="headerlink" href="#part-1-8-loops-and-selection" title="Link to this heading">#</a></h3>
+<p>Now let’s work on combining loops with selection (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">if-else</span></code>) statements. Write code that will loop to generate 5 random integers, each in the range from 1 to 30. For each, print the integer and whether or not it was less than 15.</p>
+<p>Use</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
+</pre></div>
+</div>
+<p>like you did in question 1.6 to solve this problem.</p>
+</section>
+<section id="part-1-9-for-and-random-char-from-a-string">
+<h3>Part 1.9: <code class="docutils literal notranslate"><span class="pre">for</span></code> and random <code class="docutils literal notranslate"><span class="pre">char</span></code> from a string<a class="headerlink" href="#part-1-9-for-and-random-char-from-a-string" title="Link to this heading">#</a></h3>
+<p>Write a program that will choose a <strong>random character</strong> from the string ‘xyz’. If the character is ‘x’, it will loop to print ‘!’ 30 times in a row, but if the character is not ‘x’, it will just print ‘Sad’.</p>
+<p>To solve this problem, we will need <em>a different function</em> from the <code class="docutils literal notranslate"><span class="pre">random</span></code> library: <code class="docutils literal notranslate"><span class="pre">choice</span></code>. See if you can figure out how to gain access to <code class="docutils literal notranslate"><span class="pre">choice</span></code>, following the template above.</p>
+<p><strong>Hint</strong>: use <code class="docutils literal notranslate"><span class="pre">help()</span></code> after you import <code class="docutils literal notranslate"><span class="pre">choice</span></code> to examine what <code class="docutils literal notranslate"><span class="pre">choice</span></code> does!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Help</span> <span class="n">on</span> <span class="n">method</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">random</span><span class="p">:</span>
+
+<span class="n">choice</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="n">method</span> <span class="n">of</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span> <span class="n">instance</span>
+    <span class="n">Choose</span> <span class="n">a</span> <span class="n">random</span> <span class="n">element</span> <span class="kn">from</span><span class="w"> </span><span class="nn">a</span> <span class="n">non</span><span class="o">-</span><span class="n">empty</span> <span class="n">sequence</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="part-2-while-loops">
+<h2>Part 2: <code class="docutils literal notranslate"><span class="pre">while</span></code> loops<a class="headerlink" href="#part-2-while-loops" title="Link to this heading">#</a></h2>
+<section id="part-2-2-while-and-random-numbers">
+<h3>Part 2.2 <code class="docutils literal notranslate"><span class="pre">while()</span></code> and random numbers<a class="headerlink" href="#part-2-2-while-and-random-numbers" title="Link to this heading">#</a></h3>
+<p>Write a loop that will generate and print random integers, each in the range from 1 to 20, until one of the random integers is greater than 15. Then, after the loop, print the random integer that ended the loop.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">randint</span></code> from <code class="docutils literal notranslate"><span class="pre">random</span></code> like you did above!</p>
+</section>
+<section id="part-2-3-while-loops-counting-and-averages">
+<h3>Part 2.3: While Loops — Counting and Averages<a class="headerlink" href="#part-2-3-while-loops-counting-and-averages" title="Link to this heading">#</a></h3>
+<p>Ahead of time, we do not know how many times the action of a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop will be executed. However, it is frequently useful to <strong>count</strong> the number of times that the action has been executed.</p>
+<p>Write a script that:</p>
+<ul>
+<li><p>Prompts the user to enter <strong>positive numbers</strong>, one at a time.</p></li>
+<li><p>Continues until the user enters a <strong>negative number</strong>.</p></li>
+<li><p>Keeps track of both:</p>
+<ul class="simple">
+<li><p>The <strong>sum</strong> of the positive numbers entered.</p></li>
+<li><p>The <strong>count</strong> of how many numbers were entered.</p></li>
+</ul>
+</li>
+<li><p>At the end:</p>
+<ul>
+<li><p>If no positive numbers were entered, print an <strong>error message</strong>.</p></li>
+<li><p>Otherwise, print the <strong>average</strong> of the positive numbers.</p></li>
+<li><p>Also print how many tries it took, in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">It</span> <span class="n">took</span> <span class="n">xx</span> <span class="n">tries</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p>If the user stops the loop after the very first input, print:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">It</span> <span class="n">took</span> <span class="mi">1</span> <span class="k">try</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-4a-morning-assignment-nested-for-loops">
+<h1>Week 4A Morning Assignment: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops<a class="headerlink" href="#week-4a-morning-assignment-nested-for-loops" title="Link to this heading">#</a></h1>
+<section id="problem-2-formatted-output-with-nested-loops">
+<h2>Problem 2: Formatted output with nested loops<a class="headerlink" href="#problem-2-formatted-output-with-nested-loops" title="Link to this heading">#</a></h2>
+<p>Your task is to practice nested loops by writing a Python program that generates a simple pattern.</p>
+<ul class="simple">
+<li><p>Loop over the numbers 0 through 4.</p></li>
+<li><p>On each line, first print the number, followed by a colon (:).</p></li>
+<li><p>After the colon, print as many asterisks (*) as the number itself.</p></li>
+<li><p>Each line should show the number and its matching stars.</p></li>
+</ul>
+<p>Example Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">:</span>
+<span class="mi">1</span><span class="p">:</span><span class="o">*</span>
+<span class="mi">2</span><span class="p">:</span><span class="o">**</span>
+<span class="mi">3</span><span class="p">:</span><span class="o">***</span>
+<span class="mi">4</span><span class="p">:</span><span class="o">****</span>
+</pre></div>
+</div>
+<p>Hint: You will need a loop inside a loop — the outer loop handles the numbers, and the inner loop handles printing the stars.</p>
+</section>
+<section id="problem-6-nested-while-and-for-loops">
+<h2>Problem 6: Nested <code class="docutils literal notranslate"><span class="pre">while</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span></code> loops<a class="headerlink" href="#problem-6-nested-while-and-for-loops" title="Link to this heading">#</a></h2>
+<p>Write a script that will prompt the user for positive numbers. As long as the user is entering positive numbers, Print <code class="docutils literal notranslate"><span class="pre">Ni!</span></code> that many times on a single line for each. For example, if the user enters 3, <code class="docutils literal notranslate"><span class="pre">Ni!Ni!Ni!</span></code> would be printed.</p>
+</section>
+<section id="problem-9-running-sum">
+<h2>Problem 9: Running sum<a class="headerlink" href="#problem-9-running-sum" title="Link to this heading">#</a></h2>
+<p>Use a nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to calculate a running sum of all of the integers in all of the lists in the variable <code class="docutils literal notranslate"><span class="pre">nestnumlist</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nestnumlist</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="week-4b-morning-assignment-advanced-loops-using-list-comprehensions">
+<h1>Week 4B Morning Assignment: Advanced loops using list comprehensions<a class="headerlink" href="#week-4b-morning-assignment-advanced-loops-using-list-comprehensions" title="Link to this heading">#</a></h1>
+<section id="problem-2-using-complex-range-calls-in-for-loops">
+<h2>Problem 2: Using complex <code class="docutils literal notranslate"><span class="pre">range</span></code> calls in <code class="docutils literal notranslate"><span class="pre">for</span></code> loops<a class="headerlink" href="#problem-2-using-complex-range-calls-in-for-loops" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Loop to print <code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">5</span> <span class="pre">4</span> <span class="pre">3</span> <span class="pre">2</span></code> on one line.</p></li>
+<li><p>Write a program that calculates the sum of a series that uses every other denominator and alternates the sign of each term. For example, if <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">10</span></code>, the series is <code class="docutils literal notranslate"><span class="pre">1/1</span> <span class="pre">-</span> <span class="pre">1/3</span> <span class="pre">+</span> <span class="pre">1/5</span> <span class="pre">-</span> <span class="pre">1/7</span> <span class="pre">+</span> <span class="pre">1/9</span></code>. Assume <code class="docutils literal notranslate"><span class="pre">n</span></code> is an integer greater than 1.</p></li>
+</ul>
+</section>
+<section id="problem-4-enumerate">
+<h2>Problem 4: Enumerate<a class="headerlink" href="#problem-4-enumerate" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> and a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to print the indices and individual characters from a string you chose.</p></li>
+<li><p>Create a list of strings. Then, for each string, print</p>
+<ul>
+<li><p>the index of the string (naturally, e.g. 1,2,3.. instead of 0,1,2..)</p></li>
+<li><p>the number of characters in the string</p></li>
+<li><p>the individual characters.</p></li>
+<li><p>For example, if the first string is “Hello”, the first line of output would be <code class="docutils literal notranslate"><span class="pre">Word</span> <span class="pre">1</span> <span class="pre">&quot;Hello&quot;</span> <span class="pre">has</span> <span class="pre">5</span> <span class="pre">characters:</span> <span class="pre">H</span> <span class="pre">e</span> <span class="pre">l</span> <span class="pre">l</span> <span class="pre">o</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="problem-5-vectorizing-with-built-in-operations">
+<h2>Problem 5: Vectorizing with built-in operations<a class="headerlink" href="#problem-5-vectorizing-with-built-in-operations" title="Link to this heading">#</a></h2>
+<section id="create-a-list-of-numbers-find-the-minimum-using-the-built-in-min-function-and-also-by-using-a-loop">
+<h3>5.3: Create a list of numbers. Find the minimum using the built-in <strong>min</strong> function, and also by using a loop.<a class="headerlink" href="#create-a-list-of-numbers-find-the-minimum-using-the-built-in-min-function-and-also-by-using-a-loop" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="problem-6-list-comprehensions">
+<h2>Problem 6: List comprehensions<a class="headerlink" href="#problem-6-list-comprehensions" title="Link to this heading">#</a></h2>
+<section id="get-the-absolute-value-of-every-element-in-a-list-of-numbers-do-this-2-ways-using-a-list-comprehension-and-using-a-for-loop">
+<h3>6.2: Get the absolute value of every element in a list of numbers. Do this 2 ways: using a list comprehension and using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.<a class="headerlink" href="#get-the-absolute-value-of-every-element-in-a-list-of-numbers-do-this-2-ways-using-a-list-comprehension-and-using-a-for-loop" title="Link to this heading">#</a></h3>
+</section>
+<section id="generate-a-set-of-vowels-from-a-given-string-using-a-list-comprehension-hint-this-will-require-using-an-if-as-part-of-the-comprehension">
+<h3>6.4: Generate a set of vowels from a given string using a list comprehension. <strong>Hint</strong>: this will require using an <code class="docutils literal notranslate"><span class="pre">if</span></code> as part of the comprehension.<a class="headerlink" href="#generate-a-set-of-vowels-from-a-given-string-using-a-list-comprehension-hint-this-will-require-using-an-if-as-part-of-the-comprehension" title="Link to this heading">#</a></h3>
+</section>
+<section id="create-a-list-of-numbers-write-code-that-will-create-a-new-list-which-is-for-every-element-in-the-original-list-that-number-plus-its-index-for-example-4-8-2-would-become-4-0-8-1-2-2-or-4-9-4-do-this-3-ways-using-a-list-comprehension-with-range-using-a-list-comprehension-with-enumerate-and-using-a-for-loop">
+<h3>6.5: Create a list of numbers. Write code that will create a new list which is, for every element in the original list, that number plus its index. For example, [4, 8, 2] would become [4+0, 8+1, 2+2] or [4, 9, 4]. Do this 3 ways: using a list comprehension with <code class="docutils literal notranslate"><span class="pre">range</span></code>, using a list comprehension with <code class="docutils literal notranslate"><span class="pre">enumerate</span></code>, and using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.<a class="headerlink" href="#create-a-list-of-numbers-write-code-that-will-create-a-new-list-which-is-for-every-element-in-the-original-list-that-number-plus-its-index-for-example-4-8-2-would-become-4-0-8-1-2-2-or-4-9-4-do-this-3-ways-using-a-list-comprehension-with-range-using-a-list-comprehension-with-enumerate-and-using-a-for-loop" title="Link to this heading">#</a></h3>
+</section>
+<section id="in-a-list-comprehension-you-can-have-multiple-for-clauses-create-a-list-of-x-y-values-where-x-ranges-from-1-to-3-and-y-ranges-from-1-to-4-using-a-list-comprehension">
+<h3>6.7: In a list comprehension, you can have multiple <code class="docutils literal notranslate"><span class="pre">for</span></code> clauses. Create a list of x+y values, where x ranges from 1 to 3 and y ranges from 1 to 4, using a list comprehension.<a class="headerlink" href="#in-a-list-comprehension-you-can-have-multiple-for-clauses-create-a-list-of-x-y-values-where-x-ranges-from-1-to-3-and-y-ranges-from-1-to-4-using-a-list-comprehension" title="Link to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week5A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 5A Preread: Nested lists and Multilevel Indexing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week6A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 6A Pre-read: Mastering Slicing in Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weeks 1-4 GPP Review</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week1b-intro-to-python">Week1B: Intro to Python!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2a-morning-assignment-working-with-sequences">Week 2A Morning Assignment: Working with Sequences</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-string-exploration">Part 1: String Exploration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-1-string-basics">Task 1.1: String Basics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-list-operations">Part 2: List Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-1-list-creation-and-access">Task 2.1: List Creation and Access</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-2-list-modification-challenge">Task 2.2: List Modification Challenge</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-mixed-practice">Part 3: Mixed Practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-1-data-processing">Task 3.1: Data Processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2b-morning-assignment-boolean-logic-practice">Week 2B Morning Assignment: Boolean Logic Practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-weather-decision-system">Part 2: Weather Decision System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-grade-calculator-with-conditions">Part 3: Grade Calculator with Conditions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3a-morning-assignment-coding-basics-wrap-up-and-selection-statements">Week 3A Morning Assignment: Coding Basics Wrap-up and Selection Statements</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-f-strings-escape-characters-the-input-function-and-type-casting">Part 1: f-strings, escape characters, the <code class="docutils literal notranslate"><span class="pre">input()</span></code> function and type casting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-2-series-resistor-voltage-report">Problem 1.2: Series Resistor Voltage Report</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-basic-selection-statements">Part 2: Basic selection statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-2-prize-number-generator">Problem 2.2: Prize Number Generator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-nested-selection-statements">Part 3: Nested selection statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-3-selections-and-booleans">Problem 3.3: Selections AND booleans</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3b-morning-assignment-for-and-while-loops">Week 3B Morning Assignment: <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-for-loops">Part 1: <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-7-running-products">Part 1.7: Running products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-8-loops-and-selection">Part 1.8: Loops and selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-9-for-and-random-char-from-a-string">Part 1.9: <code class="docutils literal notranslate"><span class="pre">for</span></code> and random <code class="docutils literal notranslate"><span class="pre">char</span></code> from a string</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-while-loops">Part 2: <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-2-while-and-random-numbers">Part 2.2 <code class="docutils literal notranslate"><span class="pre">while()</span></code> and random numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-3-while-loops-counting-and-averages">Part 2.3: While Loops — Counting and Averages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4a-morning-assignment-nested-for-loops">Week 4A Morning Assignment: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-formatted-output-with-nested-loops">Problem 2: Formatted output with nested loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-nested-while-and-for-loops">Problem 6: Nested <code class="docutils literal notranslate"><span class="pre">while</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-9-running-sum">Problem 9: Running sum</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4b-morning-assignment-advanced-loops-using-list-comprehensions">Week 4B Morning Assignment: Advanced loops using list comprehensions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-using-complex-range-calls-in-for-loops">Problem 2: Using complex <code class="docutils literal notranslate"><span class="pre">range</span></code> calls in <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-enumerate">Problem 4: Enumerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-vectorizing-with-built-in-operations">Problem 5: Vectorizing with built-in operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-list-of-numbers-find-the-minimum-using-the-built-in-min-function-and-also-by-using-a-loop">5.3: Create a list of numbers. Find the minimum using the built-in <strong>min</strong> function, and also by using a loop.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-list-comprehensions">Problem 6: List comprehensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-absolute-value-of-every-element-in-a-list-of-numbers-do-this-2-ways-using-a-list-comprehension-and-using-a-for-loop">6.2: Get the absolute value of every element in a list of numbers. Do this 2 ways: using a list comprehension and using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-a-set-of-vowels-from-a-given-string-using-a-list-comprehension-hint-this-will-require-using-an-if-as-part-of-the-comprehension">6.4: Generate a set of vowels from a given string using a list comprehension. <strong>Hint</strong>: this will require using an <code class="docutils literal notranslate"><span class="pre">if</span></code> as part of the comprehension.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-list-of-numbers-write-code-that-will-create-a-new-list-which-is-for-every-element-in-the-original-list-that-number-plus-its-index-for-example-4-8-2-would-become-4-0-8-1-2-2-or-4-9-4-do-this-3-ways-using-a-list-comprehension-with-range-using-a-list-comprehension-with-enumerate-and-using-a-for-loop">6.5: Create a list of numbers. Write code that will create a new list which is, for every element in the original list, that number plus its index. For example, [4, 8, 2] would become [4+0, 8+1, 2+2] or [4, 9, 4]. Do this 3 ways: using a list comprehension with <code class="docutils literal notranslate"><span class="pre">range</span></code>, using a list comprehension with <code class="docutils literal notranslate"><span class="pre">enumerate</span></code>, and using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-a-list-comprehension-you-can-have-multiple-for-clauses-create-a-list-of-x-y-values-where-x-ranges-from-1-to-3-and-y-ranges-from-1-to-4-using-a-list-comprehension">6.7: In a list comprehension, you can have multiple <code class="docutils literal notranslate"><span class="pre">for</span></code> clauses. Create a list of x+y values, where x ranges from 1 to 3 and y ranges from 1 to 4, using a list comprehension.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

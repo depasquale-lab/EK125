@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Class 2A: Sequences, Strings, and Lists in Python &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week2A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class 2B: Booleans and Basic Logic" href="Week2B.html" />
+    <link rel="prev" title="Class 1B: Intro to colab and why program?" href="Week1B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10A.html">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week2A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Class 2A: Sequences, Strings, and Lists in Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-sequences">Why Do We Need Sequences?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-sequences">1. Understanding Sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-strings">2. Working with Strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-strings">Creating Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-indexing-and-length">String Indexing and Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-string-operations">Common String Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-tuples">3. Working with Tuples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tuples">Creating Tuples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-indexing-and-length">Tuple Indexing and Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tuple-operations">Common Tuple Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-lists">4. Working with Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-lists">Creating Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-list-elements">Accessing List Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-lists">Modifying Lists</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-sequence-operations">5. Common Sequence Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-preview-covered-in-more-detail-later">Slicing (Preview - covered in more detail later)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership-testing">Membership Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation">Concatenation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-all-items-in-a-list">Processing All Items in a List</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-differences-strings-vs-lists-vs-tuples">6. Important Differences: Strings vs Lists vs Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sequences">7. Other sequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-each">When to use each:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-to-remember">Key Terms to Remember</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="class-2a-sequences-strings-and-lists-in-python">
+<h1>Class 2A: Sequences, Strings, and Lists in Python<a class="headerlink" href="#class-2a-sequences-strings-and-lists-in-python" title="Link to this heading">#</a></h1>
+<section id="why-do-we-need-sequences">
+<h2>Why Do We Need Sequences?<a class="headerlink" href="#why-do-we-need-sequences" title="Link to this heading">#</a></h2>
+<p>Imagine you’re writing a program to manage a class roster. You could create individual variables for each student:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">student2</span> <span class="o">=</span> <span class="s2">&quot;Bob&quot;</span> 
+<span class="n">student3</span> <span class="o">=</span> <span class="s2">&quot;Charlie&quot;</span>
+</pre></div>
+</div>
+<p>But what happens when you have 100 students? 1000? Or when you need to add or remove students? Reorder them from last name to first name? This approach quickly becomes unmanageable.</p>
+<p><strong>Sequences solve this problem</strong> by letting you store multiple related items in a single, organized collection. Instead of dozens of individual variables, you can have:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>  <span class="c1"># A list - can grow and shrink</span>
+</pre></div>
+</div>
+<p>Different sequence types solve different problems:</p>
+<ul class="simple">
+<li><p><strong>Strings</strong> solve the problem of working with text (words, sentences, user input)</p></li>
+<li><p><strong>Lists</strong> solve the problem of managing collections that change (shopping carts, student rosters, game scores)</p></li>
+<li><p><strong>Tuples</strong> solve the problem of storing related data that shouldn’t change (coordinates, RGB colors, database records)</p></li>
+</ul>
+<p>All sequences share common operations (indexing, length, iteration) which means once you learn one, you understand the pattern for all of them.</p>
+</section>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this reading, you should understand:</p>
+<ul class="simple">
+<li><p>What sequences are in Python and their common characteristics</p></li>
+<li><p>How to work with strings as sequences of characters</p></li>
+<li><p>How to work with tuples as immutable sequences</p></li>
+<li><p>How to create, modify, and access elements in lists</p></li>
+<li><p>Basic operations you can perform on sequences</p></li>
+</ul>
+</section>
+<section id="understanding-sequences">
+<h2>1. Understanding Sequences<a class="headerlink" href="#understanding-sequences" title="Link to this heading">#</a></h2>
+<p>In Python, a <strong>sequence</strong> is an ordered collection of items. The three most important built-in sequence types are:</p>
+<ul class="simple">
+<li><p><strong>Strings</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) - sequences of characters</p></li>
+<li><p><strong>Tuples</strong> (<code class="docutils literal notranslate"><span class="pre">tuple</span></code>) - ordered collections of items that cannot be changed</p></li>
+<li><p><strong>Lists</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) - ordered collections of items that can be changed</p></li>
+</ul>
+<p>All sequences share common properties:</p>
+<ul class="simple">
+<li><p>They have a defined order</p></li>
+<li><p>You can access individual elements by position (indexing)</p></li>
+<li><p>You can find their length</p></li>
+<li><p>You can iterate through them</p></li>
+</ul>
+</section>
+<section id="working-with-strings">
+<h2>2. Working with Strings<a class="headerlink" href="#working-with-strings" title="Link to this heading">#</a></h2>
+<p>Strings are sequences of characters enclosed in quotes.</p>
+<section id="creating-strings">
+<h3>Creating Strings<a class="headerlink" href="#creating-strings" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Hello, world!&#39;</span>
+<span class="n">multiline</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;This is a</span>
+<span class="s2">multiline string&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="string-indexing-and-length">
+<h3>String Indexing and Length<a class="headerlink" href="#string-indexing-and-length" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1"># &#39;P&#39; (first character)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># &#39;n&#39; (last character)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>    <span class="c1"># 6 (length of string)</span>
+</pre></div>
+</div>
+</section>
+<section id="common-string-operations">
+<h3>Common String Operations<a class="headerlink" href="#common-string-operations" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Hello World&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>           <span class="c1"># &quot;HELLO WORLD&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>           <span class="c1"># &quot;hello world&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>           <span class="c1"># &quot;Hello World&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">))</span> <span class="c1"># &quot;Hell0 W0rld&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">))</span>        <span class="c1"># 3 (counts occurrences of &quot;l&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>           <span class="c1"># [&quot;Hello&quot;, &quot;World&quot;] (splits on whitespace)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;World&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">)</span>        <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-tuples">
+<h2>3. Working with Tuples<a class="headerlink" href="#working-with-tuples" title="Link to this heading">#</a></h2>
+<p>Tuples are ordered collections that cannot be modified after creation.</p>
+<section id="creating-tuples">
+<h3>Creating Tuples<a class="headerlink" href="#creating-tuples" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">mixed</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">empty</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">singleItem</span> <span class="o">=</span> <span class="p">(</span><span class="mi">42</span><span class="p">,)</span>  <span class="c1"># Note the comma for single-item tuples</span>
+</pre></div>
+</div>
+</section>
+<section id="tuple-indexing-and-length">
+<h3>Tuple Indexing and Length<a class="headerlink" href="#tuple-indexing-and-length" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>     <span class="c1"># &quot;x&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># 50</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>   <span class="c1"># 4</span>
+</pre></div>
+</div>
+</section>
+<section id="common-tuple-operations">
+<h3>Common Tuple Operations<a class="headerlink" href="#common-tuple-operations" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>              <span class="c1"># &quot;green&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;red&quot;</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">)</span>        <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;yellow&quot;</span><span class="p">,))</span>   <span class="c1"># (&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>             <span class="c1"># (&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)</span>
+
+<span class="c1"># Tuples are often used for data that shouldn&#39;t change</span>
+<span class="n">studentRecord</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;Computer Science&quot;</span><span class="p">)</span>
+<span class="n">rgbColor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Orange color</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-lists">
+<h2>4. Working with Lists<a class="headerlink" href="#working-with-lists" title="Link to this heading">#</a></h2>
+<p>Lists are ordered collections that can hold different types of data and can be modified.</p>
+<section id="creating-lists">
+<h3>Creating Lists<a class="headerlink" href="#creating-lists" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">mixed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</section>
+<section id="accessing-list-elements">
+<h3>Accessing List Elements<a class="headerlink" href="#accessing-list-elements" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># &quot;apple&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># &quot;orange&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fruits</span><span class="p">))</span>  <span class="c1"># 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">))</span>  <span class="c1"># 1 (count of &quot;apple&quot; in list)</span>
+</pre></div>
+</div>
+</section>
+<section id="modifying-lists">
+<h3>Modifying Lists<a class="headerlink" href="#modifying-lists" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">]</span>
+<span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span>           <span class="c1"># Change element</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>        <span class="c1"># Add to end</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;pink&quot;</span><span class="p">)</span>       <span class="c1"># Insert at position</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>          <span class="c1"># Remove first occurrence of &quot;blue&quot;</span>
+<span class="n">removed</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>         <span class="c1"># Remove and return last item</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-sequence-operations">
+<h2>5. Common Sequence Operations<a class="headerlink" href="#common-sequence-operations" title="Link to this heading">#</a></h2>
+<p>These operations work on all sequence types:</p>
+<section id="slicing-preview-covered-in-more-detail-later">
+<h3>Slicing (Preview - covered in more detail later)<a class="headerlink" href="#slicing-preview-covered-in-more-detail-later" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Programming&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>    <span class="c1"># &quot;Prog&quot;</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># [2, 3, 4]</span>
+</pre></div>
+</div>
+</section>
+<section id="membership-testing">
+<h3>Membership Testing<a class="headerlink" href="#membership-testing" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;gram&quot;</span> <span class="ow">in</span> <span class="s2">&quot;Programming&quot;</span><span class="p">)</span>  <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xyz&quot;</span> <span class="ow">in</span> <span class="s2">&quot;Programming&quot;</span><span class="p">)</span>   <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>       <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>       <span class="c1"># False</span>
+
+<span class="c1"># Checking for &quot;at least&quot; - using count()</span>
+<span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;alice@university.edu&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># True (has at least 1 @)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># False (doesn&#39;t have at least 2 @)</span>
+</pre></div>
+</div>
+</section>
+<section id="concatenation">
+<h3>Concatenation<a class="headerlink" href="#concatenation" title="Link to this heading">#</a></h3>
+<p>(i.e., putting things next to each other)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;World&quot;</span><span class="p">)</span>  <span class="c1"># &quot;Hello World&quot;</span>
+<span class="nb">print</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>         <span class="c1"># [1, 2, 3, 4]</span>
+</pre></div>
+</div>
+</section>
+<section id="processing-all-items-in-a-list">
+<h3>Processing All Items in a List<a class="headerlink" href="#processing-all-items-in-a-list" title="Link to this heading">#</a></h3>
+<p>Sometimes we need to apply the same operation to every item in a list. Here is one common pattern, we’ll introduce without explanation. Many more will come later.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a loop to create a new list</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;bob&quot;</span><span class="p">,</span> <span class="s2">&quot;charlie&quot;</span><span class="p">]</span>
+<span class="n">upperNames</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="n">upperNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">upperNames</span><span class="p">)</span>  <span class="c1"># [&quot;ALICE&quot;, &quot;BOB&quot;, &quot;CHARLIE&quot;]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="important-differences-strings-vs-lists-vs-tuples">
+<h2>6. Important Differences: Strings vs Lists vs Tuples<a class="headerlink" href="#important-differences-strings-vs-lists-vs-tuples" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Strings</span></code> are <strong>immutable</strong> - you cannot change individual characters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="c1"># word[0] = &quot;h&quot;  # This would cause an error!</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Tuples</span></code> are <strong>immutable</strong> - like strings, you cannot change individual elements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="c1"># coordinates[0] = 15  # This would cause an error!</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Lists</span></code> are <strong>mutable</strong> - you can change individual elements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+<span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>  <span class="c1"># This works fine</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># [&quot;A&quot;, &quot;b&quot;, &quot;c&quot;]</span>
+</pre></div>
+</div>
+</section>
+<section id="other-sequences">
+<h2>7. Other sequences<a class="headerlink" href="#other-sequences" title="Link to this heading">#</a></h2>
+<p>Strings, lists, and tuples are not the only sequences in Python. There are also others, such as range objects, byte arrays, etc…. However, those are out of scope for now.</p>
+<section id="when-to-use-each">
+<h3>When to use each:<a class="headerlink" href="#when-to-use-each" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Strings</strong>: For text data</p></li>
+<li><p><strong>Tuples</strong>: For collections that should stay the same (coordinates, database records)</p></li>
+<li><p><strong>Lists</strong>: For collections that need to change (add, remove, modify items)</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>What are the advantages of having a consistent interface across sequence types?</p></li>
+</ol>
+</section>
+</section>
+<section id="key-terms-to-remember">
+<h2>Key Terms to Remember<a class="headerlink" href="#key-terms-to-remember" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Sequence</strong>: An ordered collection of items</p></li>
+<li><p><strong>Index</strong>: The position of an element in a sequence (starting from 0)</p></li>
+<li><p><strong>Mutable</strong>: Can be changed after creation (like lists)</p></li>
+<li><p><strong>Immutable</strong>: Cannot be changed after creation (like strings and tuples)</p></li>
+<li><p><strong>Length</strong>: The number of elements in a sequence</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week1B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Class 1B: Intro to colab and why program?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week2B.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Class 2B: Booleans and Basic Logic</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-sequences">Why Do We Need Sequences?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-sequences">1. Understanding Sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-strings">2. Working with Strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-strings">Creating Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-indexing-and-length">String Indexing and Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-string-operations">Common String Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-tuples">3. Working with Tuples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tuples">Creating Tuples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-indexing-and-length">Tuple Indexing and Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tuple-operations">Common Tuple Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-lists">4. Working with Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-lists">Creating Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-list-elements">Accessing List Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-lists">Modifying Lists</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-sequence-operations">5. Common Sequence Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-preview-covered-in-more-detail-later">Slicing (Preview - covered in more detail later)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership-testing">Membership Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation">Concatenation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-all-items-in-a-list">Processing All Items in a List</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-differences-strings-vs-lists-vs-tuples">6. Important Differences: Strings vs Lists vs Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sequences">7. Other sequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-each">When to use each:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-to-remember">Key Terms to Remember</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

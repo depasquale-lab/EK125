@@ -1,0 +1,1615 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Week 10A: File I/O and File Structure &#8212; EK125</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week10A';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Week 10b: From Python to MATLAB: Syntax and Plotting" href="Week10B.html" />
+    <link rel="prev" title="Week 9B Pre-read: Visualizing Data and Plotting in Python" href="Week9B.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">EK125</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction to this jupyter book: HTML rendered mardown files for EK125 Pre-readings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1B.html">Class 1B: Intro to colab and why program?</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week2A.html">Class 2A: Sequences, Strings, and Lists in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2B.html">Class 2B: Booleans and Basic Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3A.html">Week3A Preread: Coding Basics Wrap-up and Selection Statements</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week3B.html">Week3B Preread: Basic Loops - <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4A.html">Week4A Preread: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4B.html">Week4B Preread: Advanced Loops using List Comprehensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5A.html">Week 5A Preread: Nested lists and Multilevel Indexing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review.html">Weeks 1-4 GPP Review</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week6A.html">Week 6A Pre-read: Mastering Slicing in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6B.html">Week 6B Preread: Digging into arrays with NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7A.html">Week 7A Preread: Dictionaries and Intro to Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7B.html">Week 7B Preread: User-Defined Functions and Modular Program introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8A.html">Week 8 Class 14 Pre-read: Function Arguments, Variable Scope, and Data Copying</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8B.html">Week 8 Class 15 Pre-read: Scripts, Comments, and Code Documentation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week9A.html">Week 9a Working with Online Data Stores and APIs in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9aappendix.html">Week 9a Appendix How to Get an API Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9B.html">Week 9B Pre-read: Visualizing Data and Plotting in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 10A: File I/O and File Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10B.html">Week 10b: From Python to MATLAB: Syntax and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11A.html">Week 11 Pre-read: Debugging and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpp-review-2.html">Weeks 5-10 GPP Review</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Week12A.html">Week 12a: Creating Vectors and Matrices in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12B.html">Week 12B: Vector and Matrix Operations in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week13A.html">Week 13a: MATLAB Scripts, Documentation, and File I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week14A.html">Week14A: User Functions and Modular Programming in MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP-review-3.html">MATLAB Practice Problems for Paper Exam Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15A.html">Week 15A: Useful MATLAB Toolboxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week15B.html">Week 15B Pre-read: AI-Assisted Programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Week10A.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Week 10A: File I/O and File Structure</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-file">1. What Is a File?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#files-on-your-computer">Files on Your Computer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-file-system">The File System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-you-find-files-vs-how-they-re-stored">How You Find Files vs How They’re Stored</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-tree">Navigating the Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-inside-a-file">What’s Inside a File?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-vs-storage">Memory vs Storage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-file-i-o-matters">2. Why File I/O Matters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-scenarios">Real-World Scenarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-paths-and-location">3. File Paths and Location</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-vs-relative-paths">Absolute vs Relative Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-paths">Absolute Paths</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-paths">Relative Paths</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#which-should-you-use">Which Should You Use?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-directory">Working Directory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-and-closing-files">4. Opening and Closing Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-that-destroy-performance-or-data">Common Mistakes That Destroy Performance or Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-function">The open() Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-modes">File Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-files">Closing Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-with-statement-best-practice">5. The with Statement (Best Practice)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-from-files">6. Reading from Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-entire-file">Reading the Entire File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-line-by-line">Reading Line by Line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-all-lines-into-a-list">Reading All Lines into a List</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-specific-number-of-lines">Reading a Specific Number of Lines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-to-files">7. Writing to Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-strings">Writing Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-multiple-lines">Writing Multiple Lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appending-to-files">Appending to Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-structured-text-files">8. Processing Structured Text Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reading-csv-like-data">Example: Reading CSV-like Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-structured-data">Writing Structured Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-patterns-and-idioms">9. Common Patterns and Idioms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-lines-in-a-file">Counting Lines in a File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-specific-content">Finding Specific Content</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-summary">Creating a Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-processing-in-one-pass">Reading and Processing in One Pass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure-and-organization">10. File Structure and Organization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-directory-structures">Common Directory Structures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">11. Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">12. Common Mistakes to Avoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-to-remember">Key Terms to Remember</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-text-vs-binary-files-background-information">Appendix A: Text vs Binary Files (Background Information)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-python-sees">What Python Sees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files">Text Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-files">Binary Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-distinction-matters">Why the Distinction Matters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-this-class">For This Class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-tell-file-types-apart">How to Tell File Types Apart</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-error-handling-preview">Appendix B: Error Handling (Preview)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-file-operations-can-fail">Why File Operations Can Fail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-when-operations-fail">What Happens When Operations Fail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-try-except-block-preview">The try-except Block (Preview)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-file-not-found">Example 1: File Not Found</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-permission-errors">Example 2: Permission Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-safe-file-operations">Example 3: Safe File Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-each-approach">When to Use Each Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-exception-types">Multiple Exception Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why This Matters</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="week-10a-file-i-o-and-file-structure">
+<h1>Week 10A: File I/O and File Structure<a class="headerlink" href="#week-10a-file-i-o-and-file-structure" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this reading, you should understand:</p>
+<ul class="simple">
+<li><p>Why programs need to read and write files</p></li>
+<li><p>How to open and close files properly in Python</p></li>
+<li><p>The difference between text and binary files</p></li>
+<li><p>How to read from files using different methods</p></li>
+<li><p>How to write data to files</p></li>
+<li><p>Best practices for working with files</p></li>
+<li><p>How to handle common file-related errors</p></li>
+</ul>
+</section>
+<section id="what-is-a-file">
+<h2>1. What Is a File?<a class="headerlink" href="#what-is-a-file" title="Link to this heading">#</a></h2>
+<p>Before we discuss reading and writing files in Python, we need to understand what a file actually is.</p>
+<section id="files-on-your-computer">
+<h3>Files on Your Computer<a class="headerlink" href="#files-on-your-computer" title="Link to this heading">#</a></h3>
+<p>When you use your computer, you interact with files constantly:</p>
+<ul class="simple">
+<li><p>Documents you write (essays, reports)</p></li>
+<li><p>Photos you take</p></li>
+<li><p>Music you download</p></li>
+<li><p>Programs you run</p></li>
+<li><p>Spreadsheets with data</p></li>
+</ul>
+<p>Each file is a collection of data stored on your computer’s hard drive or solid-state drive. Unlike data in your program’s memory (variables, lists, etc.), files persist even after your program ends or your computer turns off.</p>
+</section>
+<section id="the-file-system">
+<h3>The File System<a class="headerlink" href="#the-file-system" title="Link to this heading">#</a></h3>
+<p>Your computer organizes files in a tree structure (technically a Directed Acyclic Graph, or DAG):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Your Computer
+├── Documents/
+│   ├── essay.txt
+│   └── research/
+│       └── notes.txt
+├── Pictures/
+│   └── vacation.jpg
+└── Downloads/
+    └── data.csv
+</pre></div>
+</div>
+<p>This structure is like a set of nested folders (also called directories). Each file has a specific location in this structure. The “acyclic” part means you cannot have loops - a folder cannot contain itself, and you cannot navigate in circles. This makes sense: imagine if Documents contained a folder that somehow contained Documents again. You would get lost quickly.</p>
+</section>
+<section id="how-you-find-files-vs-how-they-re-stored">
+<h3>How You Find Files vs How They’re Stored<a class="headerlink" href="#how-you-find-files-vs-how-they-re-stored" title="Link to this heading">#</a></h3>
+<p>Most modern computer users find files by searching: you type “essay” in the search bar and the computer finds “essay.txt” wherever it lives. This is convenient, but it hides the actual organization of your computer.</p>
+<p><strong>Under the hood, your computer uses a tree structure.</strong> Every file exists at a specific location in this tree, defined by its path from the root (the top of the tree) down through branches (directories) to the file itself.</p>
+<p><strong>What is a path?</strong> A path is simply the sequence of directories you must walk through to reach a file, just like a path through a forest tells you which way to walk to reach your destination. If you want to reach a cabin deep in the woods, you might walk: “Start at the trailhead, take the left fork, continue to the meadow, then follow the stream.” A file path works the same way: “Start at Documents, go into the research folder, then find notes.txt.”</p>
+<p>In code, we write paths using slashes to separate each step. This is operating system dependent:</p>
+<ul class="simple">
+<li><p><strong>Windows</strong>: Uses backslashes <code class="docutils literal notranslate"><span class="pre">\</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Documents\research\notes.txt&quot;</span></code>)</p></li>
+<li><p><strong>macOS and Linux</strong>: Use forward slashes <code class="docutils literal notranslate"><span class="pre">/</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Documents/research/notes.txt&quot;</span></code>)</p></li>
+</ul>
+<p>However, <strong>Python accepts forward slashes <code class="docutils literal notranslate"><span class="pre">/</span></code> on all operating systems</strong>, including Windows. This means you should always use forward slashes in your Python code for portability:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good: Works everywhere</span>
+<span class="s2">&quot;Documents/research/notes.txt&quot;</span>
+
+<span class="c1"># Avoid: Only works on Windows, and requires escaping</span>
+<span class="s2">&quot;Documents</span><span class="se">\\</span><span class="s2">research</span><span class="se">\\</span><span class="s2">notes.txt&quot;</span>
+</pre></div>
+</div>
+<p>The reason Windows paths need double backslashes <code class="docutils literal notranslate"><span class="pre">\\</span></code> is that a single backslash is an escape character in Python strings (like <code class="docutils literal notranslate"><span class="pre">\n</span></code> for newline). Using forward slashes avoids this complication entirely.</p>
+<p>This reads as: “Starting from where I am now, go into Documents, then into research, then access notes.txt.”</p>
+<p>Think of it like a building:</p>
+<ul class="simple">
+<li><p><strong>Search approach</strong>: “Find the office where Alice works” - you search the entire building</p></li>
+<li><p><strong>Tree approach</strong>: “Alice’s office is in Building A, Floor 3, Room 301” - you follow a specific path</p></li>
+</ul>
+<p>When you write programs that work with files, you cannot just search for “essay.txt” and hope Python finds it. You must understand where the file lives in the tree structure and provide the path to reach it - the sequence of folders to walk through.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is what search-based thinking looks like (doesn&#39;t work):</span>
+<span class="c1"># &quot;Just find essay.txt somewhere&quot;</span>
+
+<span class="c1"># This is what tree-based thinking looks like (works):</span>
+<span class="c1"># &quot;essay.txt is in the Documents folder&quot;</span>
+<span class="n">filePath</span> <span class="o">=</span> <span class="s2">&quot;Documents/essay.txt&quot;</span>
+</pre></div>
+</div>
+<p>The tree structure matters because:</p>
+<ol class="arabic simple">
+<li><p>Multiple files can have the same name in different locations</p></li>
+<li><p>Your program starts from a specific location in the tree (the working directory)</p></li>
+<li><p>You need to tell Python how to navigate from that starting point to your file</p></li>
+</ol>
+<p><strong>Example of why this matters:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Your Computer
+├── Documents/
+│   └── data.txt          # Contains today&#39;s experiment data
+├── Downloads/
+│   └── data.txt          # Contains old reference data
+└── Projects/
+    └── analysis.py       # Your Python program (working directory)
+</pre></div>
+</div>
+<p>If your program just asks for “data.txt”, which one should Python open? The computer cannot guess. You must specify the path: <code class="docutils literal notranslate"><span class="pre">&quot;Documents/data.txt&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;Downloads/data.txt&quot;</span></code>.</p>
+</section>
+<section id="navigating-the-tree">
+<h3>Navigating the Tree<a class="headerlink" href="#navigating-the-tree" title="Link to this heading">#</a></h3>
+<p>When you specify a file path, you’re giving directions through the tree:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;data.txt&quot;</span></code> - “Look in the current directory”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;data/readings.txt&quot;</span></code> - “Go into the data subdirectory, then find readings.txt”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;../output.txt&quot;</span></code> - “Go up one level to the parent directory, then find output.txt”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;../../Desktop/file.txt&quot;</span></code> - “Go up two levels, then into Desktop”</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">..</span></code> notation means “parent directory” (move up one level in the tree). This is how you navigate relative to where your program is running.</p>
+</section>
+<section id="what-s-inside-a-file">
+<h3>What’s Inside a File?<a class="headerlink" href="#what-s-inside-a-file" title="Link to this heading">#</a></h3>
+<p>At the most basic level, files contain sequences of bytes (numbers from 0 to 255). How these bytes are interpreted depends on the file type:</p>
+<ul class="simple">
+<li><p><strong>Text files</strong> (.txt, .py, .csv): Bytes represent readable characters using an encoding like ASCII or UTF-8. When you open a .txt file, your computer interprets the bytes as letters, numbers, and punctuation.</p></li>
+<li><p><strong>Binary files</strong> (.jpg, .exe, .pdf): Bytes represent specialized data formats. These files are not meant to be read as text.</p></li>
+</ul>
+<p>For example, the text “Hi” in a file is stored as bytes:</p>
+<ul class="simple">
+<li><p>‘H’ → byte value 72</p></li>
+<li><p>‘i’ → byte value 105</p></li>
+</ul>
+<p>When Python reads a text file, it automatically converts these bytes back into the characters you expect.</p>
+</section>
+<section id="memory-vs-storage">
+<h3>Memory vs Storage<a class="headerlink" href="#memory-vs-storage" title="Link to this heading">#</a></h3>
+<p>Understanding the difference between memory and storage is crucial:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MEMORY</span> <span class="p">(</span><span class="n">RAM</span><span class="p">)</span>                    <span class="n">STORAGE</span> <span class="p">(</span><span class="n">Hard</span> <span class="n">Drive</span><span class="o">/</span><span class="n">SSD</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Fast</span>                          <span class="o">-</span> <span class="n">Slower</span>
+<span class="o">-</span> <span class="n">Temporary</span>                     <span class="o">-</span> <span class="n">Permanent</span>
+<span class="o">-</span> <span class="n">Lost</span> <span class="n">when</span> <span class="n">program</span> <span class="n">ends</span>        <span class="o">-</span> <span class="n">Persists</span> <span class="n">after</span> <span class="n">program</span> <span class="n">ends</span>
+<span class="o">-</span> <span class="n">Where</span> <span class="n">variables</span> <span class="n">live</span>          <span class="o">-</span> <span class="n">Where</span> <span class="n">files</span> <span class="n">live</span>
+<span class="o">-</span> <span class="n">Limited</span> <span class="n">capacity</span>              <span class="o">-</span> <span class="n">Much</span> <span class="n">larger</span> <span class="n">capacity</span>
+</pre></div>
+</div>
+<p>When your Python program runs:</p>
+<ol class="arabic simple">
+<li><p>Your code and variables exist in memory</p></li>
+<li><p>Files exist in storage</p></li>
+<li><p>To use file data, you must read it from storage into memory</p></li>
+<li><p>To save data permanently, you must write it from memory to storage</p></li>
+</ol>
+</section>
+</section>
+<section id="why-file-i-o-matters">
+<h2>2. Why File I/O Matters<a class="headerlink" href="#why-file-i-o-matters" title="Link to this heading">#</a></h2>
+<p>Until now, your programs have lost all their data when they finish running. File Input/Output (I/O) allows programs to:</p>
+<ul class="simple">
+<li><p>Store data permanently between program runs</p></li>
+<li><p>Process large datasets that cannot fit in memory all at once</p></li>
+<li><p>Share data between different programs</p></li>
+<li><p>Create reports and logs</p></li>
+<li><p>Read configuration settings</p></li>
+</ul>
+<p>Think of file I/O as giving your program a filing cabinet where it can store and retrieve information.</p>
+<section id="real-world-scenarios">
+<h3>Real-World Scenarios<a class="headerlink" href="#real-world-scenarios" title="Link to this heading">#</a></h3>
+<p><strong>Scenario 1: Saving game progress</strong>
+When you play a video game and save your progress, the game writes your current state (level, score, inventory) to a file. When you restart the game, it reads that file to restore your progress.</p>
+<p><strong>Scenario 2: Processing experimental data</strong>
+You run an experiment that produces thousands of measurements. Rather than typing them all into your program, you store them in a file. Your Python program reads the file, analyzes the data, and writes results to a new file.</p>
+<p><strong>Scenario 3: Configuration</strong>
+An application needs to remember user preferences (theme color, language, default directory). These settings are stored in a file that the program reads each time it starts.</p>
+</section>
+</section>
+<section id="file-paths-and-location">
+<h2>3. File Paths and Location<a class="headerlink" href="#file-paths-and-location" title="Link to this heading">#</a></h2>
+<p>Before reading or writing files, you need to know where they are located.</p>
+<section id="absolute-vs-relative-paths">
+<h3>Absolute vs Relative Paths<a class="headerlink" href="#absolute-vs-relative-paths" title="Link to this heading">#</a></h3>
+<p>This is one of the most important concepts to understand when working with files. The difference between absolute and relative paths determines how your program finds files.</p>
+<section id="absolute-paths">
+<h4>Absolute Paths<a class="headerlink" href="#absolute-paths" title="Link to this heading">#</a></h4>
+<p>An <strong>absolute path</strong> is the complete address of a file from the root of the file system. It specifies every directory from the very top level down to your file. Think of it like a complete mailing address: “123 Main Street, Boston, MA 02115, USA” - no matter where you are in the world, this address points to exactly one location.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Absolute paths start from the root of the file system</span>
+<span class="c1"># On macOS/Linux (start with /):</span>
+<span class="n">absolutePath</span> <span class="o">=</span> <span class="s2">&quot;/Users/alice/Documents/data.txt&quot;</span>
+
+<span class="c1"># On Windows (start with drive letter):</span>
+<span class="n">absolutePath</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/alice/Documents/data.txt&quot;</span>
+</pre></div>
+</div>
+<p><strong>Advantages of absolute paths:</strong></p>
+<ul class="simple">
+<li><p>Unambiguous - always points to the same file</p></li>
+<li><p>Works regardless of where your program runs from</p></li>
+</ul>
+<p><strong>Disadvantages of absolute paths:</strong></p>
+<ul class="simple">
+<li><p>Not portable - won’t work on someone else’s computer (they don’t have <code class="docutils literal notranslate"><span class="pre">/Users/alice/</span></code>)</p></li>
+<li><p>Fragile - breaks if you move your project to a different location</p></li>
+<li><p>Verbose - requires typing the entire path</p></li>
+</ul>
+</section>
+<section id="relative-paths">
+<h4>Relative Paths<a class="headerlink" href="#relative-paths" title="Link to this heading">#</a></h4>
+<p>A <strong>relative path</strong> specifies the location of a file relative to your current working directory (where your program is running from). Think of it like giving directions from where you are standing: “Go two blocks north, then turn left.” These directions only make sense relative to your starting position.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Relative paths start from the current working directory</span>
+<span class="n">relativePath</span> <span class="o">=</span> <span class="s2">&quot;data.txt&quot;</span>                  <span class="c1"># Same directory as your program</span>
+<span class="n">relativePath</span> <span class="o">=</span> <span class="s2">&quot;./data.txt&quot;</span>                <span class="c1"># Explicitly &quot;current directory&quot; (same as above)</span>
+<span class="n">relativePath</span> <span class="o">=</span> <span class="s2">&quot;data/readings.txt&quot;</span>         <span class="c1"># In a subdirectory called data</span>
+<span class="n">relativePath</span> <span class="o">=</span> <span class="s2">&quot;./data/readings.txt&quot;</span>       <span class="c1"># Same as above, explicit notation</span>
+<span class="n">relativePath</span> <span class="o">=</span> <span class="s2">&quot;../output.txt&quot;</span>             <span class="c1"># In the parent directory</span>
+<span class="n">relativePath</span> <span class="o">=</span> <span class="s2">&quot;../../results.csv&quot;</span>         <span class="c1"># Two directories up</span>
+</pre></div>
+</div>
+<p><strong>Note on the <code class="docutils literal notranslate"><span class="pre">./</span></code> notation:</strong> The dot <code class="docutils literal notranslate"><span class="pre">.</span></code> means “current directory”, so <code class="docutils literal notranslate"><span class="pre">&quot;./data.txt&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;data.txt&quot;</span></code> are identical. Some programmers prefer the explicit <code class="docutils literal notranslate"><span class="pre">./</span></code> notation to make it clear they’re using a relative path, but it’s optional. Both work the same way.</p>
+<p><strong>Understanding relative paths with an example:</strong></p>
+<p>Imagine your project structure looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>myProject/
+├── code/
+│   └── analysis.py       # Your program runs here
+├── data/
+│   └── readings.txt
+├── output/
+│   └── results.txt
+└── config.txt
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">analysis.py</span></code> is running (making <code class="docutils literal notranslate"><span class="pre">code/</span></code> the working directory), the relative paths would be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To access config.txt (one level up, then into root):</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../config.txt&quot;</span>
+
+<span class="c1"># To access readings.txt (one level up, then into data/):</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../data/readings.txt&quot;</span>
+
+<span class="c1"># To access results.txt (one level up, then into output/):</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../output/results.txt&quot;</span>
+</pre></div>
+</div>
+<p><strong>How to read relative paths:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;data.txt&quot;</span></code> means “in my current directory”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;./data.txt&quot;</span></code> means “in my current directory” (explicit notation, same as above)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;data/readings.txt&quot;</span></code> means “go into data subdirectory, then find readings.txt”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;../output.txt&quot;</span></code> means “go up one directory level, then find output.txt”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;../../file.txt&quot;</span></code> means “go up two directory levels, then find file.txt”</p></li>
+</ul>
+<p><strong>Advantages of relative paths:</strong></p>
+<ul class="simple">
+<li><p>Portable - your project can move anywhere and still work</p></li>
+<li><p>Flexible - someone else can run your code without changes</p></li>
+<li><p>Concise - shorter to write</p></li>
+</ul>
+<p><strong>Disadvantages of relative paths:</strong></p>
+<ul class="simple">
+<li><p>Context-dependent - only work relative to where your program runs</p></li>
+<li><p>Can be confusing if you don’t understand the working directory</p></li>
+</ul>
+</section>
+<section id="which-should-you-use">
+<h4>Which Should You Use?<a class="headerlink" href="#which-should-you-use" title="Link to this heading">#</a></h4>
+<p><strong>For this class, use relative paths.</strong> Keep your data files in the same directory as your Python programs, or in a subdirectory like <code class="docutils literal notranslate"><span class="pre">data/</span></code>. This makes your code portable and easy for others (including your TAs) to run.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good: Relative path, works on any computer</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># Good: Relative path with subdirectory</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/readings.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># Avoid: Absolute path, only works on your computer</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/Users/alice/Documents/class/data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-directory">
+<h3>Working Directory<a class="headerlink" href="#working-directory" title="Link to this heading">#</a></h3>
+<p>Your program runs from a specific directory called the working directory. Relative paths start from here.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Find out where your program is running from</span>
+<span class="n">currentDirectory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">currentDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="opening-and-closing-files">
+<h2>4. Opening and Closing Files<a class="headerlink" href="#opening-and-closing-files" title="Link to this heading">#</a></h2>
+<p>The basic pattern for working with files involves three steps: open, process, close.</p>
+<p><strong>CRITICAL CONCEPT: File operations are expensive.</strong> Opening and closing files is much slower than working with data in memory. Every time you open a file, the operating system must:</p>
+<ol class="arabic simple">
+<li><p>Locate the file on the physical disk</p></li>
+<li><p>Check permissions</p></li>
+<li><p>Allocate system resources (file descriptors, buffers)</p></li>
+<li><p>Load metadata about the file</p></li>
+</ol>
+<p>Every time you close a file, the system must:</p>
+<ol class="arabic simple">
+<li><p>Flush any buffered data to disk</p></li>
+<li><p>Update file metadata (modification time, etc.)</p></li>
+<li><p>Release system resources</p></li>
+</ol>
+<p>This takes time - much more time than you might think.</p>
+<p><strong>Even worse: Opening files in write mode (“w”) is destructive.</strong> Every time you open a file in write mode, you erase its entire contents. If you accidentally open-close-open-close in a loop, you can destroy data.</p>
+<section id="common-mistakes-that-destroy-performance-or-data">
+<h3>Common Mistakes That Destroy Performance or Data<a class="headerlink" href="#common-mistakes-that-destroy-performance-or-data" title="Link to this heading">#</a></h3>
+<p><strong>Mistake 1: Opening file inside a loop</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TERRIBLE: Opening file inside loop (hundreds of slow operations)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Line </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># This opens and closes the file 100 times! Extremely slow. If done quickly and repeatedly, ***WILL*** wreck an SD card in just a few hours.</span>
+</pre></div>
+</div>
+<p><strong>Mistake 2: Opening in write mode repeatedly</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TERRIBLE: Opening in write mode repeatedly (destroys data!)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;First line</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>  <span class="c1"># ERASES EVERYTHING!</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Second line</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Result: File only contains &quot;Second line\n&quot;</span>
+</pre></div>
+</div>
+<p><strong>The correct approach:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># GOOD: Open once, process, close once</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Line </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Opens file once, writes 100 times, closes once. Fast!</span>
+</pre></div>
+</div>
+<p><strong>The principle: Open the file once, do all your work, then close it.</strong> Treat file operations as precious and rare. Minimize how often you open and close files.</p>
+</section>
+<section id="the-open-function">
+<h3>The open() Function<a class="headerlink" href="#the-open-function" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open a file for reading</span>
+<span class="n">fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+<span class="c1"># Open a file for writing</span>
+<span class="n">fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+<span class="c1"># Open a file for appending</span>
+<span class="n">fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;log.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="file-modes">
+<h3>File Modes<a class="headerlink" href="#file-modes" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Creates file?</p></th>
+<th class="head"><p>Erases existing?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“r”</p></td>
+<td><p>Read only</p></td>
+<td><p>No (error if missing)</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>“w”</p></td>
+<td><p>Write only</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>“a”</p></td>
+<td><p>Append</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>“r+”</p></td>
+<td><p>Read and write</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="closing-files">
+<h3>Closing Files<a class="headerlink" href="#closing-files" title="Link to this heading">#</a></h3>
+<p>Always close files when done:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="c1"># ... do something with the file ...</span>
+<span class="n">fileHandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Critical concept</strong>: If you do not close a file after writing, your data might not be saved properly. The operating system buffers (temporarily stores) file writes, and closing the file ensures everything is written to disk.</p>
+</section>
+</section>
+<section id="the-with-statement-best-practice">
+<h2>5. The with Statement (Best Practice)<a class="headerlink" href="#the-with-statement-best-practice" title="Link to this heading">#</a></h2>
+<p>Python provides a safer way to work with files that automatically closes them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="c1"># File is automatically closed here, even if an error occurs</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">with</span></code> statement guarantees the file closes properly, even if your code encounters an error. This is the preferred approach and what you should use in your programs.</p>
+</section>
+<section id="reading-from-files">
+<h2>6. Reading from Files<a class="headerlink" href="#reading-from-files" title="Link to this heading">#</a></h2>
+<p>There are several ways to read file content, each suited for different situations.</p>
+<section id="reading-the-entire-file">
+<h3>Reading the Entire File<a class="headerlink" href="#reading-the-entire-file" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;story.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>  <span class="c1"># Prints entire file as one string</span>
+</pre></div>
+</div>
+<p>Use this when:</p>
+<ul class="simple">
+<li><p>The file is small enough to fit in memory</p></li>
+<li><p>You need to process the entire content at once</p></li>
+</ul>
+</section>
+<section id="reading-line-by-line">
+<h3>Reading Line by Line<a class="headerlink" href="#reading-line-by-line" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># strip() removes the newline character</span>
+</pre></div>
+</div>
+<p>Use this when:</p>
+<ul class="simple">
+<li><p>Processing large files</p></li>
+<li><p>You need to handle each line separately</p></li>
+<li><p>Memory efficiency matters</p></li>
+</ul>
+</section>
+<section id="reading-all-lines-into-a-list">
+<h3>Reading All Lines into a List<a class="headerlink" href="#reading-all-lines-into-a-list" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;names.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">allLines</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    
+<span class="c1"># allLines is now a list where each element is one line</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">allLines</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Use this when:</p>
+<ul class="simple">
+<li><p>You need random access to lines</p></li>
+<li><p>The file is small enough for memory</p></li>
+<li><p>You want to process lines multiple times</p></li>
+</ul>
+</section>
+<section id="reading-a-specific-number-of-lines">
+<h3>Reading a Specific Number of Lines<a class="headerlink" href="#reading-a-specific-number-of-lines" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">firstLine</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">secondLine</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">firstLine</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">secondLine</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="writing-to-files">
+<h2>7. Writing to Files<a class="headerlink" href="#writing-to-files" title="Link to this heading">#</a></h2>
+<section id="writing-strings">
+<h3>Writing Strings<a class="headerlink" href="#writing-strings" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello, World!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;This is a second line.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Important</strong>: <code class="docutils literal notranslate"><span class="pre">write()</span></code> does not add newline characters automatically. You must include <code class="docutils literal notranslate"><span class="pre">\n</span></code> explicitly.</p>
+</section>
+<section id="writing-multiple-lines">
+<h3>Writing Multiple Lines<a class="headerlink" href="#writing-multiple-lines" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;First line</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;Second line</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;Third line</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="appending-to-files">
+<h3>Appending to Files<a class="headerlink" href="#appending-to-files" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;log.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;New log entry</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Mode “a” adds content to the end without erasing existing data.</p>
+</section>
+</section>
+<section id="processing-structured-text-files">
+<h2>8. Processing Structured Text Files<a class="headerlink" href="#processing-structured-text-files" title="Link to this heading">#</a></h2>
+<p>Many files contain structured data where each line follows a pattern.</p>
+<section id="example-reading-csv-like-data">
+<h3>Example: Reading CSV-like Data<a class="headerlink" href="#example-reading-csv-like-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File content:</span>
+<span class="c1"># Alice,85,92,88</span>
+<span class="c1"># Bob,78,84,91</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;grades.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">])]</span>
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">average</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-structured-data">
+<h3>Writing Structured Data<a class="headerlink" href="#writing-structured-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">91</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">93</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;grades.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">students</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">score1</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">score2</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">score3</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">score1</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">score2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">score3</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-patterns-and-idioms">
+<h2>9. Common Patterns and Idioms<a class="headerlink" href="#common-patterns-and-idioms" title="Link to this heading">#</a></h2>
+<section id="counting-lines-in-a-file">
+<h3>Counting Lines in a File<a class="headerlink" href="#counting-lines-in-a-file" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open the file for reading</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">lineCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Process each line one at a time</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">lineCount</span> <span class="o">=</span> <span class="n">lineCount</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1"># After loop completes, lineCount holds the total</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File has </span><span class="si">{</span><span class="n">lineCount</span><span class="si">}</span><span class="s2"> lines&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="finding-specific-content">
+<h3>Finding Specific Content<a class="headerlink" href="#finding-specific-content" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search through a file for lines containing specific text</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="c1"># Convert to lowercase for case-insensitive search</span>
+        <span class="k">if</span> <span class="s2">&quot;temperature&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="c1"># Strip whitespace before printing</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-summary">
+<h3>Creating a Summary<a class="headerlink" href="#creating-a-summary" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Read numbers from a file and calculate average</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;numbers.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="c1"># Convert string to number after stripping whitespace</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">number</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Calculate average after processing all numbers</span>
+<span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average: </span><span class="si">{</span><span class="n">average</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-and-processing-in-one-pass">
+<h3>Reading and Processing in One Pass<a class="headerlink" href="#reading-and-processing-in-one-pass" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validEmails</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Filter data while reading (don&#39;t store everything)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;contacts.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># Basic validation: must contain @ and at least one dot</span>
+        <span class="k">if</span> <span class="s2">&quot;@&quot;</span> <span class="ow">in</span> <span class="n">email</span> <span class="ow">and</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">email</span><span class="p">:</span>
+            <span class="n">validEmails</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+
+<span class="c1"># Now validEmails contains only the valid ones</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">validEmails</span><span class="p">)</span><span class="si">}</span><span class="s2"> valid emails&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-structure-and-organization">
+<h2>10. File Structure and Organization<a class="headerlink" href="#file-structure-and-organization" title="Link to this heading">#</a></h2>
+<p>As your programs grow, organizing files becomes important.</p>
+<section id="common-directory-structures">
+<h3>Common Directory Structures<a class="headerlink" href="#common-directory-structures" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">/</span>
+    <span class="n">main</span><span class="o">.</span><span class="n">py</span>           <span class="c1"># Your main program</span>
+    <span class="n">data</span><span class="o">/</span>             <span class="c1"># Input data files</span>
+        <span class="n">input1</span><span class="o">.</span><span class="n">txt</span>
+        <span class="n">input2</span><span class="o">.</span><span class="n">txt</span>
+    <span class="n">output</span><span class="o">/</span>           <span class="c1"># Generated output files</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">txt</span>
+    <span class="n">logs</span><span class="o">/</span>             <span class="c1"># Log files</span>
+        <span class="n">activity</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-directories">
+<h3>Creating Directories<a class="headerlink" href="#creating-directories" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output/results.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Results go here</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>11. Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Always use the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement</strong> when working with files</p></li>
+<li><p><strong>Close files explicitly</strong> if you cannot use <code class="docutils literal notranslate"><span class="pre">with</span></code></p></li>
+<li><p><strong>Use relative paths</strong> when possible for portability</p></li>
+<li><p><strong>Check if files exist</strong> before trying to read them (see Appendix)</p></li>
+<li><p><strong>Use meaningful variable names</strong> for file handles: <code class="docutils literal notranslate"><span class="pre">inputFile</span></code>, <code class="docutils literal notranslate"><span class="pre">outputFile</span></code>, not just <code class="docutils literal notranslate"><span class="pre">f</span></code></p></li>
+<li><p><strong>Add newlines explicitly</strong> when writing text</p></li>
+<li><p><strong>Strip whitespace</strong> when reading lines that you will process</p></li>
+<li><p><strong>Comment your file operations</strong> to explain the file format</p></li>
+</ol>
+</section>
+<section id="common-mistakes-to-avoid">
+<h2>12. Common Mistakes to Avoid<a class="headerlink" href="#common-mistakes-to-avoid" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># WRONG: File not closed if error occurs</span>
+<span class="n">fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># If an error happens here, the file never closes</span>
+<span class="n">fileHandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># RIGHT: Use with statement</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># WRONG: Forgetting newlines</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Line 1&quot;</span><span class="p">)</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Line 2&quot;</span><span class="p">)</span>
+<span class="c1"># Results in: &quot;Line 1Line 2&quot;</span>
+
+<span class="c1"># RIGHT: Add newlines explicitly</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Line 1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Line 2</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># WRONG: Not stripping whitespace when processing</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;numbers.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>  <span class="c1"># Will fail due to newline character</span>
+
+<span class="c1"># RIGHT: Strip whitespace first</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;numbers.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="questions-to-consider">
+<h2>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Why might you want to process a file line-by-line instead of reading it all at once?</p></li>
+<li><p>What happens if you open a file in write mode (“w”) and the file already exists?</p></li>
+<li><p>Why is the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement safer than manually opening and closing files?</p></li>
+<li><p>How would you modify a program that reads from one file and writes to another?</p></li>
+</ol>
+</section>
+<section id="key-terms-to-remember">
+<h2>Key Terms to Remember<a class="headerlink" href="#key-terms-to-remember" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>File I/O</strong>: Input/Output operations for reading and writing files</p></li>
+<li><p><strong>File Handle</strong>: An object that represents an open file</p></li>
+<li><p><strong>Path</strong>: The location of a file in the file system</p></li>
+<li><p><strong>Working Directory</strong>: The directory from which your program runs</p></li>
+<li><p><strong>Mode</strong>: Specifies how to open a file (read, write, append)</p></li>
+<li><p><strong>with Statement</strong>: Python construct that ensures proper file closure</p></li>
+<li><p><strong>Buffer</strong>: Temporary storage used by the OS for file operations</p></li>
+<li><p><strong>Text File</strong>: File containing readable character data</p></li>
+<li><p><strong>Binary File</strong>: File containing raw byte data</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="appendix-a-text-vs-binary-files-background-information">
+<h2>Appendix A: Text vs Binary Files (Background Information)<a class="headerlink" href="#appendix-a-text-vs-binary-files-background-information" title="Link to this heading">#</a></h2>
+<p>This section provides background on file types. For this class, we will focus exclusively on text files, but understanding the distinction helps you recognize what kind of files you’re working with.</p>
+<section id="what-python-sees">
+<h3>What Python Sees<a class="headerlink" href="#what-python-sees" title="Link to this heading">#</a></h3>
+<p>Python distinguishes between text and binary files based on how it interprets the bytes in the file.</p>
+</section>
+<section id="text-files">
+<h3>Text Files<a class="headerlink" href="#text-files" title="Link to this heading">#</a></h3>
+<p><strong>Text files</strong> contain human-readable characters encoded using a character encoding system (usually UTF-8 or ASCII).</p>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p>Contain readable characters (letters, numbers, punctuation)</p></li>
+<li><p>Use encoding to convert bytes to characters</p></li>
+<li><p>Can be opened in any text editor</p></li>
+<li><p>Lines typically end with newline characters (<code class="docutils literal notranslate"><span class="pre">\n</span></code>)</p></li>
+<li><p>Examples: <code class="docutils literal notranslate"><span class="pre">.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.py</span></code>, <code class="docutils literal notranslate"><span class="pre">.html</span></code>, <code class="docutils literal notranslate"><span class="pre">.json</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code> files</p></li>
+</ul>
+<p><strong>How to open:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default mode is text</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Returns a string</span>
+</pre></div>
+</div>
+<p><strong>What Python does:</strong></p>
+<ul class="simple">
+<li><p>Reads bytes from disk</p></li>
+<li><p>Converts bytes to characters using UTF-8 encoding</p></li>
+<li><p>Handles newline characters appropriately for your OS</p></li>
+<li><p>Returns strings that you can work with directly</p></li>
+</ul>
+</section>
+<section id="binary-files">
+<h3>Binary Files<a class="headerlink" href="#binary-files" title="Link to this heading">#</a></h3>
+<p><strong>Binary files</strong> contain raw bytes that represent specialized data formats. These bytes are not meant to be interpreted as text characters.</p>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p>Contain raw byte data</p></li>
+<li><p>Not human-readable when opened in a text editor</p></li>
+<li><p>No character encoding applied</p></li>
+<li><p>Examples: <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">.png</span></code>, <code class="docutils literal notranslate"><span class="pre">.mp3</span></code>, <code class="docutils literal notranslate"><span class="pre">.exe</span></code>, <code class="docutils literal notranslate"><span class="pre">.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">.zip</span></code> files</p></li>
+</ul>
+<p><strong>How to open:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note the &#39;b&#39; in the mode string</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;image.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Returns bytes, not a string</span>
+</pre></div>
+</div>
+<p><strong>What Python does:</strong></p>
+<ul class="simple">
+<li><p>Reads raw bytes from disk</p></li>
+<li><p>No character encoding or conversion</p></li>
+<li><p>Returns a <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object instead of a string</p></li>
+</ul>
+</section>
+<section id="why-the-distinction-matters">
+<h3>Why the Distinction Matters<a class="headerlink" href="#why-the-distinction-matters" title="Link to this heading">#</a></h3>
+<p>If you try to open a binary file in text mode, you’ll get errors or garbage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># WRONG: Opening a binary file in text mode</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;photo.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Error or garbage characters</span>
+</pre></div>
+</div>
+<p>If you open a text file in binary mode, you get bytes instead of strings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Opens successfully but gives you bytes</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Returns b&#39;Hello\n&#39; instead of &#39;Hello\n&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="for-this-class">
+<h3>For This Class<a class="headerlink" href="#for-this-class" title="Link to this heading">#</a></h3>
+<p><strong>We will only work with text files.</strong> Always use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code> for reading text files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> for writing text files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> for appending to text files</p></li>
+</ul>
+<p>You do not need to use binary mode (<code class="docutils literal notranslate"><span class="pre">&quot;rb&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;wb&quot;</span></code>) in this course.</p>
+</section>
+<section id="how-to-tell-file-types-apart">
+<h3>How to Tell File Types Apart<a class="headerlink" href="#how-to-tell-file-types-apart" title="Link to this heading">#</a></h3>
+<p><strong>Text files</strong> usually have extensions like:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.txt</span></code> - plain text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.csv</span></code> - comma-separated values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.py</span></code> - Python source code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.html</span></code> - web pages</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.json</span></code> - structured data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.md</span></code> - markdown documents</p></li>
+</ul>
+<p><strong>Binary files</strong> usually have extensions like:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">.png</span></code>, <code class="docutils literal notranslate"><span class="pre">.gif</span></code> - images</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.mp3</span></code>, <code class="docutils literal notranslate"><span class="pre">.wav</span></code> - audio</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.mp4</span></code>, <code class="docutils literal notranslate"><span class="pre">.avi</span></code> - video</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.pdf</span></code> - documents</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.exe</span></code> - programs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.zip</span></code> - compressed archives</p></li>
+</ul>
+<p>When in doubt, try opening the file in a text editor. If you see readable text, it’s a text file. If you see strange symbols or boxes, it’s binary.</p>
+</section>
+</section>
+<section id="appendix-b-error-handling-preview">
+<h2>Appendix B: Error Handling (Preview)<a class="headerlink" href="#appendix-b-error-handling-preview" title="Link to this heading">#</a></h2>
+<p>This section introduces concepts you will learn later in the course. You do not need to master these now, but they are included for reference.</p>
+<section id="why-file-operations-can-fail">
+<h3>Why File Operations Can Fail<a class="headerlink" href="#why-file-operations-can-fail" title="Link to this heading">#</a></h3>
+<p>File operations can fail for many reasons:</p>
+<ol class="arabic simple">
+<li><p><strong>File doesn’t exist</strong>: You try to read “data.txt” but it’s not in the expected location</p></li>
+<li><p><strong>Permission denied</strong>: The operating system won’t let you read or write the file (e.g., system files, files owned by other users)</p></li>
+<li><p><strong>Disk full</strong>: No space left to write data</p></li>
+<li><p><strong>File in use</strong>: Another program has locked the file</p></li>
+<li><p><strong>Path doesn’t exist</strong>: You try to write to “output/results.txt” but the “output” directory doesn’t exist</p></li>
+</ol>
+</section>
+<section id="what-happens-when-operations-fail">
+<h3>What Happens When Operations Fail<a class="headerlink" href="#what-happens-when-operations-fail" title="Link to this heading">#</a></h3>
+<p>When Python encounters a file error, it raises an <strong>exception</strong> - a special signal that something went wrong. If you don’t handle the exception, your program crashes with an error message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will crash if the file doesn&#39;t exist</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;missing.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># Error: FileNotFoundError: [Errno 2] No such file or directory: &#39;missing.txt&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="the-try-except-block-preview">
+<h3>The try-except Block (Preview)<a class="headerlink" href="#the-try-except-block-preview" title="Link to this heading">#</a></h3>
+<p>Python provides a way to catch and handle errors gracefully using <code class="docutils literal notranslate"><span class="pre">try-except</span></code> blocks. This is like saying “try to do this, but if it fails, do something else instead of crashing.”</p>
+<p><strong>Structure:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Code that might fail</span>
+    <span class="n">risky_operation</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">SomeError</span><span class="p">:</span>
+    <span class="c1"># What to do if it fails</span>
+    <span class="n">handle_the_error</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-1-file-not-found">
+<h3>Example 1: File Not Found<a class="headerlink" href="#example-1-file-not-found" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to open a file, but handle the case where it doesn&#39;t exist</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;missing.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="c1"># This code runs ONLY if the file doesn&#39;t exist</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: File does not exist&quot;</span><span class="p">)</span>
+    <span class="c1"># Program continues instead of crashing</span>
+</pre></div>
+</div>
+<p><strong>What’s happening:</strong></p>
+<ol class="arabic simple">
+<li><p>Python tries to execute the code in the <code class="docutils literal notranslate"><span class="pre">try</span></code> block</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">open()</span></code> cannot find the file, it raises a <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></p></li>
+<li><p>Instead of crashing, Python jumps to the <code class="docutils literal notranslate"><span class="pre">except</span></code> block</p></li>
+<li><p>The error message prints, and the program continues</p></li>
+</ol>
+</section>
+<section id="example-2-permission-errors">
+<h3>Example 2: Permission Errors<a class="headerlink" href="#example-2-permission-errors" title="Link to this heading">#</a></h3>
+<p><strong>What is a permission error?</strong> Operating systems control who can read, write, or execute files. If you try to write to a file you don’t have permission to modify (like system files, or files owned by another user), you get a <code class="docutils literal notranslate"><span class="pre">PermissionError</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to write to a protected file</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;protected.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">fileHandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
+    <span class="c1"># This runs if you don&#39;t have permission</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Cannot write to this file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Common causes of permission errors:</strong></p>
+<ul class="simple">
+<li><p>Trying to modify system files</p></li>
+<li><p>Writing to directories you don’t own</p></li>
+<li><p>Opening a file that another program has locked</p></li>
+<li><p>On shared computers, accessing other users’ files</p></li>
+</ul>
+</section>
+<section id="example-3-safe-file-operations">
+<h3>Example 3: Safe File Operations<a class="headerlink" href="#example-3-safe-file-operations" title="Link to this heading">#</a></h3>
+<p>Instead of using try-except, you can check if a file exists before trying to open it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;data.txt&quot;</span>
+
+<span class="c1"># Check if file exists before trying to open it</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>The <code class="docutils literal notranslate"><span class="pre">os.path.exists()</span></code> function</strong> checks whether a file or directory exists, returning <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. This is useful when you want to do different things depending on whether the file exists.</p>
+</section>
+<section id="when-to-use-each-approach">
+<h3>When to Use Each Approach<a class="headerlink" href="#when-to-use-each-approach" title="Link to this heading">#</a></h3>
+<p><strong>Use <code class="docutils literal notranslate"><span class="pre">os.path.exists()</span></code> when:</strong></p>
+<ul class="simple">
+<li><p>You want to check before attempting the operation</p></li>
+<li><p>The file might legitimately not exist</p></li>
+<li><p>You need to create the file if it’s missing</p></li>
+</ul>
+<p><strong>Use try-except when:</strong></p>
+<ul class="simple">
+<li><p>You expect the operation to usually succeed</p></li>
+<li><p>You need to handle multiple types of errors</p></li>
+<li><p>You’re dealing with permissions or other runtime issues</p></li>
+</ul>
+</section>
+<section id="multiple-exception-types">
+<h3>Multiple Exception Types<a class="headerlink" href="#multiple-exception-types" title="Link to this heading">#</a></h3>
+<p>You can catch different types of errors separately:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileHandle</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>  <span class="c1"># Might fail if content isn&#39;t a number</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File doesn&#39;t exist&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Don&#39;t have permission to read this file&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File contents are not a valid number&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="why-this-matters">
+<h3>Why This Matters<a class="headerlink" href="#why-this-matters" title="Link to this heading">#</a></h3>
+<p>When you write programs that others will use, handling errors gracefully makes your program more professional:</p>
+<ul class="simple">
+<li><p>Instead of crashing with cryptic messages, give users helpful feedback</p></li>
+<li><p>Allow the program to continue even when one operation fails</p></li>
+<li><p>Log errors for debugging while keeping the program running</p></li>
+</ul>
+<p>You will learn more about exception handling later in the course. For now, focus on understanding that file operations can fail, and Python provides mechanisms to handle these failures.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Week9B.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Week 9B Pre-read: Visualizing Data and Plotting in Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Week10B.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 10b: From Python to MATLAB: Syntax and Plotting</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-file">1. What Is a File?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#files-on-your-computer">Files on Your Computer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-file-system">The File System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-you-find-files-vs-how-they-re-stored">How You Find Files vs How They’re Stored</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-tree">Navigating the Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-inside-a-file">What’s Inside a File?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-vs-storage">Memory vs Storage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-file-i-o-matters">2. Why File I/O Matters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-scenarios">Real-World Scenarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-paths-and-location">3. File Paths and Location</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-vs-relative-paths">Absolute vs Relative Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-paths">Absolute Paths</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-paths">Relative Paths</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#which-should-you-use">Which Should You Use?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-directory">Working Directory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-and-closing-files">4. Opening and Closing Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-that-destroy-performance-or-data">Common Mistakes That Destroy Performance or Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-function">The open() Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-modes">File Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-files">Closing Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-with-statement-best-practice">5. The with Statement (Best Practice)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-from-files">6. Reading from Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-entire-file">Reading the Entire File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-line-by-line">Reading Line by Line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-all-lines-into-a-list">Reading All Lines into a List</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-specific-number-of-lines">Reading a Specific Number of Lines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-to-files">7. Writing to Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-strings">Writing Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-multiple-lines">Writing Multiple Lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appending-to-files">Appending to Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-structured-text-files">8. Processing Structured Text Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reading-csv-like-data">Example: Reading CSV-like Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-structured-data">Writing Structured Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-patterns-and-idioms">9. Common Patterns and Idioms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-lines-in-a-file">Counting Lines in a File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-specific-content">Finding Specific Content</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-summary">Creating a Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-and-processing-in-one-pass">Reading and Processing in One Pass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure-and-organization">10. File Structure and Organization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-directory-structures">Common Directory Structures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">11. Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">12. Common Mistakes to Avoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-to-remember">Key Terms to Remember</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-text-vs-binary-files-background-information">Appendix A: Text vs Binary Files (Background Information)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-python-sees">What Python Sees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files">Text Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-files">Binary Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-distinction-matters">Why the Distinction Matters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-this-class">For This Class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-tell-file-types-apart">How to Tell File Types Apart</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-error-handling-preview">Appendix B: Error Handling (Preview)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-file-operations-can-fail">Why File Operations Can Fail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-when-operations-fail">What Happens When Operations Fail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-try-except-block-preview">The try-except Block (Preview)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-file-not-found">Example 1: File Not Found</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-permission-errors">Example 2: Permission Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-safe-file-operations">Example 3: Safe File Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-each-approach">When to Use Each Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-exception-types">Multiple Exception Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why This Matters</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stormy Attaway, Brian DePasquale, Christine Mulvey, Kenn Sebesta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
