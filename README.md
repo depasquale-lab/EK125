@@ -5,4 +5,4 @@
 - Modify `_toc.yml` to include this new file, following the precedeent set there.
 - Make a commit/push in the repo. GitHub actions will build the book. (This step is unnecessary if files are added from the web interface)
 
-## https://BU-EK125.github.io/EK125/intro.html
+## https://depasquale-lab.github.io/EK125/intro.html
